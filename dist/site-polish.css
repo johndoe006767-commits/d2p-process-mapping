@@ -1,0 +1,202 @@
+/* Refinement of the existing finance-anatomy interface. */
+:root{--plum-base:#291a36;--plum-surface:#352342;--plum-raised:#412d50;--plum-line:#61476f;--plum-text:#f6eff9;--plum-muted:#c7b5d1;--signal-in:#a8eddb;--signal-out:#efb1d4;--ui-ease:cubic-bezier(.23,1,.32,1)}
+body{font-weight:400;-webkit-font-smoothing:antialiased}
+button{transition:background 160ms ease,color 160ms ease,border-color 160ms ease,transform 140ms var(--ui-ease)}
+button:active{transform:scale(.98)}
+button:focus-visible{outline:2px solid #e5bad7;outline-offset:4px}
+button:disabled{cursor:default}
+.label.card{width:clamp(194px,16vw,242px);padding:10px 14px;border:1px solid #725481;border-radius:12px;box-shadow:none;line-height:1.2}
+.label.card small{color:#c4b2cd;font-size:10px;letter-spacing:.08em;margin-bottom:4px}
+.label.card strong{font-size:17px;line-height:1.15;font-weight:550;letter-spacing:-.02em}
+.label.card .hb-row{margin-top:6px}
+.label.card .hb-n b{font-size:17px;font-weight:550}
+.label.card .hb-mode{font-size:10px}
+/* Let the longer activity label use the remaining space and wrap at its hyphen. */
+@media(min-width:768px){
+  .label.card .hb-row{grid-template-columns:max-content minmax(min-content,1fr) max-content;column-gap:5px;align-items:start}
+  .label.card .hb-n{min-width:0;max-width:100%}
+  .label.card .hb-mode{display:block;white-space:normal;line-height:1.3}
+  .label.card .hb-mode i{margin-right:3px;vertical-align:1px}
+}
+.label.card .hb-pulse{height:14px;margin:2px 0 4px}
+.label.card .hb-summary{padding-top:6px;margin-top:6px;font-size:11px;line-height:1.2}
+.label.card .cta{display:none}
+.label.card:hover{background:#44304f;transform:none;color:var(--plum-text)}
+.hb-legend{font-size:10px;gap:6px 12px;color:#d2c2db}
+.hb-key-pp b,.hb-key-tpi b{background:#523760;color:#f6eff9}
+#tower-telemetry-hud{background:#30203e;border:1px solid #725481;box-shadow:none}
+#tower-telemetry-hud .hud-chip{transition:background 160ms ease,color 160ms ease}
+#tower-telemetry-hud .hud-chip:active{transform:scale(.99)}
+#tower-telemetry-hud .hud-action-btn{border-color:#856491}
+#tower-telemetry-hud .hud-score strong{font-weight:550}
+#tower-telemetry-hud .hud-bar-segment{transition:width 260ms var(--ui-ease),filter 160ms ease}
+#tower-telemetry-hud .hud-legend-item:hover{background:#493153}
+.process-node .process-name{font-weight:500;line-height:1.4;border-radius:10px}
+#back,#reset,#flow-back{font-weight:450;letter-spacing:0}
+.detail-title h2{font-weight:500;letter-spacing:-.025em}
+body.modal-open{overflow:hidden}
+.handoff-overlay{color-scheme:dark;background:var(--plum-base)}
+.handoff-backdrop{background:var(--plum-base);backdrop-filter:none;-webkit-backdrop-filter:none}
+.handoff-container{width:100%;max-width:1640px;height:100dvh;padding:0 32px;color:var(--plum-text)}
+/* Insight navigation: page identity, insight tabs, then execution categories. */
+.handoff-topbar{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:28px 24px;padding:32px 0 0;border:0;flex-shrink:0;background:var(--plum-base)}
+.handoff-title-block{min-width:0}
+.handoff-title-block h2{display:block;font-size:clamp(28px,2.5vw,38px);font-weight:550;line-height:1.16;letter-spacing:-.035em;margin:0;text-wrap:balance}
+.handoff-subtitle{margin:10px 0 0;font-size:14px;line-height:1.6;color:var(--plum-muted);max-width:75ch}
+.handoff-close-btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:44px;padding:10px 16px;border:1px solid #70557e;border-radius:24px;background:transparent;color:#e7d8ed;font-size:13px;font-weight:500;box-shadow:none;transition:background 160ms ease,border-color 160ms ease}
+.handoff-close-btn .ico{margin:0;width:16px;height:16px}
+.handoff-close-btn:hover{background:#412d50;border-color:#b395c1;box-shadow:none}
+.modal-tabs{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:20px;width:100%;max-width:100%;padding:0;border:0;border-bottom:1px solid #61476f;border-radius:0;background:transparent;overflow:visible}
+.insight-tabs,.execution-tabs{display:flex;align-items:center;gap:6px;min-width:0}
+.execution-tabs{gap:4px;padding-left:20px;border-left:1px solid #61476f}
+.modal-tab-btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:12px 14px;border:0;border-radius:0;background:transparent;color:#c7b5d1;font-size:13px;font-weight:500;letter-spacing:0;white-space:nowrap;box-shadow:none;transition:background 160ms ease,color 160ms ease}
+.modal-tab-btn:hover{background:#ffffff06;color:#fff}
+.modal-tab-btn.active{background:transparent;color:#f6eff9;box-shadow:none}
+.insight-tabs .modal-tab-btn::after{content:'';position:absolute;inset:auto 12px -1px;height:3px;border-radius:2px 2px 0 0;background:transparent}
+.insight-tabs .modal-tab-btn.active::after{background:#d8b7ef}
+.tab-count{font-size:12px;font-weight:450;line-height:1;min-width:0;padding:0;border-radius:0;background:transparent;text-align:center;font-variant-numeric:tabular-nums;color:#bca5ca}
+.modal-tab-btn.active .tab-count{background:transparent;color:#e2c9ef}
+.execution-tabs .modal-tab-btn{min-height:36px;padding:8px 11px;border-radius:6px}
+.execution-tabs .modal-tab-btn.active{background:#493255}
+.modal-tabs .tab-dot{width:6px;height:6px;margin:0;box-shadow:none;border-radius:50%}
+.modal-tabs .dot-auto{background:#82cfb8}.modal-tabs .dot-semi{background:#e2bc73}.modal-tabs .dot-manual{background:#d791ac}
+.modal-subview{min-height:0;height:auto}
+.modal-content-scroll{padding:24px 0 40px;scrollbar-color:#88649a transparent;scrollbar-width:thin}
+.content-intro{display:flex;justify-content:space-between;gap:16px;margin:0 0 20px;color:var(--plum-muted);font-size:12px;line-height:1.5}
+.content-intro>span:first-child{color:#e7d8ed;font-weight:500}
+.ai-opps-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.ai-card{min-width:0;display:flex;flex-direction:column;gap:22px;margin:0;padding:22px;background:var(--plum-surface);border:1px solid var(--plum-line);border-radius:12px;box-shadow:none;transform:none;transition:border-color 160ms ease}
+.ai-card:hover{background:var(--plum-surface);border-color:#977aa5;box-shadow:none;transform:none}
+.ai-card-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.ai-type-pill{font-size:10px;font-weight:500;letter-spacing:.03em;line-height:1.4;padding:4px 7px;border:0;border-radius:4px}
+.type-automation{background:#a8eddb16;color:#a8eddb}.type-optimization{background:#e2bc7316;color:#e2bc73}.type-predictive{background:#d6b7ee16;color:#dfc3f2}.type-manual{background:#efb1d416;color:#efb1d4}
+.ai-validate-tag{font-size:10px;font-weight:400;line-height:1.4;color:#c7b5d1;border:0;padding:4px 0}
+.ai-card-title{margin:0;font-size:16px;font-weight:500;line-height:1.5;letter-spacing:-.015em;color:var(--plum-text)}
+.pain-table-wrap{background:var(--plum-surface);border:1px solid var(--plum-line);border-radius:12px;overflow:auto}
+.pain-table{table-layout:fixed;font-size:13px;line-height:1.6}
+.pain-table th{background:#3e2b4c;color:#e9dced;padding:15px 18px;font-size:11px;line-height:1.4;font-weight:550;text-transform:none;letter-spacing:0;border-bottom:1px solid var(--plum-line);text-align:left}
+.pain-table th:nth-child(1){width:18%}.pain-table th:nth-child(2){width:29%}.pain-table th:nth-child(3){width:37%}.pain-table th:nth-child(4){width:16%}
+.pain-table td{vertical-align:top;padding:18px;border-bottom:1px solid #594067;color:#e6d9ed;overflow-wrap:break-word}
+.pain-table td:first-child{font-weight:550;color:#f5eafb}.pain-table td:nth-child(3){color:#cbbbd4}.pain-table tr:last-child td{border-bottom:0}
+.pain-status-pill{display:inline-block;white-space:normal;background:#e2bc7312;border:1px solid #92754f;color:#ead09e;padding:4px 8px;border-radius:5px;font-size:10px;font-weight:500;line-height:1.45}
+.proc-activity-grid{display:flex;flex-direction:column;gap:0;margin:0;padding:0;border:1px solid var(--plum-line);border-radius:12px;overflow:hidden;background:var(--plum-surface);list-style:none}
+.proc-activity-row{display:flex;flex-wrap:nowrap;align-items:center;gap:20px;padding:21px 24px;border:0;border-bottom:1px solid #594067;border-radius:0;background:transparent;color:var(--plum-text)}
+.proc-activity-row:last-child{border-bottom:0}.proc-activity-row:hover{border-color:#594067;background:#3c284b}
+.tpi-code,.activity-order{flex:none;min-width:44px;color:#baa2c9;font-size:11px;font-variant-numeric:tabular-nums;line-height:1.5}
+.tpi-copy{flex:1;min-width:0}.tpi-copy h3{margin:0;font-size:15px;line-height:1.45;font-weight:500;letter-spacing:-.015em}.tpi-copy p{margin:6px 0 0;font-size:13px;line-height:1.55;color:var(--plum-muted);max-width:75ch}
+.status-active{background:#a8eddb12;border-color:#617f78;color:#a8eddb;white-space:nowrap}
+.execution-name{flex:1;font-size:14px;font-weight:450;line-height:1.55}.execution-mode{display:inline-flex;align-items:center;gap:7px;font-size:11px;white-space:nowrap}.execution-mode i{display:block;width:6px;height:6px;border-radius:50%;background:currentColor}.mode-auto{color:#a8eddb}.mode-semi{color:#e2bc73}.mode-manual{color:#efb1d4}
+/* The imported animation retains its neurons and directional light travel. */
+#view-handoffs{overflow:hidden}
+.neural-tools{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 0 14px;flex-shrink:0}
+.neural-tools p{margin:0;color:var(--plum-muted);font-size:12px;line-height:1.5}.neural-tools>div{display:flex;gap:6px;flex:none}
+.neural-tools button{font-size:11px;padding:7px 10px;min-height:34px;border:1px solid var(--plum-line);border-radius:6px;background:transparent;color:#e4d3ed}
+.neural-tools button:disabled{opacity:.42;cursor:default}.neural-tools button[aria-pressed=true]{background:#543764;border-color:#b594c8;color:#fff}
+.neural-scroll{overflow:auto;flex:1;min-height:0;scrollbar-width:thin;scrollbar-color:#88649a transparent;padding:0 0 10px}
+.neural-headings,.neural-diagram{display:grid;grid-template-columns:minmax(140px,1fr) minmax(300px,1.55fr) minmax(140px,1fr);column-gap:clamp(54px,6vw,110px);min-width:850px}
+.neural-headings{position:sticky;top:0;z-index:4;padding:12px 0 18px;background:var(--plum-base);color:var(--plum-text);font-size:14px;font-weight:500;text-align:center}
+.neural-headings>span:first-child{color:var(--signal-in);text-align:right}.neural-headings>span:last-child{color:var(--signal-out);text-align:left}
+.neural-headings small{display:block;margin-top:5px;color:var(--plum-muted);font-size:10px;font-weight:400}
+.neural-diagram{position:relative;isolation:isolate;min-height:760px;padding:12px 0}
+.neural-diagram .three-layer,.neural-diagram .neural-fallback{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.neural-ready .neural-fallback{visibility:hidden}
+.neural-dependencies,.neural-flows{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:space-around;gap:10px;min-width:0;pointer-events:none}
+.neural-diagram .dependency{position:relative;min-width:0;padding:10px 18px;font-size:14px;font-weight:500;line-height:1.5;transition:opacity 160ms ease,color 160ms ease,text-shadow 160ms ease}
+.neural-diagram .dependency.in{color:#a8eddb;text-align:right;padding-left:0}
+.neural-diagram .dependency.out{color:#efb1d4;text-align:left;padding-right:0}
+.neural-diagram .dependency::after{content:'';position:absolute;top:50%;width:5px;height:5px;border-radius:50%;background:currentColor;transform:translateY(-50%);box-shadow:0 0 8px currentColor}
+.neural-diagram .dependency.in::after{right:0}.neural-diagram .dependency.out::after{left:0}
+.neural-diagram .dependency.connected.in{color:#c9fff0;text-shadow:0 0 10px #72efc980,0 0 24px #72efc940}
+.neural-diagram .dependency.connected.out{color:#ffdaee;text-shadow:0 0 10px #ff9dce80,0 0 24px #ff9dce40}
+.neural-diagram .dependency.connected::after{width:7px;height:7px;box-shadow:0 0 8px currentColor,0 0 20px currentColor}
+.neural-diagram .activity{pointer-events:auto;position:relative;min-height:62px;flex:1;display:flex;align-items:center;justify-content:center;padding:14px 38px;border:0;border-radius:0;background:transparent;box-shadow:none;font-size:15px;font-weight:500;line-height:1.5;text-align:center;white-space:normal;color:#ead9fb;text-shadow:0 0 12px #c292f033;transition:opacity 160ms ease,color 160ms ease,text-shadow 160ms ease,transform 140ms var(--ui-ease)}
+.neural-diagram .activity>span{position:relative;z-index:1;max-width:100%;background:none;padding:2px 5px;border:0;border-radius:0}
+.neural-diagram .activity small{display:block;margin-top:4px;color:#c9afd9;font-size:11px;font-weight:400;line-height:1.3;font-variant-numeric:tabular-nums;text-shadow:none}
+.neural-diagram .activity[aria-pressed=true]{color:#fff;text-shadow:0 0 8px #e0b5ffb3,0 0 22px #c283fa99,0 0 38px #bd73ed55}
+.neural-diagram .activity[aria-pressed=true] small{color:#efdcff}
+.neural-diagram.selected .activity:not([aria-pressed=true]){opacity:.64;text-shadow:none}
+.neural-diagram.selected .dependency:not(.connected){opacity:.62}
+.neural-status{flex-shrink:0;min-height:42px;margin:0;padding:12px 0;color:var(--plum-muted);font-size:11px;line-height:1.5;border-top:1px solid var(--plum-line)}
+@media(hover:hover) and (pointer:fine){.neural-diagram .activity:not([aria-pressed=true]):hover,.neural-diagram .activity.is-hovered:not([aria-pressed=true]){opacity:1;background:transparent;color:#fff;text-shadow:0 0 10px #e0b5ff99,0 0 24px #c283fa66}.neural-tools button:not(:disabled):hover{background:var(--plum-raised);border-color:#977aa5}}
+.handoff-container ::selection{background:#79528d;color:#fff}
+.handoff-container button:focus-visible{outline:2px solid #e9c6df;outline-offset:3px}
+.handoff-container .activity:focus-visible{outline:none}.neural-diagram .activity:focus-visible>span{text-decoration:underline;text-decoration-color:#e0b5ff;text-underline-offset:6px;text-decoration-thickness:2px}
+@media(min-width:768px) and (max-height:820px){.label.card{padding:8px 12px}.label.card small{font-size:9px;margin-bottom:3px}.label.card strong{font-size:15px}.label.card .hb-pulse{height:12px;margin:0 0 4px}.label.card .hb-row{margin-top:5px}.label.card .hb-n b{font-size:14px}.label.card .hb-mode{font-size:9px}.label.card .hb-summary{margin-top:5px;padding-top:5px;font-size:10px}}
+@media(min-width:768px) and (max-width:1023px){.label.card{width:180px}.label.card strong{font-size:14px}.label.card .hb-mode{font-size:8px}}
+@media(max-width:1000px){.handoff-container{padding:0 24px}.handoff-topbar{padding-top:24px;gap:18px 14px}.ai-opps-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.neural-tools{flex-wrap:wrap}.neural-diagram,.neural-headings{column-gap:60px}}
+@media(max-width:767px){.label.card,.label.card.left{width:128px;min-width:0;max-width:140px;padding:8px 9px}.label.card small{font-size:8px;margin-bottom:3px}.label.card strong{font-size:12px}.label.card .hb-pulse{height:12px;margin:0 0 3px}.label.card .hb-row{margin-top:5px}.label.card .hb-n b{font-size:11px}.label.card .hb-mode{font-size:0}.label.card .hb-summary{margin-top:5px;padding-top:5px;font-size:9px}.handoff-container{padding:0 16px}.handoff-topbar{grid-template-columns:1fr;padding-top:18px;gap:12px}.handoff-close-btn{grid-row:1;justify-self:start;font-size:11px;min-height:34px;padding:6px 10px}.handoff-title-block h2{font-size:25px}.handoff-subtitle{font-size:12px;margin-top:6px}.modal-tabs{grid-column:1;padding:4px;width:100%;gap:2px}.modal-tab-btn{font-size:11px;padding:8px 10px}.neural-tools{padding:14px 0 12px;gap:9px}.neural-tools p{font-size:11px}.neural-tools p::after{content:' Swipe sideways to explore the map.'}.neural-tools>div{flex-wrap:wrap}.neural-tools button{font-size:10px;min-height:32px}.neural-status{max-height:90px;overflow:auto;font-size:10px}.content-intro{font-size:10px;gap:12px;flex-wrap:wrap;margin-bottom:16px}.modal-content-scroll{padding-top:18px}.ai-opps-grid{grid-template-columns:1fr;gap:12px}.ai-card{padding:18px;gap:18px}.ai-card-title{font-size:15px}.proc-activity-row{gap:12px;padding:17px 15px;align-items:flex-start}.tpi-row{display:grid;grid-template-columns:1fr auto;gap:8px}.tpi-code{grid-column:1;grid-row:1}.tpi-copy{grid-column:1/-1;grid-row:2}.status-active{grid-row:1;grid-column:2}.tpi-copy h3{font-size:14px}.tpi-copy p{font-size:12px}.activity-order{min-width:20px;font-size:10px}.execution-name{font-size:12px}.execution-mode{font-size:0;margin-top:6px}.execution-mode i{width:7px;height:7px}.pain-table,.pain-table tbody{display:block}.pain-table thead{display:none}.pain-table tr{display:grid;grid-template-columns:1fr;gap:15px;padding:18px;border-bottom:1px solid var(--plum-line)}.pain-table tr:last-child{border-bottom:0}.pain-table td{display:block;padding:0;border:0;font-size:12px}.pain-table td::before{content:attr(data-label);display:block;margin-bottom:5px;color:#baa2c9;font-size:10px;font-weight:400}.pain-table td:first-child{font-size:14px}}
+@media(max-width:767px) and (max-height:720px){.label.card,.label.card.left{padding:6px 8px}.label.card small{margin-bottom:2px}.label.card .hb-pulse{height:8px}.label.card .hb-row{margin-top:3px}.label.card .hb-summary{margin-top:3px;padding-top:3px}.label.card strong{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.handoff-container *,#tower-telemetry-hud *,.label.card *{transition:none!important}.component-pulse-sweep{animation:none!important}}
+
+.keyboard-input .handoff-container *, .keyboard-input .label.card, .keyboard-input #tower-telemetry-hud *{transition:none!important}
+
+@media(min-width:768px) and (max-height:700px){.label.card{padding:7px 11px}.label.card small{margin-bottom:2px}.label.card strong{font-size:14px}.label.card .hb-pulse{height:9px;margin-bottom:3px}.label.card .hb-row{margin-top:4px}.label.card .hb-n b{font-size:12px}.label.card .hb-summary{margin-top:3px;padding-top:3px;font-size:9px}}
+
+/* Keep functional labels legible without adding motion to changing figures. */
+#tower-telemetry-hud .hud-bar-segment{transition:filter 160ms ease}
+#tower-telemetry-hud .hud-action-btn,#tower-telemetry-hud .hud-legend-item>span{font-size:11px}
+#tower-telemetry-hud .hud-demo-note{font-size:10px}
+.tab-count,.ai-type-pill,.ai-validate-tag,.pain-status-pill,.neural-tools button,.neural-headings small,.neural-diagram .activity small{font-size:11px}
+.hb-legend{font-size:11px}
+@media(max-width:767px){.pain-table td::before,.content-intro,.neural-status{font-size:11px}}
+
+/* Low-contrast X-ray paper is painted behind content, never over it. */
+:root{--xray-grid:linear-gradient(#c9b7e00a 1px,transparent 1px),linear-gradient(90deg,#c9b7e00a 1px,transparent 1px),linear-gradient(#c9b7e007 1px,transparent 1px),linear-gradient(90deg,#c9b7e007 1px,transparent 1px)}
+#experience,.label.card,.label.card:hover,#tower-telemetry-hud,.handoff-backdrop{background-image:var(--xray-grid);background-size:120px 120px,120px 120px,24px 24px,24px 24px;background-position:center}
+/* The entire waveform travels, rather than illuminating a static ECG shape. */
+.organ-pulse{overflow:hidden;color:var(--pulse-color)}
+.organ-pulse-baseline{fill:none;stroke:currentColor;stroke-width:.7;opacity:.16}
+.organ-pulse-train{animation:organ-signal-travel var(--pulse-duration) linear infinite;animation-delay:var(--pulse-phase);transform-origin:0 0;will-change:transform}
+.organ-pulse-train path{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+#tower-telemetry-hud .organ-pulse-train path{stroke-width:1.8}
+.label.card .hb-pulse{height:19px;margin:2px 0 5px}
+.label.card .organ-pulse-train{animation-play-state:paused}
+.label.card .hb.on .organ-pulse-train{animation-play-state:running}
+body[data-detail=true] .label.card .organ-pulse-train,body:not([data-detail=true]) #tower-telemetry-hud .organ-pulse-train,body.modal-open .organ-pulse-train,body.page-hidden .organ-pulse-train{animation-play-state:paused!important}
+@keyframes organ-signal-travel{from{transform:translateX(0)}to{transform:translateX(-200px)}}
+@media(max-width:767px){.label.card .hb-pulse{height:15px;margin:1px 0 4px}}
+@media(prefers-reduced-motion:reduce){.organ-pulse-train{animation:none;transform:none;will-change:auto}}
+
+/* Handoffs use one vertical scroll area so navigation leaves with the page. */
+.handoff-container.is-handoff-view{display:block;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#88649a transparent}
+.is-handoff-view #view-handoffs{flex:none;height:auto;min-height:100dvh;overflow:visible;padding:14px 0 24px}
+.is-handoff-view .neural-scroll{flex:none;overflow-x:auto;overflow-y:hidden;min-height:0}
+.is-handoff-view .neural-headings{position:static}
+.is-handoff-view .neural-diagram{min-height:max(760px,calc(100dvh - 92px))}
+.neural-announcement{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+
+/* Compact column key remains pinned while the page navigation scrolls away. */
+.is-handoff-view{scroll-padding-top:92px}
+.is-handoff-view #view-handoffs{padding-top:0}
+.is-handoff-view .neural-header{position:sticky;top:0;z-index:6;flex:none;overflow:hidden;background:#30203d;border-bottom:1px solid #594266}
+.is-handoff-view .neural-headings{--heading-gap:clamp(54px,6vw,110px);position:static;padding:0;background:transparent;align-items:stretch;column-gap:var(--heading-gap)}
+.neural-headings>.neural-heading-cell{position:relative;display:flex;align-items:center;justify-content:center;min-height:80px;padding:14px 0;color:#e5cef5;text-align:center}
+.neural-headings>.neural-heading-cell:first-child{color:var(--signal-in);text-align:center}
+.neural-headings>.neural-heading-cell:last-child{color:var(--signal-out);text-align:center}
+.neural-heading-cell::after{content:'';position:absolute;bottom:0;left:calc(50% - 18px);width:36px;height:2px;background:currentColor;opacity:.7}
+.neural-heading-group{display:flex;align-items:center;justify-content:center}
+.neural-heading-copy{text-align:center}
+.neural-headings strong{display:block;font-size:18px;font-weight:550;line-height:1.2;letter-spacing:-.015em}
+.neural-headings small{display:block;margin-top:6px;font-size:12px;font-weight:400;line-height:1.4;color:#c7b5d1;letter-spacing:0}
+.is-handoff-view .neural-scroll{padding-top:12px}
+.is-handoff-view .activity{scroll-margin-top:92px}
+@media(max-width:1150px){
+ .modal-tabs{flex-wrap:wrap;gap:0;padding-bottom:12px}
+ .insight-tabs{width:100%;margin-bottom:10px;border-bottom:1px solid #493254}
+ .execution-tabs{padding:0;border:0}
+}
+@media(max-width:1000px){.is-handoff-view .neural-headings{--heading-gap:60px}}
+@media(max-width:767px){
+ .handoff-topbar{grid-template-columns:1fr;gap:20px;padding:18px 0 0}
+ .handoff-close-btn{grid-row:1;justify-self:start;font-size:12px;min-height:40px;padding:8px 14px}
+ .handoff-title-block h2{font-size:28px}
+ .handoff-subtitle{font-size:13px;line-height:1.55;margin-top:10px}
+ .modal-tabs{grid-column:1;gap:0;padding:0 0 12px;width:100%}
+ .insight-tabs{display:grid;grid-template-columns:1fr 1fr;gap:0 12px;margin-bottom:12px;padding-bottom:6px}
+ .insight-tabs .modal-tab-btn{justify-content:flex-start;min-height:44px;padding:10px 4px;font-size:13px}
+ .insight-tabs .modal-tab-btn::after{left:4px;right:4px;height:2px}
+ .execution-tabs{width:100%;gap:2px;justify-content:space-between}
+ .execution-tabs .modal-tab-btn{gap:5px;padding:8px 5px;min-height:40px;font-size:12px}
+ .modal-tabs .tab-count{font-size:11px}
+ .neural-headings>.neural-heading-cell{min-height:76px}
+}

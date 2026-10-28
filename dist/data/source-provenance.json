@@ -1,0 +1,59 @@
+{
+  "source": "D2P-process-maps-MERGED.html",
+  "sha256": "1335995530b0dc2da86be120a43ada9aa53d9a95b959be613ac5b0714d9fea97",
+  "basis": "Activity counts use the original source steps/stat functions on data.asis only. Pain points reproduce the As-Is pain register (unique step-level statements plus stage-level statements where the original source includes them). TPIs join embedded tower registers with the merged TPI Analysis register by opportunity ID; all documented statuses are retained. AI KPI counts AI-tagged TPI register entries. Additional source map hypotheses are listed separately. Handoffs reproduce the original sankeyLite renderer output exactly: its As-Is data, tower-specific filtering, flow grouping, labels, ordering and every edge (including repeated parties). Generic stage up/down metadata is not added. No To-Be activity changes enter the activity mix.",
+  "maps": {
+    "FPAC": "8355b11a423a0507b8523ebaebe05794ed61fe7152ba9a7570a5dd0af728d8dd",
+    "FPAO": "4ecaa06dcdca0bb0a3cbf33dec40f2a599fed10b8d2a1259de6396668f4a337e",
+    "CAPEX": "5d0a8e7b812f357d0c439b9d71fbe366bc6499e9aeb95859bf79175f467f4156",
+    "P2P": "4c31eddc58939334bbf1909b670f32352e892a962725f520465584cea6b0d794",
+    "O2C": "9b8c3c51f313eea4f4a0a73e392e20a321ff76dcaacf1f1756744f8adf5a000f",
+    "TAX": "13c3338dd7d6bf5ea56c7654b9b4b1b7089da08fd01bdb3097b9289759e9538c",
+    "R2R": "fdbeeaab8c7c8c073e76d518e5ff0154705e2ff257face24a2466db1990d1c83",
+    "CTRL": "d24305972c9cef36034c168aeac00634ac021d9cdc9c73a43f45bca95a29f44a"
+  },
+  "handoffValidation": {
+    "renderer": "sankeyLite",
+    "validatedAgainst": "Original rendered SVG counts and every link popup title and description",
+    "towers": {
+      "FPAC": {
+        "flows": 9,
+        "links": 55
+      },
+      "FPAO": {
+        "flows": 8,
+        "links": 63
+      },
+      "CAPEX": {
+        "flows": 8,
+        "links": 15
+      },
+      "P2P": {
+        "flows": 5,
+        "links": 54
+      },
+      "O2C": {
+        "flows": 10,
+        "links": 39
+      },
+      "TAX": {
+        "flows": 23,
+        "links": 32
+      },
+      "R2R": {
+        "flows": 9,
+        "links": 34
+      },
+      "CTRL": {
+        "flows": 2,
+        "links": 16
+      }
+    }
+  },
+  "contentCoverage": {
+    "file": "tower-content.json",
+    "sha256": "b38eeb86f3e875f470d4a558c010c54232eb9c115553be8bc77bdbd917ca09a0",
+    "basis": "All rendered non-flow sections from each original As-Is and AI page, plus source control and KPI definitions. Process maps, high-level flow artifacts and the original handoff SVG are excluded; the handoff graph is reproduced separately with its exact original connections. All AI sections retain their original text, tables and feasibility comments.",
+    "registerCorrection": "TAX and R2R include every documented native TPI register ID, including entries absent from the consolidated overview. O2C and Controlling pain counts include their original stage-level register statements."
+  }
+}

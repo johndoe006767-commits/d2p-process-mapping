@@ -1,0 +1,98 @@
+/* Scoped refresh of overview cards and the selected tower's metric panel only. */
+.label.card,.hb-legend,#tower-telemetry-hud{--hb-auto:#82cfb8;--hb-hyb:#e2bc73;--hb-man:#d791ac;--component-ink:#f7f0fa;--component-muted:#c4b2cd;--component-accent:#e5bad7;--component-rule:#5e436c}
+.label.card{background:#342341;border:0;border-radius:12px;padding:9px 12px;box-shadow:0 8px 24px #100a192b;color:var(--component-ink);backdrop-filter:none;-webkit-backdrop-filter:none}
+.label.card:hover{background:#44304f;color:var(--component-ink)}
+.label.card small{color:var(--component-muted);font-size:9px;letter-spacing:.08em;margin-bottom:3px}
+.label.card strong{font-size:16px;font-weight:600;line-height:1.15;letter-spacing:-.3px}
+.label.card .cta{color:var(--component-accent);font-size:10px;margin-top:6px}
+.label.card .hb{margin-top:2px}
+.hb-pulse{display:block;width:100%;height:15px;margin-bottom:4px}
+.component-pulse-track,.component-pulse-sweep{fill:none;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.component-pulse-track{stroke:#755a83}
+.component-pulse-sweep{stroke:var(--component-accent);stroke-dasharray:24 76;animation:component-heartbeat 2.8s linear infinite}
+@keyframes component-heartbeat{from{stroke-dashoffset:100}to{stroke-dashoffset:-100}}
+.label.card .hb-bar{height:5px;border-radius:2px;background:#51355f}
+.label.card .hb-fill{gap:2px}
+.label.card .hb-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:5px;color:var(--component-muted)}
+.label.card .hb-n{display:flex;flex-direction:column;align-items:flex-start;gap:3px}
+.label.card .hb-n b{color:var(--component-ink);font-size:15px;font-weight:600}
+.hb-mode{display:flex;align-items:center;gap:3px;font-size:9px;line-height:1.1;white-space:nowrap}
+.label.card .hb-n i{width:5px;height:5px;border-radius:50%}
+.hb-summary{display:flex;justify-content:space-between;gap:5px;margin-top:5px;padding-top:5px;border-top:1px solid var(--component-rule);font-size:10px;color:var(--component-muted)}
+.hb-summary b{font-weight:600;color:var(--component-ink)}
+#tower-telemetry-hud{color-scheme:dark;color:var(--component-ink);background:#342341;border:0;border-radius:14px;padding:24px;box-shadow:0 16px 40px #100a193d;backdrop-filter:none;-webkit-backdrop-filter:none}
+#tower-telemetry-hud .hud-header{align-items:flex-start;gap:12px;margin:0 0 24px}
+#tower-telemetry-hud .hud-tower-name{margin:0;font-size:25px;line-height:1.15;font-weight:600;letter-spacing:-.025em;overflow-wrap:normal}
+.hud-subtitle{margin:7px 0 0;font-size:13px;line-height:1.4;color:var(--component-muted)}
+#tower-telemetry-hud .hud-action-btn{display:flex;align-items:center;gap:5px;flex:none;padding:7px 8px;min-height:32px;border:1px solid var(--component-rule);border-radius:6px;background:transparent;color:var(--component-accent);box-shadow:none;font-size:11px;font-weight:500;letter-spacing:0}
+#tower-telemetry-hud .hud-action-btn:hover{background:#493153;border-color:#a484b3;color:var(--component-accent);box-shadow:none}
+.hud-health-row{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:14px}
+.hud-score{display:flex;align-items:baseline;gap:4px;white-space:nowrap;font-size:13px;color:var(--component-muted);font-variant-numeric:tabular-nums}
+.hud-score strong{font-size:34px;line-height:1.1;font-weight:600;color:var(--component-accent);letter-spacing:-.03em}
+#tower-telemetry-hud .hud-ecg-container{display:block;height:34px;margin:12px 0 22px;overflow:hidden}
+#tower-telemetry-hud .component-pulse-track,#tower-telemetry-hud .component-pulse-sweep{stroke-width:1.8}
+.hud-mix-heading{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:12px;font-size:13px}
+.hud-mix-heading strong{font-size:15px;font-weight:600}
+.hud-mix-heading>span{color:var(--component-muted);font-size:12px}
+#tower-telemetry-hud .hud-bar-container{height:12px;gap:3px;margin-bottom:14px;border-radius:3px;box-shadow:none;background:#51355f}
+#tower-telemetry-hud .seg-automated{background:var(--hb-auto);box-shadow:none}
+#tower-telemetry-hud .seg-semi{background:var(--hb-hyb);box-shadow:none}
+#tower-telemetry-hud .seg-manual{background:var(--hb-man);box-shadow:none}
+#tower-telemetry-hud .hud-legend{gap:6px;padding-bottom:18px;margin-bottom:2px;border-bottom:1px solid var(--component-rule);color:var(--component-ink);font-weight:400}
+#tower-telemetry-hud .hud-legend-item{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:7px;padding:3px 0 5px;border:0;border-radius:4px;min-height:54px;background:transparent;text-align:left}
+#tower-telemetry-hud .hud-legend-item:hover{background:#493153}
+#tower-telemetry-hud .hud-legend-item strong{font-size:25px;font-weight:500;line-height:1;font-variant-numeric:tabular-nums}
+#tower-telemetry-hud .hud-legend-item>span{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--component-muted);white-space:nowrap}
+#tower-telemetry-hud .legend-dot{width:6px;height:6px;box-shadow:none}
+#tower-telemetry-hud .dot-auto{background:var(--hb-auto)}
+#tower-telemetry-hud .dot-semi{background:var(--hb-hyb)}
+#tower-telemetry-hud .dot-manual{background:var(--hb-man)}
+#tower-telemetry-hud .hud-chips{display:flex;flex-direction:column;gap:0}
+#tower-telemetry-hud .hud-chip{display:flex;flex-wrap:nowrap;align-items:center;gap:8px;padding:11px 0;min-height:40px;border:0;border-bottom:1px solid var(--component-rule);border-radius:0;background:transparent;color:var(--component-ink);text-align:left;box-shadow:none;animation:none;transition:background 160ms ease}
+#tower-telemetry-hud .hud-chip:hover{background:#493153;filter:none;transform:none}
+#tower-telemetry-hud .chip-lbl{flex:1;white-space:normal;font-size:12px;font-weight:400}
+#tower-telemetry-hud .chip-val{font-size:16px;font-weight:600;font-variant-numeric:tabular-nums}
+#tower-telemetry-hud .hud-chip .ico-ne{width:13px;height:13px;color:var(--component-accent)}
+.hud-demo-note{margin:12px 0 0;font-size:10px;color:var(--component-muted)}
+#tower-telemetry-hud button:focus-visible,.label.card:focus-visible{outline:2px solid #e5bad7;outline-offset:3px}
+#tower-telemetry-hud ::selection,.label.card ::selection{background:#6d487b;color:#f7f0fa}
+@media(min-width:768px) and (max-height:780px){.label.card{padding:6px 11px}.label.card .hb{margin-top:0}.label.card strong{font-size:15px}.hb-pulse{height:9px;margin-bottom:3px}.label.card .hb-row{margin-top:3px}.label.card .hb-n{gap:2px}.hb-summary{margin-top:3px;padding-top:3px;font-size:9px}.label.card .hb-n b{font-size:12px}}
+@media(min-width:768px) and (max-width:1023px){.label.card{width:178px}.hb-mode{font-size:8px;gap:2px}}
+@media(max-width:1099px){
+  #tower-telemetry-hud{padding:14px 18px}
+  #tower-telemetry-hud .hud-header{margin-bottom:10px;align-items:center}
+  #tower-telemetry-hud .hud-tower-name{font-size:20px}
+  .hud-subtitle{margin-top:3px;font-size:12px}
+  .hud-score strong{font-size:27px}
+  #tower-telemetry-hud .hud-ecg-container{height:23px;margin:5px 0 9px}
+  .hud-mix-heading{margin-bottom:7px}
+  #tower-telemetry-hud .hud-bar-container{height:9px;margin-bottom:7px}
+  #tower-telemetry-hud .hud-legend{padding-bottom:8px}
+  #tower-telemetry-hud .hud-legend-item{gap:4px;min-height:42px}
+  #tower-telemetry-hud .hud-legend-item strong{font-size:21px}
+  #tower-telemetry-hud .hud-chips{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+  #tower-telemetry-hud .hud-chip{gap:4px;padding:8px 0;border:0}
+  #tower-telemetry-hud .chip-lbl{font-size:11px}
+  #tower-telemetry-hud .chip-val{font-size:15px}
+  #tower-telemetry-hud .hud-chip .ico-ne{display:none}
+  .hud-demo-note{margin-top:2px;font-size:9px}
+}
+@media(max-width:767px){
+  .label.card,.label.card.left{min-width:124px;max-width:140px;padding:7px 9px;text-align:left;border-radius:10px}
+  .label.card strong{font-size:12px}.label.card small{font-size:8px;margin-bottom:2px}
+  .label.card .hb{margin-top:1px}.hb-pulse{height:12px;margin-bottom:3px}
+  .label.card .hb-bar{height:4px}.label.card .hb-row{display:flex;justify-content:space-between;gap:5px;margin-top:5px}
+  .label.card .hb-n{flex-direction:row;align-items:center;gap:3px}.label.card .hb-n b{font-size:11px}
+  .hb-mode{font-size:0;gap:0}.label.card .hb-n i{width:5px;height:5px}
+  .hb-summary{margin-top:5px;padding-top:5px;font-size:9px}
+}
+@media(max-width:480px){
+  #tower-telemetry-hud{padding:12px 14px}
+  #tower-telemetry-hud .hud-header{gap:8px}
+  #tower-telemetry-hud .hud-action-btn>span:last-child{display:inline}
+  #tower-telemetry-hud .hud-action-btn{padding:6px;font-size:10px}
+  #tower-telemetry-hud .hud-tower-name{font-size:18px}
+  .hud-subtitle{font-size:11px}.hud-health-row{font-size:13px}
+  #tower-telemetry-hud .hud-legend-item>span{font-size:10px;gap:4px}
+}
+@media(prefers-reduced-motion:reduce){.component-pulse-sweep{animation:none;stroke-dasharray:none}.label.card .hb-fill{clip-path:none}}
