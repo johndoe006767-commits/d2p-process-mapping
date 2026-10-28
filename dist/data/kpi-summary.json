@@ -1,0 +1,1202 @@
+{
+  "brain": {
+    "asIs": {
+      "auto": 18,
+      "semi": 16,
+      "manual": 68,
+      "total": 102
+    },
+    "toBe": {
+      "auto": 47,
+      "semi": 22,
+      "manual": 33,
+      "total": 102
+    },
+    "dependencies": [
+      {
+        "id": "pancreas",
+        "name": "FP&A Operations",
+        "count": 1,
+        "evidence": [
+          {
+            "flowId": "FPAC-03",
+            "flow": "3. Stage 3: P&L Planning & Total Company Consolidation",
+            "direction": "in",
+            "party": "FP&A Ops (Product Costing)",
+            "detail": "SCC rate per SKU (via FET)",
+            "source": "As documented by FP&A Commercial (E2E simplified v3 / CAPEX planning)"
+          }
+        ],
+        "rank": 1
+      }
+    ],
+    "projects": [
+      {
+        "name": "FAST+",
+        "entries": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        "sourceCount": 10,
+        "aiCount": 9,
+        "months": [
+          "June"
+        ]
+      },
+      {
+        "name": "P&L Data House / reporting",
+        "entries": [
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50
+        ],
+        "sourceCount": 15,
+        "aiCount": 17,
+        "months": [
+          "September"
+        ]
+      }
+    ],
+    "source": "source-maps/FPAC.html"
+  },
+  "pancreas": {
+    "asIs": {
+      "auto": 3,
+      "semi": 24,
+      "manual": 34,
+      "total": 61
+    },
+    "toBe": {
+      "auto": 12,
+      "semi": 36,
+      "manual": 13,
+      "total": 61
+    },
+    "dependencies": [
+      {
+        "id": "liver",
+        "name": "CAPEX",
+        "count": 2,
+        "evidence": [
+          {
+            "flowId": "FPAO-02",
+            "flow": "2. Operational Planning",
+            "direction": "in",
+            "party": "CAPEX",
+            "detail": "Depreciation forecast",
+            "source": "As mapped on the FP&A Ops As-Is map (LT feedback applied, Oct 2026)"
+          },
+          {
+            "flowId": "FPAO-05",
+            "flow": "5. Month-End Actualization",
+            "direction": "in",
+            "party": "CAPEX",
+            "detail": "Depreciation and amortisation run",
+            "source": "As mapped on the FP&A Ops As-Is map (LT feedback applied, Oct 2026)"
+          }
+        ],
+        "rank": 1
+      },
+      {
+        "id": "stomach",
+        "name": "P2P",
+        "count": 1,
+        "evidence": [
+          {
+            "flowId": "FPAO-05",
+            "flow": "5. Month-End Actualization",
+            "direction": "in",
+            "party": "P2P",
+            "detail": "Coupa PO / non-PO and T&E cut-off",
+            "source": "As mapped on the FP&A Ops As-Is map (LT feedback applied, Oct 2026)"
+          }
+        ],
+        "rank": 2
+      },
+      {
+        "id": "lungs",
+        "name": "R2R",
+        "count": 1,
+        "evidence": [
+          {
+            "flowId": "FPAO-05",
+            "flow": "5. Month-End Actualization",
+            "direction": "in",
+            "party": "R2R",
+            "detail": "Sub-module close (FA, AP, AR); accruals; lease; ICT",
+            "source": "As mapped on the FP&A Ops As-Is map (LT feedback applied, Oct 2026)"
+          }
+        ],
+        "rank": 2
+      }
+    ],
+    "projects": [
+      {
+        "name": "Agent Rhy · APAC MI Pack",
+        "entries": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31
+        ],
+        "sourceCount": 15,
+        "aiCount": 17,
+        "months": [
+          "September"
+        ]
+      },
+      {
+        "name": "Site Cost & FTE Dashboard",
+        "entries": [
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55
+        ],
+        "sourceCount": 18,
+        "aiCount": 6,
+        "months": [
+          "July"
+        ]
+      }
+    ],
+    "source": "source-maps/FPAO.html"
+  },
+  "liver": {
+    "asIs": {
+      "auto": 4,
+      "semi": 11,
+      "manual": 60,
+      "total": 75
+    },
+    "toBe": {
+      "auto": 4,
+      "semi": 39,
+      "manual": 32,
+      "total": 75
+    },
+    "dependencies": [
+      {
+        "id": "stomach",
+        "name": "P2P",
+        "count": 2,
+        "evidence": [
+          {
+            "flowId": "CAPEX-02",
+            "flow": "2. Project Spend, Settlement & Capitalisation",
+            "direction": "in",
+            "party": "P2P-02 Invoice Management",
+            "detail": "POs, goods receipts and invoices against WBSE",
+            "source": "As documented in the CAPEX process register v5"
+          },
+          {
+            "flowId": "CAPEX-02",
+            "flow": "2. Project Spend, Settlement & Capitalisation",
+            "direction": "in",
+            "party": "P2P-01 Perform Goods & Services Receipt",
+            "detail": "Goods receipts against project WBSE",
+            "source": "As documented in the CAPEX process register v5"
+          }
+        ],
+        "rank": 1
+      }
+    ],
+    "projects": [
+      {
+        "name": "Global Fixed Assets dashboard",
+        "entries": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34
+        ],
+        "sourceCount": 21,
+        "aiCount": 14,
+        "months": [
+          "August"
+        ]
+      }
+    ],
+    "source": "source-maps/CAPEX.html"
+  },
+  "stomach": {
+    "asIs": {
+      "auto": 18,
+      "semi": 9,
+      "manual": 57,
+      "total": 84
+    },
+    "toBe": {
+      "auto": 31,
+      "semi": 21,
+      "manual": 32,
+      "total": 84
+    },
+    "dependencies": [
+      {
+        "id": "intestines",
+        "name": "O2C",
+        "count": 6,
+        "evidence": [
+          {
+            "flowId": "P2P-03",
+            "flow": "3. Payment",
+            "direction": "in",
+            "party": "O2C-03 Cash & Banking",
+            "detail": "Payment confirmation / ACK file",
+            "source": "As documented in the CAPEX process register v5"
+          },
+          {
+            "flowId": "P2P-03",
+            "flow": "3. Payment",
+            "direction": "in",
+            "party": "O2C-03 Cash & Banking",
+            "detail": "Rejected payment notification",
+            "source": "As documented in the CAPEX process register v5"
+          },
+          {
+            "flowId": "P2P-03",
+            "flow": "3. Payment",
+            "direction": "in",
+            "party": "O2C-03 Cash & Banking",
+            "detail": "Incoming funds notification",
+            "source": "As documented in the CAPEX process register v5"
+          },
+          {
+            "flowId": "P2P-05",
+            "flow": "5. Specialist variants (branch from the core invoice journey)",
+            "direction": "in",
+            "party": "O2C-03 Cash & Banking",
+            "detail": "Debit posting",
+            "source": "As documented in the CAPEX process register v5"
+          },
+          {
+            "flowId": "P2P-03",
+            "flow": "3. Payment",
+            "direction": "in",
+            "party": "O2C-03 Cash & Banking",
+            "detail": "Payment failure notification",
+            "source": "As documented in the CAPEX process register v5"
+          },
+          {
+            "flowId": "P2P-03",
+            "flow": "3. Payment",
+            "direction": "in",
+            "party": "O2C-03 Cash & Banking",
+            "detail": "Payment confirmation and proof",
+            "source": "As documented in the CAPEX process register v5"
+          }
+        ],
+        "rank": 1
+      },
+      {
+        "id": "lungs",
+        "name": "R2R",
+        "count": 2,
+        "evidence": [
+          {
+            "flowId": "P2P-04",
+            "flow": "4. Month-end close",
+            "direction": "in",
+            "party": "R2R-01 SAP Close",
+            "detail": "Close calendar",
+            "source": "As documented in the CAPEX process register v5"
+          },
+          {
+            "flowId": "P2P-04",
+            "flow": "4. Month-end close",
+            "direction": "in",
+            "party": "R2R",
+            "detail": "Coupa accrual and offset prepayment adjustment (China)",
+            "source": "As documented in the CAPEX process register v5"
+          }
+        ],
+        "rank": 2
+      },
+      {
+        "id": "kidneys",
+        "name": "Controlling",
+        "count": 1,
+        "evidence": [
+          {
+            "flowId": "P2P-04",
+            "flow": "4. Month-end close",
+            "direction": "in",
+            "party": "Controlling",
+            "detail": "BlackLine reconciliation calendar",
+            "source": "As documented in the CAPEX process register v5"
+          }
+        ],
+        "rank": 3
+      },
+      {
+        "id": "spleen",
+        "name": "Tax",
+        "count": 1,
+        "evidence": [
+          {
+            "flowId": "P2P-05",
+            "flow": "5. Specialist variants (branch from the core invoice journey)",
+            "direction": "in",
+            "party": "Tax",
+            "detail": "Confirmed WHT treatment",
+            "source": "As documented in the CAPEX process register v5"
+          }
+        ],
+        "rank": 3
+      }
+    ],
+    "projects": [
+      {
+        "name": "Non-PO Accrual (APAC)",
+        "entries": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36
+        ],
+        "sourceCount": 20,
+        "aiCount": 17,
+        "months": [
+          "August"
+        ]
+      },
+      {
+        "name": "BSR Automation",
+        "entries": [
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71
+        ],
+        "sourceCount": 19,
+        "aiCount": 16,
+        "months": [
+          "August"
+        ]
+      }
+    ],
+    "source": "source-maps/P2P.html"
+  },
+  "intestines": {
+    "asIs": {
+      "auto": 8,
+      "semi": 16,
+      "manual": 13,
+      "total": 37
+    },
+    "toBe": {
+      "auto": 18,
+      "semi": 9,
+      "manual": 10,
+      "total": 37
+    },
+    "dependencies": [
+      {
+        "id": "stomach",
+        "name": "P2P",
+        "count": 2,
+        "evidence": [
+          {
+            "flowId": "SOC-04.2",
+            "flow": "Disputes and deductions management",
+            "direction": "in",
+            "party": "P2P",
+            "detail": "AP-due invoice check",
+            "source": "As documented by O2C"
+          },
+          {
+            "flowId": "SOC-06.1",
+            "flow": "Flow A - Payment process: automated / semi-automated payment run",
+            "direction": "in",
+            "party": "P2P",
+            "detail": "3rd party / intercompany vendor invoices",
+            "source": "As documented by O2C"
+          }
+        ],
+        "rank": 1
+      },
+      {
+        "id": "kidneys",
+        "name": "Controlling",
+        "count": 1,
+        "evidence": [
+          {
+            "flowId": "SOC-01.1",
+            "flow": "Flow 1 · EDI orders",
+            "direction": "in",
+            "party": "Controlling",
+            "detail": "Updates the price in SAP",
+            "source": "As documented by O2C"
+          }
+        ],
+        "rank": 2
+      },
+      {
+        "id": "spleen",
+        "name": "Tax",
+        "count": 1,
+        "evidence": [
+          {
+            "flowId": "SOC-06.1",
+            "flow": "Flow A - Payment process: automated / semi-automated payment run",
+            "direction": "in",
+            "party": "Tax",
+            "detail": "Tax payments",
+            "source": "As documented by O2C"
+          }
+        ],
+        "rank": 2
+      }
+    ],
+    "projects": [
+      {
+        "name": "Payroll Payment Posting",
+        "entries": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        "sourceCount": 13,
+        "aiCount": 6,
+        "months": [
+          "July"
+        ]
+      },
+      {
+        "name": "Intracompany Fund Transfer",
+        "entries": [
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32
+        ],
+        "sourceCount": 8,
+        "aiCount": 6,
+        "months": [
+          "June"
+        ]
+      }
+    ],
+    "source": "source-maps/O2C.html"
+  },
+  "spleen": {
+    "asIs": {
+      "auto": 6,
+      "semi": 0,
+      "manual": 91,
+      "total": 97
+    },
+    "toBe": {
+      "auto": 12,
+      "semi": 30,
+      "manual": 55,
+      "total": 97
+    },
+    "dependencies": [
+      {
+        "id": "lungs",
+        "name": "R2R",
+        "count": 4,
+        "evidence": [
+          {
+            "flowId": "TAX-01.5",
+            "flow": "5 · Monthly WHT remittance",
+            "direction": "in",
+            "party": "R2R-01 SAP Close",
+            "detail": "SAP Close",
+            "source": "As documented in the Tax SOPs and current-state maps"
+          },
+          {
+            "flowId": "TAX-02.2",
+            "flow": "2 · Financial close",
+            "direction": "in",
+            "party": "R2R-01 SAP Close",
+            "detail": "SAP Close",
+            "source": "As documented in the Tax SOPs and current-state maps"
+          },
+          {
+            "flowId": "TAX-03.4",
+            "flow": "4 · VAT data gathering",
+            "direction": "in",
+            "party": "R2R-01 SAP Close",
+            "detail": "SAP Close",
+            "source": "As documented in the Tax SOPs and current-state maps"
+          },
+          {
+            "flowId": "TAX-04.1",
+            "flow": "1 · Quarterly CIT reporting calculation in the TRT",
+            "direction": "in",
+            "party": "R2R-03 Group Consolidation",
+            "detail": "ERH PBT and cash tax",
+            "source": "As documented in the Tax SOPs and current-state maps"
+          }
+        ],
+        "rank": 1
+      },
+      {
+        "id": "kidneys",
+        "name": "Controlling",
+        "count": 2,
+        "evidence": [
+          {
+            "flowId": "TAX-03.4",
+            "flow": "4 · VAT data gathering",
+            "direction": "in",
+            "party": "Controlling",
+            "detail": "sum netting report",
+            "source": "As documented in the Tax SOPs and current-state maps"
+          },
+          {
+            "flowId": "TAX-04.2",
+            "flow": "2 · Prior year adjustments (RTP) into the TRT",
+            "direction": "in",
+            "party": "Controlling",
+            "detail": "Reviewed RTP file",
+            "source": "As documented in the Tax SOPs and current-state maps"
+          }
+        ],
+        "rank": 2
+      },
+      {
+        "id": "liver",
+        "name": "CAPEX",
+        "count": 1,
+        "evidence": [
+          {
+            "flowId": "TAX-02.1",
+            "flow": "1 · Business inputs",
+            "direction": "in",
+            "party": "CAPEX-05 Depreciation",
+            "detail": "Depreciation & Amortisation",
+            "source": "As documented in the Tax SOPs and current-state maps"
+          }
+        ],
+        "rank": 3
+      }
+    ],
+    "projects": [
+      {
+        "name": "Tax GL Analyzer · Capital Assets",
+        "entries": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "sourceCount": 29,
+        "aiCount": 0,
+        "months": []
+      }
+    ],
+    "source": "source-maps/TAX.html"
+  },
+  "lungs": {
+    "asIs": {
+      "auto": 1,
+      "semi": 9,
+      "manual": 29,
+      "total": 39
+    },
+    "toBe": {
+      "auto": 4,
+      "semi": 16,
+      "manual": 19,
+      "total": 39
+    },
+    "dependencies": [
+      {
+        "id": "liver",
+        "name": "CAPEX",
+        "count": 3,
+        "evidence": [
+          {
+            "flowId": "R2R-01.2",
+            "flow": "2 · Complete Month-End ERP Close",
+            "direction": "in",
+            "party": "CAPEX",
+            "detail": "Settlement, depreciation and lease journals",
+            "source": "As documented in the R2R GSOPs and the LT review of 13 Oct 2026"
+          },
+          {
+            "flowId": "R2R-02.1",
+            "flow": "1 · Prepare Legal Entity Financial Statements",
+            "direction": "in",
+            "party": "CAPEX",
+            "detail": "FA and lease ERH files",
+            "source": "As documented in the R2R GSOPs and the LT review of 13 Oct 2026"
+          },
+          {
+            "flowId": "R2R-03.1",
+            "flow": "1 · Reconcile GL and Sub-Ledger Accounts",
+            "direction": "in",
+            "party": "CAPEX",
+            "detail": "FA and lease recs",
+            "source": "As documented in the R2R GSOPs and the LT review of 13 Oct 2026"
+          }
+        ],
+        "rank": 1
+      },
+      {
+        "id": "intestines",
+        "name": "O2C",
+        "count": 3,
+        "evidence": [
+          {
+            "flowId": "R2R-01.1",
+            "flow": "1 · Intercompany Month-End Close",
+            "direction": "in",
+            "party": "O2C",
+            "detail": "C2C billing release and trade AR",
+            "source": "As documented in the R2R GSOPs and the LT review of 13 Oct 2026"
+          },
+          {
+            "flowId": "R2R-01.2",
+            "flow": "2 · Complete Month-End ERP Close",
+            "direction": "in",
+            "party": "O2C",
+            "detail": "Sales, billing and AR",
+            "source": "As documented in the R2R GSOPs and the LT review of 13 Oct 2026"
+          },
+          {
+            "flowId": "R2R-03.1",
+            "flow": "1 · Reconcile GL and Sub-Ledger Accounts",
+            "direction": "in",
+            "party": "O2C",
+            "detail": "AR and C2C support",
+            "source": "As documented in the R2R GSOPs and the LT review of 13 Oct 2026"
+          }
+        ],
+        "rank": 1
+      },
+      {
+        "id": "kidneys",
+        "name": "Controlling",
+        "count": 2,
+        "evidence": [
+          {
+            "flowId": "R2R-01.2",
+            "flow": "2 · Complete Month-End ERP Close",
+            "direction": "in",
+            "party": "Controlling",
+            "detail": "Manual journals (MJV)",
+            "source": "As documented in the R2R GSOPs and the LT review of 13 Oct 2026"
+          },
+          {
+            "flowId": "R2R-02.1",
+            "flow": "1 · Prepare Legal Entity Financial Statements",
+            "direction": "in",
+            "party": "Controlling",
+            "detail": "Non-SAP units' data",
+            "source": "As documented in the R2R GSOPs and the LT review of 13 Oct 2026"
+          }
+        ],
+        "rank": 3
+      },
+      {
+        "id": "stomach",
+        "name": "P2P",
+        "count": 2,
+        "evidence": [
+          {
+            "flowId": "R2R-01.2",
+            "flow": "2 · Complete Month-End ERP Close",
+            "direction": "in",
+            "party": "P2P",
+            "detail": "Coupa cut-off, AP invoices and accruals",
+            "source": "As documented in the R2R GSOPs and the LT review of 13 Oct 2026"
+          },
+          {
+            "flowId": "R2R-03.1",
+            "flow": "1 · Reconcile GL and Sub-Ledger Accounts",
+            "direction": "in",
+            "party": "P2P",
+            "detail": "AP support",
+            "source": "As documented in the R2R GSOPs and the LT review of 13 Oct 2026"
+          }
+        ],
+        "rank": 3
+      },
+      {
+        "id": "brain",
+        "name": "FP&A Commercial",
+        "count": 1,
+        "evidence": [
+          {
+            "flowId": "R2R-01.2",
+            "flow": "2 · Complete Month-End ERP Close",
+            "direction": "in",
+            "party": "FP&A Comm",
+            "detail": "Close inputs",
+            "source": "As documented in the R2R GSOPs and the LT review of 13 Oct 2026"
+          }
+        ],
+        "rank": 5
+      },
+      {
+        "id": "pancreas",
+        "name": "FP&A Operations",
+        "count": 1,
+        "evidence": [
+          {
+            "flowId": "R2R-01.2",
+            "flow": "2 · Complete Month-End ERP Close",
+            "direction": "in",
+            "party": "FP&A Ops",
+            "detail": "Close inputs and accruals",
+            "source": "As documented in the R2R GSOPs and the LT review of 13 Oct 2026"
+          }
+        ],
+        "rank": 5
+      },
+      {
+        "id": "spleen",
+        "name": "Tax",
+        "count": 1,
+        "evidence": [
+          {
+            "flowId": "R2R-01.2",
+            "flow": "2 · Complete Month-End ERP Close",
+            "direction": "in",
+            "party": "Tax",
+            "detail": "Tax postings before close",
+            "source": "As documented in the R2R GSOPs and the LT review of 13 Oct 2026"
+          }
+        ],
+        "rank": 5
+      }
+    ],
+    "projects": [
+      {
+        "name": "R2R Coupa Accrual Reports",
+        "entries": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "sourceCount": 18,
+        "aiCount": 6,
+        "months": []
+      },
+      {
+        "name": "R2R Payroll Interface",
+        "entries": [
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44
+        ],
+        "sourceCount": 8,
+        "aiCount": 13,
+        "months": []
+      }
+    ],
+    "source": "source-maps/R2R.html"
+  },
+  "kidneys": {
+    "asIs": {
+      "auto": 0,
+      "semi": 0,
+      "manual": 14,
+      "total": 14
+    },
+    "toBe": {
+      "auto": 0,
+      "semi": 14,
+      "manual": 0,
+      "total": 14
+    },
+    "dependencies": [
+      {
+        "id": "stomach",
+        "name": "P2P",
+        "count": 1,
+        "evidence": [
+          {
+            "flowId": "CTRL-01.01",
+            "flow": "Manual Journal Request",
+            "direction": "in",
+            "party": "P2P-04",
+            "detail": "Coupa accruals (preventable journals)",
+            "source": "As documented by Controlling (workbook, MJV deck, register)"
+          }
+        ],
+        "rank": 1
+      },
+      {
+        "id": "lungs",
+        "name": "R2R",
+        "count": 1,
+        "evidence": [
+          {
+            "flowId": "CTRL-02.01",
+            "flow": "Statutory audit end-to-end",
+            "direction": "in",
+            "party": "R2R",
+            "detail": "Financial statements and trial balance",
+            "source": "As documented by Controlling (workbook, MJV deck, register)"
+          }
+        ],
+        "rank": 1
+      },
+      {
+        "id": "spleen",
+        "name": "Tax",
+        "count": 1,
+        "evidence": [
+          {
+            "flowId": "CTRL-02.01",
+            "flow": "Statutory audit end-to-end",
+            "direction": "in",
+            "party": "Tax",
+            "detail": "Planning input",
+            "source": "As documented by Controlling (workbook, MJV deck, register)"
+          }
+        ],
+        "rank": 1
+      }
+    ],
+    "projects": [
+      {
+        "name": "End-to-end Audit Support",
+        "entries": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "sourceCount": 14,
+        "aiCount": 6,
+        "months": [
+          "July"
+        ]
+      },
+      {
+        "name": "Manual Journal (MJV)",
+        "entries": [
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40
+        ],
+        "sourceCount": 10,
+        "aiCount": 11,
+        "months": [
+          "June"
+        ]
+      }
+    ],
+    "source": "source-maps/CTRL.html"
+  }
+}

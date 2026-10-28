@@ -1,12 +1,12 @@
 import * as T from 'three';
-import {REAL,TOWER_HEALTH} from './real-data.js';
-import {bindTower,initExperience,hideMap,openMap} from './real-experience.js?v=galaxy-2';
+import {REAL,TOWER_HEALTH,KPI} from './real-data.js';
+import {bindTower,initExperience,hideMap,openMap} from './real-experience.js?v=labels-1';
 import {createProcessNeurons,updateProcessNeurons} from './process-neurons.js?v=galaxy-2';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
 import {loadReplacement} from './models.js';
 import {buildVesselNetwork} from './vessels.js';
-import {healthMetrics,cardMarkup,pulseMarkup,metricsSentence,countUp,resetCounts,accentFor} from './health.js?v=20261019-organ-pulses';
-import {createHelpdesk} from './helpdesk.js?v=2';
+import {healthMetrics,cardMarkup,pulseMarkup,comparisonMarkup,metricsSentence,countUp,resetCounts,accentFor} from './health.js?v=kpi-20261028';
+import {createHelpdesk} from './helpdesk.js?v=kpi-clearance';
 const $=s=>document.querySelector(s);
 const configs=[['brain','FP&A Commercial','Brain',-1,0,.18],['liver','CAPEX','Liver',-1,1,.25],['kidneys','Controlling','Kidneys',-1,2,.23],['spleen','Tax','Spleen',-1,3,.12],['lungs','R2R','Lungs',1,0,.32],['stomach','P2P','Stomach',1,1,.17],['pancreas','FP&A Operations','Pancreas',1,2,.20],['intestines','O2C','Intestines',1,3,.29]];
 document.addEventListener('visibilitychange',()=>document.body.classList.toggle('page-hidden',document.hidden));
@@ -40,9 +40,9 @@ function resize(){fitCanvas();if(ready){layoutOverviewLabels();buildConnections(
 // keeping the organ centered in the space beside or below the KPI panel.
 function detailLayout(){
   const box=$('#experience').getBoundingClientRect(),rel=el=>{const r=el.getBoundingClientRect();return {l:r.left-box.left,t:r.top-box.top,r:r.right-box.left,b:r.bottom-box.top};};
-  const hud=rel($('#tower-telemetry-hud')),title=rel($('.detail-title')),tools=rel($('.rotate-tools'));
+  const hud=rel($('#tower-telemetry-hud')),title=rel($('.detail-title'));
   const beside=hud.l>w/2,gap=20,pad=beside?24:16;
-  const L=pad,R=beside?hud.l-24:w-pad,top=beside?72:hud.b+14,bottom=Math.min(title.t,tools.t)-12,W=R-L,H=bottom-top;
+  const L=pad,R=beside?hud.l-24:w-pad,top=beside?72:hud.b+14,bottom=Math.min(title.t,h-24)-12,W=R-L,H=bottom-top;
   const l={D:Math.max(120,Math.min(W*(w<768?.78:.55),H*.83,w>=2500?975:650)),cx:L+W/2,cy:top+H/2,T:top,B:bottom,L,R,mode:'columns'};
   const span=camera.top-camera.bottom;
   l.target=new T.Vector3(camera.left+l.cx/w*(camera.right-camera.left),camera.position.y+camera.top-l.cy/h*span,.8);
@@ -55,8 +55,8 @@ function overviewScale(o){return T.MathUtils.lerp(o.size,o.overviewSize,separati
 function retarget(instant=false){detail=selected?detailLayout():null;for(const o of organs){o.flight=true;o.from=o.root.position.clone();o.to=selected===o?detail.target.clone():overviewTarget(o);o.fromScale=o.root.scale.x;o.toScale=selected===o?detail.scale:overviewScale(o);o.start=performance.now();o.duration=instant||reduced.matches?0:700;o.fromQuat=o.root.quaternion.clone();o.toQuat=new T.Quaternion();} }
 function setSeparation(value){if(!ready||selected||helpdesk.isOpen)return;separationTarget=T.MathUtils.clamp(value,0,1);expanded=separationTarget>.5;$('#assembly').value=String(Math.round(separationTarget*1000));}
 function setView(value){setSeparation(value?1:0);}
-function select(o,trigger){if(!ready||selected||helpdesk.isOpen)return;lastTrigger=trigger||o.label;selected=o;o.rotationTarget=new T.Quaternion();hover=null;document.body.dataset.detail='true';$('#detail').hidden=false;if(fitCanvas())buildConnections();$('#organ-name').textContent=o.organ;$('#tower-name').textContent=o.name;updateTelemetryHUD(o.id);bindTower(o.id);$('#back').focus({preventScroll:true});$('#scene').tabIndex=0;$('#scene').setAttribute('aria-label',`${o.name} ${o.organ}. Drag or use arrow keys to rotate. Scroll down to explore the process map.`);retarget();syncHelpdesk();}
-function close(){if(!selected)return;hideMap();selected=null;$('#scene').setAttribute('aria-label','Skeleton, heart and eight finance organs');document.body.dataset.detail='false';$('#detail').hidden=true;if(fitCanvas())buildConnections();retarget();syncHelpdesk();lastTrigger?.focus({preventScroll:true});}
+function select(o,trigger){if(!ready||selected||helpdesk.isOpen)return;lastTrigger=trigger||o.label;selected=o;o.rotationTarget=new T.Quaternion();hover=null;document.body.dataset.detail='true';window.scrollTo({top:0,behavior:'instant'});$('#detail').hidden=false;if(fitCanvas())buildConnections();$('#organ-name').textContent=o.organ;$('#tower-name').textContent=o.name;updateTelemetryHUD(o.id);bindTower(o.id);$('#back').focus({preventScroll:true});$('#scene').tabIndex=0;$('#scene').setAttribute('aria-label',`${o.name} ${o.organ}. Drag or use arrow keys to rotate. Scroll down to explore the process map.`);retarget();syncHelpdesk();}
+function close(){if(!selected)return;hideMap();selected=null;$('#scene').setAttribute('aria-label','Skeleton, heart and eight finance organs');document.body.dataset.detail='false';$('#detail').hidden=true;if(fitCanvas()){layoutOverviewLabels();buildConnections();}retarget();syncHelpdesk();lastTrigger?.focus({preventScroll:true});}
 // Exact tapered Catmull-Rom tubes and traveling flow shader from tower-overview2.
 function buildConnections(){organs.forEach((o,index)=>{
  if(o.vein){scene.remove(o.vein);o.vein.geometry.dispose();o.vein.material.dispose();}
@@ -130,11 +130,11 @@ ready=true;resize();document.fonts.ready.then(resize);$('#loading').hidden=true;
 // Keep the original separated scale; use visible bounds only to align centers.
 function layoutOverviewLabels(){
   const columns=[-1,1].map(side=>organs.filter(o=>o.side===side).sort((a,b)=>a.row-b.row));
-  const gap=mobile?14:h<700?12:Math.max(16,Math.min(40,h*.018)),pad=mobile?12:Math.max(24,Math.round(w*.025));
+  const gap=mobile?14:h<820?12:Math.max(16,Math.min(40,h*.018)),pad=mobile?12:Math.max(24,Math.round(w*.025));
   const rowHeights=columns[0].map((_,i)=>Math.max(...columns.map(c=>c[i].label.offsetHeight)));
   const total=rowHeights.reduce((a,b)=>a+b,0)+gap*3;
-  const minTop=mobile?90:h<700?72:86,maxBottom=h-(mobile?58:50);
-  const firstTop=Math.max(minTop,minTop+(maxBottom-minTop-total)/2);
+  // The two card columns share the scene's horizontal midline.
+  const firstTop=Math.max(16,(h-total)/2);
   const span=camera.top-camera.bottom,unitsPerPixel=span/h;
   const organGap=mobile?8:24;
   for(const o of organs){
@@ -194,7 +194,7 @@ o.label.style.visibility=visible?'visible':'hidden';o.label.style.opacity=visibl
 for(const o of organs)updateProcessNeurons(o,selected===o&&(o.duration===0||now-o.start>o.duration*.85),camera,w,h,time,reduced.matches,detail);
 renderer.render(scene,camera);animation=requestAnimationFrame(frame);}
 function hit(event){const rect=$('#scene').getBoundingClientRect();pointer.set((event.clientX-rect.left)/w*2-1,-(event.clientY-rect.top)/h*2+1);ray.setFromCamera(pointer,camera);return ray.intersectObjects(organs.map(o=>o.root),true).find(x=>x.object.visible&&x.object.userData.organ)?.object.userData.organ;}
-$('#assembly').addEventListener('input',e=>setSeparation(Number(e.target.value)/1000));$('#back').onclick=close;$('#retry').onclick=()=>location.reload();$('#reset').onclick=()=>{if(selected){selected.fromQuat=selected.root.quaternion.clone();selected.toQuat.identity();selected.rotationTarget.identity();selected.from.copy(selected.root.position);selected.fromScale=selected.root.scale.x;selected.start=performance.now();selected.duration=reduced.matches?0:250;}};
+$('#assembly').addEventListener('input',e=>setSeparation(Number(e.target.value)/1000));$('#back').onclick=close;$('#retry').onclick=()=>location.reload();
 // Wheel/trackpad progress is continuous and reversible; no document scroll listener.
 $('#experience').addEventListener('wheel',e=>{if(e.ctrlKey||!ready||selected||helpdesk.isOpen)return;e.preventDefault();const unit=e.deltaMode===1?16:e.deltaMode===2?h:1;const delta=T.MathUtils.clamp(e.deltaY*unit,-120,120);setSeparation(separationTarget+delta/1800);},{passive:false});
 const canvas=$('#scene');canvas.addEventListener('pointerdown',e=>{if(!ready||e.button!==0)return;if(selected)selected.rotationTarget.copy(selected.root.quaternion);drag={x:e.clientX,y:e.clientY,startX:e.clientX,startY:e.clientY};canvas.setPointerCapture(e.pointerId);});canvas.addEventListener('pointermove',e=>{if(!ready)return;if(drag&&selected){const dx=e.clientX-drag.x,dy=e.clientY-drag.y;selected.root.quaternion.premultiply(new T.Quaternion().setFromEuler(new T.Euler(dy*.009,dx*.009,0)));selected.rotationTarget.copy(selected.root.quaternion);selected.duration=0;drag.x=e.clientX;drag.y=e.clientY;}else if(drag&&!selected&&e.pointerType==='touch'){setSeparation(separationTarget+(drag.y-e.clientY)/650);drag.x=e.clientX;drag.y=e.clientY;}else if(!selected&&fine.matches){hover=hit(e);canvas.style.cursor=hover?'pointer':'default';}});canvas.addEventListener('pointerup',e=>{if(drag&&!selected&&Math.hypot(e.clientX-drag.startX,e.clientY-drag.startY)<6){const o=hit(e);if(o)select(o);}drag=null;if(canvas.hasPointerCapture(e.pointerId))canvas.releasePointerCapture(e.pointerId);});canvas.addEventListener('pointercancel',()=>drag=null);canvas.addEventListener('lostpointercapture',()=>drag=null);canvas.addEventListener('pointerleave',()=>hover=null);
@@ -208,41 +208,20 @@ addEventListener('pagehide',()=>{cancelAnimationFrame(animation);helpdesk.destro
 
 
 function updateTelemetryHUD(id) {
-  document.querySelector('.hud-ecg-container').innerHTML=pulseMarkup(id,'hud-ecg-svg');
-  const d = TOWER_HEALTH[id];
-  const total = d.auto + d.semi + d.manual;
-  const score = Math.round(((d.auto + 0.5 * d.semi) / total) * 100);
-
-  const title = document.getElementById('hud-tower-title');
-  const scoreVal = document.getElementById('hud-score-pct');
-  const barAuto = document.getElementById('hud-bar-auto');
-  const barSemi = document.getElementById('hud-bar-semi');
-  const barManual = document.getElementById('hud-bar-manual');
-  const countAuto = document.getElementById('hud-count-auto');
-  const countSemi = document.getElementById('hud-count-semi');
-  const countManual = document.getElementById('hud-count-manual');
-  const countTpi = document.getElementById('hud-count-tpi');
-  const countPain = document.getElementById('hud-count-pain');
-
-  if (title) title.textContent = d.name;
-  const descriptions = {brain:'Financial planning & analysis · Commercial',pancreas:'Financial planning & analysis · Operations',liver:'Capital expenditure',kidneys:'Financial controlling',spleen:'Tax',lungs:'Record to report',stomach:'Procure to pay',intestines:'Order to cash'};
-  document.getElementById('hud-tower-subtitle').textContent = descriptions[id] || 'Finance tower';
-  document.getElementById('hud-total').textContent = total;
-  document.getElementById('hud-count-ai').textContent = '—';
-  document.querySelector('.hud-score').title = 'Automation index = (automated + 0.5 × semi-automated) / all As-Is activities × 100';
-  if (scoreVal) scoreVal.textContent = score;
-  if (countAuto) countAuto.textContent = d.auto;
-  if (countSemi) countSemi.textContent = d.semi;
-  if (countManual) countManual.textContent = d.manual;
-  if (countTpi) countTpi.textContent = d.tpis;
-  if (countPain) {countPain.textContent = d.pain;countPain.parentElement.title = 'Unique pain points documented in the As-Is source. Zero means none supplied in this map, not proof that no pain points exist.';}
-
-  if (barAuto && barSemi && barManual) {
-    barAuto.style.width = ((d.auto / total) * 100) + '%';
-    barSemi.style.width = ((d.semi / total) * 100) + '%';
-    barManual.style.width = ((d.manual / total) * 100) + '%';
-  }
+  const d=TOWER_HEALTH[id],k=KPI[id];
+  $('#hud-tower-title').textContent=d.name;
+  const descriptions={brain:'Financial planning & analysis · Commercial',pancreas:'Financial planning & analysis · Operations',liver:'Capital expenditure',kidneys:'Financial controlling',spleen:'Tax',lungs:'Record to report',stomach:'Procure to pay',intestines:'Order to cash'};
+  $('#hud-tower-subtitle').textContent=descriptions[id];
+  $('#hud-score-pct').textContent=k.asIs.total?Math.round(k.asIs.manual/k.asIs.total*100):'—';
+  $('.hud-score').title=`${k.asIs.manual} manual / ${k.asIs.total} As Is activities × 100`;
+  $('.hud-ecg-container').innerHTML=pulseMarkup(id,'hud-ecg-svg');
+  $('#hud-comparison').innerHTML=comparisonMarkup(k.asIs,k.toBe);
+  $('#hud-count-tpi').textContent=d.tpis;
+  $('#hud-count-pain').textContent=d.pain;
+  $('#hud-count-pain').parentElement.title='Unique pain points documented in the As Is source.';
+  $('#hud-count-ai').textContent='—';
 }
+
 
 
 

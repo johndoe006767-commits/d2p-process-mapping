@@ -106,9 +106,9 @@ export function createHelpdesk(host, {onOpen, onClose}) {
     const bodyHeight=mobile?Math.min(height*.48,width*.65):(feet-head)*fullArt.height/(fullArt.bottom-fullArt.top);
     const bodyWidth=bodyHeight*fullArt.width/fullArt.height,bodyX=width*(mobile?.80:.69)-bodyWidth/2;
     const bodyY=feet-bodyHeight*fullArt.bottom/fullArt.height;
-    const dockWidth=Math.max(64,Math.min(240,width*.065));
-    const dockHeight=dockWidth*1.15+Math.max(14,width*.006);
-    const dockX=width-dockWidth-Math.max(12,width*.015),dockY=height-dockHeight-Math.max(14,height*.025);
+    const dockWidth=mobile?48:Math.max(64,Math.min(240,width*.065));
+    const dockHeight=mobile?62:dockWidth*1.15+Math.max(14,width*.006);
+    const dockX=width-dockWidth-(mobile?22:Math.max(12,width*.015)),dockY=height-dockHeight-(mobile?4:Math.max(14,height*.025));
     const mix=(a,b)=>a+(b-a)*t;
     const blend=Math.max(0,Math.min(1,(t-.40)/.45));
     launcher.style.transform=`translate3d(${mix(bodyX,dockX)}px,${mix(bodyY,dockY)}px,0)`;

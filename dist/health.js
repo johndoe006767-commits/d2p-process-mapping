@@ -8,8 +8,6 @@ export const accentFor = id => ACCENT[id] || '#cabbcf';
 
 const whole = value => Number.isInteger(value) && value >= 0 ? value : null;
 const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
-const width = n => `${String(n).length}ch`;
-const SEGMENTS = [['auto', 'automated', 'Automated'], ['hyb', 'semi', 'Semi-automated'], ['man', 'manual', 'Manual']];
 
 // Accepts one TOWER_HEALTH entry: {manual, semi, auto, tpis, pain}. Missing values show as TBC.
 export function healthMetrics(entry) {
@@ -18,6 +16,9 @@ export function healthMetrics(entry) {
   const known = steps.manual !== null && steps.semi !== null && steps.automated !== null;
   return {
     steps: known ? {...steps, total: steps.manual + steps.semi + steps.automated} : null,
+    toBe: entry.toBe,
+    dependencies: entry.dependencies || [],
+    projects: entry.projects || [],
     pain: whole(entry.pain),
     tpis: whole(entry.tpis),
   };
@@ -28,26 +29,11 @@ export function metricsSentence(m) {
   if (!m) return '';
   return [
     m.steps ? `${m.steps.total} steps: ${m.steps.manual} manual, ${m.steps.semi} semi-automated, ${m.steps.automated} automated` : 'Step mix to be confirmed',
+    m.toBe ? `To Be, proposed: ${m.toBe.auto} automated, ${m.toBe.semi} semi, ${m.toBe.manual} manual` : '',
+    `Upstream towers: ${m.dependencies.slice(0,3).map(d=>d.name).join(', ') || 'none explicitly mapped'}. ${m.projects.length} TPI ${m.projects.length===1?'project':'projects'}`,
     m.pain === null ? 'Pain points to be confirmed' : plural(m.pain, 'pain point', 'pain points'),
     m.tpis === null ? 'TPIs to be confirmed' : plural(m.tpis, 'TPI', 'TPIs'),
   ].join('. ') + '.';
-}
-
-function barMarkup(m) {
-  if (!m.steps) return '<span class="hb-bar hb-bar-tbc"></span>';
-  const segments = SEGMENTS.filter(([, key]) => m.steps[key] > 0)
-    .map(([k, key]) => `<span class="hb-seg" data-k="${k}" style="--n:${m.steps[key]}"></span>`).join('');
-  return `<span class="hb-bar"><span class="hb-fill">${segments}</span></span>`;
-}
-
-function countsMarkup(m) {
-  if (!m.steps) return '<span class="hb-row hb-row-tbc">Activity mix TBC</span>';
-  return `<span class="hb-row">${SEGMENTS.map(([k, key, label]) =>
-    `<span class="hb-n" data-k="${k}"><b data-v="${m.steps[key]}" style="min-width:${width(m.steps[key])}">${m.steps[key]}</b><span class="hb-mode"><i></i>${label}</span></span>`).join('')}</span>`;
-}
-
-function pillsMarkup(m) {
-  return `<span class="hb-summary"><span><b>${m.pain ?? 'TBC'}</b> pain ${m.pain === 1 ? 'point' : 'points'}</span><span><b>${m.tpis ?? 'TBC'}</b> TPIs</span></span>`;
 }
 
 // Illustrative signatures, not physiological measurements. Each organ has its
@@ -70,7 +56,10 @@ export function pulseMarkup(id='brain', className='hb-pulse') {
 
 // Body of an overview card. Inline elements only, because it sits inside a <button>.
 export function cardMarkup(m, delay, id='brain') {
-  return `<span class="hb${m.steps ? '' : ' hb-nosteps'}" aria-hidden="true" style="--d:${Math.round(delay)}ms">${pulseMarkup(id)}${barMarkup(m)}${countsMarkup(m)}${pillsMarkup(m)}</span>`;
+  const current=m.steps?{auto:m.steps.automated,semi:m.steps.semi,manual:m.steps.manual,total:m.steps.total}:null;
+  const percent=current?.total?Math.round(current.manual/current.total*100):0;
+  const shortName=name=>name.replace('FP&A Commercial','FP&A Comm').replace('FP&A Operations','FP&A Ops');
+  return `<span class="hb${m.steps ? '' : ' hb-nosteps'}" aria-hidden="true" style="--d:${Math.round(delay)}ms"><span class="hb-manual"><span>${percent}% manual <em>· As Is</em></span>${pulseMarkup(id)}</span>${comparisonMarkup(current,m.toBe,true)}<span class="hb-context">Upstream <b>${m.dependencies.slice(0,3).map(d=>shortName(d.name)).join(' · ') || 'Not mapped'}</b></span><span class="hb-summary"><span>${m.pain ?? '—'} pain points</span><span>${m.projects.length} TPI ${m.projects.length===1?'project':'projects'}</span></span></span>`;
 }
 
 // Numbers count up while the bar charges. Reduced motion shows the final values at once.
@@ -94,4 +83,11 @@ export function countUp(root, reduced) {
 export function resetCounts(root) {
   cancelAnimationFrame(root._hbFrame);
   root.querySelectorAll('[data-v]').forEach(el => { el.textContent = el.dataset.v; });
+}
+
+export function comparisonMarkup(asIs,toBe,compact=false){
+ const keys=['auto','semi','manual'], labels=['Automated','Semi','Manual'];
+ const header=`<span class="kpi-mix-head"><span></span>${labels.map((label,i)=>`<span><i class="kpi-dot ${keys[i]}"></i>${label}</span>`).join('')}</span>`;
+ const row=(mix,label,proposed)=>!mix?'':`<span class="kpi-mix-row"><span class="kpi-state">${label}${proposed&&!compact?'<small>Proposed</small>':''}</span>${keys.map((key,i)=>!compact&&!proposed?`<button type="button" class="kpi-number hud-modal-trigger" data-view="${key}" aria-label="${mix[key]} ${labels[i]} As Is activities">${mix[key]}</button>`:`<span class="kpi-number">${mix[key]}</span>`).join('')}<span class="kpi-stack" aria-hidden="true">${keys.filter(key=>mix[key]>0).map(key=>`<i class="${key}" style="flex:${mix[key]}"></i>`).join('')}</span></span>`;
+ return `<span class="kpi-mix${compact?' is-compact':''}">${header}${row(asIs,'As Is',false)}${row(toBe,'To Be',true)}</span>`;
 }
