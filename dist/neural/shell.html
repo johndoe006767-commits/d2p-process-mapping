@@ -2,6 +2,7 @@
  <header id="navigation">
   <div class="mast">
    <a class="identity" href="#stage-1" aria-label="{{NAME}}, first stage"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M15.5 6C12 2 7 5 7 9c-5 1-5 8-2 10-2 5 2 9 6 8 3 3 5 1 5-2V8m1-2c4-4 9-1 9 3 5 1 5 8 2 10 2 5-2 9-6 8-3 3-5 1-5-2V8M7 9c1 2 4 1 5 4m-7 6c3-2 6 0 6 3m15-13c-1 2-4 1-5 4m7 6c-3-2-6 0-6 3"/></svg><span><strong>{{NAME}}</strong><small>Process anatomy <span>·</span> As-Is</small></span></a>
+   <div id="scenario-slot"></div>
    <div class="map-modes" aria-label="Map view"><button type="button" data-mode="overview" aria-pressed="false">High-level flow</button><button type="button" data-mode="detail" aria-pressed="true">Detailed processes</button></div>
    <button class="lab-return" id="lab-return">Back to Organ</button>
   </div>
@@ -12,7 +13,7 @@
    <div class="map-tools"><button id="legend-toggle" aria-expanded="false" aria-controls="legend">Map key</button><span class="tool-divider"></span><button id="zoom-out" aria-label="Zoom out"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10"/></svg></button><output id="zoom-value" aria-live="polite">100%</output><button id="zoom-in" aria-label="Zoom in"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M8 3v10"/></svg></button><button id="fit" title="Fit the complete map width; use Readable to restore text size">Fit Width</button><button id="readable" title="Restore readable map text size">Readable</button></div>
   </div>
   <div id="legend" hidden><span><i class="legend-line"></i>Process flow</span><span><i class="legend-line chain"></i>Between processes</span><span><i class="legend-line loop"></i>Feedback loop</span><span><i class="decision-symbol"></i>Decision</span><span>Labels identify inputs and outputs. Bars show the activity mix: M = Manual, S = Semi, A = Automated.</span><span>Motion illustrates direction, not live activity.</span></div>
-  <div class="location-bar"><span id="current-stage">Viewing stage 1 of 9</span><span id="filter-status" role="status">All activities visible</span><span class="interaction-hint">Select a step or decision to inspect</span></div>
+
  </header>
  <div class="lab-main">
   <div class="map-intro"><div><h1>Planning, reporting and control.</h1><p>Follow 102 activities through the planning and monthly cycles, with their decisions, handoffs and feedback loops.</p></div><button id="first-step">Inspect the first step <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5"/></svg></button></div>

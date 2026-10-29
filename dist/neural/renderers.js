@@ -53,11 +53,11 @@ function layout(d){
         if(s.dec){x+=30;nodes[id+"|d"]={id:id+"|d",x:x,y:rowY+H/2-DW/2,w:DW,h:DW,dec:s.dec,kind:"dec",step:s,f,P,ln:P.steps.slice(j+1).filter(q=>q.dec&&q.dec.nx&&!q.dec.nx.end).length};x+=DW+G+40}});
       P._seq=seq;if(P.feed)h+=feedBlock(P,f,feedTop);
       if(P.outdoc){x+=14;nodes[`${f.id}|${P.id}|out`]={id:`${f.id}|${P.id}|out`,x,y:rowY+8,w:OUTW,h:H-16,kind:"out",doc:P.outdoc,f,P,from:P._gates?seq[seq.length-1]:items[items.length-1]};seq.push(`${f.id}|${P.id}|out`);x+=OUTW+G}
-      if(d.key==="tobe"&&P.opp){x+=6;nodes[`${f.id}|${P.id}|opp`]={id:`${f.id}|${P.id}|opp`,x,y:rowY-6,w:190,h:H+12,kind:"opp",opp:P.opp,f,P,from:items[items.length-1]};x+=210}
+      if(d.key==="tobe"&&P.opp){x+=6;nodes[`${f.id}|${P.id}|opp`]={id:`${f.id}|${P.id}|opp`,x,y:rowY-6,w:E.opportunityWidth||190,h:H+12,kind:"opp",opp:P.opp,f,P,from:items[items.length-1]};x+=(E.opportunityWidth||190)+20}
       maxX=Math.max(maxX,x);
       y=rowY+H+POUT+RGAP+fext+(P.steps.some(s=>s.dec&&s.dec.nx)?30:0);
     });
-    if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:460,h:44,kind:"fopp",opp:f.opp,f};y+=56}
+    if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:E.frameOpportunityWidth||460,h:86,kind:"fopp",opp:f.opp,f};y+=98}
     // challenge / TPI strips
     if((f.ch&&f.ch.length)||(f.tpi&&f.tpi.length)){y+=4;
       const strip=(items,kind,lab,fill,stroke,col,bw)=>{bw=E.stripWidth?.(items,bw)||bw;h+=text(x0,y+12,[lab],{fs:10.5,fw:700,fill:col,a:"start"});y+=20;let bx=x0;
@@ -255,11 +255,11 @@ function layout(d){
         if(s.dec){x+=30;nodes[id+"|d"]={id:id+"|d",x:x,y:rowY+H/2-DW/2,w:DW,h:DW,dec:s.dec,kind:"dec",step:s,f,P,ln:P.steps.slice(j+1).filter(q=>q.dec&&q.dec.nx&&!q.dec.nx.end).length};x+=DW+G+40}});
       P._seq=seq;if(P.feed)h+=feedBlock(P,f,feedTop);
       if(P.outdoc){x+=14;nodes[`${f.id}|${P.id}|out`]={id:`${f.id}|${P.id}|out`,x,y:rowY+8,w:OUTW,h:H-16,kind:"out",doc:P.outdoc,f,P,from:P._gates?seq[seq.length-1]:items[items.length-1]};seq.push(`${f.id}|${P.id}|out`);x+=OUTW+G}
-      if(d.key==="tobe"&&P.opp){x+=6;nodes[`${f.id}|${P.id}|opp`]={id:`${f.id}|${P.id}|opp`,x,y:rowY-6,w:190,h:H+12,kind:"opp",opp:P.opp,f,P,from:items[items.length-1]};x+=210}
+      if(d.key==="tobe"&&P.opp){x+=6;nodes[`${f.id}|${P.id}|opp`]={id:`${f.id}|${P.id}|opp`,x,y:rowY-6,w:E.opportunityWidth||190,h:H+12,kind:"opp",opp:P.opp,f,P,from:items[items.length-1]};x+=(E.opportunityWidth||190)+20}
       maxX=Math.max(maxX,x);
       y=rowY+H+POUT+RGAP+fext+(P.steps.some(s=>s.dec&&s.dec.nx)?30:0);
     });
-    if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:460,h:44,kind:"fopp",opp:f.opp,f};y+=56}
+    if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:E.frameOpportunityWidth||460,h:86,kind:"fopp",opp:f.opp,f};y+=98}
     // challenge / TPI strips
     if((f.ch&&f.ch.length)||(f.tpi&&f.tpi.length)){y+=4;
       const strip=(items,kind,lab,fill,stroke,col,bw)=>{bw=E.stripWidth?.(items,bw)||bw;h+=text(x0,y+12,[lab],{fs:10.5,fw:700,fill:col,a:"start"});y+=20;let bx=x0;
@@ -453,11 +453,11 @@ function layout(d){
         if(s.dec){x+=30;nodes[id+"|d"]={id:id+"|d",x:x,y:rowY+H/2-DW/2,w:DW,h:DW,dec:s.dec,kind:"dec",step:s,f,P,ln:P.steps.slice(j+1).filter(q=>q.dec&&q.dec.nx&&!q.dec.nx.end).length};x+=DW+G+40}});
       P._seq=seq;
       if(P.outdoc){x+=14;nodes[`${f.id}|${P.id}|out`]={id:`${f.id}|${P.id}|out`,x,y:rowY+8,w:OUTW,h:H-16,kind:"out",doc:P.outdoc,f,P,from:P._gates?seq[seq.length-1]:items[items.length-1]};seq.push(`${f.id}|${P.id}|out`);x+=OUTW+G}
-      if(d.key==="tobe"&&P.opp){x+=6;nodes[`${f.id}|${P.id}|opp`]={id:`${f.id}|${P.id}|opp`,x,y:rowY-6,w:190,h:H+12,kind:"opp",opp:P.opp,f,P,from:items[items.length-1]};x+=210}
+      if(d.key==="tobe"&&P.opp){x+=6;nodes[`${f.id}|${P.id}|opp`]={id:`${f.id}|${P.id}|opp`,x,y:rowY-6,w:E.opportunityWidth||190,h:H+12,kind:"opp",opp:P.opp,f,P,from:items[items.length-1]};x+=(E.opportunityWidth||190)+20}
       maxX=Math.max(maxX,x);
       y=rowY+H+POUT+RGAP+fext+(P.steps.some(s=>s.dec&&s.dec.nx)?30:0);
     });
-    if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:460,h:44,kind:"fopp",opp:f.opp,f};y+=56}
+    if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:E.frameOpportunityWidth||460,h:86,kind:"fopp",opp:f.opp,f};y+=98}
     // challenge / TPI strips
     if((f.ch&&f.ch.length)||(f.tpi&&f.tpi.length)){y+=4;
       const strip=(items,kind,lab,fill,stroke,col,bw)=>{bw=E.stripWidth?.(items,bw)||bw;h+=text(x0,y+12,[lab],{fs:10.5,fw:700,fill:col,a:"start"});y+=20;let bx=x0;
@@ -642,11 +642,11 @@ function layout(d){
         if(s.dec){x+=30;nodes[id+"|d"]={id:id+"|d",x:x,y:rowY+H/2-DW/2,w:DW,h:DW,dec:s.dec,kind:"dec",step:s,f,P,ln:P.steps.slice(j+1).filter(q=>q.dec&&q.dec.nx&&!q.dec.nx.end).length};x+=DW+G+40}});
       P._seq=seq;
       if(P.outdoc){x+=14;nodes[`${f.id}|${P.id}|out`]={id:`${f.id}|${P.id}|out`,x,y:rowY+8,w:OUTW,h:H-16,kind:"out",doc:P.outdoc,f,P,from:P._gates?seq[seq.length-1]:items[items.length-1]};seq.push(`${f.id}|${P.id}|out`);x+=OUTW+G}
-      if(d.key==="tobe"&&P.opp){x+=6;nodes[`${f.id}|${P.id}|opp`]={id:`${f.id}|${P.id}|opp`,x,y:rowY-6,w:190,h:H+12,kind:"opp",opp:P.opp,f,P,from:items[items.length-1]};x+=210}
+      if(d.key==="tobe"&&P.opp){x+=6;nodes[`${f.id}|${P.id}|opp`]={id:`${f.id}|${P.id}|opp`,x,y:rowY-6,w:E.opportunityWidth||190,h:H+12,kind:"opp",opp:P.opp,f,P,from:items[items.length-1]};x+=(E.opportunityWidth||190)+20}
       maxX=Math.max(maxX,x);
       y=rowY+H+POUT+RGAP+fext+(P.steps.some(s=>s.dec&&s.dec.nx)?30:0);
     });
-    if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:460,h:44,kind:"fopp",opp:f.opp,f};y+=56}
+    if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:E.frameOpportunityWidth||460,h:86,kind:"fopp",opp:f.opp,f};y+=98}
     // challenge / TPI strips
     if((f.ch&&f.ch.length)||(f.tpi&&f.tpi.length)){y+=4;
       const strip=(items,kind,lab,fill,stroke,col,bw)=>{bw=E.stripWidth?.(items,bw)||bw;h+=text(x0,y+12,[lab],{fs:10.5,fw:700,fill:col,a:"start"});y+=20;let bx=x0;
@@ -834,11 +834,11 @@ function layout(d){
         if(s.dec){x+=30;nodes[id+"|d"]={id:id+"|d",x:x,y:rowY+H/2-DW/2,w:DW,h:DW,dec:s.dec,kind:"dec",step:s,f,P,ln:P.steps.slice(j+1).filter(q=>q.dec&&q.dec.nx&&!q.dec.nx.end).length};x+=DW+G+40}});
       P._seq=seq;
       if(P.outdoc){x+=14;nodes[`${f.id}|${P.id}|out`]={id:`${f.id}|${P.id}|out`,x,y:rowY+8,w:OUTW,h:H-16,kind:"out",doc:P.outdoc,f,P,from:P._gates?seq[seq.length-1]:items[items.length-1]};seq.push(`${f.id}|${P.id}|out`);x+=OUTW+G}
-      if(d.key==="tobe"&&P.opp){x+=6;nodes[`${f.id}|${P.id}|opp`]={id:`${f.id}|${P.id}|opp`,x,y:rowY-6,w:190,h:H+12,kind:"opp",opp:P.opp,f,P,from:items[items.length-1]};x+=210}
+      if(d.key==="tobe"&&P.opp){x+=6;nodes[`${f.id}|${P.id}|opp`]={id:`${f.id}|${P.id}|opp`,x,y:rowY-6,w:E.opportunityWidth||190,h:H+12,kind:"opp",opp:P.opp,f,P,from:items[items.length-1]};x+=(E.opportunityWidth||190)+20}
       maxX=Math.max(maxX,x);
       y=rowY+H+POUT+RGAP+fext+(P.steps.some(s=>s.dec&&s.dec.nx)?30:0);
     });
-    if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:460,h:44,kind:"fopp",opp:f.opp,f};y+=56}
+    if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:E.frameOpportunityWidth||460,h:86,kind:"fopp",opp:f.opp,f};y+=98}
     // challenge / TPI strips
     if((f.ch&&f.ch.length)||(f.tpi&&f.tpi.length)){y+=4;
       const strip=(items,kind,lab,fill,stroke,col,bw)=>{bw=E.stripWidth?.(items,bw)||bw;h+=text(x0,y+12,[lab],{fs:10.5,fw:700,fill:col,a:"start"});y+=20;let bx=x0;
@@ -1022,11 +1022,11 @@ function layout(d){
         if(s.dec){x+=30;nodes[id+"|d"]={id:id+"|d",x:x,y:rowY+H/2-DW/2,w:DW,h:DW,dec:s.dec,kind:"dec",step:s,f,P,ln:P.steps.slice(j+1).filter(q=>q.dec&&q.dec.nx&&!q.dec.nx.end).length};x+=DW+G+40}});
       P._seq=seq;
       if(P.outdoc){x+=14;nodes[`${f.id}|${P.id}|out`]={id:`${f.id}|${P.id}|out`,x,y:rowY+8,w:OUTW,h:H-16,kind:"out",doc:P.outdoc,f,P,from:P._gates?seq[seq.length-1]:items[items.length-1]};seq.push(`${f.id}|${P.id}|out`);x+=OUTW+G}
-      if(d.key==="tobe"&&P.opp){x+=6;nodes[`${f.id}|${P.id}|opp`]={id:`${f.id}|${P.id}|opp`,x,y:rowY-6,w:250,h:H+12,kind:"opp",opp:P.opp,f,P,from:items[items.length-1]};x+=270}
+      if(d.key==="tobe"&&P.opp){x+=6;nodes[`${f.id}|${P.id}|opp`]={id:`${f.id}|${P.id}|opp`,x,y:rowY-6,w:E.opportunityWidth||250,h:H+12,kind:"opp",opp:P.opp,f,P,from:items[items.length-1]};x+=(E.opportunityWidth||250)+20}
       maxX=Math.max(maxX,x);
       y=rowY+H+POUT+RGAP+fext+(P.steps.some(s=>s.dec&&s.dec.nx)?30:0);
     });
-    if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:460,h:44,kind:"fopp",opp:f.opp,f};y+=56}
+    if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:E.frameOpportunityWidth||460,h:86,kind:"fopp",opp:f.opp,f};y+=98}
     // challenge / TPI strips
     if((f.ch&&f.ch.length)||(f.tpi&&f.tpi.length)){y+=4;
       const strip=(items,kind,lab,fill,stroke,col,bw)=>{bw=E.stripWidth?.(items,bw)||bw;h+=text(x0,y+12,[lab],{fs:10.5,fw:700,fill:col,a:"start"});y+=20;let bx=x0;
@@ -1210,11 +1210,11 @@ function layout(d){
         if(s.dec){x+=30;nodes[id+"|d"]={id:id+"|d",x:x,y:rowY+H/2-DW/2,w:DW,h:DW,dec:s.dec,kind:"dec",step:s,f,P,ln:P.steps.slice(j+1).filter(q=>q.dec&&q.dec.nx&&!q.dec.nx.end).length};x+=DW+G+40}});
       P._seq=seq;
       if(P.outdoc){x+=14;nodes[`${f.id}|${P.id}|out`]={id:`${f.id}|${P.id}|out`,x,y:rowY+8,w:OUTW,h:H-16,kind:"out",doc:P.outdoc,f,P,from:P._gates?seq[seq.length-1]:items[items.length-1]};seq.push(`${f.id}|${P.id}|out`);x+=OUTW+G}
-      if(d.key==="tobe"&&P.opp){x+=6;nodes[`${f.id}|${P.id}|opp`]={id:`${f.id}|${P.id}|opp`,x,y:rowY-6,w:250,h:H+12,kind:"opp",opp:P.opp,f,P,from:items[items.length-1]};x+=270}
+      if(d.key==="tobe"&&P.opp){x+=6;nodes[`${f.id}|${P.id}|opp`]={id:`${f.id}|${P.id}|opp`,x,y:rowY-6,w:E.opportunityWidth||250,h:H+12,kind:"opp",opp:P.opp,f,P,from:items[items.length-1]};x+=(E.opportunityWidth||250)+20}
       maxX=Math.max(maxX,x);
       y=rowY+H+POUT+RGAP+fext+(P.steps.some(s=>s.dec&&s.dec.nx)?30:0);
     });
-    if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:460,h:44,kind:"fopp",opp:f.opp,f};y+=56}
+    if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:E.frameOpportunityWidth||460,h:86,kind:"fopp",opp:f.opp,f};y+=98}
     // challenge / TPI strips
     if((f.ch&&f.ch.length)||(f.tpi&&f.tpi.length)){y+=4;
       const strip=(items,kind,lab,fill,stroke,col,bw)=>{bw=E.stripWidth?.(items,bw)||bw;h+=text(x0,y+12,[lab],{fs:10.5,fw:700,fill:col,a:"start"});y+=20;let bx=x0;
@@ -1398,11 +1398,11 @@ function layout(d){
         if(s.dec){x+=30;nodes[id+"|d"]={id:id+"|d",x:x,y:rowY+H/2-DW/2,w:DW,h:DW,dec:s.dec,kind:"dec",step:s,f,P,ln:P.steps.slice(j+1).filter(q=>q.dec&&q.dec.nx&&!q.dec.nx.end).length};x+=DW+G+40}});
       P._seq=seq;
       if(P.outdoc){x+=14;nodes[`${f.id}|${P.id}|out`]={id:`${f.id}|${P.id}|out`,x,y:rowY+8,w:OUTW,h:H-16,kind:"out",doc:P.outdoc,f,P,from:P._gates?seq[seq.length-1]:items[items.length-1]};seq.push(`${f.id}|${P.id}|out`);x+=OUTW+G}
-      if(d.key==="tobe"&&P.opp){x+=6;nodes[`${f.id}|${P.id}|opp`]={id:`${f.id}|${P.id}|opp`,x,y:rowY-6,w:190,h:H+12,kind:"opp",opp:P.opp,f,P,from:items[items.length-1]};x+=210}
+      if(d.key==="tobe"&&P.opp){x+=6;nodes[`${f.id}|${P.id}|opp`]={id:`${f.id}|${P.id}|opp`,x,y:rowY-6,w:E.opportunityWidth||190,h:H+12,kind:"opp",opp:P.opp,f,P,from:items[items.length-1]};x+=(E.opportunityWidth||190)+20}
       maxX=Math.max(maxX,x);
       y=rowY+H+POUT+RGAP+fext+(P.steps.some(s=>s.dec&&s.dec.nx)?30:0);
     });
-    if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:460,h:44,kind:"fopp",opp:f.opp,f};y+=56}
+    if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:E.frameOpportunityWidth||460,h:86,kind:"fopp",opp:f.opp,f};y+=98}
     // challenge / TPI strips
     if((f.ch&&f.ch.length)||(f.tpi&&f.tpi.length)){y+=4;
       const strip=(items,kind,lab,fill,stroke,col,bw)=>{bw=E.stripWidth?.(items,bw)||bw;h+=text(x0,y+12,[lab],{fs:10.5,fw:700,fill:col,a:"start"});y+=20;let bx=x0;
