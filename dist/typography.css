@@ -24,3 +24,9 @@ h1,h2,h3,h4,h5,h6{font-family:Inter,Arial,sans-serif;letter-spacing:normal}
 #anatomy-brand img{width:clamp(180px,7.3vw,280px);height:clamp(70px,2.85vw,110px);object-fit:cover;object-position:center;filter:none;opacity:1;transform:none;background:transparent}
 #experience{z-index:1}
 #tower-telemetry-hud{z-index:20}
+
+/* Overview introduction sits above the skeleton, clear of the tower cards. */
+#overview-intro{position:absolute;z-index:1;top:clamp(24px,1.0417vw,40px);left:50%;transform:translateX(-50%);width:min(1120px,70vw);text-align:center;pointer-events:none}
+#overview-intro h1{margin:0;color:var(--text);font-size:clamp(32px,1.4583vw,56px);font-weight:700;line-height:1.15;letter-spacing:-.02em;text-wrap:balance}
+#overview-intro p{max-width:64ch;margin:16px auto 0;color:var(--muted);font-size:clamp(16px,.625vw,24px);font-weight:400;line-height:1.5;text-wrap:balance}
+body[data-detail=true] #overview-intro,body[data-helpdesk=true] #overview-intro{display:none}
