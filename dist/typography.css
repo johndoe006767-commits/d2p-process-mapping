@@ -29,7 +29,7 @@ h1,h2,h3,h4,h5,h6{font-family:Inter,Arial,sans-serif;letter-spacing:normal}
 @font-face{font-family:Lora;src:url('assets/fonts/lora-medium.ttf') format('truetype');font-style:normal;font-weight:500;font-display:swap}
 @font-face{font-family:Lora;src:url('assets/fonts/lora-medium-italic.ttf') format('truetype');font-style:italic;font-weight:500;font-display:swap}
 #overview-intro{position:absolute;z-index:0;top:clamp(16px,.8vw,32px);left:50%;transform:translateX(-50%);width:min(1040px,60vw);text-align:center;pointer-events:none;overflow:clip}
-#overview-intro h1{margin:0;color:var(--text);font-family:Lora,Georgia,serif;font-size:clamp(38px,1.6667vw,64px);font-weight:500;line-height:1.18;letter-spacing:-.025em;white-space:nowrap}
+#overview-intro h1{position:relative;display:inline-block;max-width:100%;padding:.06em .32em;margin:0;overflow:clip;color:var(--text);font-family:Lora,Georgia,serif;font-size:clamp(38px,1.6667vw,64px);font-weight:500;line-height:1.18;letter-spacing:-.025em;white-space:nowrap}
 #overview-intro h1 em{font-size:.8em;font-weight:500;color:#e5bad7;padding-inline:.05em;text-transform:lowercase}
 #overview-intro p{max-width:42ch;margin:12px auto 0;color:var(--muted);font-size:clamp(16px,.5729vw,22px);font-weight:400;line-height:1.45;text-wrap:balance}
 body[data-disassembled=true] #overview-intro{width:min(680px,var(--overview-gap,28vw))}
@@ -38,3 +38,31 @@ body[data-disassembled=true] #overview-intro p{max-width:36ch;margin-top:10px;fo
 #scene{position:relative;z-index:1}
 #labels,#detail{z-index:2}
 body[data-detail=true] #overview-intro,body[data-helpdesk=true] #overview-intro{display:none}
+
+/* A diagnostic acquisition pass: stationary type, a moving exposure window.
+   Only transform and opacity animate; the base title remains readable. */
+#overview-intro h1::before,#overview-intro h1::after{content:"";position:absolute;top:20%;bottom:20%;width:.12em;border-block:1px solid #e5bad74d;pointer-events:none}
+#overview-intro h1::before{left:0;border-left:1px solid #e5bad74d}
+#overview-intro h1::after{right:0;border-right:1px solid #e5bad74d}
+#overview-intro .title-scan-window{position:absolute;inset:0;clip-path:inset(0 78% 0 0);pointer-events:none;opacity:0;background:linear-gradient(90deg,transparent 10%,#e5bad70a 17%,#f6eafb26 20%,transparent 22%);animation:title-scan-pass 12s linear infinite}
+#overview-intro .title-scan-window::after{content:"";position:absolute;top:12%;bottom:12%;left:20%;width:2px;background:linear-gradient(transparent,#f7effa 20%,#f7effa 80%,transparent);box-shadow:0 0 5px #e5bad760}
+#overview-intro .title-scan-copy{position:absolute;inset:0;padding:.06em .32em;color:#f7effa;-webkit-text-fill-color:transparent;-webkit-text-stroke:.018em #eadff4;text-shadow:0 0 .12em #e5bad740;animation:title-scan-register 12s linear infinite}
+#overview-intro .title-scan-copy em{color:inherit}
+@keyframes title-scan-pass{
+ 0%{transform:translateX(-22%);opacity:0}
+ 2%{opacity:.8}
+ 18%{transform:translateX(78%);opacity:.8}
+ 20%,100%{transform:translateX(78%);opacity:0}
+}
+@keyframes title-scan-register{
+ 0%{transform:translateX(22%)}
+ 18%,100%{transform:translateX(-78%)}
+}
+body.page-hidden #overview-intro .title-scan-window,body.page-hidden #overview-intro .title-scan-copy,
+#experience:has(#loading:not([hidden])) #overview-intro .title-scan-window,#experience:has(#loading:not([hidden])) #overview-intro .title-scan-copy{animation-play-state:paused}
+body.keyboard-input #overview-intro .title-scan-window{display:none}
+body.keyboard-input #overview-intro .title-scan-window,body.keyboard-input #overview-intro .title-scan-copy{animation:none}
+@media(prefers-reduced-motion:reduce){
+ #overview-intro .title-scan-window{display:none}
+ #overview-intro .title-scan-window,#overview-intro .title-scan-copy{animation:none}
+}

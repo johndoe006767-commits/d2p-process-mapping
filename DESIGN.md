@@ -12,6 +12,8 @@ Use the bundled Inter variable font for functional UI. At 4K, the KPI card's eff
 
 The overview has a centered “Demand to Profit” heading in locally hosted Lora Medium, with an italic “to,” and a short Inter description. At 4K the assembled title is 64px and the description is 22px. As disassembly begins, reduce them to 44px and 18px and constrain the text block to the measured space between the organs and cards, including movement clearance. The 3D canvas, organs and KPI cards always render above the title. Hide the introduction in organ detail, process maps and the open helpdesk view.
 
+The title has a diagnostic scan treatment: subtle registration brackets, a narrow exposure beam and an outlined copy of the letters. Each 12-second cycle has a roughly 2-second pass followed by a quiet hold. Only transforms and opacity animate; the underlying text stays stationary and readable. The duplicate is hidden from assistive technology. Pause the effect while the page is hidden or anatomy is loading, and use the static title for reduced motion and keyboard interaction.
+
 ## Logo
 
 Keep the user-supplied `dist/assets/astrazeneca-logo.png` unchanged, in its original colours with a transparent background. Do not add a backing panel or apply the previous white logo filter.
