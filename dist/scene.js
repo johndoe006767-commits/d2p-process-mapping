@@ -61,7 +61,7 @@ function separatedPosition(o){return o.overviewPosition.clone();}
 function overviewTarget(o){return o.home.clone().lerp(separatedPosition(o),separation);}
 function overviewScale(o){return T.MathUtils.lerp(o.size,o.overviewSize,separation);}
 function retarget(instant=false){detail=selected?detailLayout():null;for(const o of organs){o.flight=true;o.from=o.root.position.clone();o.to=selected===o?detail.target.clone():overviewTarget(o);o.fromScale=o.root.scale.x;o.toScale=selected===o?detail.scale:overviewScale(o);o.start=performance.now();o.duration=instant||reduced.matches?0:700;o.fromQuat=o.root.quaternion.clone();o.toQuat=new T.Quaternion();} }
-function setSeparation(value){if(!ready||selected||helpdesk.isOpen)return;separationTarget=T.MathUtils.clamp(value,0,1);expanded=separationTarget>.5;$('#assembly').value=String(Math.round(separationTarget*1000));}
+function setSeparation(value){if(!ready||selected||helpdesk.isOpen)return;separationTarget=T.MathUtils.clamp(value,0,1);expanded=separationTarget>.5;document.body.dataset.disassembled=String(separationTarget>.04);$('#assembly').value=String(Math.round(separationTarget*1000));}
 function setView(value){setSeparation(value?1:0);}
 function select(o,trigger){if(!ready||selected||helpdesk.isOpen)return;lastTrigger=trigger||o.label;selected=o;o.rotationTarget=new T.Quaternion();hover=null;document.body.dataset.detail='true';window.scrollTo({top:0,behavior:'instant'});$('#detail').hidden=false;if(fitCanvas())buildConnections();$('#organ-name').textContent=o.organ;$('#tower-name').textContent=o.name;updateTelemetryHUD(o.id);bindTower(o.id);$('#back').focus({preventScroll:true});$('#scene').tabIndex=0;$('#scene').setAttribute('aria-label',`${o.name} ${o.organ}. Drag or use arrow keys to rotate. Use the flow buttons or a stage shortcut to explore the process map.`);retarget();syncHelpdesk();}
 function close(){if(!selected)return;hideMap();selected=null;$('#scene').setAttribute('aria-label','Skeleton, heart and eight finance organs');document.body.dataset.detail='false';$('#detail').hidden=true;if(fitCanvas()){layoutOverviewLabels();buildConnections();}retarget();syncHelpdesk();lastTrigger?.focus({preventScroll:true});}
@@ -150,6 +150,7 @@ function layoutOverviewLabels(){
     o.overviewPixelWidth=o.normalizedSize.x*o.overviewSize/unitsPerPixel;
   }
   const organWidth=Math.max(...organs.map(o=>o.overviewPixelWidth));
+  let corridorLeft=0,corridorRight=w;
   for(const column of columns){
     let top=firstTop;
     for(const o of column){
@@ -163,11 +164,17 @@ function layoutOverviewLabels(){
       const cardGap=mobile?organGap:T.MathUtils.clamp(h*.012,16,32);
       const cardEdge=centerX+o.side*(organWidth/2+cardGap);
       const left=mobile?(o.side<0?pad:w-pad-cardWidth):T.MathUtils.clamp(o.side<0?cardEdge-cardWidth:cardEdge,pad,w-pad-cardWidth);
+      // Leave room for the organ silhouette, hover enlargement and suspension drift.
+      const innerReach=o.overviewPixelWidth*.5375+.008/unitsPerPixel+24;
+      if(o.side<0)corridorLeft=Math.max(corridorLeft,centerX+innerReach,left+cardWidth+24);
+      else corridorRight=Math.min(corridorRight,centerX-innerReach,left-24);
       o.label.style.translate=`${left}px ${centerY-cardHeight/2}px`;
       o.overviewPosition=new T.Vector3(camera.left+centerX*unitsPerPixel,camera.position.y+camera.top-centerY*unitsPerPixel,.20).addScaledVector(o.normalizedCenter,-o.overviewSize);
       top+=rowHeights[o.row]+gap;
     }
   }
+  const titleGap=Math.max(0,2*Math.min(w/2-corridorLeft,corridorRight-w/2));
+  $('#overview-intro').style.setProperty('--overview-gap',titleGap+'px');
 }
 function frame(now){if(document.hidden||!sceneInView||helpdesk.isOpen||document.body.classList.contains('modal-open')){last=now;animation=requestAnimationFrame(frame);return;}const dt=Math.min((now-last)/1000,.05);last=now;time+=dt;separation=reduced.matches?separationTarget:T.MathUtils.lerp(separation,separationTarget,1-Math.exp(-dt*12));if(Math.abs(separation-separationTarget)<.0001)separation=separationTarget;const beat=reduced.matches?1:1.12+Math.pow(Math.max(0,Math.sin(time*6)),8)*.035;heart.scale.setScalar(beat);syncHelpdesk();
 const bodyAlpha=selected?0:1;for(const mesh of bones.children){const target=(mesh===skull?T.MathUtils.lerp(.20,1,separation):1)*skeletonOpacity;mesh.material.opacity+=(target*bodyAlpha-mesh.material.opacity)*Math.min(1,dt*10);mesh.visible=mesh.material.opacity>.01;}heart.visible=!selected;

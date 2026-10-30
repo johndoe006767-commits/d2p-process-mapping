@@ -25,8 +25,16 @@ h1,h2,h3,h4,h5,h6{font-family:Inter,Arial,sans-serif;letter-spacing:normal}
 #experience{z-index:1}
 #tower-telemetry-hud{z-index:20}
 
-/* Overview introduction sits above the skeleton, clear of the tower cards. */
-#overview-intro{position:absolute;z-index:1;top:clamp(24px,1.0417vw,40px);left:50%;transform:translateX(-50%);width:min(1120px,70vw);text-align:center;pointer-events:none}
-#overview-intro h1{margin:0;color:var(--text);font-size:clamp(32px,1.4583vw,56px);font-weight:700;line-height:1.15;letter-spacing:-.02em;text-wrap:balance}
-#overview-intro p{max-width:64ch;margin:16px auto 0;color:var(--muted);font-size:clamp(16px,.625vw,24px);font-weight:400;line-height:1.5;text-wrap:balance}
+/* Expressive title; the functional interface continues to use Inter. */
+@font-face{font-family:Lora;src:url('assets/fonts/lora-medium.ttf') format('truetype');font-style:normal;font-weight:500;font-display:swap}
+@font-face{font-family:Lora;src:url('assets/fonts/lora-medium-italic.ttf') format('truetype');font-style:italic;font-weight:500;font-display:swap}
+#overview-intro{position:absolute;z-index:0;top:clamp(16px,.8vw,32px);left:50%;transform:translateX(-50%);width:min(1040px,60vw);text-align:center;pointer-events:none;overflow:clip}
+#overview-intro h1{margin:0;color:var(--text);font-family:Lora,Georgia,serif;font-size:clamp(38px,1.6667vw,64px);font-weight:500;line-height:1.18;letter-spacing:-.025em;white-space:nowrap}
+#overview-intro h1 em{font-size:.8em;font-weight:500;color:#e5bad7;padding-inline:.05em;text-transform:lowercase}
+#overview-intro p{max-width:42ch;margin:12px auto 0;color:var(--muted);font-size:clamp(16px,.5729vw,22px);font-weight:400;line-height:1.45;text-wrap:balance}
+body[data-disassembled=true] #overview-intro{width:min(680px,var(--overview-gap,28vw))}
+body[data-disassembled=true] #overview-intro h1{font-size:min(clamp(28px,1.1458vw,44px),calc(var(--overview-gap,28vw)*.08))}
+body[data-disassembled=true] #overview-intro p{max-width:36ch;margin-top:10px;font-size:clamp(16px,.46875vw,18px)}
+#scene{position:relative;z-index:1}
+#labels,#detail{z-index:2}
 body[data-detail=true] #overview-intro,body[data-helpdesk=true] #overview-intro{display:none}

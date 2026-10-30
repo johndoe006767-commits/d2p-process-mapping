@@ -35,3 +35,7 @@ This page combines a BodyParts3D skeleton, heart, brain, stomach, kidneys, pancr
 Geometry is extracted and repacked into a reduced subset. Display colours, organ grouping, scaled exploded positions, illustrative vessel connections, and animated blood flow were added for the GFS KL presentation. Department-to-organ assignments are provisional visual metaphors, not evidence of process responsibilities or actual circulatory anatomy.
 
 Human Atlas original application: https://github.com/ashemag/human-atlas (MIT; see HUMAN-ATLAS-LICENSE.txt).
+
+## Title font
+
+Lora Medium and Medium Italic, supplied by Google Fonts, are licensed under the SIL Open Font License 1.1. The fonts are hosted locally and used only for the overview title. See `assets/fonts/LORA-LICENSE.txt`. Source: https://github.com/google/fonts/tree/main/ofl/lora.
