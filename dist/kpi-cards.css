@@ -228,3 +228,80 @@
  #tower-telemetry-hud .hud-actions{flex-direction:column;width:116px;gap:6px}
  #tower-telemetry-hud .hud-nav-action{width:100%;padding:8px 6px;gap:5px;min-height:44px;font-size:11px}
 }
+
+/* Original card composition, extended with workbook descriptions and year selection. */
+#tower-telemetry-hud .hud-mix-heading{display:flex;align-items:center;justify-content:space-between;gap:20px}
+#tower-telemetry-hud .hud-mix-heading h4{flex:none}
+.hud-mix-legend{display:flex;align-items:center;justify-content:space-between;gap:18px;flex:1;max-width:340px;color:var(--kpi-muted);font-size:11px;line-height:1.4}
+.hud-mix-legend>span{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+#tower-telemetry-hud .kpi-mix-row{grid-template-columns:66px minmax(0,1fr);gap:12px;min-height:24px}
+#tower-telemetry-hud .kpi-state{grid-row:auto}
+#tower-telemetry-hud .kpi-stack{margin:0;grid-column:2/-1}
+#tower-telemetry-hud .kpi-mix-row+.kpi-mix-row{margin-top:6px}
+#tower-telemetry-hud .hud-context-grid{grid-template-columns:.85fr 1.15fr;gap:24px}
+#tower-telemetry-hud .hud-context-grid .hud-section-heading{margin-bottom:12px}
+#tower-telemetry-hud .hud-dependency-list button{display:flex;align-items:flex-start;gap:10px;padding:7px 0;white-space:normal;min-height:44px}
+.hud-dependency-copy{display:block;flex:1;min-width:0}
+.hud-dependency-copy strong{display:block;font-size:12px;font-weight:550;line-height:1.45;color:#f2dfed}
+.hud-dependency-copy>span{display:block;font-size:11px;line-height:1.55;color:var(--kpi-muted);margin-top:4px;overflow-wrap:anywhere}
+#tower-telemetry-hud .hud-dependency-list .ico{margin-top:3px;width:12px;height:12px}
+.hud-year-tabs{display:flex;align-items:stretch;gap:16px;border-bottom:1px solid var(--kpi-rule);margin:0 0 3px}
+#tower-telemetry-hud .hud-year-tabs button{position:relative;display:flex;align-items:center;gap:6px;min-height:34px;padding:0 0 9px;border:0;border-radius:0;background:transparent;color:var(--kpi-muted);font-size:11px;font-weight:500;line-height:1.3}
+#tower-telemetry-hud .hud-year-tabs button[aria-selected=true]{color:#f4c8e6}
+.hud-year-tabs button[aria-selected=true]::after{content:"";position:absolute;bottom:-1px;left:0;right:0;height:2px;background:#eab2d7}
+.hud-year-count{font-size:10px;color:var(--kpi-muted);font-variant-numeric:tabular-nums}
+.hud-year-count:empty{display:none}
+.hud-project-list{list-style:none;padding:0;margin:0}
+.hud-project-list li{padding:9px 0}
+.hud-project-list li+li{border-top:1px solid #72548145}
+.hud-project-list strong{display:block;font-size:12px;font-weight:550;line-height:1.45;color:#f6edf6;overflow-wrap:anywhere}
+.hud-project-list p{font-size:11px;line-height:1.55;color:var(--kpi-muted);margin:4px 0 0;overflow-wrap:anywhere}
+.hud-project-note{font-size:10px;line-height:1.55;color:var(--kpi-muted);border-top:1px solid #72548145;padding-top:9px;margin:3px 0 0}
+.hud-empty{font-size:11px;line-height:1.6;color:var(--kpi-muted);margin:12px 0}
+.hud-project-empty{padding:16px 0 10px}
+.hud-project-empty strong{font-size:12px;font-weight:500;color:#ead9ed}
+.hud-project-empty p{font-size:11px;line-height:1.6;color:var(--kpi-muted);margin:5px 0 0}
+#tower-telemetry-hud [role=tabpanel]:focus-visible{outline:2px solid #efc8e8;outline-offset:3px}
+#section-1 .label.card .hb-manual{display:block;font-size:11px;line-height:1.4;color:#f0c4dc}
+#section-1 .label.card .kpi-mix-row{grid-template-columns:32px minmax(0,1fr);gap:6px;min-height:18px}
+#section-1 .label.card .kpi-state{grid-row:auto}
+#section-1 .label.card .kpi-stack{margin:0}
+#section-1 .label.card .hb-year{display:flex;align-items:baseline;justify-content:space-between;gap:12px;font-size:11px;line-height:1.7;color:#d3c2dc}
+#section-1 .label.card .hb-year b{font-size:12px;font-weight:550;color:#f6e6f3;font-variant-numeric:tabular-nums}
+#section-1 .label.card .hb-year:first-of-type{margin-top:6px}
+#section-1 .label.card .hb-pending>span{display:block;font-size:11px;line-height:1.6;color:#ccbad6}
+#section-1 .label.card .hb-pending>span+span{margin-top:5px;color:#ecdeef}
+body[data-detail=true] #experience{min-height:var(--tower-detail-height,100dvh)}
+@media(max-width:767px){
+ #tower-telemetry-hud .hud-mix-heading{gap:12px}
+ #tower-telemetry-hud .hud-mix-heading h4{font-size:12px}
+ .hud-mix-legend{gap:8px;font-size:10px}
+ .hud-mix-legend>span{gap:4px}
+ .hud-mix-legend .kpi-dot{width:5px;height:5px}
+ #tower-telemetry-hud .kpi-mix-row{grid-template-columns:48px minmax(0,1fr);gap:9px}
+ #tower-telemetry-hud .hud-context-grid{grid-template-columns:1fr;gap:16px}
+ #tower-telemetry-hud .hud-context-grid .hud-section-heading{margin-bottom:8px}
+ #tower-telemetry-hud .hud-projects{border-top:1px solid var(--kpi-rule);padding-top:2px}
+ #tower-telemetry-hud .hud-dependency-list button{min-height:44px}
+ .hud-dependency-copy{display:grid;grid-template-columns:74px minmax(0,1fr);gap:12px;align-items:baseline}
+ .hud-dependency-copy>span{margin:0}
+ #tower-telemetry-hud .hud-year-tabs button{min-height:44px;font-size:12px}
+ .hud-project-list strong{font-size:12px}
+ .hud-project-list p,.hud-dependency-copy>span{font-size:12px}
+ #section-1 .label.card .hb-manual,#section-1 .label.card .hb-year,#section-1 .label.card .hb-pending>span{font-size:10px}
+}
+@media(max-width:360px){#tower-telemetry-hud{padding:14px}.hud-mix-legend{font-size:9px;gap:6px}#tower-telemetry-hud .hud-mix-heading{gap:8px}}
+
+/* Keep the tower title and flow controls visible while longer cards scroll. */
+#tower-telemetry-hud{--hud-scale:1;display:flex;flex-direction:column;max-height:calc((100dvh - 144px) / var(--hud-scale));overflow:hidden}
+#tower-telemetry-hud .hud-header{flex:none}
+#tower-telemetry-hud .hud-scroll{min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior-y:contain;scrollbar-gutter:stable;scrollbar-width:thin;scrollbar-color:#a78ab4 #3d2b49;margin:-6px -14px -6px -6px;padding:6px 14px 6px 6px;scroll-padding-block:6px}
+#tower-telemetry-hud .hud-scroll:focus-visible{outline:2px solid #efd2e8;outline-offset:-2px;border-radius:4px}
+#tower-telemetry-hud .hud-scroll::-webkit-scrollbar{width:10px}
+#tower-telemetry-hud .hud-scroll::-webkit-scrollbar-track{background:#3d2b49;border-radius:999px;margin-block:6px}
+#tower-telemetry-hud .hud-scroll::-webkit-scrollbar-thumb{background:#a78ab4;border:3px solid #3d2b49;border-radius:999px;min-height:48px}
+#tower-telemetry-hud .hud-scroll::-webkit-scrollbar-thumb:hover{background:#d1b3dc}
+#tower-telemetry-hud .hud-scroll::-webkit-scrollbar-thumb:active{background:#e5bad7}
+@supports selector(::-webkit-scrollbar){#tower-telemetry-hud .hud-scroll{scrollbar-width:auto;scrollbar-color:auto}}
+@media(min-width:2500px) and (min-height:1200px){#tower-telemetry-hud{--hud-scale:1.5}}
+@media(max-width:1099px){#tower-telemetry-hud{max-height:calc(100dvh - 96px)}}

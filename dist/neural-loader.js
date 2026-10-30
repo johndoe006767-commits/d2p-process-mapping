@@ -1,6 +1,6 @@
 import {getScenario,setScenario,scenarioControl,bindScenarioControl,scenarioLabel} from './process-scenario.js';
 import {REAL,getTower} from './real-data.js';
-import {mountNeuralLab} from './neural-lab.js?v=labels-1';
+import {mountNeuralLab} from './neural-lab.js?v=typography-1';
 import {titleCase,normalizeHeadings} from './title-case.js';
 const root=document.querySelector('#process-workspace');let api=null,current=null,request=0,shellPromise,pending=null,returnHandler;let scenarioRefresh=0;const sources=new Map();
 const shell=()=>shellPromise??=fetch('./neural/shell.html?v=labels-1').then(r=>{if(!r.ok)throw Error('The Process Workspace Could Not Load.');return r.text();}).catch(e=>{shellPromise=null;throw e;});
@@ -16,7 +16,7 @@ export function prepareNeural(id,onReturn){
  return job.promise;
 }
 async function loadNeural(id,onReturn){
- const scenario=getScenario(id),selection=id+':'+scenario;if(current===selection&&api)return api;const ticket=++request,t=REAL[id];root.hidden=false;root.setAttribute('aria-label',`${t.name} Process Workspace`);root.removeAttribute('aria-labelledby');root.innerHTML='<div class="neural-loading" role="status">Loading the Process Workspace…</div>';
+ const scenario=getScenario(id),selection=id+':'+scenario;if(current===selection&&api)return api;const ticket=++request,t=REAL[id];root.setAttribute('aria-label',`${t.name} Process Workspace`);root.removeAttribute('aria-labelledby');root.innerHTML='<div class="neural-loading"><p role="status">Loading the Process Workspace…</p><button id="neural-return" type="button">Back to Organ</button></div>';root.querySelector('#neural-return').onclick=onReturn;
  api?.destroy();api=null;current=null;
  try{const [html,original,tower]=await Promise.all([shell(),source(t.sourceKey+(scenario==='tobe'?'-ai':'')),getTower(id,scenario),document.fonts.ready]);if(ticket!==request)return null;const payload=structuredClone(original);preserveChallenges(payload.data);root.innerHTML=html.replaceAll('{{NAME}}',titleCase(t.name));root.style.setProperty('--stage-count',payload.data.frames.length);root.dataset.mode='detail';root.dataset.scenario=scenario;
  root.querySelector('#scenario-slot').innerHTML=scenarioControl(scenario,'Process map scenario');
@@ -30,9 +30,9 @@ async function loadNeural(id,onReturn){
  root.querySelector('.overview-heading>span').textContent=scenario==='tobe'?'AI Suggested · Potential mix if adopted':'Inputs → Processes → Outputs';
  root.querySelector('#map-svg').setAttribute('aria-label',`${t.name} Detailed Process Map`);root.querySelector('#overview-svg').setAttribute('aria-label',`${t.name} High-Level Flow`);
  payload.scenario=scenario;api=mountNeuralLab(root,payload,tower,onReturn);if(!api)throw Error('The Process Map Could Not Be Rendered.');current=selection;returnHandler=onReturn;normalizeHeadings(root);return api;
- }catch(e){if(ticket!==request)return null;root.innerHTML='<div class="neural-loading" role="alert"><h2>Process Workspace Unavailable</h2><p>Retry to load this tower’s source records.</p><button id="neural-retry">Try Again</button></div>';root.querySelector('#neural-retry').onclick=()=>prepareNeural(id,onReturn);throw e;}
+ }catch(e){if(ticket!==request)return null;root.innerHTML='<div class="neural-loading" role="alert"><h2>Process Workspace Unavailable</h2><p>Retry to load this tower’s source records.</p><button id="neural-retry">Try Again</button><button id="neural-return" type="button">Back to Organ</button></div>';root.querySelector('#neural-retry').onclick=()=>prepareNeural(id,onReturn).then(next=>{if(next)root.querySelector('#lab-return')?.focus({preventScroll:true});}).catch(()=>root.querySelector('#neural-retry')?.focus({preventScroll:true}));root.querySelector('#neural-return').onclick=onReturn;throw e;}
 }
-export function clearNeural(){request++;pending=null;api?.destroy();api=null;current=null;root.hidden=true;}
+export function clearNeural(){request++;pending=null;api?.destroy();api=null;current=null;root.hidden=true;root.replaceChildren();}
 
 window.addEventListener('process-scenario-change',async event=>{
  const {id,value}=event.detail;if(!current?.startsWith(id+':')&&!pending?.id.startsWith(id+':'))return;

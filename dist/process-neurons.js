@@ -1,4 +1,4 @@
-import {openMap} from './real-experience.js?v=galaxy-2';
+import {openMap} from './real-experience.js?v=20261030-typography-1';
 import * as T from 'three';
 
 // Labels use the actual soma objects from the supplied organ-specific network.
@@ -21,7 +21,7 @@ export function createProcessNeurons(organ, group, processes, host) {
       host.querySelectorAll('.process-plus').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
       host.querySelectorAll('.process-node').forEach(el=>el.classList.toggle('is-selected',el===label));
       document.querySelector('#process-status').textContent=`Opening ${process.name}.`;openMap(organ.id,process.id,'detail',event.detail===0);
-      // Open the selected process in the section below.
+      // Open the selected process in the dedicated flow workspace.
       host.dispatchEvent(new CustomEvent('process-select',{detail:{towerId:organ.id,processId:process.id},bubbles:true}));
     });
     return {neuron,label,title,button,leader,side,process,world:new T.Vector3()};

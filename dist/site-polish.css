@@ -143,20 +143,6 @@ body.modal-open{overflow:hidden}
 /* Low-contrast X-ray paper is painted behind content, never over it. */
 :root{--xray-grid:linear-gradient(#c9b7e00a 1px,transparent 1px),linear-gradient(90deg,#c9b7e00a 1px,transparent 1px),linear-gradient(#c9b7e007 1px,transparent 1px),linear-gradient(90deg,#c9b7e007 1px,transparent 1px)}
 #experience,.label.card,.label.card:hover,#tower-telemetry-hud,.handoff-backdrop{background-image:var(--xray-grid);background-size:120px 120px,120px 120px,24px 24px,24px 24px;background-position:center}
-/* The entire waveform travels, rather than illuminating a static ECG shape. */
-.organ-pulse{overflow:hidden;color:var(--pulse-color)}
-.organ-pulse-baseline{fill:none;stroke:currentColor;stroke-width:.7;opacity:.16}
-.organ-pulse-train{animation:organ-signal-travel var(--pulse-duration) linear infinite;animation-delay:var(--pulse-phase);transform-origin:0 0;will-change:transform}
-.organ-pulse-train path{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
-#tower-telemetry-hud .organ-pulse-train path{stroke-width:1.8}
-.label.card .hb-pulse{height:19px;margin:2px 0 5px}
-.label.card .organ-pulse-train{animation-play-state:paused}
-.label.card .hb.on .organ-pulse-train{animation-play-state:running}
-body[data-detail=true] .label.card .organ-pulse-train,body:not([data-detail=true]) #tower-telemetry-hud .organ-pulse-train,body.modal-open .organ-pulse-train,body.page-hidden .organ-pulse-train{animation-play-state:paused!important}
-@keyframes organ-signal-travel{from{transform:translateX(0)}to{transform:translateX(-200px)}}
-@media(max-width:767px){.label.card .hb-pulse{height:15px;margin:1px 0 4px}}
-@media(prefers-reduced-motion:reduce){.organ-pulse-train{animation:none;transform:none;will-change:auto}}
-
 /* Handoffs use one vertical scroll area so navigation leaves with the page. */
 .handoff-container.is-handoff-view{display:block;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#88649a transparent}
 .is-handoff-view #view-handoffs{flex:none;height:auto;min-height:100dvh;overflow:visible;padding:14px 0 24px}

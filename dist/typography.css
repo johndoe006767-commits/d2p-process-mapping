@@ -1,0 +1,23 @@
+/* Functional typography for the existing purple interface. */
+body,button,input,select,textarea{font-family:Inter,Arial,sans-serif}
+h1,h2,h3,h4,h5,h6{font-family:Inter,Arial,sans-serif;letter-spacing:normal}
+#tower-name{font-weight:700;letter-spacing:normal}
+#section-1 .label.card strong{font-weight:700;letter-spacing:normal}
+#tower-telemetry-hud .hud-nav-action{font-weight:500}
+#tower-telemetry-hud .hud-year-tabs button[aria-selected=true]{font-weight:700}
+#process-workspace :is(h1,.identity strong){font-weight:700;letter-spacing:normal}
+#process-workspace :is(.flow-title,.stage-label){font-weight:600;letter-spacing:normal}
+#tower-workbench :is(h1,h2,h3,h4){font-weight:700;letter-spacing:normal}
+
+/* Effective 4K sizes account for the card's existing 1.5x display scale. */
+@media(min-width:2500px) and (min-height:1200px){
+ #tower-telemetry-hud .hud-tower-name{font-size:26.667px;line-height:1.2;font-weight:700;letter-spacing:normal}
+ #tower-telemetry-hud .hud-section-heading h4{font-size:16px;line-height:1.333;font-weight:400}
+ #tower-telemetry-hud :is(.hud-project-list strong,.hud-dependency-copy strong){font-size:14.667px;line-height:1.364;font-weight:600}
+ #tower-telemetry-hud :is(.hud-project-list p,.hud-dependency-copy>span,.hud-empty,.hud-project-empty p){font-size:13.333px;line-height:1.5}
+ #tower-telemetry-hud :is(.hud-subtitle,.hud-mix-legend,.hud-nav-action,.hud-year-tabs button,.kpi-state,.hud-project-note,.hud-manual-copy small){font-size:12px;line-height:1.333}
+ #tower-telemetry-hud .hud-score strong{font-size:32px;line-height:1.083;font-weight:700;font-variant-numeric:tabular-nums}
+}
+
+/* Keep the supplied logo's original colours and transparent artwork intact. */
+#anatomy-brand img{width:clamp(180px,7.3vw,280px);height:clamp(70px,2.85vw,110px);object-fit:cover;object-position:center;filter:none;opacity:1;transform:none;background:transparent}

@@ -1,0 +1,232 @@
+{
+  "source": {
+    "file": "8_Tower_TPI_Interdependencies_Template.xlsx",
+    "sheet": "Tower Input",
+    "range": "A4:F12",
+    "descriptionPolicy": "Names and descriptions are concise restatements of the supplied entries; no added scope."
+  },
+  "towers": {
+    "lungs": {
+      "tower": "R2R",
+      "status": "populated",
+      "dependencies": [
+        {
+          "tower": "O2C",
+          "description": "Intercompany billing and payment",
+          "sourceCell": "B5",
+          "sourceText": "O2C: Intercompany billing and payment"
+        },
+        {
+          "tower": "All towers",
+          "description": "SAP sub-modules and GL transactions - completeness and accuracy",
+          "sourceCell": "B5",
+          "sourceText": "All towers: SAP sub-modules and GL transactions - completeness and accuracy"
+        },
+        {
+          "tower": "FA",
+          "description": "ERH FA movements",
+          "sourceCell": "B5",
+          "sourceText": "FA: ERH FA movements"
+        }
+      ],
+      "projects": {
+        "2026": [
+          {
+            "name": "Coupa P2P Accrual Dashboard",
+            "description": "Dashboard for Coupa P2P accruals.",
+            "sourceCell": "C5",
+            "sourceItem": 1,
+            "sourceText": "Coupa P2P Accrual Dashboard"
+          },
+          {
+            "name": "BSR Automation Globalisation",
+            "description": "Globalise BSR automation.",
+            "sourceCell": "C5",
+            "sourceItem": 2,
+            "sourceText": "BSR Automation Globalisation"
+          },
+          {
+            "name": "AP Third-Party Close",
+            "description": "Analysis and governance of AP third-party close.",
+            "sourceCell": "C5",
+            "sourceItem": 3,
+            "sourceText": "AP 3rd party close analysis and governance"
+          }
+        ],
+        "2027": [
+          {
+            "name": "Market-Specific MM Closes",
+            "description": "Automate market-specific MM module closes.",
+            "sourceCell": "E5",
+            "sourceItem": 1,
+            "sourceText": "Automate the market-specific MM module closes"
+          },
+          {
+            "name": "BSR Uploads to BlackLine",
+            "description": "Automate BSR template uploads into BlackLine.",
+            "sourceCell": "E5",
+            "sourceItem": 2,
+            "sourceText": "Automate BSR template upload into BlackLine"
+          },
+          {
+            "name": "ERH MOT Preparation",
+            "description": "Simplify and automate ERH MOT preparation.",
+            "sourceCell": "E5",
+            "sourceItem": 3,
+            "sourceText": "Simplify and automate ERH MOT preparation"
+          }
+        ]
+      },
+      "notes": {
+        "2027": "These 3 suggestions are aligned with GPO/GPDD focus as well"
+      }
+    },
+    "stomach": {
+      "tower": "P2P",
+      "status": "pending",
+      "dependencies": [],
+      "projects": {
+        "2026": [],
+        "2027": []
+      },
+      "notes": {}
+    },
+    "intestines": {
+      "tower": "O2C",
+      "status": "populated",
+      "dependencies": [
+        {
+          "tower": "P2P",
+          "description": "vendor payments",
+          "sourceCell": "B7",
+          "sourceText": "P2P: vendor payments"
+        },
+        {
+          "tower": "Tax",
+          "description": "tax payments, tax filing",
+          "sourceCell": "B7",
+          "sourceText": "Tax: tax payments, tax filing"
+        },
+        {
+          "tower": "Controlling",
+          "description": "price update, rebate accrual, bad debt provision",
+          "sourceCell": "B7",
+          "sourceText": "Controlling: price update, rebate accrual, bad debt provision"
+        }
+      ],
+      "projects": {
+        "2026": [
+          {
+            "name": "Customer Advance Payments",
+            "description": "Clear customer advance payments.",
+            "sourceCell": "C7",
+            "sourceItem": 1,
+            "sourceText": "Customer advance payments clearing"
+          },
+          {
+            "name": "Alexion SO, Returns & Rebates",
+            "description": "Automate Alexion SO processing, returns and rebates.",
+            "sourceCell": "C7",
+            "sourceItem": 2,
+            "sourceText": "Alexion SO automation, returns/ rebates automation"
+          },
+          {
+            "name": "Bank Clearing & FX Postings",
+            "description": "Automate bank clearing and FX gain/loss postings.",
+            "sourceCell": "C7",
+            "sourceItem": 3,
+            "sourceText": "Automation of bank clearing & FX gain/loss postings"
+          },
+          {
+            "name": "China Intracompany Funding",
+            "description": "Manage China intracompany funding through Crown requests.",
+            "sourceCell": "C7",
+            "sourceItem": 4,
+            "sourceText": "China intracompany funding via Crown request"
+          },
+          {
+            "name": "Cash & Banking",
+            "description": "A Python script automates bank clearing for foreign vendor payments, including automatic FX gain/loss postings.",
+            "sourceCell": "C7",
+            "sourceItem": 5,
+            "sourceText": "Cash & Banking: Python script automates bank clearing for foreign vendor payments, including automatic FX gain/loss postings"
+          }
+        ],
+        "2027": [
+          {
+            "name": "Crown to FIS Payment Hub",
+            "description": "Pass approved Crown request data—beneficiary, bank, currency, amount and value date—directly into the FIS Payment Hub to remove re-keying, with a duplicate-transfer check.",
+            "sourceCell": "E7",
+            "sourceItem": 1,
+            "sourceText": "Pass the approved Crown request data (beneficiary, bank, currency, amount, value date) straight into the FIS Payment Hub to remove re-keying, with a duplicate-transfer check"
+          },
+          {
+            "name": "Pre-Creation VAT Validation",
+            "description": "Before an order or credit note is created, check the VAT classification against SAP master data. Flag mismatches to the local market to prevent incorrect VAT at invoice.",
+            "sourceCell": "E7",
+            "sourceItem": 2,
+            "sourceText": "Pre-creation VAT master-data validation(Before an order or credit note is created, check the VAT classification against SAP master data and flag mismatches to local market, stopping incorrect VAT at invoice.)"
+          },
+          {
+            "name": "Order Release on Approval",
+            "description": "Use one approval workflow for all three order-block reasons. Include the exposure summary, route to the GDOA 2002 / Credit Risk Policy / GDOA 2000 approver, store the evidence, and trigger the SAP release by script.",
+            "sourceCell": "E7",
+            "sourceItem": 3,
+            "sourceText": "Order block release-on-approval workflow with evidence trail (One workflow for the three block reasons: the blocked order generates the approval request with the exposure summary, routes it to the GDOA 2002 / Credit Risk Policy / GDOA 2000 approver, stores the evidence, and triggers the SAP release by script.)"
+          }
+        ]
+      },
+      "notes": {}
+    },
+    "brain": {
+      "tower": "FP&A Commercial",
+      "status": "pending",
+      "dependencies": [],
+      "projects": {
+        "2026": [],
+        "2027": []
+      },
+      "notes": {}
+    },
+    "pancreas": {
+      "tower": "FP&A Ops",
+      "status": "pending",
+      "dependencies": [],
+      "projects": {
+        "2026": [],
+        "2027": []
+      },
+      "notes": {}
+    },
+    "spleen": {
+      "tower": "Tax",
+      "status": "pending",
+      "dependencies": [],
+      "projects": {
+        "2026": [],
+        "2027": []
+      },
+      "notes": {}
+    },
+    "liver": {
+      "tower": "CAPEX",
+      "status": "pending",
+      "dependencies": [],
+      "projects": {
+        "2026": [],
+        "2027": []
+      },
+      "notes": {}
+    },
+    "kidneys": {
+      "tower": "Controlling",
+      "status": "pending",
+      "dependencies": [],
+      "projects": {
+        "2026": [],
+        "2027": []
+      },
+      "notes": {}
+    }
+  }
+}
