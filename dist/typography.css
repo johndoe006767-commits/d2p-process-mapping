@@ -20,4 +20,7 @@ h1,h2,h3,h4,h5,h6{font-family:Inter,Arial,sans-serif;letter-spacing:normal}
 }
 
 /* Keep the supplied logo's original colours and transparent artwork intact. */
+#anatomy-brand{inset:0 auto auto 0;padding:10px;z-index:0}
 #anatomy-brand img{width:clamp(180px,7.3vw,280px);height:clamp(70px,2.85vw,110px);object-fit:cover;object-position:center;filter:none;opacity:1;transform:none;background:transparent}
+#experience{z-index:1}
+#tower-telemetry-hud{z-index:20}

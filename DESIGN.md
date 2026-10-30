@@ -13,3 +13,5 @@ Use the bundled Inter variable font for functional UI. At 4K, the KPI card's eff
 ## Logo
 
 Keep the user-supplied `dist/assets/astrazeneca-logo.png` unchanged, in its original colours with a transparent background. Do not add a backing panel or apply the previous white logo filter.
+
+Align the logo at the top left with 10px padding. Keep its layer behind the anatomy interface and all KPI cards.
