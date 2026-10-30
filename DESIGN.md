@@ -14,6 +14,8 @@ The overview has a centered “Demand to Profit” heading in locally hosted Lor
 
 The title has a diagnostic scan treatment: subtle registration brackets, a narrow exposure beam and an outlined copy of the letters. Each 4-second cycle has a roughly 2-second pass followed by a quiet hold. Only transforms and opacity animate; the underlying text stays stationary and readable. The duplicate is hidden from assistive technology. Pause the effect while the page is hidden or anatomy is loading, and use the static title for reduced motion and keyboard interaction.
 
+When switching between assembled and disassembled title sizes, fade the title and description to 35% opacity over 80ms, swap sizes, then restore opacity over 160ms. Use interruptible opacity transitions; rapid reversals cancel a pending size swap. Keyboard input and reduced motion switch sizes immediately without this fade.
+
 ## Logo
 
 Keep the user-supplied `dist/assets/astrazeneca-logo.png` unchanged, in its original colours with a transparent background. Do not add a backing panel or apply the previous white logo filter.

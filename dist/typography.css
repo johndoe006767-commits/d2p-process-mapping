@@ -28,7 +28,9 @@ h1,h2,h3,h4,h5,h6{font-family:Inter,Arial,sans-serif;letter-spacing:normal}
 /* Expressive title; the functional interface continues to use Inter. */
 @font-face{font-family:Lora;src:url('assets/fonts/lora-medium.ttf') format('truetype');font-style:normal;font-weight:500;font-display:swap}
 @font-face{font-family:Lora;src:url('assets/fonts/lora-medium-italic.ttf') format('truetype');font-style:italic;font-weight:500;font-display:swap}
-#overview-intro{position:absolute;z-index:0;top:clamp(16px,.8vw,32px);left:50%;transform:translateX(-50%);width:min(1040px,60vw);text-align:center;pointer-events:none;overflow:clip}
+#overview-intro{position:absolute;z-index:0;top:clamp(16px,.8vw,32px);left:50%;transform:translateX(-50%);width:min(1040px,60vw);text-align:center;pointer-events:none;overflow:clip;opacity:1;transition:opacity 160ms cubic-bezier(.23,1,.32,1)}
+#overview-intro.is-resizing{opacity:.35;transition-duration:80ms}
+body.keyboard-input #overview-intro{opacity:1;transition:none}
 #overview-intro h1{position:relative;display:block;width:max-content;max-width:100%;padding:.02em .32em;margin:0 auto;overflow:clip;color:var(--text);font-family:Lora,Georgia,serif;font-size:clamp(38px,1.6667vw,64px);font-weight:500;line-height:1.05;letter-spacing:-.025em;white-space:nowrap}
 #overview-intro h1 em{font-size:.8em;font-weight:500;color:#e5bad7;padding-inline:.05em;text-transform:lowercase}
 #overview-intro p{margin:0;color:var(--muted);font-family:Lora,Georgia,serif;font-size:clamp(14px,.46875vw,18px);font-weight:500;line-height:1.1;white-space:nowrap}
@@ -63,6 +65,7 @@ body.page-hidden #overview-intro .title-scan-window,body.page-hidden #overview-i
 body.keyboard-input #overview-intro .title-scan-window{display:none}
 body.keyboard-input #overview-intro .title-scan-window,body.keyboard-input #overview-intro .title-scan-copy{animation:none}
 @media(prefers-reduced-motion:reduce){
+ #overview-intro{opacity:1;transition:none}
  #overview-intro .title-scan-window{display:none}
  #overview-intro .title-scan-window,#overview-intro .title-scan-copy{animation:none}
 }

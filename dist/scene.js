@@ -61,7 +61,30 @@ function separatedPosition(o){return o.overviewPosition.clone();}
 function overviewTarget(o){return o.home.clone().lerp(separatedPosition(o),separation);}
 function overviewScale(o){return T.MathUtils.lerp(o.size,o.overviewSize,separation);}
 function retarget(instant=false){detail=selected?detailLayout():null;for(const o of organs){o.flight=true;o.from=o.root.position.clone();o.to=selected===o?detail.target.clone():overviewTarget(o);o.fromScale=o.root.scale.x;o.toScale=selected===o?detail.scale:overviewScale(o);o.start=performance.now();o.duration=instant||reduced.matches?0:700;o.fromQuat=o.root.quaternion.clone();o.toQuat=new T.Quaternion();} }
-function setSeparation(value){if(!ready||selected||helpdesk.isOpen)return;separationTarget=T.MathUtils.clamp(value,0,1);expanded=separationTarget>.5;document.body.dataset.disassembled=String(separationTarget>.04);$('#assembly').value=String(Math.round(separationTarget*1000));}
+const overviewIntro=$('#overview-intro');
+let introCompact=false,introResizePending=false;
+function settleOverviewTitle(){
+ introResizePending=false;
+ document.body.dataset.disassembled=String(introCompact);
+ overviewIntro.classList.remove('is-resizing');
+}
+function syncOverviewTitle(compact){
+ const instant=reduced.matches||document.body.classList.contains('keyboard-input')||document.hidden;
+ if(compact===introCompact){if(instant&&introResizePending)settleOverviewTitle();return;}
+ introCompact=compact;
+ // Fade at the size boundary only; reversing the slider can cancel the pending swap.
+ if(instant||compact===(document.body.dataset.disassembled==='true')){settleOverviewTitle();return;}
+ introResizePending=true;
+ overviewIntro.classList.add('is-resizing');
+}
+// Wait for the painted fade, so a busy 3D frame cannot skip it before the size swap.
+for(const event of ['transitionend','transitioncancel'])overviewIntro.addEventListener(event,e=>{
+ if(e.target===overviewIntro&&e.propertyName==='opacity'&&introResizePending)settleOverviewTitle();
+});
+document.addEventListener('keydown',()=>{if(introResizePending)settleOverviewTitle();});
+reduced.addEventListener('change',()=>{if(reduced.matches)settleOverviewTitle();});
+addEventListener('pagehide',settleOverviewTitle);
+function setSeparation(value){if(!ready||selected||helpdesk.isOpen)return;separationTarget=T.MathUtils.clamp(value,0,1);expanded=separationTarget>.5;syncOverviewTitle(separationTarget>.04);$('#assembly').value=String(Math.round(separationTarget*1000));}
 function setView(value){setSeparation(value?1:0);}
 function select(o,trigger){if(!ready||selected||helpdesk.isOpen)return;lastTrigger=trigger||o.label;selected=o;o.rotationTarget=new T.Quaternion();hover=null;document.body.dataset.detail='true';window.scrollTo({top:0,behavior:'instant'});$('#detail').hidden=false;if(fitCanvas())buildConnections();$('#organ-name').textContent=o.organ;$('#tower-name').textContent=o.name;updateTelemetryHUD(o.id);bindTower(o.id);$('#back').focus({preventScroll:true});$('#scene').tabIndex=0;$('#scene').setAttribute('aria-label',`${o.name} ${o.organ}. Drag or use arrow keys to rotate. Use the flow buttons or a stage shortcut to explore the process map.`);retarget();syncHelpdesk();}
 function close(){if(!selected)return;hideMap();selected=null;$('#scene').setAttribute('aria-label','Skeleton, heart and eight finance organs');document.body.dataset.detail='false';$('#detail').hidden=true;if(fitCanvas()){layoutOverviewLabels();buildConnections();}retarget();syncHelpdesk();lastTrigger?.focus({preventScroll:true});}
