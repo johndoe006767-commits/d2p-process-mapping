@@ -1,4 +1,5 @@
 import * as T from 'three';
+import {syncAnatomyLayout,elementDisplayScale} from './anatomy-layout.js';
 import {REAL,KPI} from './real-data.js';
 import {CARD_BRIEFS} from './tower-briefs.js';
 import {bindTower,initExperience,hideMap,openMap} from './real-experience.js?v=20261102-summary';
@@ -8,8 +9,9 @@ import {loadReplacement} from './models.js';
 import {buildVesselNetwork} from './vessels.js';
 import {mountAstralOrgan,mountAstralSkeleton,mountAstralVessel,createAstralRenderer} from './astral-anatomy.js';
 import {cardMarkup,metricsSentence,accentFor,towerNameFor} from './health.js?v=20261102-summary';
-import {createHelpdesk} from './helpdesk.js?v=20261102-support';
+import {createHelpdesk} from './helpdesk.js?v=20261102-sizing';
 const $=s=>document.querySelector(s);
+syncAnatomyLayout();
 const configs=[['brain','FP&A Commercial','Brain',-1,0,.18],['liver','CAPEX','Liver',-1,1,.25],['kidneys','Controlling','Kidneys',-1,2,.23],['spleen','Tax','Spleen',-1,3,.12],['lungs','R2R','Lungs',1,0,.32],['stomach','P2P','Stomach',1,1,.17],['pancreas','FP&A Operations','Pancreas',1,2,.20],['intestines','O2C','Intestines',1,3,.29]];
 document.addEventListener('visibilitychange',()=>document.body.classList.toggle('page-hidden',document.hidden));
 const reduced=matchMedia('(prefers-reduced-motion: reduce)'), fine=matchMedia('(hover: hover) and (pointer: fine)');
@@ -36,19 +38,28 @@ function ease(x){ // Skill's cubic-bezier(.77,0,.175,1), inverted on its x axis.
 }
 let detail=null;
 // The canvas always matches #experience (its CSS height, not the window), so DOM and 3D share one coordinate space.
-function fitCanvas(){const nw=innerWidth,nh=$('#experience').clientHeight||Math.max(innerHeight,640);if(nw===w&&nh===h)return false;w=nw;h=nh;mobile=w<768;renderer.setSize(w,h);const half=1.10;camera.left=-half*w/h;camera.right=half*w/h;camera.top=half;camera.bottom=-half;camera.updateProjectionMatrix();return true;}
-function resize(){if($('#section-1').hidden)return;syncCardHeight();fitCanvas();if(ready){layoutOverviewLabels();buildConnections();retarget(true);syncHelpdesk();}}
+function fitCanvas(){
+ const experience=$('#experience'),nw=experience.clientWidth,nh=experience.clientHeight||Math.max(innerHeight,640);
+ // Match the physical display resolution even when the logical stage is scaled.
+ const ratio=Math.min(devicePixelRatio,1.75)*elementDisplayScale(experience);
+ if(renderer.getPixelRatio()!==ratio)renderer.setPixelRatio(ratio);
+ if(nw===w&&nh===h)return false;
+ w=nw;h=nh;mobile=w<768;renderer.setSize(w,h);const half=1.10;
+ camera.left=-half*w/h;camera.right=half*w/h;camera.top=half;camera.bottom=-half;camera.updateProjectionMatrix();return true;
+}
+function resize(){syncAnatomyLayout();if($('#section-1').hidden)return;syncCardHeight();fitCanvas();if(ready){layoutOverviewLabels();buildConnections();retarget(true);syncHelpdesk();}}
 function syncCardHeight(){
  if(!selected)return;
  const cardHeight=$('#tower-telemetry-hud').getBoundingClientRect().height;
- const height=innerWidth<1100?Math.max(innerHeight,72+cardHeight+640):innerHeight;
+ const height=innerWidth<1100?Math.max(innerHeight,72+cardHeight+640):$('#section-1').dataset.scaledDesktop==='true'?1440:innerHeight;
  $('#experience').style.setProperty('--tower-detail-height',height+'px');
 }
 addEventListener('tower-card-layout',()=>{if(ready&&selected)resize();});
 // Zoomed-in layout: measure the HUD, title and controls, then give the organ the largest free square,
 // keeping the organ centered in the space beside or below the KPI panel.
 function detailLayout(){
-  const box=$('#experience').getBoundingClientRect(),rel=el=>{const r=el.getBoundingClientRect();return {l:r.left-box.left,t:r.top-box.top,r:r.right-box.left,b:r.bottom-box.top};};
+  const box=$('#experience').getBoundingClientRect(),scale=elementDisplayScale($('#experience'));
+  const rel=el=>{const r=el.getBoundingClientRect();return {l:(r.left-box.left)/scale,t:(r.top-box.top)/scale,r:(r.right-box.left)/scale,b:(r.bottom-box.top)/scale};};
   const hud=rel($('#tower-telemetry-hud')),title=rel($('.detail-title'));
   const beside=hud.l>w/2,gap=20,pad=beside?24:16;
   const L=pad,R=beside?hud.l-24:w-pad,top=beside?72:hud.b+14,bottom=Math.min(title.t,h-24)-12,W=R-L,H=bottom-top;
@@ -235,11 +246,11 @@ o.label.style.visibility=visible?'visible':'hidden';o.label.style.opacity=visibl
 }
 for(const o of organs)updateProcessNeurons(o,selected===o&&(o.duration===0||now-o.start>o.duration*.85),camera,w,h,time,reduced.matches,detail);
 astralRenderer.render(scene,camera,time,reduced.matches);animation=requestAnimationFrame(frame);}
-function hit(event){const rect=$('#scene').getBoundingClientRect();pointer.set((event.clientX-rect.left)/w*2-1,-(event.clientY-rect.top)/h*2+1);ray.setFromCamera(pointer,camera);return ray.intersectObjects(organs.map(o=>o.root),true).find(x=>x.object.visible&&x.object.userData.organ)?.object.userData.organ;}
+function hit(event){const rect=$('#scene').getBoundingClientRect();pointer.set((event.clientX-rect.left)/rect.width*2-1,-(event.clientY-rect.top)/rect.height*2+1);ray.setFromCamera(pointer,camera);return ray.intersectObjects(organs.map(o=>o.root),true).find(x=>x.object.visible&&x.object.userData.organ)?.object.userData.organ;}
 $('#assembly').addEventListener('input',e=>setSeparation(Number(e.target.value)/1000));$('#back').onclick=close;$('#retry').onclick=()=>location.reload();
 // Wheel/trackpad progress is continuous and reversible; no document scroll listener.
 $('#experience').addEventListener('wheel',e=>{if(e.ctrlKey||!ready||selected||helpdesk.isOpen)return;e.preventDefault();const unit=e.deltaMode===1?16:e.deltaMode===2?h:1;const delta=T.MathUtils.clamp(e.deltaY*unit,-120,120);setSeparation(separationTarget+delta/1800);},{passive:false});
-const canvas=$('#scene');canvas.addEventListener('pointerdown',e=>{if(!ready||e.button!==0)return;if(selected)selected.rotationTarget.copy(selected.root.quaternion);drag={x:e.clientX,y:e.clientY,startX:e.clientX,startY:e.clientY};canvas.setPointerCapture(e.pointerId);});canvas.addEventListener('pointermove',e=>{if(!ready)return;if(drag&&selected){const dx=e.clientX-drag.x,dy=e.clientY-drag.y;selected.root.quaternion.premultiply(new T.Quaternion().setFromEuler(new T.Euler(dy*.009,dx*.009,0)));selected.rotationTarget.copy(selected.root.quaternion);selected.duration=0;drag.x=e.clientX;drag.y=e.clientY;}else if(drag&&!selected&&e.pointerType==='touch'){setSeparation(separationTarget+(drag.y-e.clientY)/650);drag.x=e.clientX;drag.y=e.clientY;}else if(!selected&&fine.matches){hover=hit(e);canvas.style.cursor=hover?'pointer':'default';}});canvas.addEventListener('pointerup',e=>{if(drag&&!selected&&Math.hypot(e.clientX-drag.startX,e.clientY-drag.startY)<6){const o=hit(e);if(o)select(o);}drag=null;if(canvas.hasPointerCapture(e.pointerId))canvas.releasePointerCapture(e.pointerId);});canvas.addEventListener('pointercancel',()=>drag=null);canvas.addEventListener('lostpointercapture',()=>drag=null);canvas.addEventListener('pointerleave',()=>hover=null);
+const canvas=$('#scene');canvas.addEventListener('pointerdown',e=>{if(!ready||e.button!==0)return;if(selected)selected.rotationTarget.copy(selected.root.quaternion);drag={x:e.clientX,y:e.clientY,startX:e.clientX,startY:e.clientY};canvas.setPointerCapture(e.pointerId);});canvas.addEventListener('pointermove',e=>{if(!ready)return;if(drag&&selected){const displayScale=elementDisplayScale(canvas),dx=(e.clientX-drag.x)/displayScale,dy=(e.clientY-drag.y)/displayScale;selected.root.quaternion.premultiply(new T.Quaternion().setFromEuler(new T.Euler(dy*.009,dx*.009,0)));selected.rotationTarget.copy(selected.root.quaternion);selected.duration=0;drag.x=e.clientX;drag.y=e.clientY;}else if(drag&&!selected&&e.pointerType==='touch'){setSeparation(separationTarget+(drag.y-e.clientY)/650);drag.x=e.clientX;drag.y=e.clientY;}else if(!selected&&fine.matches){hover=hit(e);canvas.style.cursor=hover?'pointer':'default';}});canvas.addEventListener('pointerup',e=>{if(drag&&!selected&&Math.hypot(e.clientX-drag.startX,e.clientY-drag.startY)<6){const o=hit(e);if(o)select(o);}drag=null;if(canvas.hasPointerCapture(e.pointerId))canvas.releasePointerCapture(e.pointerId);});canvas.addEventListener('pointercancel',()=>drag=null);canvas.addEventListener('lostpointercapture',()=>drag=null);canvas.addEventListener('pointerleave',()=>hover=null);
 addEventListener('keydown',e=>{if(e.defaultPrevented||!$('#tower-workbench').hidden||!$('#process-workspace').hidden)return;if(e.key==='Escape'&&e.target.closest?.('#process-workspace'))return;if(e.key==='Escape')close();if(selected&&e.target===canvas&&['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)){e.preventDefault();selected.duration=0;selected.root.quaternion.premultiply(new T.Quaternion().setFromEuler(new T.Euler(e.key==='ArrowUp'?-.15:e.key==='ArrowDown'?.15:0,e.key==='ArrowLeft'?-.15:e.key==='ArrowRight'?.15:0,0)));selected.rotationTarget.copy(selected.root.quaternion);}});
 canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();cancelAnimationFrame(animation);fail(new Error('WebGL context lost'));});
 // Keyboard users can explore each organ in either view, without visual label overlap.

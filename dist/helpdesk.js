@@ -1,4 +1,5 @@
 // GFS support companion. It deliberately has no process-map or source-register bindings.
+import {elementDisplayScale} from './anatomy-layout.js';
 export function createHelpdesk(host, {onOpen, onClose}) {
   // Visible alpha bounds, measured from the original transparent artwork.
   const fullArt={width:887,height:1774,left:214,top:1,right:695,bottom:1715};
@@ -56,18 +57,19 @@ export function createHelpdesk(host, {onOpen, onClose}) {
   function visibleArtBounds(){
     const portrait=state.progress>.625,art=portrait?portraitArt:fullArt;
     const img=root.querySelector(portrait?'.helpdesk-portrait':'.helpdesk-full');
-    const r=img.getBoundingClientRect(),padding=parseFloat(getComputedStyle(img).paddingBottom)||0;
+    const r=img.getBoundingClientRect(),padding=(parseFloat(getComputedStyle(img).paddingBottom)||0)*elementDisplayScale(host);
     const contentHeight=r.height-padding,scale=Math.min(r.width/art.width,contentHeight/art.height);
     const x=r.left+(r.width-art.width*scale)/2,y=r.top+(contentHeight-art.height*scale)*(portrait?1:.5);
     return {left:x+art.left*scale,right:x+art.right*scale,top:y+art.top*scale,bottom:y+art.bottom*scale};
   }
   function placePreview(){
     if(preview.hidden)return;
-    const bounds=host.getBoundingClientRect(),r=visibleArtBounds(),card=preview.getBoundingClientRect();
+    const bounds=host.getBoundingClientRect(),r=visibleArtBounds(),scale=elementDisplayScale(host);
+    const card={width:preview.offsetWidth,height:preview.offsetHeight};
     const gap=Math.max(16,Math.min(32,state.width*.008)),pad=16;
-    let x=r.right-bounds.left+gap;
-    if(x+card.width>state.width-pad)x=r.left-bounds.left-card.width-gap;
-    const y=Math.max(16,Math.min(r.top-bounds.top+(r.bottom-r.top)*.12,state.height-card.height-24));
+    let x=(r.right-bounds.left)/scale+gap;
+    if(x+card.width>state.width-pad)x=(r.left-bounds.left)/scale-card.width-gap;
+    const y=Math.max(16,Math.min((r.top-bounds.top+(r.bottom-r.top)*.12)/scale,state.height-card.height-24));
     preview.style.left=`${Math.max(pad,Math.min(x,state.width-card.width-pad))}px`;
     preview.style.top=`${y}px`;
   }
@@ -81,7 +83,8 @@ export function createHelpdesk(host, {onOpen, onClose}) {
     entrance?.cancel();
     if(!reduced.matches&&to.height>0){
       const scale=Math.max(.12,Math.min(1,from.height/to.height));
-      entrance=hero.animate([{transform:`translate(${from.left+from.width/2-to.left-to.width/2}px,${from.top-to.top}px) scale(${scale})`,opacity:.15},{transform:'translate(0,0) scale(1)',opacity:1}],{duration:520,easing:'cubic-bezier(.16,1,.3,1)'});
+      const displayScale=elementDisplayScale(host);
+      entrance=hero.animate([{transform:`translate(${(from.left+from.width/2-to.left-to.width/2)/displayScale}px,${(from.top-to.top)/displayScale}px) scale(${scale})`,opacity:.15},{transform:'translate(0,0) scale(1)',opacity:1}],{duration:520,easing:'cubic-bezier(.16,1,.3,1)'});
     }
     back.focus({preventScroll:true});
   }

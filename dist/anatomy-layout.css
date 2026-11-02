@@ -1,0 +1,28 @@
+/* Large desktop displays share the approved 2560 × 1440 composition.
+   Keep the full-bleed page background; center any spare aspect-ratio space. */
+#section-1[data-scaled-desktop=true]{
+  position:fixed;
+  width:2560px;
+  height:1440px;
+  left:var(--anatomy-x);
+  top:var(--anatomy-y);
+  transform:scale(var(--anatomy-scale));
+  transform-origin:top left;
+}
+#section-1[data-scaled-desktop=true] #experience,
+body[data-detail=true] #section-1[data-scaled-desktop=true] #experience{height:1440px;min-height:1440px}
+#section-1[data-scaled-desktop=true] .label.card{width:440px}
+#section-1[data-scaled-desktop=true] #tower-telemetry-hud{max-height:calc((1440px - 144px) / var(--hud-scale))}
+
+/* Resolve viewport-relative details against the reference stage as well. */
+#section-1[data-scaled-desktop=true] #anatomy-brand img{width:186.88px;height:72.96px}
+#section-1[data-scaled-desktop=true] #overview-intro{top:20.48px;width:1040px}
+#section-1[data-scaled-desktop=true] #overview-intro h1{font-size:42.66752px}
+#section-1[data-scaled-desktop=true] #overview-intro p{font-size:14px}
+body[data-disassembled=true] #section-1[data-scaled-desktop=true] #overview-intro{width:min(680px,var(--overview-gap,716.8px))}
+body[data-disassembled=true] #section-1[data-scaled-desktop=true] #overview-intro h1{font-size:min(29.33248px,calc(var(--overview-gap,716.8px)*.08))}
+#section-1[data-scaled-desktop=true] #helpdesk{--helpdesk-unit:20.48px}
+#section-1[data-scaled-desktop=true] .helpdesk-dock-label{font-size:16.64px}
+#section-1[data-scaled-desktop=true] .helpdesk-preview{width:460.8px}
+#section-1[data-scaled-desktop=true] #helpdesk-detail{gap:32px;padding:100.8px 71.68px 43.2px}
+#section-1[data-scaled-desktop=true] .helpdesk-back{right:71.68px;font-size:17.92px}
