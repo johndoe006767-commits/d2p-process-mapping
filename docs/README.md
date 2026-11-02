@@ -9,7 +9,7 @@ The design target for this project is a **3840 × 2160 desktop display**. Future
 
 ## Run locally
 
-Install **Python 3.9 or newer**. No additional packages or build step are required.
+Install **Python 3.9 or newer**. No additional packages or frontend build step are required.
 
 | Platform | Start | Stop |
 | --- | --- | --- |
@@ -18,7 +18,7 @@ Install **Python 3.9 or newer**. No additional packages or build step are requir
 
 Start opens **http://127.0.0.1:8767/** in your browser. The server runs in the background, so closing the launcher window does not stop it. Starting again reopens the existing server. Stop shuts down only the server started from this folder; it does not close the browser tab or stop unrelated servers.
 
-From a terminal:
+From a terminal in the project root:
 
 ```sh
 python3 scripts/server.py start
@@ -31,16 +31,18 @@ On Windows, use `py -3` instead of `python3`. To choose another port or avoid op
 ## Folder layout
 
 ```text
-dist/                       Website served directly, including data and assets
-D2P-process-maps-MERGED.html  Authoritative source maps and supporting registers
-scripts/server.py           Local start/stop controller
-Start.command / Stop.command
-Start.bat / Stop.bat
-.github/workflows/pages.yml  GitHub Pages deployment
-README.md
+Start.command / Stop.command    macOS launchers
+Start.bat / Stop.bat            Windows launchers
+Source/                        Authoritative source maps and supporting registers
+dist/                          Website served directly, including data and assets
+scripts/                       Local start/stop controller
+docs/                          README, design, product and project instructions
+tests/                         Site verification
+backups/                       Original site undo backup (local only)
+.github/workflows/pages.yml     GitHub Pages deployment
 ```
 
-The ignored `.runtime/` folder is created on first start for the local server state and log. `.git/` contains repository history. Asset and library licenses are retained alongside the files they cover.
+Only the four Start/Stop launcher files remain loose at the top level; `Source/` stays directly accessible there. Documentation lives in `docs/`. Hidden repository and local configuration files retain their required locations. The ignored `.runtime/` folder contains local server state and logs. `.git/` contains repository history. Asset and library licenses are retained alongside the files they cover.
 
 ## Edit and publish
 
@@ -52,6 +54,6 @@ The process workspace opens from **High-level flow**, **Detailed flow**, or a st
 
 Tower cards use `dist/data/tower-briefs.json` for dependencies and the 2026 / 2027 TPI lists, transcribed from **8_Tower_TPI_Interdependencies_Template.xlsx**, `Tower Input!A4:F12`. R2R and O2C have populated dependencies and projects; those sections remain placeholders for the other six towers. Project names and descriptions restate the supplied entries, and each record retains its original text and source cell. The R2R 2027 GPO/GPDD note is separate from its three projects. Manual percentages and As Is / To Be activity mixes are populated for all eight towers from `kpi-summary.json`, independently of workbook availability. The source maps and detailed registers are unchanged.
 
-`D2P-process-maps-MERGED.html` is the source of truth. Baseline map records use `dist/neural/<TOWER>.json`; AI records use `<TOWER>-ai.json`. `dist/data/suggested-processes.json` supplies the AI activity registers and adopted activity mix. Source HTML is retained for comparison and is not served or published by the website.
+`Source/` retains the supplied source maps and supporting registers. Baseline map records use `dist/neural/<TOWER>.json`; AI records use `<TOWER>-ai.json`. `dist/data/suggested-processes.json` supplies the AI activity registers and adopted activity mix. Source files are retained for comparison and are not served or published by the website.
 
 Push changes to `main` to deploy. GitHub Actions publishes only `dist/` to GitHub Pages, retaining relative paths so the site also works under `/d2p-process-mapping/`.

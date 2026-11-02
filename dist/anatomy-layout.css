@@ -11,7 +11,14 @@
 }
 #section-1[data-scaled-desktop=true] #experience,
 body[data-detail=true] #section-1[data-scaled-desktop=true] #experience{height:1440px;min-height:1440px}
-#section-1[data-scaled-desktop=true] .label.card{width:440px}
+#section-1[data-scaled-desktop=true] .label.card{width:440px;padding:24px}
+/* A 4px rhythm separates identity, metrics, activity mix and the TPI pair. */
+#section-1[data-scaled-desktop=true] .label.card .hb-brief{margin-top:12px}
+#section-1[data-scaled-desktop=true] .label.card .hb-manual{margin-bottom:12px}
+#section-1[data-scaled-desktop=true] .label.card .kpi-mix-head{line-height:1.4;margin-bottom:8px}
+#section-1[data-scaled-desktop=true] .label.card .kpi-mix-row+.kpi-mix-row{margin-top:8px}
+#section-1[data-scaled-desktop=true] .label.card .kpi-mix+.hb-year{margin-top:12px}
+#section-1[data-scaled-desktop=true] .label.card .hb-year+.hb-year{margin-top:4px}
 #section-1[data-scaled-desktop=true] #tower-telemetry-hud{max-height:calc((1440px - 144px) / var(--hud-scale))}
 
 /* Resolve viewport-relative details against the reference stage as well. */
