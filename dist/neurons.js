@@ -14,7 +14,7 @@ export function createNeuronNetwork(brain, corticalMeshes, options = {}) {
   brain.updateMatrixWorld(true);
   const raycaster = new THREE.Raycaster();
   const center = new THREE.Vector3(0, options.generic ? 0 : 0.25, 0);
-  const glowColor = new THREE.Color(options.color || '#ff263d').multiplyScalar(2.8);
+  const glowColor = new THREE.Color(options.color || '#ff164f').multiplyScalar(4.2);
   // Keep every lobe of a lung in the same network, but never join the pair.
   // Each group also gets its own projection origin and raycast targets so a
   // connection cannot accidentally snap onto the opposite organ.
@@ -84,11 +84,11 @@ export function createNeuronNetwork(brain, corticalMeshes, options = {}) {
   const links = new THREE.Group();
   network.add(links);
   const filament = new THREE.MeshBasicMaterial({
-    color: glowColor, transparent: true, opacity: 0.62,
-    blending: THREE.AdditiveBlending, depthWrite: false, depthTest: true,
+    color: glowColor, transparent: true, opacity: 0.92, toneMapped: false,
+    blending: THREE.NormalBlending, depthWrite: false, depthTest: true,
   });
   const connection = filament.clone();
-  connection.opacity = 0.25;
+  connection.opacity = 0.60;
   const membrane = new THREE.ShaderMaterial({
     uniforms: { glowColor: { value: glowColor } },
     transparent: true, depthWrite: false, depthTest: true,
@@ -98,7 +98,7 @@ export function createNeuronNetwork(brain, corticalMeshes, options = {}) {
       n=normalize(normalMatrix*normal);eye=-p.xyz;gl_Position=projectionMatrix*p;}`,
     fragmentShader: `uniform vec3 glowColor; varying vec3 n; varying vec3 eye;
       void main(){float rim=pow(1.0-clamp(abs(dot(normalize(n),normalize(eye))),0.0,1.0),2.2);
-      gl_FragColor=vec4(glowColor,0.07+rim*0.38);}`,
+      gl_FragColor=vec4(glowColor,0.14+rim*0.58);}`,
   });
   const somaGeometry = new THREE.SphereGeometry(0.043, 20, 14);
   const nucleusGeometry = new THREE.SphereGeometry(0.013, 12, 8);

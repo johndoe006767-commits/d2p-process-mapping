@@ -6,6 +6,7 @@ import {createProcessNeurons,updateProcessNeurons} from './process-neurons.js?v=
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
 import {loadReplacement} from './models.js';
 import {buildVesselNetwork} from './vessels.js';
+import {mountAstralOrgan,mountAstralSkeleton,mountAstralVessel,createAstralRenderer} from './astral-anatomy.js';
 import {cardMarkup,metricsSentence,accentFor} from './health.js?v=20261030-typography-1';
 import {createHelpdesk} from './helpdesk.js?v=kpi-clearance';
 const $=s=>document.querySelector(s);
@@ -18,7 +19,7 @@ let sceneInView=true;
 const sceneObserver=new IntersectionObserver(([entry])=>sceneInView=entry.isIntersecting);sceneObserver.observe($('#section-1'));
 const autoTurnAxis=new T.Vector3(0,1,0),autoTurnStep=new T.Quaternion(),autoTurnSpeed=Math.PI/30;
 const organs=[],ray=new T.Raycaster(),pointer=new T.Vector2(),p=new T.Vector3();
-let anatomyLandmarks;
+let anatomyLandmarks,astralRenderer;
 const helpdesk=createHelpdesk($('#experience'),{
  onOpen(){if(!ready||selected)return false;hideMap();document.body.dataset.helpdesk='true';$('#scene').inert=true;$('#labels').inert=true;hover=null;return true;},
  onClose(){delete document.body.dataset.helpdesk;$('#scene').inert=false;$('#labels').inert=false;}
@@ -90,7 +91,7 @@ function select(o,trigger){if(!ready||selected||helpdesk.isOpen)return;lastTrigg
 function close(){if(!selected)return;hideMap();selected=null;$('#scene').setAttribute('aria-label','Skeleton, heart and eight finance organs');document.body.dataset.detail='false';$('#detail').hidden=true;if(fitCanvas()){layoutOverviewLabels();buildConnections();}retarget();syncHelpdesk();lastTrigger?.focus({preventScroll:true});}
 // Exact tapered Catmull-Rom tubes and traveling flow shader from tower-overview2.
 function buildConnections(){organs.forEach((o,index)=>{
- if(o.vein){scene.remove(o.vein);o.vein.geometry.dispose();o.vein.material.dispose();}
+ if(o.vein){o.disposeVesselAppearance?.();scene.remove(o.vein);o.vein.geometry.dispose();o.vein.material.dispose();}
  const origin=heart.position.clone().add(new T.Vector3(0,.02,.035));
  const geometry=buildVesselNetwork(origin,o.home,separatedPosition(o),1,o.side,index*31+7);
       const uniforms = {
@@ -133,11 +134,12 @@ function buildConnections(){organs.forEach((o,index)=>{
       const mesh = new T.Mesh(geometry, material);
       mesh.frustumCulled = false;
 
- mesh.renderOrder=4;scene.add(mesh);o.vein=mesh;o.vesselUniforms=uniforms;
+ mesh.renderOrder=4;scene.add(mesh);o.vein=mesh;o.vesselUniforms=uniforms;o.disposeVesselAppearance=mountAstralVessel(mesh,uniforms,o.id);
 });}
 function fail(error){console.error(error);$('#loading').hidden=false;$('#load-message').textContent='The anatomy could not load. Please retry in a WebGL-enabled browser.';$('#retry').hidden=false;}
 async function init(){try{
 renderer=new T.WebGLRenderer({canvas:$('#scene'),antialias:true,alpha:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio,1.75));renderer.setClearColor(0x331c41,0);renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.3;
+astralRenderer=createAstralRenderer(renderer);
 scene=new T.Scene();camera=new T.OrthographicCamera(-1,1,1,-1,.01,20);camera.position.set(0,.86,5);camera.lookAt(0,.86,0);
 scene.add(new T.HemisphereLight(0xfff4ed,0x765580,2.2));const light=new T.DirectionalLight(0xfff5ee,3);light.position.set(-2,3,4);scene.add(light);const rim=new T.DirectionalLight(0xe9d3e8,1.6);rim.position.set(3,2,-2);scene.add(rim);
 bones=new T.Group();scene.add(bones);
@@ -145,7 +147,8 @@ const [atlasResponse,bodyResponse]=await Promise.all([fetch('./data/anatomy/atla
 const skeletalParts=atlas.parts.filter(part=>part.group==='skeleton');
 anatomyLandmarks={floor:Math.min(...skeletalParts.map(part=>part.bounds[0][1])),shoulder:Math.max(...skeletalParts.filter(part=>/clavicle/i.test(part.name)).map(part=>part.bounds[1][1]))};
 const grouped=new Map(),homes=new Map();for(const part of atlas.parts){const bounds=new T.Box3(new T.Vector3(...part.bounds[0]),new T.Vector3(...part.bounds[1]));if(!homes.has(part.group))homes.set(part.group,bounds);else homes.get(part.group).union(bounds);if(!['skeleton','heart'].includes(part.group))continue;const g=new T.BufferGeometry();g.setAttribute('position',new T.BufferAttribute(new Float32Array(buffer,part.positions,part.vertexCount*3),3));g.setAttribute('normal',new T.BufferAttribute(new Int16Array(buffer,part.normals,part.vertexCount*3),3,true));g.setIndex(new T.BufferAttribute(new Uint32Array(buffer,part.indices,part.indexCount),1));const id=part.group==='skeleton'&&part.bounds[0][1]>1.45?'skull':part.group;if(!grouped.has(id))grouped.set(id,[]);grouped.get(id).push(g);}
-for(const [id,pieces]of grouped){const geo=mergeGeometries(pieces,false);pieces.forEach(g=>g.dispose());const mat=new T.MeshPhysicalMaterial({color:id==='heart'?0xc72e66:0xe1ddd2,roughness:.45,metalness:.02,clearcoat:.16,depthTest:false,transparent:true,opacity:1});const mesh=new T.Mesh(geo,mat);mesh.renderOrder=id==='heart'?11:-1/* skeleton draws first, behind organs, vessels and heart */;if(id==='heart'){geo.computeBoundingBox();const c=geo.boundingBox.getCenter(new T.Vector3());geo.translate(-c.x,-c.y,-c.z);mesh.position.copy(c);heart=mesh;heart.position.z=.23;scene.add(mesh);}else{bones.add(mesh);if(id==='skull')skull=mesh;}}
+for(const [id,pieces]of grouped){const geo=mergeGeometries(pieces,false);pieces.forEach(g=>g.dispose());const mat=new T.MeshPhysicalMaterial({color:id==='heart'?0xd0006f:0xe1ddd2,roughness:.45,metalness:.02,clearcoat:.16,depthTest:false,transparent:true,opacity:1});const mesh=new T.Mesh(geo,mat);mesh.renderOrder=id==='heart'?11:-1/* skeleton draws first, behind organs, vessels and heart */;if(id==='heart'){geo.computeBoundingBox();const c=geo.boundingBox.getCenter(new T.Vector3());geo.translate(-c.x,-c.y,-c.z);mesh.position.copy(c);heart=mesh;heart.position.z=.23;scene.add(mesh);}else{bones.add(mesh);if(id==='skull')skull=mesh;}}
+mountAstralSkeleton(bones,heart);
 for(const [id,name,organ,side,row,size] of configs){const {model,geometry,network}=await loadReplacement(id);geometry.computeBoundingBox();const visibleBounds=geometry.boundingBox.clone();const root=new T.Group();root.add(model);root.updateMatrixWorld(true);const box=visibleBounds;const center=box.getCenter(new T.Vector3());model.position.sub(center);const max=Math.max(...box.getSize(new T.Vector3()).toArray());model.scale.multiplyScalar(1/max);model.position.multiplyScalar(1/max);const home=homes.get(id).getCenter(new T.Vector3());home.z=Math.max(home.z,.13);if(id==='brain')home.z=.015;// Include the full visible silhouette (including the brainstem), while
 // retaining the original normalization and scale for the assembled anatomy.
 root.updateMatrixWorld(true);
@@ -154,6 +157,7 @@ model.traverseVisible(mesh=>{if(!mesh.isMesh)return;const positions=mesh.geometr
 root.position.copy(home);root.scale.setScalar(size);scene.add(root);
 const label=document.createElement('button');const m=CARD_BRIEFS[id];label.className=`label ${side<0?'left':'right'}${m?' card':''}`;if(m)label.style.setProperty('--accent-c',accentFor(id));label.innerHTML=`<small>${organ}</small><strong>${name}</strong>${m?cardMarkup(m,KPI[id]):''}<span class="cta">Explore tower<svg class="ico ico-ne" aria-hidden="true"><use href="#i-ne"/></svg></span>`;label.setAttribute('aria-label',`Explore ${name}, ${organ}.${m?' '+metricsSentence(m,KPI[id]):''}`);$('#labels').append(label);
 const o={id,name,organ,side,row,size,root,home,label,m,normalizedSize:renderedBounds.getSize(new T.Vector3()),normalizedCenter:renderedBounds.getCenter(new T.Vector3()),hb:label.querySelector('.hb'),hbOn:false,from:home.clone(),to:home.clone(),fromScale:size,toScale:size,start:0,duration:0,fromQuat:new T.Quaternion(),toQuat:new T.Quaternion(),hoverAmount:0};root.traverse(m=>{if(m.isMesh)m.userData.organ=o;});label.onclick=()=>select(o,label);label.onpointerenter=()=>{if(fine.matches)hover=o;};label.onpointerleave=()=>{hover=null;};
+mountAstralOrgan(o,model,network);
 o.processNeurons=createProcessNeurons(o,network,REAL[id].stages,$('#process-neurons'));network.visible=false;geometry.dispose();organs.push(o);$('#load-message').textContent=`Preparing ${organ.toLowerCase()}…`;}
 ready=true;resize();document.fonts.ready.then(resize);$('#loading').hidden=true;addEventListener('resize',resize);new ResizeObserver(()=>{if($('#experience').clientHeight!==h)resize();}).observe($('#experience'));frame(performance.now());
 }catch(error){fail(error);}}
@@ -230,7 +234,7 @@ const visible=separation>.55&&!selected;const labelAlpha=T.MathUtils.smoothstep(
 o.label.style.visibility=visible?'visible':'hidden';o.label.style.opacity=visible?String(labelAlpha):'0';o.label.tabIndex=visible?0:-1;if(o.hb){if(!o.hbOn&&visible&&labelAlpha>=.6){o.hbOn=true;o.hb.classList.add('on');}else if(o.hbOn&&separation<.5){o.hbOn=false;o.hb.classList.remove('on');}}
 }
 for(const o of organs)updateProcessNeurons(o,selected===o&&(o.duration===0||now-o.start>o.duration*.85),camera,w,h,time,reduced.matches,detail);
-renderer.render(scene,camera);animation=requestAnimationFrame(frame);}
+astralRenderer.render(scene,camera,time,reduced.matches);animation=requestAnimationFrame(frame);}
 function hit(event){const rect=$('#scene').getBoundingClientRect();pointer.set((event.clientX-rect.left)/w*2-1,-(event.clientY-rect.top)/h*2+1);ray.setFromCamera(pointer,camera);return ray.intersectObjects(organs.map(o=>o.root),true).find(x=>x.object.visible&&x.object.userData.organ)?.object.userData.organ;}
 $('#assembly').addEventListener('input',e=>setSeparation(Number(e.target.value)/1000));$('#back').onclick=close;$('#retry').onclick=()=>location.reload();
 // Wheel/trackpad progress is continuous and reversible; no document scroll listener.
@@ -242,7 +246,7 @@ canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();cancelAnimatio
 for(const config of configs){const b=document.createElement('button');b.textContent=`Explore ${config[1]}`;b.className='keyboard-organ';b.onclick=()=>{const o=organs.find(o=>o.id===config[0]);if(o)select(o,b);};$('#experience').append(b);}
 init();
 
-addEventListener('pagehide',()=>{cancelAnimationFrame(animation);helpdesk.destroy();sceneObserver.disconnect();renderer?.dispose();scene?.traverse(o=>{if(o.geometry)o.geometry.dispose();if(o.material){const materials=Array.isArray(o.material)?o.material:[o.material];materials.forEach(m=>m.dispose());}});});
+addEventListener('pagehide',()=>{cancelAnimationFrame(animation);helpdesk.destroy();sceneObserver.disconnect();astralRenderer?.dispose();renderer?.dispose();scene?.traverse(o=>{if(o.geometry)o.geometry.dispose();if(o.material){const materials=Array.isArray(o.material)?o.material:[o.material];materials.forEach(m=>m.dispose());}});});
 
 
 function updateTelemetryHUD(id) {

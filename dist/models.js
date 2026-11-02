@@ -33,9 +33,9 @@ void main() {
   vec3 tint = mix(color, highlight, pow(rim, 3.0) * 0.6);
   gl_FragColor = vec4(sqrt(tint) * light * 1.35, strength * (fill + 0.18 * broad + 0.86 * rim));
 }`;
-function material(strength, color = 0xf5dfd9, rimPower = 3.8) {
+function material(strength, color = 0xe4eaf5, rimPower = 3.8) {
   return new THREE.ShaderMaterial({
-    uniforms: { color: { value: new THREE.Color(color) }, strength: { value: strength }, rimPower: { value: rimPower }, highlight: { value: new THREE.Color(1, 0.94, 0.91) }, fill: { value: 0.06 } },
+    uniforms: { color: { value: new THREE.Color(color) }, strength: { value: strength }, rimPower: { value: rimPower }, highlight: { value: new THREE.Color(0.92, 0.97, 1) }, fill: { value: 0.06 } },
     vertexShader, fragmentShader, transparent: true,
     blending: THREE.AdditiveBlending, depthWrite: false, depthTest: false,
     side: THREE.DoubleSide,
@@ -43,12 +43,12 @@ function material(strength, color = 0xf5dfd9, rimPower = 3.8) {
 }
 const materials = {
   cortex: material(0.85),
-  cerebellum: material(0.22, 0xf1dcd5, 3.3),
-  brainstem: material(0.35, 0xf5e3dc, 3.2),
-  white_matter: material(0.22, 0xfff3ec, 3.2),
-  ventricles: material(0.24, 0xffeee7, 3.4),
-  diencephalon: material(0.10, 0xf0dad4),
-  deep_grey: material(0.085, 0xedd6cf),
+  cerebellum: material(0.22, 0xdce4f1, 3.3),
+  brainstem: material(0.35, 0xe3eaf5, 3.2),
+  white_matter: material(0.22, 0xf3f7ff, 3.2),
+  ventricles: material(0.24, 0xeef4ff, 3.4),
+  diencephalon: material(0.10, 0xdae2f0),
+  deep_grey: material(0.085, 0xd6dfed),
 };
 materials.cortex.depthTest = true;
 materials.cortex.side = THREE.FrontSide;
@@ -104,7 +104,7 @@ export async function loadReplacement(id) {
   });
   // A colorless nearest-surface pass keeps gyri readable. Interior layers are
   // drawn first and remain visible beneath the luminous cortical surface.
-  const brainBody = bodyMaterial(0xd89daf);
+  const brainBody = bodyMaterial(0xb2b9dc);
   for (const mesh of corticalMeshes) {
     const depth = new THREE.Mesh(mesh.geometry, cortexDepth);
     depth.renderOrder = 2;
