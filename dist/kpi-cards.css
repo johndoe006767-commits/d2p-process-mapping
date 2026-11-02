@@ -211,8 +211,7 @@
 #tower-telemetry-hud .hud-summary-title{font-size:16px;line-height:1.333;font-weight:400;margin:0 0 8px;color:var(--kpi-muted)}
 #tower-telemetry-hud .hud-header-footer{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:12px}
 #tower-telemetry-hud .hud-header-footer .hud-subtitle{margin:0;flex:none;font-weight:600}
-#tower-telemetry-hud .hud-pain{display:flex;align-items:center;gap:7px;padding-left:18px;border-left:1px solid var(--kpi-rule);font-size:12px;line-height:1.4;white-space:nowrap}
-#tower-telemetry-hud .hud-pain strong{font-size:20px;line-height:1.2;font-weight:600;font-variant-numeric:tabular-nums}
+#tower-telemetry-hud .hud-pain{padding-left:22px;border-left:1px solid var(--kpi-rule);white-space:nowrap}
 .kpi-dot.pain{background:#830051}
 #section-1 .label.card .kpi-pain{display:inline-flex;align-items:center;gap:4px;font:inherit;color:inherit}
 #section-1 .label.card .kpi-pain b{font-weight:600;font-variant-numeric:tabular-nums}
@@ -320,3 +319,13 @@ body[data-detail=true] #experience{min-height:var(--tower-detail-height,100dvh)}
 @supports selector(::-webkit-scrollbar){#tower-telemetry-hud .hud-scroll{scrollbar-width:auto;scrollbar-color:auto}}
 @media(min-width:2500px) and (min-height:1200px){#tower-telemetry-hud{--hud-scale:1.5}}
 @media(max-width:1099px){#tower-telemetry-hud{max-height:calc(100dvh - 96px)}}
+
+/* Both source metrics use the same label/value hierarchy. */
+#tower-telemetry-hud .hud-manual{flex-wrap:wrap;row-gap:14px}
+#tower-telemetry-hud .hud-score{display:inline-flex;align-items:baseline;font-variant-numeric:tabular-nums}
+#section-1 .label.card .hb-manual{display:flex;align-items:baseline;gap:7px;font-size:11px;line-height:1.4}
+#section-1 .label.card .hb-manual>span{font:inherit;color:inherit}
+#section-1 .label.card .hb-manual b{font:inherit;font-weight:600;font-variant-numeric:tabular-nums}
+#section-1 .label.card .kpi-divider{padding:0}
+@media(min-width:2500px) and (min-height:1200px){#section-1 .label.card .hb-manual{font-size:17px}}
+@media(max-width:767px){#section-1 .label.card .hb-manual{font-size:10px;gap:4px;flex-wrap:wrap}}

@@ -1,0 +1,13 @@
+/* An unlabelled icon visually, with an explicit accessible name and state. */
+#display-fullscreen{position:fixed;z-index:210;top:18px;right:24px;width:clamp(44px,2vw,64px);height:clamp(44px,2vw,64px);display:grid;place-items:center;padding:10px;border:1px solid #9674a366;border-radius:10px;background:#30203ed9;color:#f6f1f5;line-height:1}
+#display-fullscreen svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+#display-fullscreen .fullscreen-exit{display:none}
+#display-fullscreen[aria-pressed=true] .fullscreen-enter{display:none}
+#display-fullscreen[aria-pressed=true] .fullscreen-exit{display:block}
+#display-fullscreen:focus-visible{outline:2px solid #efd2e8;outline-offset:4px}
+@media(hover:hover){#display-fullscreen:hover{background:#493153;border-color:#c6a6d2}}
+#display-status{position:fixed;z-index:211;top:90px;right:24px;max-width:340px;padding:14px 18px;border:1px solid #9674a3;border-radius:10px;background:#30203e;color:#f6f1f5;font-size:14px;line-height:1.5}
+body[data-fullscreen-control=true] #detail #back{right:100px}
+body[data-fullscreen-control=true] #helpdesk .helpdesk-back{right:100px}
+body[data-fullscreen-control=true] #process-workspace .mast{padding-right:80px}
+body[data-fullscreen-control=true] #tower-workbench .tw-page-heading{padding-right:80px}

@@ -15,6 +15,8 @@ const TOWER_NAMES = {
   intestines: 'Order to Cash',
 };
 export const towerNameFor = id => TOWER_NAMES[id] || id;
+const OVERVIEW_NAMES={brain:'FP&A Commercial',pancreas:'FP&A Operations',liver:'CAPEX',kidneys:'Controlling'};
+export const overviewNameFor=id=>OVERVIEW_NAMES[id]||towerNameFor(id);
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
 export function metricsSentence(brief, metrics, painCount) {
@@ -26,7 +28,7 @@ export function metricsSentence(brief, metrics, painCount) {
 export function cardMarkup(brief, metrics, painCount) {
   const populated=brief.status==='populated';
   const percent=metrics.asIs.total?Math.round(metrics.asIs.manual/metrics.asIs.total*100):0;
-  return `<span class="hb hb-brief" aria-hidden="true"><span class="hb-manual">${percent}% manual · As Is <span class="kpi-divider">|</span> <span class="kpi-pain">Pain Points <i class="kpi-dot pain"></i><b>${painCount}</b></span></span>${comparisonMarkup(metrics.asIs,metrics.toBe)}<span class="hb-year"><span>2026 TPI</span><b>${populated?brief.projects['2026'].length:'—'}</b></span><span class="hb-year"><span>2027 AI Suggested TPI</span><b>${populated?brief.projects['2027'].length:'—'}</b></span></span>`;
+  return `<span class="hb hb-brief" aria-hidden="true"><span class="hb-manual"><span class="kpi-manual"><b>${percent}%</b> manual · As Is</span><span class="kpi-divider">|</span><span class="kpi-pain">Pain Points <b>${painCount}</b></span></span>${comparisonMarkup(metrics.asIs,metrics.toBe)}<span class="hb-year"><span>2026 TPI</span><b>${populated?brief.projects['2026'].length:'—'}</b></span><span class="hb-year"><span>2027 AI Suggested TPI</span><b>${populated?brief.projects['2027'].length:'—'}</b></span></span>`;
 }
 
 export function comparisonMarkup(asIs,toBe,includeLegend=true){
