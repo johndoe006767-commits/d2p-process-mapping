@@ -2,7 +2,7 @@ import {setScenario} from './process-scenario.js';
 import {cancelPageNavigation} from './page-navigation.js';
 import {REAL,KPI,escapeHTML as esc} from './real-data.js';
 import {CARD_BRIEFS,CARD_SOURCE} from './tower-briefs.js';
-import {comparisonMarkup} from './health.js?v=20261030-typography-1';
+import {comparisonMarkup} from './health.js?v=20261102-summary';
 import {openDashboard,closeDashboard,configureDashboard,destroyDashboard} from './tower-dashboard.js';
 import {prepareNeural,clearNeural} from './neural-loader.js?v=typography-1';
 import {titleCase,normalizeHeadings} from './title-case.js';
@@ -62,6 +62,8 @@ function renderKpiContext(id){
  $('#hud-score-pct').textContent=Math.round(metrics.asIs.manual/metrics.asIs.total*100);
  $('#hud-score-unit').hidden=false;
  $('.hud-score').title=`${metrics.asIs.manual} manual / ${metrics.asIs.total} As Is activities × 100`;
+ $('#hud-pain-count').textContent=REAL[id].counts.pain;
+ $('.hud-pain').title=`${REAL[id].counts.pain} documented As Is pain points`;
  $('#hud-comparison').innerHTML=comparisonMarkup(metrics.asIs,metrics.toBe,false);
  $('#hud-dependencies').innerHTML=populated?`<ul class="hud-dependency-list">${brief.dependencies.map((d,i)=>`<li><button type="button" data-dependency="${i}" aria-label="View ${esc(d.tower)} dependency"><span class="hud-dependency-copy"><strong>${esc(d.tower)}</strong><span>${esc(d.description)}</span></span><svg class="ico" aria-hidden="true"><use href="#i-ne"/></svg></button></li>`).join('')}</ul>`:'<p class="hud-empty">Awaiting tower data</p>';
  $('#hud-dependencies').querySelectorAll('[data-dependency]').forEach(button=>button.onclick=()=>{

@@ -1,5 +1,5 @@
 /* Tower summaries: aligned state comparison and source-backed context. */
-#tower-telemetry-hud{--kpi-muted:#ccbcd3;--kpi-rule:#725481;--kpi-auto:#82cfb8;--kpi-semi:#e2bc73;--kpi-manual:#d791ac;width:520px;max-width:calc(100% - 48px);padding:24px;max-height:none;overflow:visible;background:#30203ef5;background-image:none;border:1px solid var(--kpi-rule);border-radius:16px;box-shadow:none;zoom:1}
+#tower-telemetry-hud{--kpi-muted:#ccbcd3;--kpi-rule:#725481;--kpi-auto:#68d2df;--kpi-semi:#f0ab00;--kpi-manual:#830051;width:520px;max-width:calc(100% - 48px);padding:24px;max-height:none;overflow:visible;background:#30203ef5;background-image:none;border:1px solid var(--kpi-rule);border-radius:16px;box-shadow:none;zoom:1}
 #tower-telemetry-hud .hud-header{display:block;margin:0 0 18px}
 #tower-telemetry-hud .hud-tower-name{font-size:26px;line-height:1.18;letter-spacing:-.025em}
 #tower-telemetry-hud .hud-subtitle{font-size:12px;line-height:1.4;margin:6px 0 0;color:var(--kpi-muted)}
@@ -20,12 +20,12 @@
 .hud-section-heading>span{font-size:11px;line-height:1.4;color:var(--kpi-muted)}
 .kpi-mix{display:block;font-variant-numeric:tabular-nums}
 .kpi-mix-head,.kpi-mix-row{display:grid;grid-template-columns:85px repeat(3,minmax(0,1fr));column-gap:12px;align-items:center}
-.kpi-mix-head{margin-bottom:8px;font-size:11px;color:var(--kpi-muted,#cabbcf)}
-.kpi-mix-head>span:not(:first-child){display:flex;align-items:center;justify-content:flex-end;gap:5px;white-space:nowrap}
+.kpi-mix-head{display:flex;justify-content:flex-start;gap:7px;padding-inline:7px;margin-bottom:8px;font-size:11px;color:var(--kpi-muted,#cabbcf)}
+.kpi-mix-head>span{display:flex;align-items:center;gap:5px;white-space:nowrap}
 .kpi-dot{display:inline-block;width:6px;height:6px;border-radius:50%;flex:none}
-.kpi-dot.auto,.kpi-stack .auto{background:var(--kpi-auto,#82cfb8)}
-.kpi-dot.semi,.kpi-stack .semi{background:var(--kpi-semi,#e2bc73)}
-.kpi-dot.manual,.kpi-stack .manual{background:var(--kpi-manual,#d791ac)}
+.kpi-dot.auto,.kpi-stack .auto{background:var(--kpi-auto,#68d2df)}
+.kpi-dot.semi,.kpi-stack .semi{background:var(--kpi-semi,#f0ab00)}
+.kpi-dot.manual,.kpi-stack .manual{background:var(--kpi-manual,#830051)}
 .kpi-state{font-size:13px;font-weight:550;line-height:1.3}
 .kpi-state small{display:block;font-size:10px;font-weight:400;color:var(--kpi-muted,#cabbcf);margin-top:2px}
 .kpi-number{font-size:22px;font-weight:500;line-height:1.2;text-align:right}
@@ -61,7 +61,7 @@
 #section-1 .label.card .hb-pulse{flex:1;min-width:0;width:0;height:18px;margin:0}
 #section-1 .label.card .kpi-mix-head,#section-1 .label.card .kpi-mix-row{grid-template-columns:42px repeat(3,minmax(0,1fr));column-gap:7px}
 #section-1 .label.card .kpi-mix-head{font-size:10px;margin-bottom:4px}
-#section-1 .label.card .kpi-mix-head>span:not(:first-child){gap:3px}
+#section-1 .label.card .kpi-mix-head>span{gap:3px}
 #section-1 .label.card .kpi-dot{width:4px;height:4px}
 #section-1 .label.card .kpi-state{font-size:11px}
 #section-1 .label.card .kpi-number{font-size:18px}
@@ -206,9 +206,23 @@
 #anatomy-brand img{transform:translateX(-10px)}
 #detail #back{left:auto;right:32px;top:18px;z-index:21;padding:0;min-height:44px}
 #detail .process-status.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
-#tower-telemetry-hud .hud-header{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:18px;margin-bottom:20px}
+#tower-telemetry-hud .hud-header{display:block;margin-bottom:20px}
 #tower-telemetry-hud .hud-title-wrap{min-width:0}
+#tower-telemetry-hud .hud-summary-title{font-size:16px;line-height:1.333;font-weight:400;margin:0 0 8px;color:var(--kpi-muted)}
+#tower-telemetry-hud .hud-header-footer{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:12px}
+#tower-telemetry-hud .hud-header-footer .hud-subtitle{margin:0;flex:none;font-weight:600}
+#tower-telemetry-hud .hud-pain{display:flex;align-items:center;gap:7px;padding-left:18px;border-left:1px solid var(--kpi-rule);font-size:12px;line-height:1.4;white-space:nowrap}
+#tower-telemetry-hud .hud-pain strong{font-size:20px;line-height:1.2;font-weight:600;font-variant-numeric:tabular-nums}
+.kpi-dot.pain{background:#830051}
+#section-1 .label.card .kpi-pain{display:inline-flex;align-items:center;gap:4px;font:inherit;color:inherit}
+#section-1 .label.card .kpi-pain b{font-weight:600;font-variant-numeric:tabular-nums}
+#section-1 .label.card .kpi-divider{padding-inline:4px;color:var(--kpi-muted,#cabbcf);font:inherit}
+#section-1 .label.card .kpi-mix-head{column-gap:7px}
 #tower-telemetry-hud .hud-actions{align-items:center;margin:0;justify-self:end}
+@media(min-width:768px){
+ #tower-telemetry-hud .hud-header-footer{flex-direction:column;align-items:flex-start;gap:14px;margin-top:6px}
+ #tower-telemetry-hud .hud-header-footer .hud-actions{justify-content:flex-start}
+}
 #tower-telemetry-hud .hud-context-grid .hud-section-heading{margin-bottom:10px}
 @media(min-width:1100px){
  #tower-telemetry-hud{width:min(600px,44vw);top:50%;transform:translateY(-50%)}
@@ -230,9 +244,9 @@
 }
 
 /* Original card composition, extended with workbook descriptions and year selection. */
-#tower-telemetry-hud .hud-mix-heading{display:flex;align-items:center;justify-content:space-between;gap:20px}
+#tower-telemetry-hud .hud-mix-heading{display:flex;align-items:center;justify-content:flex-start;gap:20px}
 #tower-telemetry-hud .hud-mix-heading h4{flex:none}
-.hud-mix-legend{display:flex;align-items:center;justify-content:space-between;gap:18px;flex:1;max-width:340px;color:var(--kpi-muted);font-size:11px;line-height:1.4}
+.hud-mix-legend{display:flex;align-items:center;justify-content:flex-start;gap:calc(7px / var(--hud-scale,1));padding-inline:calc(7px / var(--hud-scale,1));color:var(--kpi-muted);font-size:11px;line-height:1.4}
 .hud-mix-legend>span{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
 #tower-telemetry-hud .kpi-mix-row{grid-template-columns:66px minmax(0,1fr);gap:12px;min-height:24px}
 #tower-telemetry-hud .kpi-state{grid-row:auto}
@@ -264,7 +278,8 @@
 #tower-telemetry-hud [role=tabpanel]:focus-visible{outline:2px solid #efc8e8;outline-offset:3px}
 #section-1 .label.card .hb-manual{display:block;font-size:11px;line-height:1.4;color:#f0c4dc}
 #section-1 .label.card .kpi-mix-row{grid-template-columns:32px minmax(0,1fr);gap:6px;min-height:18px}
-#section-1 .label.card .kpi-state{grid-row:auto}
+#section-1 .label.card .kpi-state{grid-row:auto;white-space:nowrap}
+@media(min-width:768px){#section-1 .label.card .kpi-mix-row{grid-template-columns:48px minmax(0,1fr)}}
 #section-1 .label.card .kpi-stack{margin:0}
 #section-1 .label.card .hb-year{display:flex;align-items:baseline;justify-content:space-between;gap:12px;font-size:11px;line-height:1.7;color:#d3c2dc}
 #section-1 .label.card .hb-year b{font-size:12px;font-weight:550;color:#f6e6f3;font-variant-numeric:tabular-nums}

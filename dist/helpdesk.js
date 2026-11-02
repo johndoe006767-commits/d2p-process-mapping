@@ -7,28 +7,28 @@ export function createHelpdesk(host, {onOpen, onClose}) {
   root.id = 'helpdesk';
   root.dataset.available = 'false';
   root.innerHTML = `
-    <button class="helpdesk-launcher" type="button" aria-label="Explore GFS Finance Helpdesk" aria-controls="helpdesk-detail" disabled>
+    <button class="helpdesk-launcher" type="button" aria-label="Explore GFS Finance Operations Support" aria-controls="helpdesk-detail" disabled>
       <span class="helpdesk-art">
         <img class="helpdesk-full" src="assets/helpdesk/nurse-full.png" alt="" decoding="async" draggable="false">
         <img class="helpdesk-portrait" src="assets/helpdesk/nurse-portrait.png" alt="" decoding="async" draggable="false">
       </span>
-      <span class="helpdesk-dock-label">GFS Helpdesk</span>
+      <span class="helpdesk-dock-label"><span>GFS Finance</span><span>Operations Support</span></span>
     </button>
-    <aside class="helpdesk-preview" aria-label="Helpdesk KPI Preview" hidden>
-      <h2>GFS Finance Helpdesk</h2>
+    <aside class="helpdesk-preview" aria-label="Finance Operations Support KPI Preview" hidden>
+      <h2>GFS Finance Operations Support</h2>
       <p>Placeholder Data</p>
       <dl><div><dt>KPI Name</dt><dd>—</dd></div><div><dt>KPI Name</dt><dd>—</dd></div><div><dt>KPI Name</dt><dd>—</dd></div></dl>
-      <button type="button" class="helpdesk-preview-open">View Helpdesk <svg class="ico" aria-hidden="true"><use href="#i-ne"/></svg></button>
+      <button type="button" class="helpdesk-preview-open">View Operations Support <svg class="ico" aria-hidden="true"><use href="#i-ne"/></svg></button>
     </aside>
     <section id="helpdesk-detail" aria-labelledby="helpdesk-title" hidden>
       <button type="button" class="helpdesk-back"><svg class="ico" aria-hidden="true"><use href="#i-left"/></svg>Back to Overview</button>
       <div class="helpdesk-hero" aria-hidden="true">
         <img class="helpdesk-hero-full" src="assets/helpdesk/nurse-full.png" alt="" draggable="false">
         <img class="helpdesk-hero-portrait" src="assets/helpdesk/nurse-portrait.png" alt="" draggable="false">
-        <div class="helpdesk-caption"><strong>GFS Finance Helpdesk</strong><span>Service Support</span></div>
+        <div class="helpdesk-caption"><strong>GFS Finance Operations Support</strong><span>Service Support</span></div>
       </div>
       <div class="helpdesk-dashboard">
-        <div class="helpdesk-heading"><div><h1 id="helpdesk-title">GFS Finance Helpdesk</h1><p>Placeholder Data · Reporting Period</p></div><label class="helpdesk-period">Period<select aria-label="Helpdesk Reporting Period" disabled><option>Reporting Period</option></select></label></div>
+        <div class="helpdesk-heading"><div><h1 id="helpdesk-title">GFS Finance Operations Support</h1><p>Placeholder Data · Reporting Period</p></div><label class="helpdesk-period">Period<select aria-label="Operations Support Reporting Period" disabled><option>Reporting Period</option></select></label></div>
         <dl class="helpdesk-metrics">
           <div><dt>Requests Received</dt><dd>—</dd></div><div><dt>Open Requests</dt><dd>—</dd></div><div><dt>Resolved Requests</dt><dd>—</dd></div><div><dt>SLA Compliance</dt><dd>—</dd></div>
         </dl>

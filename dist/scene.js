@@ -1,14 +1,14 @@
 import * as T from 'three';
 import {REAL,KPI} from './real-data.js';
 import {CARD_BRIEFS} from './tower-briefs.js';
-import {bindTower,initExperience,hideMap,openMap} from './real-experience.js?v=20261030-typography-1';
+import {bindTower,initExperience,hideMap,openMap} from './real-experience.js?v=20261102-summary';
 import {createProcessNeurons,updateProcessNeurons} from './process-neurons.js?v=20261030-typography-1';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
 import {loadReplacement} from './models.js';
 import {buildVesselNetwork} from './vessels.js';
 import {mountAstralOrgan,mountAstralSkeleton,mountAstralVessel,createAstralRenderer} from './astral-anatomy.js';
-import {cardMarkup,metricsSentence,accentFor} from './health.js?v=20261030-typography-1';
-import {createHelpdesk} from './helpdesk.js?v=kpi-clearance';
+import {cardMarkup,metricsSentence,accentFor,towerNameFor} from './health.js?v=20261102-summary';
+import {createHelpdesk} from './helpdesk.js?v=20261102-support';
 const $=s=>document.querySelector(s);
 const configs=[['brain','FP&A Commercial','Brain',-1,0,.18],['liver','CAPEX','Liver',-1,1,.25],['kidneys','Controlling','Kidneys',-1,2,.23],['spleen','Tax','Spleen',-1,3,.12],['lungs','R2R','Lungs',1,0,.32],['stomach','P2P','Stomach',1,1,.17],['pancreas','FP&A Operations','Pancreas',1,2,.20],['intestines','O2C','Intestines',1,3,.29]];
 document.addEventListener('visibilitychange',()=>document.body.classList.toggle('page-hidden',document.hidden));
@@ -155,7 +155,7 @@ root.updateMatrixWorld(true);
 const renderedBounds=new T.Box3(),vertex=new T.Vector3();
 model.traverseVisible(mesh=>{if(!mesh.isMesh)return;const positions=mesh.geometry.getAttribute('position');if(!positions)return;for(let i=0;i<positions.count;i++){vertex.fromBufferAttribute(positions,i).applyMatrix4(mesh.matrixWorld);renderedBounds.expandByPoint(vertex);}});
 root.position.copy(home);root.scale.setScalar(size);scene.add(root);
-const label=document.createElement('button');const m=CARD_BRIEFS[id];label.className=`label ${side<0?'left':'right'}${m?' card':''}`;if(m)label.style.setProperty('--accent-c',accentFor(id));label.innerHTML=`<small>${organ}</small><strong>${name}</strong>${m?cardMarkup(m,KPI[id]):''}<span class="cta">Explore tower<svg class="ico ico-ne" aria-hidden="true"><use href="#i-ne"/></svg></span>`;label.setAttribute('aria-label',`Explore ${name}, ${organ}.${m?' '+metricsSentence(m,KPI[id]):''}`);$('#labels').append(label);
+const label=document.createElement('button');const m=CARD_BRIEFS[id];label.className=`label ${side<0?'left':'right'}${m?' card':''}`;if(m)label.style.setProperty('--accent-c',accentFor(id));label.innerHTML=`<small>${organ}</small><strong>${towerNameFor(id)}</strong>${m?cardMarkup(m,KPI[id],REAL[id].counts.pain):''}<span class="cta">Explore tower<svg class="ico ico-ne" aria-hidden="true"><use href="#i-ne"/></svg></span>`;label.setAttribute('aria-label',`Explore ${towerNameFor(id)}, ${organ}.${m?' '+metricsSentence(m,KPI[id],REAL[id].counts.pain):''}`);$('#labels').append(label);
 const o={id,name,organ,side,row,size,root,home,label,m,normalizedSize:renderedBounds.getSize(new T.Vector3()),normalizedCenter:renderedBounds.getCenter(new T.Vector3()),hb:label.querySelector('.hb'),hbOn:false,from:home.clone(),to:home.clone(),fromScale:size,toScale:size,start:0,duration:0,fromQuat:new T.Quaternion(),toQuat:new T.Quaternion(),hoverAmount:0};root.traverse(m=>{if(m.isMesh)m.userData.organ=o;});label.onclick=()=>select(o,label);label.onpointerenter=()=>{if(fine.matches)hover=o;};label.onpointerleave=()=>{hover=null;};
 mountAstralOrgan(o,model,network);
 o.processNeurons=createProcessNeurons(o,network,REAL[id].stages,$('#process-neurons'));network.visible=false;geometry.dispose();organs.push(o);$('#load-message').textContent=`Preparing ${organ.toLowerCase()}…`;}
@@ -243,16 +243,15 @@ const canvas=$('#scene');canvas.addEventListener('pointerdown',e=>{if(!ready||e.
 addEventListener('keydown',e=>{if(e.defaultPrevented||!$('#tower-workbench').hidden||!$('#process-workspace').hidden)return;if(e.key==='Escape'&&e.target.closest?.('#process-workspace'))return;if(e.key==='Escape')close();if(selected&&e.target===canvas&&['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)){e.preventDefault();selected.duration=0;selected.root.quaternion.premultiply(new T.Quaternion().setFromEuler(new T.Euler(e.key==='ArrowUp'?-.15:e.key==='ArrowDown'?.15:0,e.key==='ArrowLeft'?-.15:e.key==='ArrowRight'?.15:0,0)));selected.rotationTarget.copy(selected.root.quaternion);}});
 canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();cancelAnimationFrame(animation);fail(new Error('WebGL context lost'));});
 // Keyboard users can explore each organ in either view, without visual label overlap.
-for(const config of configs){const b=document.createElement('button');b.textContent=`Explore ${config[1]}`;b.className='keyboard-organ';b.onclick=()=>{const o=organs.find(o=>o.id===config[0]);if(o)select(o,b);};$('#experience').append(b);}
+for(const config of configs){const b=document.createElement('button');b.textContent=`Explore ${towerNameFor(config[0])}`;b.className='keyboard-organ';b.onclick=()=>{const o=organs.find(o=>o.id===config[0]);if(o)select(o,b);};$('#experience').append(b);}
 init();
 
 addEventListener('pagehide',()=>{cancelAnimationFrame(animation);helpdesk.destroy();sceneObserver.disconnect();astralRenderer?.dispose();renderer?.dispose();scene?.traverse(o=>{if(o.geometry)o.geometry.dispose();if(o.material){const materials=Array.isArray(o.material)?o.material:[o.material];materials.forEach(m=>m.dispose());}});});
 
 
 function updateTelemetryHUD(id) {
-  $('#hud-tower-title').textContent=REAL[id].name;
-  const descriptions={brain:'Financial planning & analysis · Commercial',pancreas:'Financial planning & analysis · Operations',liver:'Capital expenditure',kidneys:'Financial controlling',spleen:'Tax',lungs:'Record to report',stomach:'Procure to pay',intestines:'Order to cash'};
-  $('#hud-tower-subtitle').textContent=descriptions[id];
+  $('#hud-tower-title').textContent=towerNameFor(id);
+  $('#hud-tower-subtitle').textContent=REAL[id].sourceKey;
 }
 
 
