@@ -24,7 +24,7 @@
             "direction": "in",
             "party": "FP&A Ops (Product Costing)",
             "detail": "SCC rate per SKU (via FET)",
-            "source": "As documented by FP&A Commercial (E2E simplified v3 / CAPEX planning)"
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-FPAC"
           }
         ],
         "rank": 1
@@ -32,7 +32,7 @@
     ],
     "projects": [
       {
-        "name": "FAST+",
+        "name": "FAST+ tool (FST)",
         "entries": [
           0,
           1,
@@ -54,14 +54,12 @@
           17,
           18
         ],
-        "sourceCount": 10,
-        "aiCount": 9,
-        "months": [
-          "June"
-        ]
+        "sourceCount": 15,
+        "aiCount": 4,
+        "months": []
       },
       {
-        "name": "P&L Data House / reporting",
+        "name": "P&L reporting (PNL)",
         "entries": [
           19,
           20,
@@ -96,14 +94,12 @@
           49,
           50
         ],
-        "sourceCount": 15,
-        "aiCount": 17,
-        "months": [
-          "September"
-        ]
+        "sourceCount": 26,
+        "aiCount": 6,
+        "months": []
       }
     ],
-    "source": "D2P-process-maps-MERGED.html#src-FPAC"
+    "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-FPAC"
   },
   "pancreas": {
     "asIs": {
@@ -130,7 +126,7 @@
             "direction": "in",
             "party": "CAPEX",
             "detail": "Depreciation forecast",
-            "source": "As mapped on the FP&A Ops As-Is map (LT feedback applied, Oct 2026)"
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-FPAO"
           },
           {
             "flowId": "FPAO-05",
@@ -138,7 +134,7 @@
             "direction": "in",
             "party": "CAPEX",
             "detail": "Depreciation and amortisation run",
-            "source": "As mapped on the FP&A Ops As-Is map (LT feedback applied, Oct 2026)"
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-FPAO"
           }
         ],
         "rank": 1
@@ -154,7 +150,7 @@
             "direction": "in",
             "party": "P2P",
             "detail": "Coupa PO / non-PO and T&E cut-off",
-            "source": "As mapped on the FP&A Ops As-Is map (LT feedback applied, Oct 2026)"
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-FPAO"
           }
         ],
         "rank": 2
@@ -170,15 +166,15 @@
             "direction": "in",
             "party": "R2R",
             "detail": "Sub-module close (FA, AP, AR); accruals; lease; ICT",
-            "source": "As mapped on the FP&A Ops As-Is map (LT feedback applied, Oct 2026)"
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-FPAO"
           }
         ],
-        "rank": 2
+        "rank": 3
       }
     ],
     "projects": [
       {
-        "name": "Agent Rhy · APAC MI Pack",
+        "name": "Agent Rhy · APAC MI Pack consolidation (RHY)",
         "entries": [
           0,
           1,
@@ -213,14 +209,12 @@
           30,
           31
         ],
-        "sourceCount": 15,
-        "aiCount": 17,
-        "months": [
-          "September"
-        ]
+        "sourceCount": 14,
+        "aiCount": 18,
+        "months": []
       },
       {
-        "name": "Site Cost & FTE Dashboard",
+        "name": "APAC Site Cost & FTE Dashboard (FPA)",
         "entries": [
           32,
           33,
@@ -247,14 +241,12 @@
           54,
           55
         ],
-        "sourceCount": 18,
-        "aiCount": 6,
-        "months": [
-          "July"
-        ]
+        "sourceCount": 16,
+        "aiCount": 8,
+        "months": []
       }
     ],
-    "source": "D2P-process-maps-MERGED.html#src-FPAO"
+    "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-FPAO"
   },
   "liver": {
     "asIs": {
@@ -265,8 +257,8 @@
     },
     "toBe": {
       "auto": 4,
-      "semi": 39,
-      "manual": 32,
+      "semi": 25,
+      "manual": 46,
       "total": 75
     },
     "dependencies": [
@@ -281,7 +273,7 @@
             "direction": "in",
             "party": "P2P-02 Invoice Management",
             "detail": "POs, goods receipts and invoices against WBSE",
-            "source": "As documented in the CAPEX process register v5"
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-CAPEX"
           },
           {
             "flowId": "CAPEX-02",
@@ -289,7 +281,7 @@
             "direction": "in",
             "party": "P2P-01 Perform Goods & Services Receipt",
             "detail": "Goods receipts against project WBSE",
-            "source": "As documented in the CAPEX process register v5"
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-CAPEX"
           }
         ],
         "rank": 1
@@ -297,7 +289,7 @@
     ],
     "projects": [
       {
-        "name": "Global Fixed Assets dashboard",
+        "name": "CAPEX",
         "entries": [
           0,
           1,
@@ -335,14 +327,12 @@
           33,
           34
         ],
-        "sourceCount": 21,
-        "aiCount": 14,
-        "months": [
-          "August"
-        ]
+        "sourceCount": 24,
+        "aiCount": 11,
+        "months": []
       }
     ],
-    "source": "D2P-process-maps-MERGED.html#src-CAPEX"
+    "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-CAPEX"
   },
   "stomach": {
     "asIs": {
@@ -360,7 +350,7 @@
     "dependencies": [
       {
         "id": "intestines",
-        "name": "O2C",
+        "name": "Order to Cash",
         "count": 6,
         "evidence": [
           {
@@ -369,7 +359,7 @@
             "direction": "in",
             "party": "O2C-03 Cash & Banking",
             "detail": "Payment confirmation / ACK file",
-            "source": "As documented in the CAPEX process register v5"
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-P2P"
           },
           {
             "flowId": "P2P-03",
@@ -377,7 +367,7 @@
             "direction": "in",
             "party": "O2C-03 Cash & Banking",
             "detail": "Rejected payment notification",
-            "source": "As documented in the CAPEX process register v5"
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-P2P"
           },
           {
             "flowId": "P2P-03",
@@ -385,7 +375,7 @@
             "direction": "in",
             "party": "O2C-03 Cash & Banking",
             "detail": "Incoming funds notification",
-            "source": "As documented in the CAPEX process register v5"
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-P2P"
           },
           {
             "flowId": "P2P-05",
@@ -393,7 +383,7 @@
             "direction": "in",
             "party": "O2C-03 Cash & Banking",
             "detail": "Debit posting",
-            "source": "As documented in the CAPEX process register v5"
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-P2P"
           },
           {
             "flowId": "P2P-03",
@@ -401,7 +391,7 @@
             "direction": "in",
             "party": "O2C-03 Cash & Banking",
             "detail": "Payment failure notification",
-            "source": "As documented in the CAPEX process register v5"
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-P2P"
           },
           {
             "flowId": "P2P-03",
@@ -409,7 +399,7 @@
             "direction": "in",
             "party": "O2C-03 Cash & Banking",
             "detail": "Payment confirmation and proof",
-            "source": "As documented in the CAPEX process register v5"
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-P2P"
           }
         ],
         "rank": 1
@@ -425,7 +415,7 @@
             "direction": "in",
             "party": "R2R-01 SAP Close",
             "detail": "Close calendar",
-            "source": "As documented in the CAPEX process register v5"
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-P2P"
           },
           {
             "flowId": "P2P-04",
@@ -433,26 +423,10 @@
             "direction": "in",
             "party": "R2R",
             "detail": "Coupa accrual and offset prepayment adjustment (China)",
-            "source": "As documented in the CAPEX process register v5"
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-P2P"
           }
         ],
         "rank": 2
-      },
-      {
-        "id": "kidneys",
-        "name": "Controlling",
-        "count": 1,
-        "evidence": [
-          {
-            "flowId": "P2P-04",
-            "flow": "4. Month-end close",
-            "direction": "in",
-            "party": "Controlling",
-            "detail": "BlackLine reconciliation calendar",
-            "source": "As documented in the CAPEX process register v5"
-          }
-        ],
-        "rank": 3
       },
       {
         "id": "spleen",
@@ -465,15 +439,31 @@
             "direction": "in",
             "party": "Tax",
             "detail": "Confirmed WHT treatment",
-            "source": "As documented in the CAPEX process register v5"
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-P2P"
           }
         ],
         "rank": 3
+      },
+      {
+        "id": "kidneys",
+        "name": "Controlling",
+        "count": 1,
+        "evidence": [
+          {
+            "flowId": "P2P-04",
+            "flow": "4. Month-end close",
+            "direction": "in",
+            "party": "Controlling",
+            "detail": "BlackLine reconciliation calendar",
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-P2P"
+          }
+        ],
+        "rank": 4
       }
     ],
     "projects": [
       {
-        "name": "Non-PO Accrual (APAC)",
+        "name": "P2P",
         "entries": [
           0,
           1,
@@ -511,17 +501,7 @@
           33,
           34,
           35,
-          36
-        ],
-        "sourceCount": 20,
-        "aiCount": 17,
-        "months": [
-          "August"
-        ]
-      },
-      {
-        "name": "BSR Automation",
-        "entries": [
+          36,
           37,
           38,
           39,
@@ -558,14 +538,12 @@
           70,
           71
         ],
-        "sourceCount": 19,
-        "aiCount": 16,
-        "months": [
-          "August"
-        ]
+        "sourceCount": 66,
+        "aiCount": 6,
+        "months": []
       }
     ],
-    "source": "D2P-process-maps-MERGED.html#src-P2P"
+    "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-P2P"
   },
   "intestines": {
     "asIs": {
@@ -575,8 +553,8 @@
       "total": 37
     },
     "toBe": {
-      "auto": 18,
-      "semi": 9,
+      "auto": 17,
+      "semi": 10,
       "manual": 10,
       "total": 37
     },
@@ -592,7 +570,7 @@
             "direction": "in",
             "party": "P2P",
             "detail": "AP-due invoice check",
-            "source": "As documented by O2C"
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-O2C"
           },
           {
             "flowId": "SOC-06.1",
@@ -600,26 +578,10 @@
             "direction": "in",
             "party": "P2P",
             "detail": "3rd party / intercompany vendor invoices",
-            "source": "As documented by O2C"
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-O2C"
           }
         ],
         "rank": 1
-      },
-      {
-        "id": "kidneys",
-        "name": "Controlling",
-        "count": 1,
-        "evidence": [
-          {
-            "flowId": "SOC-01.1",
-            "flow": "Flow 1 · EDI orders",
-            "direction": "in",
-            "party": "Controlling",
-            "detail": "Updates the price in SAP",
-            "source": "As documented by O2C"
-          }
-        ],
-        "rank": 2
       },
       {
         "id": "spleen",
@@ -632,23 +594,55 @@
             "direction": "in",
             "party": "Tax",
             "detail": "Tax payments",
-            "source": "As documented by O2C"
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-O2C"
           }
         ],
         "rank": 2
+      },
+      {
+        "id": "kidneys",
+        "name": "Controlling",
+        "count": 1,
+        "evidence": [
+          {
+            "flowId": "SOC-01.1",
+            "flow": "Flow 1 · EDI orders",
+            "direction": "in",
+            "party": "Controlling",
+            "detail": "Updates the price in SAP",
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-O2C"
+          }
+        ],
+        "rank": 3
       }
     ],
     "projects": [
       {
-        "name": "Payroll Payment Posting",
+        "name": "O2C process register Oct 2026 - CI / TPI column",
         "entries": [
           0,
           1,
           2,
           3,
           4,
-          5,
-          6,
+          5
+        ],
+        "sourceCount": 6,
+        "aiCount": 0,
+        "months": []
+      },
+      {
+        "name": "O2C feedback - Angie Lee (Oct 2026)",
+        "entries": [
+          6
+        ],
+        "sourceCount": 1,
+        "aiCount": 0,
+        "months": []
+      },
+      {
+        "name": "O2C Cash & Banking - Intracompany Fund Transfer (TPI Jun 2026)",
+        "entries": [
           7,
           8,
           9,
@@ -659,60 +653,69 @@
           14,
           15,
           16,
-          17,
-          18
+          17
         ],
-        "sourceCount": 13,
-        "aiCount": 6,
-        "months": [
-          "July"
-        ]
+        "sourceCount": 11,
+        "aiCount": 0,
+        "months": []
       },
       {
-        "name": "Intracompany Fund Transfer",
+        "name": "O2C - Payroll Payment Posting (TPI Jul 2026)",
         "entries": [
+          18,
           19,
           20,
           21,
           22,
           23,
-          24,
-          25,
+          24
+        ],
+        "sourceCount": 7,
+        "aiCount": 0,
+        "months": []
+      },
+      {
+        "name": "R2R - Payroll Interface (TPI Jun 2026)",
+        "entries": [
+          25
+        ],
+        "sourceCount": 1,
+        "aiCount": 0,
+        "months": []
+      },
+      {
+        "name": "P2P - BSR Automation, shared with O2C Cash & Banking (TPI Aug 2026)",
+        "entries": [
           26,
           27,
           28,
-          29,
-          30,
-          31,
-          32
+          29
         ],
-        "sourceCount": 8,
-        "aiCount": 6,
-        "months": [
-          "June"
-        ]
+        "sourceCount": 4,
+        "aiCount": 0,
+        "months": []
       }
     ],
-    "source": "D2P-process-maps-MERGED.html#src-O2C"
+    "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-O2C"
   },
   "spleen": {
     "asIs": {
-      "auto": 6,
+      "auto": 4,
       "semi": 0,
-      "manual": 91,
-      "total": 97
+      "manual": 73,
+      "total": 77
     },
     "toBe": {
-      "auto": 12,
-      "semi": 30,
-      "manual": 55,
-      "total": 97
+      "auto": 6,
+      "semi": 20,
+      "manual": 51,
+      "total": 77
     },
     "dependencies": [
       {
         "id": "lungs",
         "name": "R2R",
-        "count": 4,
+        "count": 3,
         "evidence": [
           {
             "flowId": "TAX-01.5",
@@ -720,7 +723,7 @@
             "direction": "in",
             "party": "R2R-01 SAP Close",
             "detail": "SAP Close",
-            "source": "As documented in the Tax SOPs and current-state maps"
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-TAX"
           },
           {
             "flowId": "TAX-02.2",
@@ -728,7 +731,7 @@
             "direction": "in",
             "party": "R2R-01 SAP Close",
             "detail": "SAP Close",
-            "source": "As documented in the Tax SOPs and current-state maps"
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-TAX"
           },
           {
             "flowId": "TAX-03.4",
@@ -736,42 +739,10 @@
             "direction": "in",
             "party": "R2R-01 SAP Close",
             "detail": "SAP Close",
-            "source": "As documented in the Tax SOPs and current-state maps"
-          },
-          {
-            "flowId": "TAX-04.1",
-            "flow": "1 · Quarterly CIT reporting calculation in the TRT",
-            "direction": "in",
-            "party": "R2R-03 Group Consolidation",
-            "detail": "ERH PBT and cash tax",
-            "source": "As documented in the Tax SOPs and current-state maps"
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-TAX"
           }
         ],
         "rank": 1
-      },
-      {
-        "id": "kidneys",
-        "name": "Controlling",
-        "count": 2,
-        "evidence": [
-          {
-            "flowId": "TAX-03.4",
-            "flow": "4 · VAT data gathering",
-            "direction": "in",
-            "party": "Controlling",
-            "detail": "sum netting report",
-            "source": "As documented in the Tax SOPs and current-state maps"
-          },
-          {
-            "flowId": "TAX-04.2",
-            "flow": "2 · Prior year adjustments (RTP) into the TRT",
-            "direction": "in",
-            "party": "Controlling",
-            "detail": "Reviewed RTP file",
-            "source": "As documented in the Tax SOPs and current-state maps"
-          }
-        ],
-        "rank": 2
       },
       {
         "id": "liver",
@@ -784,7 +755,23 @@
             "direction": "in",
             "party": "CAPEX-05 Depreciation",
             "detail": "Depreciation & Amortisation",
-            "source": "As documented in the Tax SOPs and current-state maps"
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-TAX"
+          }
+        ],
+        "rank": 2
+      },
+      {
+        "id": "kidneys",
+        "name": "Controlling",
+        "count": 1,
+        "evidence": [
+          {
+            "flowId": "TAX-03.4",
+            "flow": "4 · VAT data gathering",
+            "direction": "in",
+            "party": "Controlling",
+            "detail": "sum netting report",
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-TAX"
           }
         ],
         "rank": 3
@@ -792,7 +779,7 @@
     ],
     "projects": [
       {
-        "name": "Tax GL Analyzer · Capital Assets",
+        "name": "Tax",
         "entries": [
           0,
           1,
@@ -824,27 +811,67 @@
           27,
           28
         ],
-        "sourceCount": 29,
-        "aiCount": 0,
+        "sourceCount": 18,
+        "aiCount": 11,
         "months": []
       }
     ],
-    "source": "D2P-process-maps-MERGED.html#src-TAX"
+    "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-TAX"
   },
   "lungs": {
     "asIs": {
       "auto": 1,
-      "semi": 9,
-      "manual": 29,
+      "semi": 11,
+      "manual": 27,
       "total": 39
     },
     "toBe": {
       "auto": 4,
-      "semi": 16,
-      "manual": 19,
+      "semi": 14,
+      "manual": 21,
       "total": 39
     },
     "dependencies": [
+      {
+        "id": "intestines",
+        "name": "Order to Cash",
+        "count": 4,
+        "evidence": [
+          {
+            "flowId": "R2R-01.1",
+            "flow": "1 · Intercompany Month-End Close",
+            "direction": "in",
+            "party": "O2C",
+            "detail": "C2C billing release and trade AR",
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-R2R"
+          },
+          {
+            "flowId": "R2R-01.2",
+            "flow": "2 · Complete Month-End ERP Close",
+            "direction": "in",
+            "party": "O2C",
+            "detail": "Sales, billing and AR",
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-R2R"
+          },
+          {
+            "flowId": "R2R-02.1",
+            "flow": "1 · Prepare Legal Entity Financial Statements",
+            "direction": "in",
+            "party": "O2C",
+            "detail": "",
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-R2R"
+          },
+          {
+            "flowId": "R2R-03.1",
+            "flow": "1 · Reconcile GL and Sub-Ledger Accounts",
+            "direction": "in",
+            "party": "O2C",
+            "detail": "AR and C2C support",
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-R2R"
+          }
+        ],
+        "rank": 1
+      },
       {
         "id": "liver",
         "name": "CAPEX",
@@ -856,7 +883,7 @@
             "direction": "in",
             "party": "CAPEX",
             "detail": "Settlement, depreciation and lease journals",
-            "source": "As documented in the R2R GSOPs and the LT review of 13 Oct 2026"
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-R2R"
           },
           {
             "flowId": "R2R-02.1",
@@ -864,7 +891,7 @@
             "direction": "in",
             "party": "CAPEX",
             "detail": "FA and lease ERH files",
-            "source": "As documented in the R2R GSOPs and the LT review of 13 Oct 2026"
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-R2R"
           },
           {
             "flowId": "R2R-03.1",
@@ -872,66 +899,10 @@
             "direction": "in",
             "party": "CAPEX",
             "detail": "FA and lease recs",
-            "source": "As documented in the R2R GSOPs and the LT review of 13 Oct 2026"
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-R2R"
           }
         ],
-        "rank": 1
-      },
-      {
-        "id": "intestines",
-        "name": "O2C",
-        "count": 3,
-        "evidence": [
-          {
-            "flowId": "R2R-01.1",
-            "flow": "1 · Intercompany Month-End Close",
-            "direction": "in",
-            "party": "O2C",
-            "detail": "C2C billing release and trade AR",
-            "source": "As documented in the R2R GSOPs and the LT review of 13 Oct 2026"
-          },
-          {
-            "flowId": "R2R-01.2",
-            "flow": "2 · Complete Month-End ERP Close",
-            "direction": "in",
-            "party": "O2C",
-            "detail": "Sales, billing and AR",
-            "source": "As documented in the R2R GSOPs and the LT review of 13 Oct 2026"
-          },
-          {
-            "flowId": "R2R-03.1",
-            "flow": "1 · Reconcile GL and Sub-Ledger Accounts",
-            "direction": "in",
-            "party": "O2C",
-            "detail": "AR and C2C support",
-            "source": "As documented in the R2R GSOPs and the LT review of 13 Oct 2026"
-          }
-        ],
-        "rank": 1
-      },
-      {
-        "id": "kidneys",
-        "name": "Controlling",
-        "count": 2,
-        "evidence": [
-          {
-            "flowId": "R2R-01.2",
-            "flow": "2 · Complete Month-End ERP Close",
-            "direction": "in",
-            "party": "Controlling",
-            "detail": "Manual journals (MJV)",
-            "source": "As documented in the R2R GSOPs and the LT review of 13 Oct 2026"
-          },
-          {
-            "flowId": "R2R-02.1",
-            "flow": "1 · Prepare Legal Entity Financial Statements",
-            "direction": "in",
-            "party": "Controlling",
-            "detail": "Non-SAP units' data",
-            "source": "As documented in the R2R GSOPs and the LT review of 13 Oct 2026"
-          }
-        ],
-        "rank": 3
+        "rank": 2
       },
       {
         "id": "stomach",
@@ -944,7 +915,7 @@
             "direction": "in",
             "party": "P2P",
             "detail": "Coupa cut-off, AP invoices and accruals",
-            "source": "As documented in the R2R GSOPs and the LT review of 13 Oct 2026"
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-R2R"
           },
           {
             "flowId": "R2R-03.1",
@@ -952,10 +923,34 @@
             "direction": "in",
             "party": "P2P",
             "detail": "AP support",
-            "source": "As documented in the R2R GSOPs and the LT review of 13 Oct 2026"
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-R2R"
           }
         ],
         "rank": 3
+      },
+      {
+        "id": "kidneys",
+        "name": "Controlling",
+        "count": 2,
+        "evidence": [
+          {
+            "flowId": "R2R-01.2",
+            "flow": "2 · Complete Month-End ERP Close",
+            "direction": "in",
+            "party": "Controlling",
+            "detail": "Manual journals (MJV)",
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-R2R"
+          },
+          {
+            "flowId": "R2R-02.1",
+            "flow": "1 · Prepare Legal Entity Financial Statements",
+            "direction": "in",
+            "party": "Controlling",
+            "detail": "Non-SAP units' data",
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-R2R"
+          }
+        ],
+        "rank": 4
       },
       {
         "id": "brain",
@@ -968,7 +963,7 @@
             "direction": "in",
             "party": "FP&A Comm",
             "detail": "Close inputs",
-            "source": "As documented in the R2R GSOPs and the LT review of 13 Oct 2026"
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-R2R"
           }
         ],
         "rank": 5
@@ -984,10 +979,10 @@
             "direction": "in",
             "party": "FP&A Ops",
             "detail": "Close inputs and accruals",
-            "source": "As documented in the R2R GSOPs and the LT review of 13 Oct 2026"
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-R2R"
           }
         ],
-        "rank": 5
+        "rank": 6
       },
       {
         "id": "spleen",
@@ -1000,10 +995,10 @@
             "direction": "in",
             "party": "Tax",
             "detail": "Tax postings before close",
-            "source": "As documented in the R2R GSOPs and the LT review of 13 Oct 2026"
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-R2R"
           }
         ],
-        "rank": 5
+        "rank": 7
       }
     ],
     "projects": [
@@ -1035,8 +1030,8 @@
           22,
           23
         ],
-        "sourceCount": 18,
-        "aiCount": 6,
+        "sourceCount": 0,
+        "aiCount": 24,
         "months": []
       },
       {
@@ -1064,12 +1059,12 @@
           43,
           44
         ],
-        "sourceCount": 8,
-        "aiCount": 13,
+        "sourceCount": 0,
+        "aiCount": 21,
         "months": []
       }
     ],
-    "source": "D2P-process-maps-MERGED.html#src-R2R"
+    "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-R2R"
   },
   "kidneys": {
     "asIs": {
@@ -1096,23 +1091,7 @@
             "direction": "in",
             "party": "P2P-04",
             "detail": "Coupa accruals (preventable journals)",
-            "source": "As documented by Controlling (workbook, MJV deck, register)"
-          }
-        ],
-        "rank": 1
-      },
-      {
-        "id": "lungs",
-        "name": "R2R",
-        "count": 1,
-        "evidence": [
-          {
-            "flowId": "CTRL-02.01",
-            "flow": "Statutory audit end-to-end",
-            "direction": "in",
-            "party": "R2R",
-            "detail": "Financial statements and trial balance",
-            "source": "As documented by Controlling (workbook, MJV deck, register)"
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-CTRL"
           }
         ],
         "rank": 1
@@ -1128,15 +1107,31 @@
             "direction": "in",
             "party": "Tax",
             "detail": "Planning input",
-            "source": "As documented by Controlling (workbook, MJV deck, register)"
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-CTRL"
           }
         ],
-        "rank": 1
+        "rank": 2
+      },
+      {
+        "id": "lungs",
+        "name": "R2R",
+        "count": 1,
+        "evidence": [
+          {
+            "flowId": "CTRL-02.01",
+            "flow": "Statutory audit end-to-end",
+            "direction": "in",
+            "party": "R2R",
+            "detail": "Financial statements and trial balance",
+            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-CTRL"
+          }
+        ],
+        "rank": 3
       }
     ],
     "projects": [
       {
-        "name": "End-to-end Audit Support",
+        "name": "End-to-end audit support",
         "entries": [
           0,
           1,
@@ -1159,14 +1154,12 @@
           18,
           19
         ],
-        "sourceCount": 14,
-        "aiCount": 6,
-        "months": [
-          "July"
-        ]
+        "sourceCount": 12,
+        "aiCount": 8,
+        "months": []
       },
       {
-        "name": "Manual Journal (MJV)",
+        "name": "Manual journal (MJV)",
         "entries": [
           20,
           21,
@@ -1190,13 +1183,11 @@
           39,
           40
         ],
-        "sourceCount": 10,
-        "aiCount": 11,
-        "months": [
-          "June"
-        ]
+        "sourceCount": 14,
+        "aiCount": 7,
+        "months": []
       }
     ],
-    "source": "D2P-process-maps-MERGED.html#src-CTRL"
+    "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-CTRL"
   }
 }

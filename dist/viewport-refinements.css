@@ -29,6 +29,11 @@
 #tower-workbench .tw-zoom output{min-width:4ch;text-align:center;font-size:calc(12px * var(--tw-scale));color:#d7c1df}
 #tower-workbench #tw-zoom-fit{margin-left:calc(8px * var(--tw-scale));border-left:1px solid #ffffff25;border-radius:0;padding-left:calc(14px * var(--tw-scale))}
 #tower-workbench #tw-connection-panel{overflow:auto;min-height:0;flex:1}
+/* AI dependency tables can exceed the viewport; keep both source views usable. */
+#tower-workbench[data-view=handoffs] .tw-scroll:has(.tw-proposed-dependencies){display:block;overflow:auto}
+#tower-workbench[data-view=handoffs] #tw-page:has(.tw-proposed-dependencies){height:auto;min-height:100%}
+#tw-page:has(.tw-proposed-dependencies) .tw-network{flex:none;height:65vh}
+#tw-page:has(.tw-proposed-dependencies) #tw-connection-panel{flex:none;max-height:65vh}
 #tower-workbench .tw-network.is-fullscreen{padding:calc(8px * var(--tw-scale)) calc(20px * var(--tw-scale));background:#302238}
 #tower-workbench .tw-network.is-fullscreen .tw-network-top{padding:0 0 calc(4px * var(--tw-scale));gap:calc(12px * var(--tw-scale));font-size:calc(11px * var(--tw-scale))}
 #tower-workbench .tw-network-top #tw-flow-details{display:inline-flex;align-items:center;gap:calc(8px * var(--tw-scale))}

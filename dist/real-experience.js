@@ -1,10 +1,10 @@
 import {setScenario} from './process-scenario.js';
 import {cancelPageNavigation} from './page-navigation.js';
-import {REAL,KPI,escapeHTML as esc} from './real-data.js';
-import {CARD_BRIEFS,CARD_SOURCE} from './tower-briefs.js';
-import {comparisonMarkup} from './health.js?v=20261102-summary';
-import {openDashboard,closeDashboard,configureDashboard,destroyDashboard} from './tower-dashboard.js';
-import {prepareNeural,clearNeural} from './neural-loader.js?v=typography-1';
+import {REAL,KPI,escapeHTML as esc} from './real-data.js?v=20261102-source-sync';
+import {CARD_BRIEFS,CARD_SOURCE} from './tower-briefs.js?v=20261102-source-sync';
+import {comparisonMarkup} from './health.js?v=20261102-source-sync';
+import {openDashboard,closeDashboard,configureDashboard,destroyDashboard} from './tower-dashboard.js?v=20261102-source-sync';
+import {prepareNeural,clearNeural} from './neural-loader.js?v=20261102-source-sync';
 import {titleCase,normalizeHeadings} from './title-case.js';
 export {openDashboard,closeDashboard};
 const $=s=>document.querySelector(s);
@@ -65,7 +65,7 @@ function renderKpiContext(id){
  $('#hud-pain-count').textContent=REAL[id].counts.pain;
  $('.hud-pain').title=`${REAL[id].counts.pain} documented As Is pain points`;
  $('#hud-comparison').innerHTML=comparisonMarkup(metrics.asIs,metrics.toBe,false);
- $('#hud-dependencies').innerHTML=populated?`<ul class="hud-dependency-list">${brief.dependencies.map((d,i)=>`<li><button type="button" data-dependency="${i}" aria-label="View ${esc(d.tower)} dependency"><span class="hud-dependency-copy"><strong>${esc(d.tower)}</strong><span>${esc(d.description)}</span></span><svg class="ico" aria-hidden="true"><use href="#i-ne"/></svg></button></li>`).join('')}</ul>`:'<p class="hud-empty">Awaiting tower data</p>';
+ $('#hud-dependencies').innerHTML=populated?(brief.dependencies.length?`<ul class="hud-dependency-list">${brief.dependencies.map((d,i)=>`<li><button type="button" data-dependency="${i}" aria-label="View ${esc(d.tower)} dependency"><span class="hud-dependency-copy"><strong>${esc(d.tower)}</strong><span>${esc(d.description)}</span></span><svg class="ico" aria-hidden="true"><use href="#i-ne"/></svg></button></li>`).join('')}</ul>`:'<p class="hud-empty">No key interdependencies supplied in the source.</p>'):'<p class="hud-empty">Awaiting tower data</p>';
  $('#hud-dependencies').querySelectorAll('[data-dependency]').forEach(button=>button.onclick=()=>{
   setScenario(id,'asis');
   openDashboard(id,'handoffs',{dependency:brief.dependencies[Number(button.dataset.dependency)],source:CARD_SOURCE});
@@ -80,7 +80,7 @@ function renderKpiContext(id){
    if(active&&focus)tab.focus({preventScroll:true});
   });
   const panel=$('#hud-year-panel');panel.setAttribute('aria-labelledby','hud-year-'+year);
-  panel.innerHTML=populated?`<ul class="hud-project-list">${brief.projects[year].map(project=>`<li><strong>${esc(project.name)}</strong><p>${esc(project.description)}</p></li>`).join('')}</ul>${brief.notes[year]?`<p class="hud-project-note">${esc(brief.notes[year])}</p>`:''}`:'<div class="hud-project-empty"><strong>Awaiting tower data</strong><p>Project names and descriptions will appear here.</p></div>';
+  panel.innerHTML=populated?`${brief.projects[year].length?`<ul class="hud-project-list">${brief.projects[year].map(project=>`<li><strong>${esc(project.name)}</strong><p>${esc(project.description)}</p></li>`).join('')}</ul>`:`<div class="hud-project-empty"><strong>No ${year} ${year==='2027'?'AI-suggested ':''}TPI projects supplied</strong><p>The source records 0 projects for this tower.</p></div>`}${brief.notes[year]?`<p class="hud-project-note">${esc(brief.notes[year])}</p>`:''}`:'<div class="hud-project-empty"><strong>Awaiting tower data</strong><p>Project names and descriptions will appear here.</p></div>';
   window.dispatchEvent(new Event('tower-card-layout'));
  };
  tabs.forEach(tab=>tab.onclick=()=>selectYear(tab.dataset.projectYear));

@@ -1,14 +1,14 @@
 import * as T from 'three';
 import {syncAnatomyLayout,elementDisplayScale} from './anatomy-layout.js?v=20261102-display';
-import {REAL,KPI} from './real-data.js';
-import {CARD_BRIEFS} from './tower-briefs.js';
-import {bindTower,initExperience,hideMap,openMap} from './real-experience.js?v=20261102-summary';
-import {createProcessNeurons,updateProcessNeurons} from './process-neurons.js?v=20261030-typography-1';
+import {REAL,KPI} from './real-data.js?v=20261102-source-sync';
+import {CARD_BRIEFS} from './tower-briefs.js?v=20261102-source-sync';
+import {bindTower,initExperience,hideMap,openMap} from './real-experience.js?v=20261102-source-sync';
+import {createProcessNeurons,updateProcessNeurons} from './process-neurons.js?v=20261102-source-sync';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
-import {loadReplacement} from './models.js';
+import {loadReplacement} from './models.js?v=20261102-source-sync';
 import {buildVesselNetwork} from './vessels.js';
 import {mountAstralOrgan,mountAstralSkeleton,mountAstralVessel,createAstralRenderer} from './astral-anatomy.js';
-import {cardMarkup,metricsSentence,accentFor,towerNameFor,overviewNameFor} from './health.js?v=20261102-display';
+import {cardMarkup,metricsSentence,accentFor,towerNameFor,towerAcronymFor,overviewNameFor} from './health.js?v=20261102-source-sync';
 import {createHelpdesk} from './helpdesk.js?v=20261102-sizing';
 const $=s=>document.querySelector(s);
 syncAnatomyLayout();
@@ -262,7 +262,7 @@ addEventListener('pagehide',()=>{cancelAnimationFrame(animation);helpdesk.destro
 
 function updateTelemetryHUD(id) {
   $('#hud-tower-title').textContent=towerNameFor(id);
-  $('#hud-tower-subtitle').textContent=REAL[id].sourceKey;
+  $('#hud-tower-subtitle').textContent=towerAcronymFor(REAL[id].sourceKey);
 }
 
 

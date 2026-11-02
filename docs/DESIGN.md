@@ -8,11 +8,13 @@ Latest refinement: apply an additional 75% application zoom specifically for the
 
 ## Colour
 
-Retain the original purple interface, including the purple astral process-map background, surfaces, borders and scrollbars. The user reverted the Mulberry theme. The scoped KPI activity-colour update below is the only later interface palette exception; other activity renderers retain their existing colours.
+Retain the original purple interface, including the purple astral process-map background, surfaces, borders and scrollbars. The user reverted the Mulberry theme. Activity colors in the KPI cards and all process maps use Automated AZ Light Blue `#68d2df`, Semi AZ Gold `#f0ab00`, and Manual AZ Mulberry `#830051`. Apply the process-map palette to high-level bars, detailed activity markers, stage summaries and legends across all eight towers in both As Is and AI Suggested modes.
 
 ## Executive Summary cards — 2 November 2026
 
 The expanded KPI card starts with Executive Summary at 24px effective size, the full tower name at 40px Bold, and the source acronym at 18px Semibold. The full-width title has room for both FP&A names; the acronym sits directly beneath the name, followed by the flow controls in a left-aligned row. Preserve the card width, position, background, scrolling behavior, process data, anatomy and navigation.
+
+The visible acronym labels for the two FP&A towers read **FP&A Operations** and **FP&A Commercial** in the summary and insights navigation. Internal source keys and process identifiers remain `FPAO` and `FPAC` so source references stay intact.
 
 Both overview cards and the expanded summary display the documented As Is pain-point count from `REAL[id].counts.pain`. The overview places `| Pain Points · count` after As Is; the expanded summary places it beside the manual percentage. Zero remains a numeric zero. Accessible card descriptions also include the count. All 2027 project labels read “2027 AI Suggested TPI.”
 

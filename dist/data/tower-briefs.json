@@ -1,9 +1,11 @@
 {
   "source": {
-    "file": "8_Tower_TPI_Interdependencies_Template.xlsx",
+    "file": "8_Tower_TPI_Interdependencies_Template(Tower Input).csv",
+    "format": "CSV",
+    "encoding": "Windows-1252",
     "sheet": "Tower Input",
     "range": "A4:F12",
-    "descriptionPolicy": "Names and descriptions are concise restatements of the supplied entries; no added scope."
+    "descriptionPolicy": "Titles are concise restatements; descriptions and sourceText retain the supplied entries. Explicit source counts are verified against the project lists."
   },
   "towers": {
     "lungs": {
@@ -33,21 +35,21 @@
         "2026": [
           {
             "name": "Coupa P2P Accrual Dashboard",
-            "description": "Dashboard for Coupa P2P accruals.",
+            "description": "Coupa P2P Accrual Dashboard",
             "sourceCell": "C5",
             "sourceItem": 1,
             "sourceText": "Coupa P2P Accrual Dashboard"
           },
           {
             "name": "BSR Automation Globalisation",
-            "description": "Globalise BSR automation.",
+            "description": "BSR Automation Globalisation",
             "sourceCell": "C5",
             "sourceItem": 2,
             "sourceText": "BSR Automation Globalisation"
           },
           {
             "name": "AP Third-Party Close",
-            "description": "Analysis and governance of AP third-party close.",
+            "description": "AP 3rd party close analysis and governance",
             "sourceCell": "C5",
             "sourceItem": 3,
             "sourceText": "AP 3rd party close analysis and governance"
@@ -56,21 +58,21 @@
         "2027": [
           {
             "name": "Market-Specific MM Closes",
-            "description": "Automate market-specific MM module closes.",
+            "description": "Automate the market-specific MM module closes",
             "sourceCell": "E5",
             "sourceItem": 1,
             "sourceText": "Automate the market-specific MM module closes"
           },
           {
             "name": "BSR Uploads to BlackLine",
-            "description": "Automate BSR template uploads into BlackLine.",
+            "description": "Automate BSR template upload into BlackLine",
             "sourceCell": "E5",
             "sourceItem": 2,
             "sourceText": "Automate BSR template upload into BlackLine"
           },
           {
             "name": "ERH MOT Preparation",
-            "description": "Simplify and automate ERH MOT preparation.",
+            "description": "Simplify and automate ERH MOT preparation",
             "sourceCell": "E5",
             "sourceItem": 3,
             "sourceText": "Simplify and automate ERH MOT preparation"
@@ -78,18 +80,77 @@
         ]
       },
       "notes": {
-        "2027": "These 3 suggestions are aligned with GPO/GPDD focus as well"
+        "2027": "(These 3 suggestions are aligned with GPO/GPDD focus as well)"
+      },
+      "sourceCounts": {
+        "2026": 3,
+        "2027": 3
+      },
+      "countSourceCells": {
+        "2026": "D5",
+        "2027": "F5"
       }
     },
     "stomach": {
       "tower": "P2P",
-      "status": "pending",
-      "dependencies": [],
+      "status": "populated",
+      "dependencies": [
+        {
+          "tower": "O2C",
+          "description": "Payment confirmation",
+          "sourceCell": "B6",
+          "sourceText": "O2C: Payment confirmation"
+        },
+        {
+          "tower": "R2R",
+          "description": "ME Close Calendar",
+          "sourceCell": "B6",
+          "sourceText": "R2R: ME Close Calendar"
+        }
+      ],
       "projects": {
-        "2026": [],
-        "2027": []
+        "2026": [
+          {
+            "name": "Non PO Accrual (In Progress)",
+            "description": "Non PO Accrual (In Progress)",
+            "sourceCell": "C6",
+            "sourceItem": 1,
+            "sourceText": "Non PO Accrual (In Progress)"
+          },
+          {
+            "name": "Global BSR Standardisation & Centralisation (In Progress)",
+            "description": "Global BSR Standardisation & Centralisation (In Progress)",
+            "sourceCell": "C6",
+            "sourceItem": 2,
+            "sourceText": "Global BSR Standardisation & Centralisation (In Progress)"
+          }
+        ],
+        "2027": [
+          {
+            "name": "Coupa Interfaced Cut-Off",
+            "description": "Automate Coupa interfaced cut-off",
+            "sourceCell": "E6",
+            "sourceItem": 1,
+            "sourceText": "Automate Coupa interfaced cut-off"
+          },
+          {
+            "name": "China Accrual & Pre-Payment Offsetting",
+            "description": "China: contribution accrual and pre-payment offsetting",
+            "sourceCell": "E6",
+            "sourceItem": 2,
+            "sourceText": "China: contribution accrual and pre-payment offsetting"
+          }
+        ]
       },
-      "notes": {}
+      "notes": {},
+      "sourceCounts": {
+        "2026": 2,
+        "2027": 2
+      },
+      "countSourceCells": {
+        "2026": "D6",
+        "2027": "F6"
+      }
     },
     "intestines": {
       "tower": "O2C",
@@ -118,115 +179,302 @@
         "2026": [
           {
             "name": "Customer Advance Payments",
-            "description": "Clear customer advance payments.",
+            "description": "Customer advance payments clearing",
             "sourceCell": "C7",
             "sourceItem": 1,
             "sourceText": "Customer advance payments clearing"
           },
           {
             "name": "Alexion SO, Returns & Rebates",
-            "description": "Automate Alexion SO processing, returns and rebates.",
+            "description": "Alexion SO automation, returns/ rebates automation",
             "sourceCell": "C7",
             "sourceItem": 2,
             "sourceText": "Alexion SO automation, returns/ rebates automation"
           },
           {
             "name": "Bank Clearing & FX Postings",
-            "description": "Automate bank clearing and FX gain/loss postings.",
+            "description": "Automate bank clearing for foreign vendor payments, including automatic FX gain/loss postings",
             "sourceCell": "C7",
             "sourceItem": 3,
-            "sourceText": "Automation of bank clearing & FX gain/loss postings"
+            "sourceText": "Automate bank clearing for foreign vendor payments, including automatic FX gain/loss postings"
           },
           {
             "name": "China Intracompany Funding",
-            "description": "Manage China intracompany funding through Crown requests.",
+            "description": "China intracompany funding via Crown request",
             "sourceCell": "C7",
             "sourceItem": 4,
             "sourceText": "China intracompany funding via Crown request"
-          },
-          {
-            "name": "Cash & Banking",
-            "description": "A Python script automates bank clearing for foreign vendor payments, including automatic FX gain/loss postings.",
-            "sourceCell": "C7",
-            "sourceItem": 5,
-            "sourceText": "Cash & Banking: Python script automates bank clearing for foreign vendor payments, including automatic FX gain/loss postings"
           }
         ],
         "2027": [
           {
             "name": "Crown to FIS Payment Hub",
-            "description": "Pass approved Crown request data—beneficiary, bank, currency, amount and value date—directly into the FIS Payment Hub to remove re-keying, with a duplicate-transfer check.",
+            "description": "Pass the approved Crown request data (beneficiary, bank, currency, amount, value date) straight into the FIS Payment Hub to remove re-keying, with a duplicate-transfer check",
             "sourceCell": "E7",
             "sourceItem": 1,
             "sourceText": "Pass the approved Crown request data (beneficiary, bank, currency, amount, value date) straight into the FIS Payment Hub to remove re-keying, with a duplicate-transfer check"
           },
           {
             "name": "Pre-Creation VAT Validation",
-            "description": "Before an order or credit note is created, check the VAT classification against SAP master data. Flag mismatches to the local market to prevent incorrect VAT at invoice.",
+            "description": "Pre-creation VAT master-data validation(Before an order or credit note is created, check the VAT classification against SAP master data and flag mismatches to local market, stopping incorrect VAT at invoice.)",
             "sourceCell": "E7",
             "sourceItem": 2,
             "sourceText": "Pre-creation VAT master-data validation(Before an order or credit note is created, check the VAT classification against SAP master data and flag mismatches to local market, stopping incorrect VAT at invoice.)"
           },
           {
             "name": "Order Release on Approval",
-            "description": "Use one approval workflow for all three order-block reasons. Include the exposure summary, route to the GDOA 2002 / Credit Risk Policy / GDOA 2000 approver, store the evidence, and trigger the SAP release by script.",
+            "description": "Order block release-on-approval workflow with evidence trail (One workflow for the three block reasons: the blocked order generates the approval request with the exposure summary, routes it to the GDOA 2002 / Credit Risk Policy / GDOA 2000 approver, stores the evidence, and triggers the SAP release by script.)",
             "sourceCell": "E7",
             "sourceItem": 3,
             "sourceText": "Order block release-on-approval workflow with evidence trail (One workflow for the three block reasons: the blocked order generates the approval request with the exposure summary, routes it to the GDOA 2002 / Credit Risk Policy / GDOA 2000 approver, stores the evidence, and triggers the SAP release by script.)"
           }
         ]
       },
-      "notes": {}
+      "notes": {},
+      "sourceCounts": {
+        "2026": 4,
+        "2027": 3
+      },
+      "countSourceCells": {
+        "2026": "D7",
+        "2027": "F7"
+      }
     },
     "brain": {
       "tower": "FP&A Commercial",
-      "status": "pending",
-      "dependencies": [],
+      "status": "populated",
+      "dependencies": [
+        {
+          "tower": "O2C",
+          "description": "Sales invoice issuance",
+          "sourceCell": "B8",
+          "sourceText": "O2C: Sales invoice issuance"
+        },
+        {
+          "tower": "RTR/Controlling",
+          "description": "SAP close and journal posting",
+          "sourceCell": "B8",
+          "sourceText": "RTR/Controlling: SAP close and journal posting"
+        },
+        {
+          "tower": "PTP",
+          "description": "vendor invoices posting",
+          "sourceCell": "B8",
+          "sourceText": "PTP: vendor invoices posting"
+        },
+        {
+          "tower": "Ops",
+          "description": "Product costing for COGS calculation",
+          "sourceCell": "B8",
+          "sourceText": "Ops: Product costing for COGS calculation"
+        }
+      ],
       "projects": {
-        "2026": [],
-        "2027": []
+        "2026": [
+          {
+            "name": "Fast+: Financial Control Approval Flow",
+            "description": "Fast+: Financial control approval flow",
+            "sourceCell": "C8",
+            "sourceItem": 1,
+            "sourceText": "Fast+: Financial control approval flow"
+          },
+          {
+            "name": "Preclosing PnL Data Transformation",
+            "description": "Preclosing PnL data transformation",
+            "sourceCell": "C8",
+            "sourceItem": 2,
+            "sourceText": "Preclosing PnL data transformation"
+          }
+        ],
+        "2027": [
+          {
+            "name": "Pre-Closing Variance Screening & Commentary",
+            "description": "Pre closing: First level variance screening using AI agent and AI draft commentary with transaction evidence",
+            "sourceCell": "E8",
+            "sourceItem": 1,
+            "sourceText": "Pre closing: First level variance screening using AI agent and AI draft commentary with transaction evidence"
+          },
+          {
+            "name": "SCC & Royalty Reconciliation",
+            "description": "SCC and Royalty check after system open: using python to do the reconciliation and using AI to flag the variances",
+            "sourceCell": "E8",
+            "sourceItem": 2,
+            "sourceText": "SCC and Royalty check after system open: using python to do the reconciliation and using AI to flag the variances"
+          }
+        ]
       },
-      "notes": {}
+      "notes": {},
+      "sourceCounts": {
+        "2026": 2,
+        "2027": 2
+      },
+      "countSourceCells": {
+        "2026": "D8",
+        "2027": "F8"
+      }
     },
     "pancreas": {
       "tower": "FP&A Ops",
-      "status": "pending",
+      "status": "populated",
       "dependencies": [],
       "projects": {
         "2026": [],
         "2027": []
       },
-      "notes": {}
+      "notes": {},
+      "sourceCounts": {
+        "2026": 0,
+        "2027": 0
+      },
+      "countSourceCells": {
+        "2026": "D9",
+        "2027": "F9"
+      }
     },
     "spleen": {
       "tower": "Tax",
-      "status": "pending",
+      "status": "populated",
       "dependencies": [],
       "projects": {
         "2026": [],
         "2027": []
       },
-      "notes": {}
+      "notes": {},
+      "sourceCounts": {
+        "2026": 0,
+        "2027": 0
+      },
+      "countSourceCells": {
+        "2026": "D10",
+        "2027": "F10"
+      }
     },
     "liver": {
       "tower": "CAPEX",
-      "status": "pending",
-      "dependencies": [],
+      "status": "populated",
+      "dependencies": [
+        {
+          "tower": "R2R",
+          "description": "SAP FA sub ledger close and GL close",
+          "sourceCell": "B11",
+          "sourceText": "R2R: SAP FA sub ledger close and GL close"
+        },
+        {
+          "tower": "R2R",
+          "description": "ERH MOT FA and Lease movements",
+          "sourceCell": "B11",
+          "sourceText": "R2R: ERH MOT FA and Lease movements"
+        },
+        {
+          "tower": "P2P",
+          "description": "FA and Lease invoices",
+          "sourceCell": "B11",
+          "sourceText": "P2P: FA and Lease invoices"
+        }
+      ],
       "projects": {
-        "2026": [],
-        "2027": []
+        "2026": [
+          {
+            "name": "Global FA Dashboard",
+            "description": "Global FA Dashboard",
+            "sourceCell": "C11",
+            "sourceItem": 1,
+            "sourceText": "Global FA Dashboard"
+          },
+          {
+            "name": "FA MEC Movement Dashboard",
+            "description": "FA MEC Movement Dashboard",
+            "sourceCell": "C11",
+            "sourceItem": 2,
+            "sourceText": "FA MEC Movement Dashboard"
+          }
+        ],
+        "2027": [
+          {
+            "name": "Lease ETL Preparation Automation",
+            "description": "Lease ETL preparation automation",
+            "sourceCell": "E11",
+            "sourceItem": 1,
+            "sourceText": "Lease ETL preparation automation"
+          }
+        ]
       },
-      "notes": {}
+      "notes": {},
+      "sourceCounts": {
+        "2026": 2,
+        "2027": 1
+      },
+      "countSourceCells": {
+        "2026": "D11",
+        "2027": "F11"
+      }
     },
     "kidneys": {
       "tower": "Controlling",
-      "status": "pending",
-      "dependencies": [],
+      "status": "populated",
+      "dependencies": [
+        {
+          "tower": "FP&A",
+          "description": "Cost information for manual journal requests",
+          "sourceCell": "B12",
+          "sourceText": "FP&A: Cost information for manual journal requests "
+        },
+        {
+          "tower": "R2R",
+          "description": "Closed ledger and Balance Sheet Reconciliations;Recurring journal setup",
+          "sourceCell": "B12",
+          "sourceText": "R2R: Closed ledger and Balance Sheet Reconciliations;Recurring journal setup"
+        },
+        {
+          "tower": "O2C",
+          "description": "Revenue recognition, collections",
+          "sourceCell": "B12",
+          "sourceText": "O2C: Revenue recognition, collections"
+        }
+      ],
       "projects": {
-        "2026": [],
-        "2027": []
+        "2026": [
+          {
+            "name": "Manual Journal Month End Close Transformation",
+            "description": "Manual Journal Month end close transformation",
+            "sourceCell": "C12",
+            "sourceItem": 1,
+            "sourceText": "Manual Journal Month end close transformation"
+          },
+          {
+            "name": "Statutory Audit End to End Audit",
+            "description": "Statutory audit end to end audit",
+            "sourceCell": "C12",
+            "sourceItem": 2,
+            "sourceText": "Statutory audit end to end audit"
+          }
+        ],
+        "2027": [
+          {
+            "name": "Standard Journal Request Form (MJV-06)",
+            "description": "Replace the email request with standard journal request form via Power Platform (MJV-06)",
+            "sourceCell": "E12",
+            "sourceItem": 1,
+            "sourceText": "Replace the email request with standard journal request form via Power Platform (MJV-06)"
+          },
+          {
+            "name": "Pre-Submission AI Checks (MJV-07)",
+            "description": "Pre-submission AI checks which includes GSOP compliance, enigma rules - enhancements from Subzero (MJV-07)",
+            "sourceCell": "E12",
+            "sourceItem": 2,
+            "sourceText": "Pre-submission AI checks which includes GSOP compliance, enigma rules - enhancements from Subzero (MJV-07)"
+          }
+        ]
       },
-      "notes": {}
+      "notes": {},
+      "sourceCounts": {
+        "2026": 2,
+        "2027": 2
+      },
+      "countSourceCells": {
+        "2026": "D12",
+        "2027": "F12"
+      }
     }
   }
 }

@@ -15,6 +15,7 @@ const TOWER_NAMES = {
   intestines: 'Order to Cash',
 };
 export const towerNameFor = id => TOWER_NAMES[id] || id;
+export const towerAcronymFor = key => ({FPAC:'FP&A Commercial',FPAO:'FP&A Operations'})[key] || key;
 const OVERVIEW_NAMES={brain:'FP&A Commercial',pancreas:'FP&A Operations',liver:'CAPEX',kidneys:'Controlling'};
 export const overviewNameFor=id=>OVERVIEW_NAMES[id]||towerNameFor(id);
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -22,7 +23,8 @@ const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;',
 export function metricsSentence(brief, metrics, painCount) {
   const activities=`${metrics.asIs.manual} manual, ${metrics.asIs.semi} semi and ${metrics.asIs.auto} automated activities. ${painCount} documented As Is pain points.`;
   if (brief.status !== 'populated') return `${activities} Key inter dependencies and 2026 / 2027 TPI projects are awaiting tower data.`;
-  return `${activities} ${brief.projects['2026'].length} TPI projects for 2026. ${brief.projects['2027'].length} AI-suggested TPI projects for 2027. Key inter dependencies: ${brief.dependencies.map(d => `${d.tower}: ${d.description}`).join('. ')}.`;
+  const dependencies=brief.dependencies.length?`Key inter dependencies: ${brief.dependencies.map(d => `${d.tower}: ${d.description}`).join('. ')}.`:'No key interdependencies supplied in the source.';
+  return `${activities} ${brief.projects['2026'].length} TPI projects for 2026. ${brief.projects['2027'].length} AI-suggested TPI projects for 2027. ${dependencies}`;
 }
 
 export function cardMarkup(brief, metrics, painCount) {

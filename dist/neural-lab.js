@@ -28,7 +28,7 @@ const ns='http://www.w3.org/2000/svg';
 function el(tag,attrs={},text){const node=document.createElementNS(ns,tag);Object.entries(attrs).forEach(([k,v])=>node.setAttribute(k,String(v)));if(text!==undefined)node.textContent=text;return node;}
 function txt(x,y,content,size=10,color='var(--ink)',weight=400){return el('text',{x,y,'font-size':size,fill:color,'font-weight':weight,'font-family':'Inter, sans-serif'},content);}
 function sourceTitle(s){return (/(?:…|\.\.\.)$/.test(s.t)&&s.d?s.d.split(/;\s*|\.\s+/)[0].replace(/\s*\([^)]*(?:…|\.\.\.)$/, ''):s.t);}
-function shortTitle(s){const explicit={'FPAC-01.01.01':'Validate SKU master data','FPAC-01.01.02':'Build template columns & formulas','FPAC-01.01.03':'Phase historical actuals by SKU','FPAC-01.01.04':'Split by Therapeutic Area','FPAC-01.01.05':'Share planning templates','FPAC-01.01.06':'Enter volume & net price','FPAC-01.01.07':'Prepare the review package','FPAC-01.01.08':'Revise before PMR submission','FPAC-01.01.09':'Submit the final revenue plan'};return explicit[s.rid]||sourceTitle(s);}
+function shortTitle(s){if(isAI)return sourceTitle(s);const explicit={'FPAC-01.01.01':'Validate SKU master data','FPAC-01.01.02':'Build template columns & formulas','FPAC-01.01.03':'Phase historical actuals by SKU','FPAC-01.01.04':'Split by Therapeutic Area','FPAC-01.01.05':'Share planning templates','FPAC-01.01.06':'Enter volume & net price','FPAC-01.01.07':'Prepare the review package','FPAC-01.01.08':'Revise before PMR submission','FPAC-01.01.09':'Submit the final revenue plan'};return explicit[s.rid]||sourceTitle(s);}
 // Size source layout columns before routing, using the same font and padding as the nodes.
 function textWidth(value,size,lines,min,padding=24,weight=400){
  let low=Math.max(min,Math.ceil(Math.max(0,...String(value||'').split(/\s+/).map(w=>measureText(w,size,weight)))+padding+1)),high=Math.max(low,Math.ceil(measureText(value,size,weight)+padding+1));
@@ -188,6 +188,7 @@ try{
  // The galaxy runs continuously while visible. Only the OS reduced-motion preference stills it.
  const motion=()=>{paused=reduced.matches;root.classList.toggle('paused',paused);astral.setPaused(paused);updateScroll();};reduced.addEventListener('change',motion,{signal:abort.signal});
  $('#map-controls-toggle').onclick=()=>{const expanded=$('#map-controls-toggle').getAttribute('aria-expanded')!=='true';$('#map-controls-toggle').setAttribute('aria-expanded',String(expanded));$('#navigation').classList.toggle('controls-expanded',expanded);updateHeader();};
+ if(isAI){const note=document.createElement('span');note.textContent='Detailed-map colors retain the source activity types. High-level bars show the potential mix if suggestions are adopted; open an activity to compare its types.';$('#legend').append(note);}
  $('#legend-toggle').onclick=()=>{const legend=$('#legend');legend.hidden=!legend.hidden;$('#legend-toggle').setAttribute('aria-expanded',String(!legend.hidden));updateHeader();};
  $('#lab-return').onclick=()=>{closeCard(false);onReturn();};$('#first-step').onclick=async()=>{const first=activities()[0],target=svg.querySelector(`[data-id="${CSS.escape(first.id)}"]`);if(await scrollToNode(target))showCard(first.id,target);};
  $('#card-detail').onclick=openDetailedProcess;$('#close-card').onclick=()=>closeCard();$('.identity').onclick=e=>{e.preventDefault();jump(0);};

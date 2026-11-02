@@ -1,0 +1,561 @@
+{
+  "verifiedDate": "2026-11-02",
+  "timezone": "Asia/Kuala_Lumpur",
+  "scope": "Verified local site files prepared for GitHub Pages publication",
+  "status": "PASS",
+  "sources": [
+    {
+      "file": "Source/8_Tower_TPI_Interdependencies_Template(Tower Input).csv",
+      "sha256": "e06cde7ce88b8f7237d941fd849ce4bd8550fd5b8e55b583a388d910f1fdb6b0"
+    },
+    {
+      "file": "Source/D2P_All_Towers_Process_Maps_Oct19 (4).html",
+      "sha256": "8df52d33128f815534be4a5e5711380754c683c79c25466993bbce627c6c9fac"
+    }
+  ],
+  "totals": {
+    "towers": 8,
+    "scenarios": 16,
+    "stages": 46,
+    "processes": 106,
+    "activitiesPerScenario": 489,
+    "documentedHandoffs": 298,
+    "htmlRegisterEntries": 359,
+    "csvKeyInterdependencies": 18,
+    "csvTpi2026": 15,
+    "csvTpi2027AiSuggested": 13
+  },
+  "checks": [
+    {
+      "check": "independent raw HTML data audit",
+      "status": "PASS",
+      "assertions": 88889,
+      "towers": [
+        {
+          "tower": "FPAC",
+          "stages": 9,
+          "processes": 12,
+          "asIs": {
+            "auto": 18,
+            "semi": 16,
+            "manual": 68,
+            "total": 102
+          },
+          "aiSuggested": {
+            "auto": 47,
+            "semi": 22,
+            "manual": 33,
+            "total": 102
+          }
+        },
+        {
+          "tower": "FPAO",
+          "stages": 8,
+          "processes": 15,
+          "asIs": {
+            "auto": 3,
+            "semi": 24,
+            "manual": 34,
+            "total": 61
+          },
+          "aiSuggested": {
+            "auto": 12,
+            "semi": 36,
+            "manual": 13,
+            "total": 61
+          }
+        },
+        {
+          "tower": "CAPEX",
+          "stages": 8,
+          "processes": 21,
+          "asIs": {
+            "auto": 4,
+            "semi": 11,
+            "manual": 60,
+            "total": 75
+          },
+          "aiSuggested": {
+            "auto": 4,
+            "semi": 25,
+            "manual": 46,
+            "total": 75
+          }
+        },
+        {
+          "tower": "P2P",
+          "stages": 5,
+          "processes": 17,
+          "asIs": {
+            "auto": 18,
+            "semi": 9,
+            "manual": 57,
+            "total": 84
+          },
+          "aiSuggested": {
+            "auto": 31,
+            "semi": 21,
+            "manual": 32,
+            "total": 84
+          }
+        },
+        {
+          "tower": "O2C",
+          "stages": 6,
+          "processes": 10,
+          "asIs": {
+            "auto": 8,
+            "semi": 16,
+            "manual": 13,
+            "total": 37
+          },
+          "aiSuggested": {
+            "auto": 17,
+            "semi": 10,
+            "manual": 10,
+            "total": 37
+          }
+        },
+        {
+          "tower": "TAX",
+          "stages": 3,
+          "processes": 20,
+          "asIs": {
+            "auto": 4,
+            "semi": 0,
+            "manual": 73,
+            "total": 77
+          },
+          "aiSuggested": {
+            "auto": 6,
+            "semi": 20,
+            "manual": 51,
+            "total": 77
+          }
+        },
+        {
+          "tower": "R2R",
+          "stages": 5,
+          "processes": 9,
+          "asIs": {
+            "auto": 1,
+            "semi": 11,
+            "manual": 27,
+            "total": 39
+          },
+          "aiSuggested": {
+            "auto": 4,
+            "semi": 14,
+            "manual": 21,
+            "total": 39
+          }
+        },
+        {
+          "tower": "CTRL",
+          "stages": 2,
+          "processes": 2,
+          "asIs": {
+            "auto": 0,
+            "semi": 0,
+            "manual": 14,
+            "total": 14
+          },
+          "aiSuggested": {
+            "auto": 0,
+            "semi": 14,
+            "manual": 0,
+            "total": 14
+          }
+        }
+      ],
+      "failureCount": 0,
+      "failures": []
+    },
+    {
+      "result": "PASS",
+      "source": "8_Tower_TPI_Interdependencies_Template(Tower Input).csv",
+      "towers": [
+        {
+          "tower": "R2R",
+          "dependencies": 3,
+          "2026": 3,
+          "2027": 3
+        },
+        {
+          "tower": "P2P",
+          "dependencies": 2,
+          "2026": 2,
+          "2027": 2
+        },
+        {
+          "tower": "O2C",
+          "dependencies": 3,
+          "2026": 4,
+          "2027": 3
+        },
+        {
+          "tower": "FP&A Commercial",
+          "dependencies": 4,
+          "2026": 2,
+          "2027": 2
+        },
+        {
+          "tower": "FP&A Ops",
+          "dependencies": 0,
+          "2026": 0,
+          "2027": 0
+        },
+        {
+          "tower": "Tax",
+          "dependencies": 0,
+          "2026": 0,
+          "2027": 0
+        },
+        {
+          "tower": "CAPEX",
+          "dependencies": 3,
+          "2026": 2,
+          "2027": 1
+        },
+        {
+          "tower": "Controlling",
+          "dependencies": 3,
+          "2026": 2,
+          "2027": 2
+        }
+      ],
+      "totals": {
+        "dependencies": 18,
+        "2026": 15,
+        "2027": 13
+      }
+    },
+    {
+      "check": "independent rendered source audit",
+      "status": "PASS",
+      "assertions": 11912,
+      "towers": [
+        {
+          "tower": "FPAC",
+          "scenarios": 2,
+          "sourceSections": 10,
+          "tableRows": 365,
+          "handoffs": 55,
+          "aiOpportunities": 21
+        },
+        {
+          "tower": "FPAO",
+          "scenarios": 2,
+          "sourceSections": 10,
+          "tableRows": 256,
+          "handoffs": 63,
+          "aiOpportunities": 18
+        },
+        {
+          "tower": "CAPEX",
+          "scenarios": 2,
+          "sourceSections": 9,
+          "tableRows": 132,
+          "handoffs": 15,
+          "aiOpportunities": 10
+        },
+        {
+          "tower": "P2P",
+          "scenarios": 2,
+          "sourceSections": 12,
+          "tableRows": 295,
+          "handoffs": 54,
+          "aiOpportunities": 11
+        },
+        {
+          "tower": "O2C",
+          "scenarios": 2,
+          "sourceSections": 10,
+          "tableRows": 153,
+          "handoffs": 39,
+          "aiOpportunities": 14
+        },
+        {
+          "tower": "TAX",
+          "scenarios": 2,
+          "sourceSections": 10,
+          "tableRows": 126,
+          "handoffs": 21,
+          "aiOpportunities": 12
+        },
+        {
+          "tower": "R2R",
+          "scenarios": 2,
+          "sourceSections": 10,
+          "tableRows": 124,
+          "handoffs": 35,
+          "aiOpportunities": 7
+        },
+        {
+          "tower": "CTRL",
+          "scenarios": 2,
+          "sourceSections": 11,
+          "tableRows": 148,
+          "handoffs": 16,
+          "aiOpportunities": 4
+        }
+      ],
+      "failureCount": 0,
+      "failures": []
+    }
+  ],
+  "browser": {
+    "status": "PASS",
+    "viewport": "3840×2160",
+    "results": [
+      {
+        "tower": "FPAC",
+        "scenarios": 2,
+        "activities": 102,
+        "handoffs": 55,
+        "status": "PASS"
+      },
+      {
+        "tower": "FPAO",
+        "scenarios": 2,
+        "activities": 61,
+        "handoffs": 63,
+        "status": "PASS"
+      },
+      {
+        "tower": "CAPEX",
+        "scenarios": 2,
+        "activities": 75,
+        "handoffs": 15,
+        "status": "PASS"
+      },
+      {
+        "tower": "P2P",
+        "scenarios": 2,
+        "activities": 84,
+        "handoffs": 54,
+        "status": "PASS"
+      },
+      {
+        "tower": "O2C",
+        "scenarios": 2,
+        "activities": 37,
+        "handoffs": 39,
+        "status": "PASS"
+      },
+      {
+        "tower": "TAX",
+        "scenarios": 2,
+        "activities": 77,
+        "handoffs": 21,
+        "status": "PASS"
+      },
+      {
+        "tower": "R2R",
+        "scenarios": 2,
+        "activities": 39,
+        "handoffs": 35,
+        "status": "PASS"
+      },
+      {
+        "tower": "CTRL",
+        "scenarios": 2,
+        "activities": 14,
+        "handoffs": 16,
+        "status": "PASS"
+      }
+    ],
+    "errors": [],
+    "failures": []
+  },
+  "towers": {
+    "brain": {
+      "asIs": {
+        "auto": 18,
+        "semi": 16,
+        "manual": 68,
+        "total": 102
+      },
+      "aiSuggested": {
+        "auto": 47,
+        "semi": 22,
+        "manual": 33,
+        "total": 102
+      },
+      "stages": 9,
+      "processes": 12,
+      "pain": 55,
+      "registerEntries": 51,
+      "documentedHandoffs": 55
+    },
+    "pancreas": {
+      "asIs": {
+        "auto": 3,
+        "semi": 24,
+        "manual": 34,
+        "total": 61
+      },
+      "aiSuggested": {
+        "auto": 12,
+        "semi": 36,
+        "manual": 13,
+        "total": 61
+      },
+      "stages": 8,
+      "processes": 15,
+      "pain": 40,
+      "registerEntries": 56,
+      "documentedHandoffs": 63
+    },
+    "liver": {
+      "asIs": {
+        "auto": 4,
+        "semi": 11,
+        "manual": 60,
+        "total": 75
+      },
+      "aiSuggested": {
+        "auto": 4,
+        "semi": 25,
+        "manual": 46,
+        "total": 75
+      },
+      "stages": 8,
+      "processes": 21,
+      "pain": 5,
+      "registerEntries": 35,
+      "documentedHandoffs": 15
+    },
+    "stomach": {
+      "asIs": {
+        "auto": 18,
+        "semi": 9,
+        "manual": 57,
+        "total": 84
+      },
+      "aiSuggested": {
+        "auto": 31,
+        "semi": 21,
+        "manual": 32,
+        "total": 84
+      },
+      "stages": 5,
+      "processes": 17,
+      "pain": 30,
+      "registerEntries": 72,
+      "documentedHandoffs": 54
+    },
+    "intestines": {
+      "asIs": {
+        "auto": 8,
+        "semi": 16,
+        "manual": 13,
+        "total": 37
+      },
+      "aiSuggested": {
+        "auto": 17,
+        "semi": 10,
+        "manual": 10,
+        "total": 37
+      },
+      "stages": 6,
+      "processes": 10,
+      "pain": 20,
+      "registerEntries": 30,
+      "documentedHandoffs": 39
+    },
+    "spleen": {
+      "asIs": {
+        "auto": 4,
+        "semi": 0,
+        "manual": 73,
+        "total": 77
+      },
+      "aiSuggested": {
+        "auto": 6,
+        "semi": 20,
+        "manual": 51,
+        "total": 77
+      },
+      "stages": 3,
+      "processes": 20,
+      "pain": 4,
+      "registerEntries": 29,
+      "documentedHandoffs": 21
+    },
+    "lungs": {
+      "asIs": {
+        "auto": 1,
+        "semi": 11,
+        "manual": 27,
+        "total": 39
+      },
+      "aiSuggested": {
+        "auto": 4,
+        "semi": 14,
+        "manual": 21,
+        "total": 39
+      },
+      "stages": 5,
+      "processes": 9,
+      "pain": 9,
+      "registerEntries": 45,
+      "documentedHandoffs": 35
+    },
+    "kidneys": {
+      "asIs": {
+        "auto": 0,
+        "semi": 0,
+        "manual": 14,
+        "total": 14
+      },
+      "aiSuggested": {
+        "auto": 0,
+        "semi": 14,
+        "manual": 0,
+        "total": 14
+      },
+      "stages": 2,
+      "processes": 2,
+      "pain": 18,
+      "registerEntries": 41,
+      "documentedHandoffs": 16
+    }
+  },
+  "sourceNotes": [
+    "FP&A Operations and Tax have blank dependency and project fields, with explicit zero TPI counts in the CSV.",
+    "Tax has three source stages, 20 processes and 77 activities.",
+    "The R2R 2027 GPO/GPDD parenthetical remains a note, separate from its three projects.",
+    "Detailed HTML TPI registers are distinct from the annual project lists supplied in the CSV."
+  ],
+  "displayFixes": [
+    "AI activity labels use their source recommendation titles.",
+    "AI activity detail includes the original As Is type.",
+    "AI handoff views remain scrollable when proposed dependency tables exceed the viewport."
+  ],
+  "additionalChecks": {
+    "javascriptSyntax": "PASS",
+    "gitDiffWhitespace": "PASS",
+    "anatomyRegressionTests": "3 passed"
+  },
+  "release": "20261102-source-sync",
+  "prepublicationSourceChecks": {
+    "htmlAssertions": 88889,
+    "renderedAssertions": 11912,
+    "csv": "PASS",
+    "sourceHashes": "MATCH"
+  },
+  "mapPaletteVerification": {
+    "status": "PASS",
+    "towers": 8,
+    "scenarios": 16,
+    "mapViews": 32,
+    "manual": "#830051",
+    "semi": "#f0ab00",
+    "automated": "#68d2df",
+    "fpAndALabels": [
+      "FP&A Operations",
+      "FP&A Commercial"
+    ]
+  }
+}
