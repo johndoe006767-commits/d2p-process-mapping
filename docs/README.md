@@ -36,13 +36,16 @@ Start.bat / Stop.bat            Windows launchers
 Source/                        Authoritative source maps and supporting registers
 dist/                          Website served directly, including data and assets
 scripts/                       Local start/stop controller
-docs/                          README, design, product and project instructions
+docs/                          README, design and project instructions
 tests/                         Site verification
 backups/                       Original site undo backup (local only)
+archives/                      Inactive feature archives (local only)
 .github/workflows/pages.yml     GitHub Pages deployment
 ```
 
 Only the four Start/Stop launcher files remain loose at the top level; `Source/` stays directly accessible there. Documentation lives in `docs/`. Hidden repository and local configuration files retain their required locations. The ignored `.runtime/` folder contains local server state and logs. `.git/` contains repository history. Asset and library licenses are retained alongside the files they cover.
+
+The former chatbot is archived locally in `archives/ai-chatbot-2026-11-02/`. Its interface, backend, configuration and saved sessions are disconnected from the active site. The archive is excluded from Git and GitHub Pages.
 
 ## Edit and publish
 
@@ -57,3 +60,5 @@ Tower cards use `dist/data/tower-briefs.json` for dependencies and the 2026 / 20
 `Source/` retains the supplied source maps and supporting registers. Baseline map records use `dist/neural/<TOWER>.json`; AI records use `<TOWER>-ai.json`. `dist/data/suggested-processes.json` supplies the AI activity registers and adopted activity mix. Source files are retained for comparison and are not served or published by the website.
 
 Push changes to `main` to deploy. GitHub Actions publishes only `dist/` to GitHub Pages, retaining relative paths so the site also works under `/d2p-process-mapping/`.
+
+The local and published sites use the same `dist/` files. The current release marker is `20261102-site-only`; opening the live URL with `?v=20261102-site-only` bypasses an older cached homepage.
