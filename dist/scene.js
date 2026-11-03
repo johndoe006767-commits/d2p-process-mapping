@@ -9,7 +9,7 @@ import {loadReplacement} from './models.js?v=20261103-tower-workbook';
 import {buildVesselNetwork} from './vessels.js';
 import {mountAstralOrgan,mountAstralSkeleton,mountAstralVessel,createAstralRenderer} from './astral-anatomy.js';
 import {cardMarkup,metricsSentence,accentFor,towerNameFor,towerAcronymFor,overviewNameFor} from './health.js?v=20261103-tower-workbook';
-import {createHelpdesk} from './helpdesk.js?v=20261103-nursa';
+import {createHelpdesk} from './helpdesk.js?v=20261103-nursa-floor';
 const $=s=>document.querySelector(s);
 syncAnatomyLayout();
 const configs=[['brain','FP&A Commercial','Brain',-1,0,.18],['liver',REAL.liver.name,'Liver',-1,1,.25],['kidneys','Controlling','Kidneys',-1,2,.23],['spleen','Tax','Spleen',-1,3,.12],['lungs',REAL.lungs.name,'Lungs',1,0,.32],['stomach','P2P','Stomach',1,1,.17],['pancreas','FP&A Operations','Pancreas',1,2,.20],['intestines','O2C','Intestines',1,3,.29]];
@@ -29,7 +29,7 @@ const helpdesk=createHelpdesk($('#experience'),{
 function syncHelpdesk(){
  const projectY=y=>(camera.position.y+camera.top-y)/(camera.top-camera.bottom)*h;
  helpdesk.update({progress:separation,width:w,height:h,available:ready&&!selected,
-  midThighY:projectY(anatomyLandmarks.midThigh),
+  floorY:projectY(anatomyLandmarks.floor),midThighY:projectY(anatomyLandmarks.midThigh),
   shoulderY:projectY(anatomyLandmarks.shoulder)});
 }
 // All continuous motion stays in Three.js, outside UI rendering.
@@ -158,6 +158,7 @@ const [atlasResponse,bodyResponse]=await Promise.all([fetch('./data/anatomy/atla
 const skeletalParts=atlas.parts.filter(part=>part.group==='skeleton');
 const femurs=skeletalParts.filter(part=>/femur/i.test(part.name));
 anatomyLandmarks={
+ floor:Math.min(...skeletalParts.map(part=>part.bounds[0][1])),
  midThigh:femurs.reduce((sum,part)=>sum+(part.bounds[0][1]+part.bounds[1][1])/2,0)/femurs.length,
  shoulder:Math.max(...skeletalParts.filter(part=>/clavicle/i.test(part.name)).map(part=>part.bounds[1][1]))
 };

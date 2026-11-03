@@ -6,10 +6,10 @@
 .helpdesk-art{position:absolute;inset:0;display:block;transition:filter 180ms ease,scale 180ms ease;transform-origin:center bottom}
 .helpdesk-art img{position:absolute;width:100%;height:100%;inset:0;object-fit:contain;user-select:none;pointer-events:none}
 .helpdesk-full{opacity:var(--helpdesk-full-opacity,1)}
-.helpdesk-portrait{opacity:var(--helpdesk-portrait-opacity,0);object-position:center bottom;padding-bottom:calc(var(--helpdesk-unit) * 1.2)}
+.helpdesk-portrait{opacity:var(--helpdesk-portrait-opacity,0);object-position:center bottom;padding-bottom:calc(24px + var(--helpdesk-dock-gap))}
 .helpdesk-dock-label{position:absolute;bottom:0;left:-15%;width:130%;color:#f0c5e4;font-size:clamp(10px,.65vw,25px);font-weight:550;line-height:1.2;opacity:var(--helpdesk-portrait-opacity,0);text-shadow:0 2px 8px #130b1d}
 .helpdesk-dock-label>span{display:block}
-@media(min-width:768px){.helpdesk-portrait{padding-bottom:calc(var(--helpdesk-unit) * 2)}}
+@media(min-width:768px){.helpdesk-portrait{padding-bottom:calc(var(--helpdesk-unit) * 2 + var(--helpdesk-dock-gap))}}
 #helpdesk .helpdesk-launcher:focus-visible{outline:2px solid #e9aed6;outline-offset:6px;border-radius:16px}
 @media(hover:hover) and (pointer:fine){#helpdesk .helpdesk-launcher:hover .helpdesk-art{scale:1.025;filter:drop-shadow(0 0 10px #e9aed66b)}}
 .helpdesk-preview{position:absolute;width:clamp(260px,18vw,680px);padding:calc(var(--helpdesk-unit) * 1.5);background:#30203ef7;border:1px solid #9b76a8;border-radius:14px;pointer-events:auto;box-shadow:0 14px 36px #10091c40}

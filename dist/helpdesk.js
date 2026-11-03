@@ -99,7 +99,7 @@ export function createHelpdesk(host, {onOpen, onClose}) {
   back.addEventListener('click',close);
   root.addEventListener('keydown',e=>{if(e.key==='Tab')keyboardPreview=true;if(e.key==='Escape'){e.preventDefault();e.stopPropagation();if(opened)close();else{suppressed=true;hidePreview();launcher.focus({preventScroll:true});}}});
   root.addEventListener('wheel',e=>{if(opened)e.stopPropagation();},{passive:true});
-  function update({progress,width,height,available:nextAvailable,midThighY,shoulderY}){
+  function update({progress,width,height,available:nextAvailable,floorY,midThighY,shoulderY}){
     if(available!==nextAvailable){available=nextAvailable;root.dataset.available=String(available);launcher.disabled=!available;if(!available)hidePreview();}
     if(state.width===width&&state.height===height&&Math.abs(state.progress-progress)<.0002)return;
     state={progress,width,height};
@@ -107,12 +107,14 @@ export function createHelpdesk(host, {onOpen, onClose}) {
     const head=shoulderY+height*.014;
     const bodyHeight=mobile?Math.min(midThighY-head,width*.65):midThighY-head;
     const bodyWidth=bodyHeight*fullAspect,bodyX=width*(mobile?.80:.69)-bodyWidth/2;
-    const bodyY=midThighY-bodyHeight;
+    const bodyY=floorY-bodyHeight;
     const dockWidth=mobile?48:Math.max(64,Math.min(240,width*.065));
-    const dockHeight=mobile?62:dockWidth*1.15+Math.max(14,width*.006);
+    const dockGap=mobile?8:Math.max(8,Math.min(18,width*.005));
+    const dockHeight=(mobile?62:dockWidth*1.15+Math.max(14,width*.006))+dockGap;
     const dockX=width-dockWidth-(mobile?22:Math.max(12,width*.015)),dockY=height-dockHeight-(mobile?4:Math.max(14,height*.025));
     const mix=(a,b)=>a+(b-a)*t;
     const blend=Math.max(0,Math.min(1,(t-.40)/.45));
+    root.style.setProperty('--helpdesk-dock-gap',dockGap+'px');
     launcher.style.transform=`translate3d(${mix(bodyX,dockX)}px,${mix(bodyY,dockY)}px,0)`;
     launcher.style.width=`${mix(bodyWidth,dockWidth)}px`;launcher.style.height=`${mix(bodyHeight,dockHeight)}px`;
     root.style.setProperty('--helpdesk-full-opacity',String(1-blend));root.style.setProperty('--helpdesk-portrait-opacity',String(blend));
