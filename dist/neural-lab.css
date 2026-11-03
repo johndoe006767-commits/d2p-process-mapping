@@ -28,3 +28,13 @@
 /* Fitted map chrome uses the usable width, excluding the browser scrollbar. */
 #process-workspace #navigation,#process-workspace .map-intro,#process-workspace .overview-heading{width:var(--map-viewport-width,100%)}
 #process-workspace :is(h1,[tabindex="-1"]):focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+
+/* Source context shared by both map levels and the tower insights. */
+.handoff-context{flex:none;color:inherit;font-size:inherit}
+.handoff-context>summary{cursor:pointer;width:fit-content;font-weight:600;padding:.5em 0}
+.handoff-context>summary:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+.handoff-context-body{max-height:32vh;overflow:auto;max-width:100ch;line-height:1.5;padding:0 1em .8em 0}
+.handoff-context-body ul{padding-inline-start:1.4em;margin:.4em 0 1em}
+.handoff-context-body p{margin:.3em 0 .65em}
+.handoff-context-body .lt-review li+li{margin-top:.65em}
+#process-workspace .handoff-context{box-sizing:border-box;width:var(--map-viewport-width,100%);padding:.2em 2em;background:var(--base);border-bottom:1px solid var(--line)}

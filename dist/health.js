@@ -11,7 +11,7 @@ const TOWER_NAMES = {
   kidneys: 'Financial Controlling',
   spleen: 'Tax',
   lungs: 'Record to Report',
-  stomach: 'Procure to Pay',
+  stomach: 'Purchase To Pay',
   intestines: 'Order to Cash',
 };
 export const towerNameFor = id => TOWER_NAMES[id] || id;

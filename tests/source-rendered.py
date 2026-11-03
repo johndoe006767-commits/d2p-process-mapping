@@ -6,6 +6,7 @@ It reads visible source sections and reconstructs handoffs from SVG endpoints.
 """
 
 from collections import Counter
+import hashlib
 import json
 from pathlib import Path
 import re
@@ -62,6 +63,11 @@ def audit_sections(source, exported, label):
         if src['id']:
             equal(dst['id'], src['id'], prefix + '.id')
         a, b = content(src['html']), content(dst['html'])
+        tabs = BeautifulSoup(src['html'], 'html.parser').select('button[role="tab"]')
+        headings = b.select('details.sc-tpitab > summary')
+        equal([visible(n) for n in headings], [visible(n) for n in tabs], prefix + '.registerTabs')
+        for heading in headings:
+            heading.decompose()
         equal(visible(b), visible(a), prefix + '.allVisibleText')
         # Verify table cells individually, preserving row boundaries and order.
         sr, dr = a.select('tr'), b.select('tr')
@@ -84,7 +90,7 @@ def audit_graph(source_svg, records, label):
     if len(columns) != 3:
         return 0
 
-    def rect_label(rect, middle):
+    def rect_lines(rect, middle):
         parts = []
         for sibling in rect.next_siblings:
             if getattr(sibling, 'name', None) == 'rect':
@@ -96,12 +102,20 @@ def audit_graph(source_svg, records, label):
             parts.append(sibling.title.get_text() if sibling.title else sibling.get_text())
             if not middle:
                 break
-        return normalized(' '.join(parts))
+        return parts
 
     nodes = []
     for rect in rectangles:
         column = columns.index(float(rect['x']))
-        nodes.append({'column': column, 'label': rect_label(rect, column == 1),
+        parts = rect_lines(rect, column == 1)
+        # The final source overlay can rename a whole SVG text line. A
+        # wrapped "Month-End ERP" / "Close" still has "Close" in its tooltip.
+        renamed = {'Closing': 'Close', 'Reporting': 'Report', 'Planning': 'Plan',
+                   'Sourcing': 'Source', 'Purchase To Pay': 'Procure',
+                   'Order to Cash': 'Invoice', 'Cash & Bank': 'Collect'}
+        prefix = ' '.join(f'(?:{re.escape(p)}|{re.escape(renamed[p])})'
+                          if p in renamed else re.escape(p) for p in parts)
+        nodes.append({'column': column, 'label': normalized(' '.join(parts)), 'prefix': prefix,
                       'x': float(rect['x']), 'y': float(rect['y']),
                       'w': float(rect['width']), 'h': float(rect['height'])})
     groups = [[n for n in nodes if n['column'] == i] for i in range(3)]
@@ -137,11 +151,13 @@ def audit_graph(source_svg, records, label):
             # Source boxes wrap/truncate long flow names. The path tooltip
             # retains their complete names; find its separator after the
             # visible prefix, so a colon inside the flow name remains intact.
-            boundary = remaining.index(': ', len(flow['label']))
+            visible_prefix = re.match(flow['prefix'], remaining)
+            assert visible_prefix, (label, flow['label'], remaining)
+            boundary = remaining.index(': ', visible_prefix.end())
             full_title, detail = remaining[:boundary], remaining[boundary + 2:]
         else:
             full_title, detail = edge_title.split(' → ' + party['label'] + ': ', 1)
-        equal(full_title.startswith(flow['label']), True, label + '.edgeFlowLabel')
+        equal(bool(re.match(flow['prefix'], full_title)), True, label + '.edgeFlowLabel')
         if fi in full_titles:
             equal(full_title, full_titles[fi], label + '.consistentFlowTitle')
         full_titles[fi] = full_title
@@ -164,6 +180,9 @@ def audit_graph(source_svg, records, label):
 
 def main():
     capture = read(CAPTURE_PATH)
+    source, = (ROOT / 'Source').glob('*.html')
+    equal(capture['source'], source.name, 'capture.source')
+    equal(capture['sha256'], hashlib.sha256(source.read_bytes()).hexdigest(), 'capture.sha256')
     real = read(ROOT / 'dist/data/real-processes.json')
     ai = read(ROOT / 'dist/data/suggested-processes.json')
     registers = read(ROOT / 'dist/data/tower-content.json')

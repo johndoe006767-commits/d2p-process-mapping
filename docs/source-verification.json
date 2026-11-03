@@ -1,5 +1,5 @@
 {
-  "verifiedDate": "2026-11-02",
+  "verifiedDate": "2026-11-03",
   "timezone": "Asia/Kuala_Lumpur",
   "scope": "Verified local site files prepared for GitHub Pages publication",
   "status": "PASS",
@@ -9,8 +9,8 @@
       "sha256": "e06cde7ce88b8f7237d941fd849ce4bd8550fd5b8e55b583a388d910f1fdb6b0"
     },
     {
-      "file": "Source/D2P_All_Towers_Process_Maps_Oct19 (4).html",
-      "sha256": "8df52d33128f815534be4a5e5711380754c683c79c25466993bbce627c6c9fac"
+      "file": "Source/D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html",
+      "sha256": "dd7a2e17f86511af359294fd089a95e1522da5a831e187dc8d9593a245682eef"
     }
   ],
   "totals": {
@@ -19,17 +19,18 @@
     "stages": 46,
     "processes": 106,
     "activitiesPerScenario": 489,
-    "documentedHandoffs": 298,
+    "documentedHandoffs": 305,
     "htmlRegisterEntries": 359,
     "csvKeyInterdependencies": 18,
     "csvTpi2026": 15,
-    "csvTpi2027AiSuggested": 13
+    "csvTpi2027AiSuggested": 13,
+    "ltHandoffReviewEntries": 18
   },
   "checks": [
     {
       "check": "independent raw HTML data audit",
       "status": "PASS",
-      "assertions": 88889,
+      "assertions": 89499,
       "towers": [
         {
           "tower": "FPAC",
@@ -233,7 +234,7 @@
     {
       "check": "independent rendered source audit",
       "status": "PASS",
-      "assertions": 11912,
+      "assertions": 12025,
       "towers": [
         {
           "tower": "FPAC",
@@ -248,7 +249,7 @@
           "scenarios": 2,
           "sourceSections": 10,
           "tableRows": 256,
-          "handoffs": 63,
+          "handoffs": 65,
           "aiOpportunities": 18
         },
         {
@@ -256,7 +257,7 @@
           "scenarios": 2,
           "sourceSections": 9,
           "tableRows": 132,
-          "handoffs": 15,
+          "handoffs": 16,
           "aiOpportunities": 10
         },
         {
@@ -264,7 +265,7 @@
           "scenarios": 2,
           "sourceSections": 12,
           "tableRows": 295,
-          "handoffs": 54,
+          "handoffs": 55,
           "aiOpportunities": 11
         },
         {
@@ -272,7 +273,7 @@
           "scenarios": 2,
           "sourceSections": 10,
           "tableRows": 153,
-          "handoffs": 39,
+          "handoffs": 41,
           "aiOpportunities": 14
         },
         {
@@ -288,7 +289,7 @@
           "scenarios": 2,
           "sourceSections": 10,
           "tableRows": 124,
-          "handoffs": 35,
+          "handoffs": 36,
           "aiOpportunities": 7
         },
         {
@@ -311,62 +312,79 @@
       {
         "tower": "FPAC",
         "scenarios": 2,
+        "mapViews": 4,
         "activities": 102,
         "handoffs": 55,
+        "reviewEntries": 3,
         "status": "PASS"
       },
       {
         "tower": "FPAO",
         "scenarios": 2,
+        "mapViews": 4,
         "activities": 61,
-        "handoffs": 63,
+        "handoffs": 65,
+        "reviewEntries": 3,
         "status": "PASS"
       },
       {
         "tower": "CAPEX",
         "scenarios": 2,
+        "mapViews": 4,
         "activities": 75,
-        "handoffs": 15,
+        "handoffs": 16,
+        "reviewEntries": 2,
         "status": "PASS"
       },
       {
         "tower": "P2P",
         "scenarios": 2,
+        "mapViews": 4,
         "activities": 84,
-        "handoffs": 54,
+        "handoffs": 55,
+        "reviewEntries": 3,
         "status": "PASS"
       },
       {
         "tower": "O2C",
         "scenarios": 2,
+        "mapViews": 4,
         "activities": 37,
-        "handoffs": 39,
+        "handoffs": 41,
+        "reviewEntries": 1,
         "status": "PASS"
       },
       {
         "tower": "TAX",
         "scenarios": 2,
+        "mapViews": 4,
         "activities": 77,
         "handoffs": 21,
+        "reviewEntries": 2,
         "status": "PASS"
       },
       {
         "tower": "R2R",
         "scenarios": 2,
+        "mapViews": 4,
         "activities": 39,
-        "handoffs": 35,
+        "handoffs": 36,
+        "reviewEntries": 3,
         "status": "PASS"
       },
       {
         "tower": "CTRL",
         "scenarios": 2,
+        "mapViews": 4,
         "activities": 14,
         "handoffs": 16,
+        "reviewEntries": 1,
         "status": "PASS"
       }
     ],
     "errors": [],
-    "failures": []
+    "failures": [],
+    "coverage": "Both map levels for each tower in both scenarios, including every activity card, all high-level process or stage cards, expanded LT reviews, AI opportunities and TPI subregisters."
   },
   "towers": {
     "brain": {
@@ -405,7 +423,7 @@
       "processes": 15,
       "pain": 40,
       "registerEntries": 56,
-      "documentedHandoffs": 63
+      "documentedHandoffs": 65
     },
     "liver": {
       "asIs": {
@@ -424,7 +442,7 @@
       "processes": 21,
       "pain": 5,
       "registerEntries": 35,
-      "documentedHandoffs": 15
+      "documentedHandoffs": 16
     },
     "stomach": {
       "asIs": {
@@ -443,7 +461,7 @@
       "processes": 17,
       "pain": 30,
       "registerEntries": 72,
-      "documentedHandoffs": 54
+      "documentedHandoffs": 55
     },
     "intestines": {
       "asIs": {
@@ -462,7 +480,7 @@
       "processes": 10,
       "pain": 20,
       "registerEntries": 30,
-      "documentedHandoffs": 39
+      "documentedHandoffs": 41
     },
     "spleen": {
       "asIs": {
@@ -500,7 +518,7 @@
       "processes": 9,
       "pain": 9,
       "registerEntries": 45,
-      "documentedHandoffs": 35
+      "documentedHandoffs": 36
     },
     "kidneys": {
       "asIs": {
@@ -526,22 +544,24 @@
     "FP&A Operations and Tax have blank dependency and project fields, with explicit zero TPI counts in the CSV.",
     "Tax has three source stages, 20 processes and 77 activities.",
     "The R2R 2027 GPO/GPDD parenthetical remains a note, separate from its three projects.",
-    "Detailed HTML TPI registers are distinct from the annual project lists supplied in the CSV."
+    "Detailed HTML TPI registers are distinct from the annual project lists supplied in the CSV.",
+    "Several grid maps retain their earlier trigger and handoff paragraphs in the rendered source. The site applies the replacement text declared in the HTML overlay to both scenarios."
   ],
   "displayFixes": [
-    "AI activity labels use their source recommendation titles.",
-    "AI activity detail includes the original As Is type.",
-    "AI handoff views remain scrollable when proposed dependency tables exceed the viewport."
+    "FP&A Commercial uses its supplied high-level map in both scenarios.",
+    "Updated Demand to Profit stage labels and LT review notes are available in maps and insights.",
+    "Tabbed source TPI registers open as native disclosures.",
+    "AI activity details show the baseline and feasibility-adjusted activity types."
   ],
   "additionalChecks": {
     "javascriptSyntax": "PASS",
     "gitDiffWhitespace": "PASS",
     "anatomyRegressionTests": "3 passed"
   },
-  "release": "20261102-source-sync",
+  "release": "20261103-lt-review",
   "prepublicationSourceChecks": {
-    "htmlAssertions": 88889,
-    "renderedAssertions": 11912,
+    "htmlAssertions": 89499,
+    "renderedAssertions": 12025,
     "csv": "PASS",
     "sourceHashes": "MATCH"
   },

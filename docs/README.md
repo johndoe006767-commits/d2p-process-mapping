@@ -59,7 +59,7 @@ Tower cards use `dist/data/tower-briefs.json` for dependencies and the 2026 / 20
 
 `Source/` retains the supplied source maps and supporting registers. Baseline map records use `dist/neural/<TOWER>.json`; AI records use `<TOWER>-ai.json`. `dist/data/suggested-processes.json` supplies the AI activity registers and adopted activity mix. Source files are retained for comparison and are not served or published by the website.
 
-The local source refresh on 2 November 2026 uses **D2P_All_Towers_Process_Maps_Oct19 (4).html**. It contains 46 stages, 106 processes, 489 activities and 298 documented handoffs across eight towers. Tax has three stages, 20 processes and 77 activities in this version. AI activity mixes follow each source tower's feasibility rules; original activity types remain available in the detail views. The detailed HTML TPI registers are separate from the CSV's annual project lists.
+The 3 November 2026 refresh uses **D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html**. It contains 46 stages, 106 processes, 489 activities per scenario and 305 documented handoff connections across eight towers. In either map or the Handoffs view, expand **Demand to Profit stages & LT handoff review** to read the tower’s stage impacts and review notes. The 18 review entries identify new links and requested changes, including proposals that apply only to the AI scenario. High-level trigger and handoff cards use the source’s revised wording. The detailed HTML TPI registers are separate from the CSV’s annual project lists.
 
 Three independent checks cover the source refresh:
 
@@ -73,4 +73,4 @@ The rendered check uses `.runtime/source-sync/capture.json`, captured from the s
 
 Push changes to `main` to deploy. GitHub Actions publishes only `dist/` to GitHub Pages, retaining relative paths so the site also works under `/d2p-process-mapping/`.
 
-The local and published sites use the same `dist/` files. The release marker is `20261102-source-sync`. The release includes the latest source refresh, expanded FP&A acronym labels, and the matching light-blue / gold / mulberry activity palette across all process maps. Updated data and dependent assets carry this version tag to refresh browser caches.
+The local and published sites use the same `dist/` files. The release marker is `20261103-lt-review`. Updated data and dependent assets carry this version tag to refresh browser caches.

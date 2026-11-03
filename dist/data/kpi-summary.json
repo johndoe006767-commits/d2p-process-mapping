@@ -24,7 +24,7 @@
             "direction": "in",
             "party": "FP&A Ops (Product Costing)",
             "detail": "SCC rate per SKU (via FET)",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-FPAC"
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-FPAC"
           }
         ],
         "rank": 1
@@ -99,7 +99,7 @@
         "months": []
       }
     ],
-    "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-FPAC"
+    "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-FPAC"
   },
   "pancreas": {
     "asIs": {
@@ -126,7 +126,7 @@
             "direction": "in",
             "party": "CAPEX",
             "detail": "Depreciation forecast",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-FPAO"
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-FPAO"
           },
           {
             "flowId": "FPAO-05",
@@ -134,10 +134,26 @@
             "direction": "in",
             "party": "CAPEX",
             "detail": "Depreciation and amortisation run",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-FPAO"
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-FPAO"
           }
         ],
         "rank": 1
+      },
+      {
+        "id": "brain",
+        "name": "FP&A Commercial",
+        "count": 1,
+        "evidence": [
+          {
+            "flowId": "FPAO-02",
+            "flow": "2. Operational Planning",
+            "direction": "in",
+            "party": "FP&A Comm",
+            "detail": "NEW · Sales volume forecast used for the SCC calculation",
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-FPAO"
+          }
+        ],
+        "rank": 2
       },
       {
         "id": "stomach",
@@ -150,10 +166,10 @@
             "direction": "in",
             "party": "P2P",
             "detail": "Coupa PO / non-PO and T&E cut-off",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-FPAO"
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-FPAO"
           }
         ],
-        "rank": 2
+        "rank": 3
       },
       {
         "id": "lungs",
@@ -166,10 +182,10 @@
             "direction": "in",
             "party": "R2R",
             "detail": "Sub-module close (FA, AP, AR); accruals; lease; ICT",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-FPAO"
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-FPAO"
           }
         ],
-        "rank": 3
+        "rank": 4
       }
     ],
     "projects": [
@@ -246,7 +262,7 @@
         "months": []
       }
     ],
-    "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-FPAO"
+    "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-FPAO"
   },
   "liver": {
     "asIs": {
@@ -273,7 +289,7 @@
             "direction": "in",
             "party": "P2P-02 Invoice Management",
             "detail": "POs, goods receipts and invoices against WBSE",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-CAPEX"
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-CAPEX"
           },
           {
             "flowId": "CAPEX-02",
@@ -281,7 +297,7 @@
             "direction": "in",
             "party": "P2P-01 Perform Goods & Services Receipt",
             "detail": "Goods receipts against project WBSE",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-CAPEX"
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-CAPEX"
           }
         ],
         "rank": 1
@@ -332,7 +348,7 @@
         "months": []
       }
     ],
-    "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-CAPEX"
+    "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-CAPEX"
   },
   "stomach": {
     "asIs": {
@@ -359,31 +375,7 @@
             "direction": "in",
             "party": "O2C-03 Cash & Banking",
             "detail": "Payment confirmation / ACK file",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-P2P"
-          },
-          {
-            "flowId": "P2P-03",
-            "flow": "3. Payment",
-            "direction": "in",
-            "party": "O2C-03 Cash & Banking",
-            "detail": "Rejected payment notification",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-P2P"
-          },
-          {
-            "flowId": "P2P-03",
-            "flow": "3. Payment",
-            "direction": "in",
-            "party": "O2C-03 Cash & Banking",
-            "detail": "Incoming funds notification",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-P2P"
-          },
-          {
-            "flowId": "P2P-05",
-            "flow": "5. Specialist variants (branch from the core invoice journey)",
-            "direction": "in",
-            "party": "O2C-03 Cash & Banking",
-            "detail": "Debit posting",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-P2P"
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-P2P"
           },
           {
             "flowId": "P2P-03",
@@ -391,7 +383,7 @@
             "direction": "in",
             "party": "O2C-03 Cash & Banking",
             "detail": "Payment failure notification",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-P2P"
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-P2P"
           },
           {
             "flowId": "P2P-03",
@@ -399,7 +391,31 @@
             "direction": "in",
             "party": "O2C-03 Cash & Banking",
             "detail": "Payment confirmation and proof",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-P2P"
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-P2P"
+          },
+          {
+            "flowId": "P2P-03",
+            "flow": "3. Payment",
+            "direction": "in",
+            "party": "O2C-03 Cash & Banking",
+            "detail": "Rejected payment notification",
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-P2P"
+          },
+          {
+            "flowId": "P2P-03",
+            "flow": "3. Payment",
+            "direction": "in",
+            "party": "O2C-03 Cash & Banking",
+            "detail": "Incoming funds notification",
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-P2P"
+          },
+          {
+            "flowId": "P2P-05",
+            "flow": "5. Specialist variants (branch from the core invoice journey)",
+            "direction": "in",
+            "party": "O2C-03 Cash & Banking",
+            "detail": "Debit posting",
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-P2P"
           }
         ],
         "rank": 1
@@ -415,18 +431,34 @@
             "direction": "in",
             "party": "R2R-01 SAP Close",
             "detail": "Close calendar",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-P2P"
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-P2P"
           },
           {
             "flowId": "P2P-04",
             "flow": "4. Month-end close",
             "direction": "in",
             "party": "R2R",
-            "detail": "Coupa accrual and offset prepayment adjustment (China)",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-P2P"
+            "detail": "⚠ LT#2 · Coupa accrual and offset prepayment adjustment (China)",
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-P2P"
           }
         ],
         "rank": 2
+      },
+      {
+        "id": "liver",
+        "name": "CAPEX",
+        "count": 1,
+        "evidence": [
+          {
+            "flowId": "P2P-01",
+            "flow": "1. Goods & services receipt",
+            "direction": "in",
+            "party": "CAPEX",
+            "detail": "NEW · Approved project and WBSE set up - PO raised only after CAPEX approval",
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-P2P"
+          }
+        ],
+        "rank": 3
       },
       {
         "id": "spleen",
@@ -438,11 +470,11 @@
             "flow": "5. Specialist variants (branch from the core invoice journey)",
             "direction": "in",
             "party": "Tax",
-            "detail": "Confirmed WHT treatment",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-P2P"
+            "detail": "⚠ LT#10 · Confirmed WHT treatment",
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-P2P"
           }
         ],
-        "rank": 3
+        "rank": 4
       },
       {
         "id": "kidneys",
@@ -455,10 +487,10 @@
             "direction": "in",
             "party": "Controlling",
             "detail": "BlackLine reconciliation calendar",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-P2P"
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-P2P"
           }
         ],
-        "rank": 4
+        "rank": 5
       }
     ],
     "projects": [
@@ -543,7 +575,7 @@
         "months": []
       }
     ],
-    "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-P2P"
+    "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-P2P"
   },
   "intestines": {
     "asIs": {
@@ -570,7 +602,7 @@
             "direction": "in",
             "party": "P2P",
             "detail": "AP-due invoice check",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-O2C"
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-O2C"
           },
           {
             "flowId": "SOC-06.1",
@@ -578,7 +610,7 @@
             "direction": "in",
             "party": "P2P",
             "detail": "3rd party / intercompany vendor invoices",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-O2C"
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-O2C"
           }
         ],
         "rank": 1
@@ -594,7 +626,7 @@
             "direction": "in",
             "party": "Tax",
             "detail": "Tax payments",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-O2C"
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-O2C"
           }
         ],
         "rank": 2
@@ -610,7 +642,7 @@
             "direction": "in",
             "party": "Controlling",
             "detail": "Updates the price in SAP",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-O2C"
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-O2C"
           }
         ],
         "rank": 3
@@ -696,7 +728,7 @@
         "months": []
       }
     ],
-    "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-O2C"
+    "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-O2C"
   },
   "spleen": {
     "asIs": {
@@ -723,7 +755,7 @@
             "direction": "in",
             "party": "R2R-01 SAP Close",
             "detail": "SAP Close",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-TAX"
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-TAX"
           },
           {
             "flowId": "TAX-02.2",
@@ -731,7 +763,7 @@
             "direction": "in",
             "party": "R2R-01 SAP Close",
             "detail": "SAP Close",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-TAX"
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-TAX"
           },
           {
             "flowId": "TAX-03.4",
@@ -739,7 +771,7 @@
             "direction": "in",
             "party": "R2R-01 SAP Close",
             "detail": "SAP Close",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-TAX"
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-TAX"
           }
         ],
         "rank": 1
@@ -755,7 +787,7 @@
             "direction": "in",
             "party": "CAPEX-05 Depreciation",
             "detail": "Depreciation & Amortisation",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-TAX"
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-TAX"
           }
         ],
         "rank": 2
@@ -771,7 +803,7 @@
             "direction": "in",
             "party": "Controlling",
             "detail": "sum netting report",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-TAX"
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-TAX"
           }
         ],
         "rank": 3
@@ -816,7 +848,7 @@
         "months": []
       }
     ],
-    "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-TAX"
+    "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-TAX"
   },
   "lungs": {
     "asIs": {
@@ -843,7 +875,7 @@
             "direction": "in",
             "party": "O2C",
             "detail": "C2C billing release and trade AR",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-R2R"
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-R2R"
           },
           {
             "flowId": "R2R-01.2",
@@ -851,7 +883,7 @@
             "direction": "in",
             "party": "O2C",
             "detail": "Sales, billing and AR",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-R2R"
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-R2R"
           },
           {
             "flowId": "R2R-02.1",
@@ -859,7 +891,7 @@
             "direction": "in",
             "party": "O2C",
             "detail": "",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-R2R"
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-R2R"
           },
           {
             "flowId": "R2R-03.1",
@@ -867,7 +899,7 @@
             "direction": "in",
             "party": "O2C",
             "detail": "AR and C2C support",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-R2R"
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-R2R"
           }
         ],
         "rank": 1
@@ -883,7 +915,7 @@
             "direction": "in",
             "party": "CAPEX",
             "detail": "Settlement, depreciation and lease journals",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-R2R"
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-R2R"
           },
           {
             "flowId": "R2R-02.1",
@@ -891,7 +923,7 @@
             "direction": "in",
             "party": "CAPEX",
             "detail": "FA and lease ERH files",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-R2R"
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-R2R"
           },
           {
             "flowId": "R2R-03.1",
@@ -899,7 +931,7 @@
             "direction": "in",
             "party": "CAPEX",
             "detail": "FA and lease recs",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-R2R"
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-R2R"
           }
         ],
         "rank": 2
@@ -915,7 +947,7 @@
             "direction": "in",
             "party": "P2P",
             "detail": "Coupa cut-off, AP invoices and accruals",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-R2R"
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-R2R"
           },
           {
             "flowId": "R2R-03.1",
@@ -923,7 +955,7 @@
             "direction": "in",
             "party": "P2P",
             "detail": "AP support",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-R2R"
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-R2R"
           }
         ],
         "rank": 3
@@ -939,7 +971,7 @@
             "direction": "in",
             "party": "Controlling",
             "detail": "Manual journals (MJV)",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-R2R"
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-R2R"
           },
           {
             "flowId": "R2R-02.1",
@@ -947,7 +979,7 @@
             "direction": "in",
             "party": "Controlling",
             "detail": "Non-SAP units' data",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-R2R"
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-R2R"
           }
         ],
         "rank": 4
@@ -963,7 +995,7 @@
             "direction": "in",
             "party": "FP&A Comm",
             "detail": "Close inputs",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-R2R"
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-R2R"
           }
         ],
         "rank": 5
@@ -978,8 +1010,8 @@
             "flow": "2 · Complete Month-End ERP Close",
             "direction": "in",
             "party": "FP&A Ops",
-            "detail": "Close inputs and accruals",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-R2R"
+            "detail": "⚠ LT#3 · Close inputs and accruals",
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-R2R"
           }
         ],
         "rank": 6
@@ -995,7 +1027,7 @@
             "direction": "in",
             "party": "Tax",
             "detail": "Tax postings before close",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-R2R"
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-R2R"
           }
         ],
         "rank": 7
@@ -1064,7 +1096,7 @@
         "months": []
       }
     ],
-    "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-R2R"
+    "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-R2R"
   },
   "kidneys": {
     "asIs": {
@@ -1091,7 +1123,7 @@
             "direction": "in",
             "party": "P2P-04",
             "detail": "Coupa accruals (preventable journals)",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-CTRL"
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-CTRL"
           }
         ],
         "rank": 1
@@ -1106,8 +1138,8 @@
             "flow": "Statutory audit end-to-end",
             "direction": "in",
             "party": "Tax",
-            "detail": "Planning input",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-CTRL"
+            "detail": "⚠ LT#7 · Planning input",
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-CTRL"
           }
         ],
         "rank": 2
@@ -1123,7 +1155,7 @@
             "direction": "in",
             "party": "R2R",
             "detail": "Financial statements and trial balance",
-            "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-CTRL"
+            "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-CTRL"
           }
         ],
         "rank": 3
@@ -1188,6 +1220,6 @@
         "months": []
       }
     ],
-    "source": "D2P_All_Towers_Process_Maps_Oct19 (4).html#src-CTRL"
+    "source": "D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html#src-CTRL"
   }
 }

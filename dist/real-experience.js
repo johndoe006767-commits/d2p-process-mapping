@@ -1,10 +1,10 @@
 import {setScenario} from './process-scenario.js';
 import {cancelPageNavigation} from './page-navigation.js';
-import {REAL,KPI,escapeHTML as esc} from './real-data.js?v=20261102-source-sync';
-import {CARD_BRIEFS,CARD_SOURCE} from './tower-briefs.js?v=20261102-source-sync';
-import {comparisonMarkup} from './health.js?v=20261102-source-sync';
-import {openDashboard,closeDashboard,configureDashboard,destroyDashboard} from './tower-dashboard.js?v=20261102-source-sync';
-import {prepareNeural,clearNeural} from './neural-loader.js?v=20261102-source-sync';
+import {REAL,KPI,escapeHTML as esc} from './real-data.js?v=20261103-lt-review';
+import {CARD_BRIEFS,CARD_SOURCE} from './tower-briefs.js?v=20261103-lt-review';
+import {comparisonMarkup} from './health.js?v=20261103-lt-review';
+import {openDashboard,closeDashboard,configureDashboard,destroyDashboard} from './tower-dashboard.js?v=20261103-lt-review';
+import {prepareNeural,clearNeural} from './neural-loader.js?v=20261103-lt-review';
 import {titleCase,normalizeHeadings} from './title-case.js';
 export {openDashboard,closeDashboard};
 const $=s=>document.querySelector(s);

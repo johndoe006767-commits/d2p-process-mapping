@@ -17,6 +17,10 @@ export function makeSourceOverview(svg,payload,t,onSelect){
   svg.querySelectorAll('circle').forEach(n=>n.setAttribute('fill','var(--accent)'));
   svg.querySelectorAll('.hln').forEach((g,i)=>{const id=g.dataset.p;let f=frames.find(f=>f.procs.some(P=>P.id===id));if(!f)return;const P=f.procs.find(P=>P.id===id),title=titleCase(P.name),r=record(f,P,id,title,i+1);wire(g,r);g.querySelector('rect')?.classList.add('flow-node-body');g.querySelectorAll('text').forEach(n=>{if(+n.getAttribute('font-size')>=15){n.setAttribute('y',Number(n.getAttribute('y'))+3);n.setAttribute('fill','var(--ink)');n.setAttribute('font-weight','600');n.textContent=titleCase(n.textContent);}if(n.getAttribute('text-anchor')==='middle')n.setAttribute('fill','var(--accent-ink)');});});
  }else{
+  for(const box of doc.querySelectorAll('.hlb.solid')){
+   const copy=t.highSummary[box.querySelector('h4')?.textContent];
+   if(copy)box.querySelector('p').textContent=copy;
+  }
   const cells=[...doc.querySelectorAll('.hlc')],W=320,H=196,gapX=80,gapY=100;
   const cols=Math.max(...cells.map(c=>parseInt(c.style.gridColumn)||1));const rows=Math.max(...cells.map(c=>parseInt(c.style.gridRow)||1));width=cols*(W+gapX)+48;height=rows*(H+gapY)+100;
   svg.setAttribute('viewBox',`0 0 ${width} ${height}`);const defs=el('defs'),marker=el('marker',{id:'source-high-arrow',viewBox:'0 0 10 10',refX:9,refY:5,markerWidth:7,markerHeight:7,orient:'auto'});marker.append(el('path',{d:'M0 0 L10 5 L0 10 Z',fill:'#c6adce'}));defs.append(marker);svg.append(defs);

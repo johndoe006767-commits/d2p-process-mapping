@@ -13,6 +13,10 @@ from bs4 import BeautifulSoup
 
 ROOT = Path(__file__).resolve().parents[1]
 CAPTURE = json.loads((ROOT / '.runtime/source-sync/capture.json').read_text())
+source_file, = (ROOT / 'Source').glob('*.html')
+source_hash = hashlib.sha256(source_file.read_bytes()).hexdigest()
+if (CAPTURE['source'], CAPTURE.get('sha256')) != (source_file.name, source_hash):
+    raise ValueError('Recapture the current source HTML before importing.')
 TOWERS = {'FPAC': ('brain', 'FPA', 'FP&A Commercial'),
           'FPAO': ('pancreas', 'FPA', 'FP&A Operations'),
           'CAPEX': ('liver', 'CAP', 'CAPEX'), 'P2P': ('stomach', 'P2P', 'P2P'),
@@ -60,6 +64,18 @@ def source_sections(scenario):
     out, extra = [], 0
     for s in scenario['sections']:
         doc = BeautifulSoup(s['html'], 'html.parser')
+        # Source tabs rely on inline JavaScript. Keep both registers and
+        # their labels accessible after that script is stripped.
+        tabs = doc.select('button[role="tab"]')
+        for pane in doc.select('.tpitab[data-tab]'):
+            label = tabs[int(pane['data-tab'])].get_text(' ', strip=True)
+            pane.name = 'details'
+            if not pane.has_attr('hidden'):
+                pane['open'] = ''
+            pane.attrs.pop('hidden', None)
+            heading = doc.new_tag('summary')
+            heading.string = label
+            pane.insert(0, heading)
         for n in doc.select('script, iframe, button'):
             n.decompose()
         for n in doc.find_all(True):
@@ -186,7 +202,12 @@ for key, (organ, map_key, name) in TOWERS.items():
             stages.append({'id': f['id'], 'name': f['name'], 'owner': f.get('owner', ''), 'window': f.get('win', ''),
                            'processes': [{'id': p['id'], 'name': p['name']} for p in f['procs']],
                            'counts': {'man': counts['manual'], 'hyb': counts['semi'], 'auto': counts['auto']}, 'total': counts['total']})
+        high = BeautifulSoup(scenario['high'], 'html.parser')
+        summary = {box.h4.get_text(): box.p.get_text() for box in high.select('.hlb.solid') if box.h4 and box.p}
         record = {'sourceKey': key, 'mapKey': map_key, 'name': name, 'scope': scenario['tower']['scope'],
+                  'd2pStages': src['impacts'], 'highSummary': {**summary, **src['summary']},
+                  'handoffReview': [dict(zip(('status', 'id', 'location', 'description', 'action'), row))
+                                    for row in src['review']],
                   'meta': scenario['tower']['meta'], 'stages': stages, 'activities': activities,
                   'pain': pain, 'tpis': tpis, 'ai': opportunities, 'handoffs': handoffs,
                   'counts': {**mix(activities), 'pain': len(pain), 'tpis': len(tpis), 'ai': len(opportunities)},

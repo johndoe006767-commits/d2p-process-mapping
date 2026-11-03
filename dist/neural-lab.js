@@ -2,7 +2,7 @@ import {scrollPageTo,cancelPageNavigation} from './page-navigation.js';
 import {fitLines,measureText,fitSvgLabels} from './svg-text.js?v=astral-3';
 import {mountAstralBackground} from './astral-background.js?v=galaxy-2';
 import {titleCase} from './title-case.js';
-import {makeSourceOverview} from './neural-overview.js?v=astral-3';
+import {makeSourceOverview} from './neural-overview.js?v=20261103-lt-review';
 /* Presentation layer over the source renderer's process layout and routing. */
 export function mountNeuralLab(root,payload,t,onReturn){
 'use strict';
@@ -48,7 +48,10 @@ function drawHandoffs(f,direction,y){
  row.append(el('rect',{x:26,y:y-5,width:direction==='up'?88:107,height:42,fill:'var(--base)'}));
  row.append(txt(38,y+21,direction==='up'?'Upstream':'Downstream',11.5,'var(--muted)'));
  let x=direction==='up'?120:138;
- items.forEach(item=>{const width=Math.max(65,measureText(item.p,11.2)+24),group=el('g',{class:'handoff-label',role:'button',tabindex:0,'aria-label':`${item.p}: ${item.w}`,'aria-haspopup':'dialog'});group.append(el('title',{},`${item.p}: ${item.w}`),el('rect',{x,y,width,height:32,rx:5}),txt(x+12,y+21,item.p,11.2,'var(--muted)'));const show=()=>{const entry={f,kind:'handoff',item,direction};showHandoffCard(entry,group);};group.onclick=show;group.onkeydown=e=>{if(['Enter',' '].includes(e.key)){e.preventDefault();show();}};row.append(group);x+=width+9;});
+ items.forEach(item=>{
+  const review=item.w.match(/^(NEW|⚠ LT#\w+) · /);
+  const label=review?`${review[1]} · ${item.p}`:item.p;
+  const width=Math.max(65,measureText(label,11.2)+24),group=el('g',{class:'handoff-label',role:'button',tabindex:0,'aria-label':`${item.p}: ${item.w}`,'aria-haspopup':'dialog'});group.append(el('title',{},`${item.p}: ${item.w}`),el('rect',{x,y,width,height:32,rx:5}),txt(x+12,y+21,label,11.2,'var(--muted)'));const show=()=>{const entry={f,kind:'handoff',item,direction};showHandoffCard(entry,group);};group.onclick=show;group.onkeydown=e=>{if(['Enter',' '].includes(e.key)){e.preventDefault();show();}};row.append(group);x+=width+9;});
  svg.append(row);
 }
 function showHandoffCard(n,target){opener=target;$('#card-context').textContent=`Stage ${frames.indexOf(n.f)+1} · ${n.direction==='up'?'Upstream':'Downstream'} handoff`;$('#card-content').innerHTML=`<h2 id="card-title">${esc(n.item.p)}</h2><p class="card-description">${esc(n.item.w)}</p><p class="source-note">${esc(n.item.src)}</p>`;$('#card-next').hidden=true;$('#card-detail').hidden=true;if(!card.matches(':popover-open'))card.showPopover();positionCard(target);card.scrollTop=0;$('#close-card').focus({preventScroll:true});}
@@ -123,9 +126,10 @@ const handoffs=values=>values?.length?values.map(([who,what])=>`<p><strong>${esc
 const valueText=value=>value==null?'':typeof value==='object'?Array.isArray(value)?value.map(valueText).join(' · '):Object.entries(value).map(([k,v])=>`${k}: ${valueText(v)}`).join(' · '):String(value);
 const detailFields=value=>value&&typeof value!=='object'?paragraph(value):value&&Object.keys(value).length?`<dl class="record-meta">${Object.entries(value).filter(([,v])=>v!=null&&v!=='').map(([k,v])=>`<div><dt>${esc(titleCase(k))}</dt><dd>${esc(valueText(v))}</dd></div>`).join('')}</dl>`:'';
 function aiDetails(s,n){
- const review=data.review?.[`${n.P.id}|${s.n}`]||data.review?.[s.t]||{},proposed=s.toty&&s.ch!=='same'?s.toty:s.ty;
+ const review=data.review?.[`${n.P.id}|${s.n}`]||data.review?.[s.t]||{};
+ const activity=t.activities.find(a=>a.stageId===n.f.id&&a.processId===n.P.id&&a.n===s.n);
  return block('AI suggestion',paragraph(s.rec||s.sug||review.sug||(!s.ch||s.ch==='same'?'No change proposed for this step.':'')))+
- block('Activity type if adopted',paragraph(typeNames[proposed]))+block('As Is activity type',paragraph(typeNames[s.was||review.asty]||(['FPAC','FPAO'].includes(t.sourceKey)?typeNames[s.ty]:'')))+
+ block('Activity type if adopted',paragraph(typeNames[activity.effectiveType]))+block('As Is activity type',paragraph(typeNames[activity.asIsType]))+
  block('Tools',paragraph(s.tools||review.tools))+block('Proposal basis',paragraph(s.opp))+block('Feasibility',paragraph(s.feas||review.feas))+
  block(s.feasl||'Review comments',paragraph(s.feasc||review.comment))+block('Scope',paragraph(s.scope))+block('Copilot / Microsoft AI option',detailFields(s.cop))+
  block('Proposed pain-point resolutions',list((s.pp||[]).map(p=>valueText(data.fixes?.[p])).filter(Boolean)))+block('Source review',detailFields(review));
@@ -164,7 +168,7 @@ function updateFilterStatus(){
 }
 function setOverviewScale(value){const minScale=Math.min(.35,viewportWidth()/flow.width);overviewScale=Math.max(minScale,Math.min(2.5,value));flow.setScale(overviewScale);$('#zoom-value').textContent=Math.round(overviewScale*100)+'%';$('#zoom-out').disabled=overviewScale<=minScale;$('#zoom-in').disabled=overviewScale>=2.5;closeCard(false);}
 function setMode(next){mode=next;root.dataset.mode=next;$('#process-map').hidden=next!=='detail';$('.map-intro').hidden=next!=='detail';$('#overview').hidden=next!=='overview';$$('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===next)));closeCard(false);$('.skip').href=next==='overview'?'#overview':'#process-map';if(fitted[next])fitWidth();else if(next==='overview')setOverviewScale(overviewScale);else updateScale(scale);updateFilterStatus();updateHeader();}
-function showProcessCard(r,target){selectedProcess=r;opener=target;markStage(r.st-1);flow.markStage(r.st-1);$('#card-context').textContent=`Process ${String(r.index).padStart(2,'0')} · Stage ${r.st} · ${r.id}`;$('#card-content').innerHTML=`<h2 id="card-title">${esc(r.t)}</h2><p class="card-description">${r.count} activities · ${r.pain.length} documented pain point${r.pain.length===1?'':'s'}</p><dl class="record-meta"><div><dt>Owner</dt><dd>${esc(r.P?.owner||r.f.owner)}</dd></div><div><dt>Activity mix</dt><dd>${r.man} manual · ${r.hyb} semi · ${r.auto} automated</dd></div></dl>${block('Inputs',list(Array.isArray(r.inp)?r.inp:[r.inp]))}${block('Outputs',list(r.id==='FPAC-05.01'?FPAC_FLOW.downstream:r.out?(Array.isArray(r.out)?r.out:[r.out]):[r.P?.outdoc].filter(Boolean)))}${block('Documented pain points',list(r.pain),'pain')}<p class="source-note">${esc(t.name)} · ${viewLabel} Process</p>`;$('#card-next').hidden=true;$('#card-detail').hidden=false;if(!card.matches(':popover-open'))card.showPopover();positionCard(target);card.scrollTop=0;$('#close-card').focus({preventScroll:true});}
+function showProcessCard(r,target){selectedProcess=r;opener=target;markStage(r.st-1);flow.markStage(r.st-1);$('#card-context').textContent=`Process ${String(r.index).padStart(2,'0')} · Stage ${r.st} · ${r.id}`;$('#card-content').innerHTML=`<h2 id="card-title">${esc(r.t)}</h2><p class="card-description">${r.count} activities · ${r.pain.length} documented pain point${r.pain.length===1?'':'s'}</p><dl class="record-meta"><div><dt>Owner</dt><dd>${esc(r.P?.owner||r.f.owner)}</dd></div><div><dt>Activity mix</dt><dd>${r.man} manual · ${r.hyb} semi · ${r.auto} automated</dd></div></dl>${block('Inputs',list(r.inp))}${block('Outputs',list(r.out))}${block('Documented pain points',list(r.pain),'pain')}<p class="source-note">${esc(t.name)} · ${viewLabel} Process</p>`;$('#card-next').hidden=true;$('#card-detail').hidden=false;if(!card.matches(':popover-open'))card.showPopover();positionCard(target);card.scrollTop=0;$('#close-card').focus({preventScroll:true});}
 async function openDetailedProcess(){if(!selectedProcess)return;const r=selectedProcess;setMode('detail');fitWidth();const first=activities().find(n=>r.P?n.P.id===r.id:n.f===r.f);if(first){const target=svg.querySelector(`[data-id="${CSS.escape(first.id)}"]`);if(await scrollToNode(target))showCard(first.id,target);}else jump(r.st-1);}
 function updateScroll(){if(mode!=='detail')return;const y=(window.scrollY+$('#navigation').offsetHeight+35-($('#process-map').getBoundingClientRect().top+window.scrollY))/scale+mapOriginY;let idx=0;frames.forEach((f,i)=>{if(f._box.top<=y)idx=i;});markStage(idx);signalRecords.forEach(({path,signal})=>{const r=path.getBoundingClientRect();signal.style.animationPlayState=r.bottom>$('#navigation').offsetHeight&&r.top<innerHeight&&!paused?'running':'paused';});}
 let ticking=false;listen('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(()=>{updateScroll();ticking=false;});}}, {passive:true});
@@ -175,7 +179,7 @@ try{
  skin();mapOriginY=Math.max(0,frames[0]._box.top-20);
  $('#stages').innerHTML=names.map((name,i)=>`<button data-stage="${i}" aria-current="${i===0?'step':'false'}" aria-label="Stage ${i+1}: ${esc(cleanName(frames[i]))}"><span class="stage-number">${i+1}</span><span>${esc(name)}</span></button>`).join('');
  $('#stage-select').innerHTML=frames.map((f,i)=>`<option value="${i}">${i+1}. ${esc(cleanName(f))}</option>`).join('');
- flow=t.sourceKey==='FPAC'&&!isAI?makeCommercialFlow($('#overview-svg'),data,showProcessCard):makeSourceOverview($('#overview-svg'),payload,t,showProcessCard);fitSvgLabels($('#overview-svg'));overviewScale=viewportWidth()/flow.width;
+ flow=makeSourceOverview($('#overview-svg'),payload,t,showProcessCard);fitSvgLabels($('#overview-svg'));overviewScale=viewportWidth()/flow.width;
  $('#total-count').textContent=activities().length;
  $$('#stages [data-stage]').forEach(b=>b.onclick=()=>jump(Number(b.dataset.stage)));$('#stage-select').onchange=e=>jump(Number(e.target.value));
  $$('[data-filter]').forEach(b=>b.onclick=()=>{filter=b.dataset.filter;engine.setFilter(filter);flow.setFilter(filter);$$('[data-filter]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));updateFilterStatus();});

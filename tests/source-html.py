@@ -14,7 +14,7 @@ import sys
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "Source" / "D2P_All_Towers_Process_Maps_Oct19 (4).html"
+SOURCE, = (ROOT / "Source").glob("*.html")
 # These bindings are the data properties of the source's active TOWERS entries.
 BINDINGS = {
     "FPAC": ("brain", "FPA", "FPAMAP", "FPAMAP"),
@@ -216,9 +216,24 @@ def main():
     real = load_json(ROOT / "dist/data/real-processes.json")
     suggested = load_json(ROOT / "dist/data/suggested-processes.json")
     kpis = load_json(ROOT / "dist/data/kpi-summary.json")
+    outer_towers = {t["id"]: t for t in json.loads(re.search(r'^const T=(\[.*\]);$', outer, re.M)[1])}
+    phases = json.loads(re.search(r'^const PHASES=(\[.*\]);$', outer, re.M)[1])
     summary = []
     for tower, (organ, map_key, asis_binding, ai_binding) in BINDINGS.items():
         html = embedded[tower]
+        outer_tower = outer_towers[tower]
+        labels = json.loads(re.search(r'^const M=(\{.*\});$', html, re.M)[1])
+        impacts = [{"name": labels.get(key, key), "note": outer_tower["note"][key]}
+                   for key, _ in phases if key in outer_tower["ph"]]
+        rows = json.loads(re.search(r'^const P=(\[.*\]);$', html, re.M)[1])
+        summaries = re.search(r'const TR=("(?:[^"\\]|\\.)*"),HO=("(?:[^"\\]|\\.)*");', html)
+        for record in (real[organ], suggested[organ]):
+            compare(record["d2pStages"], impacts, tower + ".finalStageLabelsAndNotes")
+            compare([[r[k] for k in ("status", "id", "location", "description", "action")]
+                     for r in record["handoffReview"]], rows, tower + ".handoffReview")
+            if summaries:
+                compare(record["highSummary"], dict(zip(("Trigger", "Handoff"),
+                        map(json.loads, summaries.groups()))), tower + ".highLevelSummaryOverrides")
         scenarios = [
             (False, map_from_html(html, asis_binding)["asis"], real[organ]),
             (True, map_from_html(html, ai_binding)["tobe"], suggested[organ]),
