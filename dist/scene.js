@@ -9,7 +9,7 @@ import {loadReplacement} from './models.js?v=20261103-tower-workbook';
 import {buildVesselNetwork} from './vessels.js';
 import {mountAstralOrgan,mountAstralSkeleton,mountAstralVessel,createAstralRenderer} from './astral-anatomy.js';
 import {cardMarkup,metricsSentence,accentFor,towerNameFor,towerAcronymFor,overviewNameFor} from './health.js?v=20261103-tower-workbook';
-import {createHelpdesk} from './helpdesk.js?v=20261102-sizing';
+import {createHelpdesk} from './helpdesk.js?v=20261103-nursa';
 const $=s=>document.querySelector(s);
 syncAnatomyLayout();
 const configs=[['brain','FP&A Commercial','Brain',-1,0,.18],['liver',REAL.liver.name,'Liver',-1,1,.25],['kidneys','Controlling','Kidneys',-1,2,.23],['spleen','Tax','Spleen',-1,3,.12],['lungs',REAL.lungs.name,'Lungs',1,0,.32],['stomach','P2P','Stomach',1,1,.17],['pancreas','FP&A Operations','Pancreas',1,2,.20],['intestines','O2C','Intestines',1,3,.29]];
@@ -29,8 +29,8 @@ const helpdesk=createHelpdesk($('#experience'),{
 function syncHelpdesk(){
  const projectY=y=>(camera.position.y+camera.top-y)/(camera.top-camera.bottom)*h;
  helpdesk.update({progress:separation,width:w,height:h,available:ready&&!selected,
-  floorY:anatomyLandmarks?projectY(anatomyLandmarks.floor):null,
-  shoulderY:anatomyLandmarks?projectY(anatomyLandmarks.shoulder):null});
+  midThighY:projectY(anatomyLandmarks.midThigh),
+  shoulderY:projectY(anatomyLandmarks.shoulder)});
 }
 // All continuous motion stays in Three.js, outside UI rendering.
 function ease(x){ // Skill's cubic-bezier(.77,0,.175,1), inverted on its x axis.
@@ -156,7 +156,11 @@ scene.add(new T.HemisphereLight(0xfff4ed,0x765580,2.2));const light=new T.Direct
 bones=new T.Group();scene.add(bones);
 const [atlasResponse,bodyResponse]=await Promise.all([fetch('./data/anatomy/atlas.json'),fetch('./data/anatomy/body.bin.gz')]);if(!atlasResponse.ok||!bodyResponse.ok)throw Error('Atlas missing');const atlas=await atlasResponse.json();const zip=await bodyResponse.arrayBuffer();const buffer=await new Response(new Blob([zip]).stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();if(buffer.byteLength!==atlas.bytes)throw Error('Incomplete atlas');
 const skeletalParts=atlas.parts.filter(part=>part.group==='skeleton');
-anatomyLandmarks={floor:Math.min(...skeletalParts.map(part=>part.bounds[0][1])),shoulder:Math.max(...skeletalParts.filter(part=>/clavicle/i.test(part.name)).map(part=>part.bounds[1][1]))};
+const femurs=skeletalParts.filter(part=>/femur/i.test(part.name));
+anatomyLandmarks={
+ midThigh:femurs.reduce((sum,part)=>sum+(part.bounds[0][1]+part.bounds[1][1])/2,0)/femurs.length,
+ shoulder:Math.max(...skeletalParts.filter(part=>/clavicle/i.test(part.name)).map(part=>part.bounds[1][1]))
+};
 const grouped=new Map(),homes=new Map();for(const part of atlas.parts){const bounds=new T.Box3(new T.Vector3(...part.bounds[0]),new T.Vector3(...part.bounds[1]));if(!homes.has(part.group))homes.set(part.group,bounds);else homes.get(part.group).union(bounds);if(!['skeleton','heart'].includes(part.group))continue;const g=new T.BufferGeometry();g.setAttribute('position',new T.BufferAttribute(new Float32Array(buffer,part.positions,part.vertexCount*3),3));g.setAttribute('normal',new T.BufferAttribute(new Int16Array(buffer,part.normals,part.vertexCount*3),3,true));g.setIndex(new T.BufferAttribute(new Uint32Array(buffer,part.indices,part.indexCount),1));const id=part.group==='skeleton'&&part.bounds[0][1]>1.45?'skull':part.group;if(!grouped.has(id))grouped.set(id,[]);grouped.get(id).push(g);}
 for(const [id,pieces]of grouped){const geo=mergeGeometries(pieces,false);pieces.forEach(g=>g.dispose());const mat=new T.MeshPhysicalMaterial({color:id==='heart'?0xd0006f:0xe1ddd2,roughness:.45,metalness:.02,clearcoat:.16,depthTest:false,transparent:true,opacity:1});const mesh=new T.Mesh(geo,mat);mesh.renderOrder=id==='heart'?11:-1/* skeleton draws first, behind organs, vessels and heart */;if(id==='heart'){geo.computeBoundingBox();const c=geo.boundingBox.getCenter(new T.Vector3());geo.translate(-c.x,-c.y,-c.z);mesh.position.copy(c);heart=mesh;heart.position.z=.23;scene.add(mesh);}else{bones.add(mesh);if(id==='skull')skull=mesh;}}
 mountAstralSkeleton(bones,heart);

@@ -1,17 +1,16 @@
 // GFS support companion. It deliberately has no process-map or source-register bindings.
 import {elementDisplayScale} from './anatomy-layout.js';
 export function createHelpdesk(host, {onOpen, onClose}) {
-  // Visible alpha bounds, measured from the original transparent artwork.
-  const fullArt={width:887,height:1774,left:214,top:1,right:695,bottom:1715};
-  const portraitArt={width:1254,height:1254,left:117,top:16,right:1156,bottom:1236};
+  // Both cutouts are trimmed to their visible bounds.
+  const fullAspect=490/952, portraitAspect=495/512;
   const root = document.createElement('div');
   root.id = 'helpdesk';
   root.dataset.available = 'false';
   root.innerHTML = `
     <button class="helpdesk-launcher" type="button" aria-label="Explore GFS Finance Operations Support" aria-controls="helpdesk-detail" disabled>
       <span class="helpdesk-art">
-        <img class="helpdesk-full" src="assets/helpdesk/nurse-full.png" alt="" decoding="async" draggable="false">
-        <img class="helpdesk-portrait" src="assets/helpdesk/nurse-portrait.png" alt="" decoding="async" draggable="false">
+        <img class="helpdesk-full" src="assets/helpdesk/nursa-full.webp" alt="" decoding="async" draggable="false">
+        <img class="helpdesk-portrait" src="assets/helpdesk/nursa-portrait.webp" alt="" decoding="async" draggable="false">
       </span>
       <span class="helpdesk-dock-label"><span>GFS Finance</span><span>Operations Support</span></span>
     </button>
@@ -24,8 +23,8 @@ export function createHelpdesk(host, {onOpen, onClose}) {
     <section id="helpdesk-detail" aria-labelledby="helpdesk-title" hidden>
       <button type="button" class="helpdesk-back"><svg class="ico" aria-hidden="true"><use href="#i-left"/></svg>Back to Overview</button>
       <div class="helpdesk-hero" aria-hidden="true">
-        <img class="helpdesk-hero-full" src="assets/helpdesk/nurse-full.png" alt="" draggable="false">
-        <img class="helpdesk-hero-portrait" src="assets/helpdesk/nurse-portrait.png" alt="" draggable="false">
+        <img class="helpdesk-hero-full" src="assets/helpdesk/nursa-full.webp" alt="" draggable="false">
+        <img class="helpdesk-hero-portrait" src="assets/helpdesk/nursa-portrait.webp" alt="" draggable="false">
         <div class="helpdesk-caption"><strong>GFS Finance Operations Support</strong><span>Service Support</span></div>
       </div>
       <div class="helpdesk-dashboard">
@@ -55,12 +54,12 @@ export function createHelpdesk(host, {onOpen, onClose}) {
   root.addEventListener('focusin',e=>{keyboardPreview=e.target.matches(':focus-visible');showPreview();});
   root.addEventListener('focusout',delayHide);
   function visibleArtBounds(){
-    const portrait=state.progress>.625,art=portrait?portraitArt:fullArt;
+    const portrait=state.progress>.625,aspect=portrait?portraitAspect:fullAspect;
     const img=root.querySelector(portrait?'.helpdesk-portrait':'.helpdesk-full');
     const r=img.getBoundingClientRect(),padding=(parseFloat(getComputedStyle(img).paddingBottom)||0)*elementDisplayScale(host);
-    const contentHeight=r.height-padding,scale=Math.min(r.width/art.width,contentHeight/art.height);
-    const x=r.left+(r.width-art.width*scale)/2,y=r.top+(contentHeight-art.height*scale)*(portrait?1:.5);
-    return {left:x+art.left*scale,right:x+art.right*scale,top:y+art.top*scale,bottom:y+art.bottom*scale};
+    const contentHeight=r.height-padding,height=Math.min(contentHeight,r.width/aspect),width=height*aspect;
+    const left=r.left+(r.width-width)/2,top=r.top+(contentHeight-height)*(portrait?1:.5);
+    return {left,right:left+width,top,bottom:top+height};
   }
   function placePreview(){
     if(preview.hidden)return;
@@ -100,15 +99,15 @@ export function createHelpdesk(host, {onOpen, onClose}) {
   back.addEventListener('click',close);
   root.addEventListener('keydown',e=>{if(e.key==='Tab')keyboardPreview=true;if(e.key==='Escape'){e.preventDefault();e.stopPropagation();if(opened)close();else{suppressed=true;hidePreview();launcher.focus({preventScroll:true});}}});
   root.addEventListener('wheel',e=>{if(opened)e.stopPropagation();},{passive:true});
-  function update({progress,width,height,available:nextAvailable,floorY,shoulderY}){
+  function update({progress,width,height,available:nextAvailable,midThighY,shoulderY}){
     if(available!==nextAvailable){available=nextAvailable;root.dataset.available=String(available);launcher.disabled=!available;if(!available)hidePreview();}
     if(state.width===width&&state.height===height&&Math.abs(state.progress-progress)<.0002)return;
     state={progress,width,height};
     const mobile=width<768, t=Math.max(0,Math.min(1,progress));
-    const feet=floorY??height*.88744,head=(shoulderY??height*.239295)+height*.014;
-    const bodyHeight=mobile?Math.min(height*.48,width*.65):(feet-head)*fullArt.height/(fullArt.bottom-fullArt.top);
-    const bodyWidth=bodyHeight*fullArt.width/fullArt.height,bodyX=width*(mobile?.80:.69)-bodyWidth/2;
-    const bodyY=feet-bodyHeight*fullArt.bottom/fullArt.height;
+    const head=shoulderY+height*.014;
+    const bodyHeight=mobile?Math.min(midThighY-head,width*.65):midThighY-head;
+    const bodyWidth=bodyHeight*fullAspect,bodyX=width*(mobile?.80:.69)-bodyWidth/2;
+    const bodyY=midThighY-bodyHeight;
     const dockWidth=mobile?48:Math.max(64,Math.min(240,width*.065));
     const dockHeight=mobile?62:dockWidth*1.15+Math.max(14,width*.006);
     const dockX=width-dockWidth-(mobile?22:Math.max(12,width*.015)),dockY=height-dockHeight-(mobile?4:Math.max(14,height*.025));
