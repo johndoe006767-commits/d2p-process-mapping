@@ -117,7 +117,7 @@
     "dependencies": [
       {
         "id": "liver",
-        "name": "CAPEX",
+        "name": "CAPEX / Fixed Assets",
         "count": 2,
         "evidence": [
           {
@@ -173,7 +173,7 @@
       },
       {
         "id": "lungs",
-        "name": "R2R",
+        "name": "Record to Report Operations",
         "count": 1,
         "evidence": [
           {
@@ -305,7 +305,7 @@
     ],
     "projects": [
       {
-        "name": "CAPEX",
+        "name": "CAPEX / Fixed Assets",
         "entries": [
           0,
           1,
@@ -422,7 +422,7 @@
       },
       {
         "id": "lungs",
-        "name": "R2R",
+        "name": "Record to Report Operations",
         "count": 2,
         "evidence": [
           {
@@ -446,7 +446,7 @@
       },
       {
         "id": "liver",
-        "name": "CAPEX",
+        "name": "CAPEX / Fixed Assets",
         "count": 1,
         "evidence": [
           {
@@ -746,7 +746,7 @@
     "dependencies": [
       {
         "id": "lungs",
-        "name": "R2R",
+        "name": "Record to Report Operations",
         "count": 3,
         "evidence": [
           {
@@ -778,7 +778,7 @@
       },
       {
         "id": "liver",
-        "name": "CAPEX",
+        "name": "CAPEX / Fixed Assets",
         "count": 1,
         "evidence": [
           {
@@ -906,7 +906,7 @@
       },
       {
         "id": "liver",
-        "name": "CAPEX",
+        "name": "CAPEX / Fixed Assets",
         "count": 3,
         "evidence": [
           {
@@ -1146,7 +1146,7 @@
       },
       {
         "id": "lungs",
-        "name": "R2R",
+        "name": "Record to Report Operations",
         "count": 1,
         "evidence": [
           {

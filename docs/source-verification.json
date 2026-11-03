@@ -5,8 +5,8 @@
   "status": "PASS",
   "sources": [
     {
-      "file": "Source/8_Tower_TPI_Interdependencies_Template(Tower Input).csv",
-      "sha256": "e06cde7ce88b8f7237d941fd849ce4bd8550fd5b8e55b583a388d910f1fdb6b0"
+      "file": "Source/8_Tower_TPI_Interdependencies_Template.xlsx",
+      "sha256": "fa6d9498e2095c22884397b02cf5ee7b79df10004101e180698f8d81ccb4fd78"
     },
     {
       "file": "Source/D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html",
@@ -21,10 +21,10 @@
     "activitiesPerScenario": 489,
     "documentedHandoffs": 305,
     "htmlRegisterEntries": 359,
-    "csvKeyInterdependencies": 18,
-    "csvTpi2026": 15,
-    "csvTpi2027AiSuggested": 13,
-    "ltHandoffReviewEntries": 18
+    "ltHandoffReviewEntries": 18,
+    "workbookKeyInterdependencies": 27,
+    "workbookTpi2026": 24,
+    "workbookTpi2027AiSuggested": 18
   },
   "checks": [
     {
@@ -174,7 +174,7 @@
     },
     {
       "result": "PASS",
-      "source": "8_Tower_TPI_Interdependencies_Template(Tower Input).csv",
+      "source": "8_Tower_TPI_Interdependencies_Template.xlsx",
       "towers": [
         {
           "tower": "R2R",
@@ -202,15 +202,15 @@
         },
         {
           "tower": "FP&A Ops",
-          "dependencies": 0,
-          "2026": 0,
-          "2027": 0
+          "dependencies": 6,
+          "2026": 6,
+          "2027": 3
         },
         {
           "tower": "Tax",
-          "dependencies": 0,
-          "2026": 0,
-          "2027": 0
+          "dependencies": 3,
+          "2026": 3,
+          "2027": 2
         },
         {
           "tower": "CAPEX",
@@ -226,9 +226,9 @@
         }
       ],
       "totals": {
-        "dependencies": 18,
-        "2026": 15,
-        "2027": 13
+        "dependencies": 27,
+        "2026": 24,
+        "2027": 18
       }
     },
     {
@@ -541,10 +541,10 @@
     }
   },
   "sourceNotes": [
-    "FP&A Operations and Tax have blank dependency and project fields, with explicit zero TPI counts in the CSV.",
+    "Tax lists two projects in Tower Input!E10. The count formula in F10 also counts two blank lines and returns four. The site displays the two named projects.",
     "Tax has three source stages, 20 processes and 77 activities.",
     "The R2R 2027 GPO/GPDD parenthetical remains a note, separate from its three projects.",
-    "Detailed HTML TPI registers are distinct from the annual project lists supplied in the CSV.",
+    "Detailed HTML TPI registers are distinct from the annual project lists supplied in the workbook.",
     "Several grid maps retain their earlier trigger and handoff paragraphs in the rendered source. The site applies the replacement text declared in the HTML overlay to both scenarios."
   ],
   "displayFixes": [
@@ -558,12 +558,12 @@
     "gitDiffWhitespace": "PASS",
     "anatomyRegressionTests": "3 passed"
   },
-  "release": "20261103-lt-review",
+  "release": "20261103-tower-workbook",
   "prepublicationSourceChecks": {
     "htmlAssertions": 89499,
     "renderedAssertions": 12025,
-    "csv": "PASS",
-    "sourceHashes": "MATCH"
+    "sourceHashes": "MATCH",
+    "workbook": "PASS"
   },
   "mapPaletteVerification": {
     "status": "PASS",

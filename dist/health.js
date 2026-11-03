@@ -1,4 +1,5 @@
 // Process metrics and workbook context shared with the selected tower card.
+import {REAL} from './real-data.js?v=20261103-tower-workbook';
 import {organs} from './organs.js';
 
 const ACCENT = Object.fromEntries(organs.map(o => [o.id, o.color]));
@@ -7,16 +8,14 @@ export const accentFor = id => ACCENT[id] || '#cabbcf';
 const TOWER_NAMES = {
   brain: 'Financial Planning & Analysis · Commercial',
   pancreas: 'Financial Planning & Analysis · Operations',
-  liver: 'Capital Expenditure',
   kidneys: 'Financial Controlling',
   spleen: 'Tax',
-  lungs: 'Record to Report',
   stomach: 'Purchase To Pay',
   intestines: 'Order to Cash',
 };
-export const towerNameFor = id => TOWER_NAMES[id] || id;
+export const towerNameFor = id => TOWER_NAMES[id] || REAL[id]?.name || id;
 export const towerAcronymFor = key => ({FPAC:'FP&A Commercial',FPAO:'FP&A Operations'})[key] || key;
-const OVERVIEW_NAMES={brain:'FP&A Commercial',pancreas:'FP&A Operations',liver:'CAPEX',kidneys:'Controlling'};
+const OVERVIEW_NAMES={brain:'FP&A Commercial',pancreas:'FP&A Operations',kidneys:'Controlling'};
 export const overviewNameFor=id=>OVERVIEW_NAMES[id]||towerNameFor(id);
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 

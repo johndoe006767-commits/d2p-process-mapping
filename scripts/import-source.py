@@ -1,7 +1,7 @@
 """Refresh static site data from capture-source.mjs's source-browser capture.
 
 Requires BeautifulSoup for preserving the source's rendered register content.
-The source HTML and CSV themselves are never changed.
+The source HTML and workbook themselves are never changed.
 """
 import copy
 import hashlib
@@ -19,9 +19,9 @@ if (CAPTURE['source'], CAPTURE.get('sha256')) != (source_file.name, source_hash)
     raise ValueError('Recapture the current source HTML before importing.')
 TOWERS = {'FPAC': ('brain', 'FPA', 'FP&A Commercial'),
           'FPAO': ('pancreas', 'FPA', 'FP&A Operations'),
-          'CAPEX': ('liver', 'CAP', 'CAPEX'), 'P2P': ('stomach', 'P2P', 'P2P'),
+          'CAPEX': ('liver', 'CAP', 'CAPEX / Fixed Assets'), 'P2P': ('stomach', 'P2P', 'P2P'),
           'O2C': ('intestines', 'SOC', 'Order to Cash'),
-          'TAX': ('spleen', 'TAX', 'Tax'), 'R2R': ('lungs', 'R2R', 'R2R'),
+          'TAX': ('spleen', 'TAX', 'Tax'), 'R2R': ('lungs', 'R2R', 'Record to Report Operations'),
           'CTRL': ('kidneys', 'CTRL', 'Controlling')}
 
 

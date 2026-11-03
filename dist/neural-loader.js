@@ -1,8 +1,8 @@
 import {getScenario,setScenario,scenarioControl,bindScenarioControl,scenarioLabel} from './process-scenario.js';
-import {REAL,getTower} from './real-data.js?v=20261103-lt-review';
-import {mountNeuralLab} from './neural-lab.js?v=20261103-lt-review';
+import {REAL,getTower} from './real-data.js?v=20261103-tower-workbook';
+import {mountNeuralLab} from './neural-lab.js?v=20261103-tower-workbook';
 import {titleCase,normalizeHeadings} from './title-case.js';
-import {handoffContext} from './handoff-context.js?v=20261103-lt-review';
+import {handoffContext} from './handoff-context.js?v=20261103-tower-workbook';
 const root=document.querySelector('#process-workspace');let api=null,current=null,request=0,shellPromise,pending=null,returnHandler;let scenarioRefresh=0;const sources=new Map();
 const shell=()=>shellPromise??=fetch('./neural/shell.html?v=labels-1').then(r=>{if(!r.ok)throw Error('The Process Workspace Could Not Load.');return r.text();}).catch(e=>{shellPromise=null;throw e;});
 const source=key=>{if(!sources.has(key))sources.set(key,fetch(`./neural/${key}.json?v=20261103-lt-review`).then(r=>{if(!r.ok)throw Error('The Process Records Could Not Load.');return r.json();}).catch(e=>{sources.delete(key);throw e;}));return sources.get(key);};

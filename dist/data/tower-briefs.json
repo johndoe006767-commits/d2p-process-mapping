@@ -1,11 +1,10 @@
 {
   "source": {
-    "file": "8_Tower_TPI_Interdependencies_Template(Tower Input).csv",
-    "format": "CSV",
-    "encoding": "Windows-1252",
+    "file": "8_Tower_TPI_Interdependencies_Template.xlsx",
+    "format": "XLSX",
     "sheet": "Tower Input",
     "range": "A4:F12",
-    "descriptionPolicy": "Titles are concise restatements; descriptions and sourceText retain the supplied entries. Explicit source counts are verified against the project lists."
+    "descriptionPolicy": "Titles summarize the supplied entries. Each item retains its original text and source cell. Project lists exclude blank lines and alignment notes. Source counts retain the workbook values."
   },
   "towers": {
     "lungs": {
@@ -316,15 +315,117 @@
     "pancreas": {
       "tower": "FP&A Ops",
       "status": "populated",
-      "dependencies": [],
+      "dependencies": [
+        {
+          "tower": "Commercial FP&A",
+          "description": "Demand volume",
+          "sourceCell": "B9",
+          "sourceText": "Commercial FP&A: Demand volume"
+        },
+        {
+          "tower": "RTR",
+          "description": "SAP close and journal posting",
+          "sourceCell": "B9",
+          "sourceText": "RTR: SAP close and journal posting"
+        },
+        {
+          "tower": "PTP",
+          "description": "Vendor invoices posting",
+          "sourceCell": "B9",
+          "sourceText": "PTP: Vendor invoices posting"
+        },
+        {
+          "tower": "O2C",
+          "description": "Intercompany invoice",
+          "sourceCell": "B9",
+          "sourceText": "O2C: Intercompany invoice"
+        },
+        {
+          "tower": "Controlling",
+          "description": "Statutory reporting & external audit",
+          "sourceCell": "B9",
+          "sourceText": "Controlling: Statutory reporting & external audit"
+        },
+        {
+          "tower": "CAPEX / Fixed Assets",
+          "description": "Actual capex & lease posting",
+          "sourceCell": "B9",
+          "sourceText": "Capex: Actual capex & lease posting"
+        }
+      ],
       "projects": {
-        "2026": [],
-        "2027": []
+        "2026": [
+          {
+            "name": "Site Costs Dashboard",
+            "description": "Site Costs Dashboard support pre-closing & closing analysis",
+            "sourceCell": "C9",
+            "sourceItem": 1,
+            "sourceText": "Site Costs Dashboard support pre-closing & closing analysis"
+          },
+          {
+            "name": "FTE Dashboard",
+            "description": "FTE Dashboard support pre-closing & closing analysis",
+            "sourceCell": "C9",
+            "sourceItem": 2,
+            "sourceText": "FTE Dashboard support pre-closing & closing analysis"
+          },
+          {
+            "name": "Ops Volume & COGM Dashboard",
+            "description": "Ops Volume & COGM Dashboard support intra-month checks and closing",
+            "sourceCell": "C9",
+            "sourceItem": 3,
+            "sourceText": "Ops Volume & COGM Dashboard support intra-month checks and closing"
+          },
+          {
+            "name": "Global Logistics pre-month closing",
+            "description": "Global Logistics pre-month closing",
+            "sourceCell": "C9",
+            "sourceItem": 4,
+            "sourceText": "Global Logistics pre-month closing"
+          },
+          {
+            "name": "Agent Rhy · Actual Pack Consolidation",
+            "description": "Agent Rhy for actual pack consolidation",
+            "sourceCell": "C9",
+            "sourceItem": 5,
+            "sourceText": "Agent Rhy for actual pack consolidation"
+          },
+          {
+            "name": "Agent Charlie · Planning Pack Consolidation",
+            "description": "Agent Charlie for planning pack consolidation",
+            "sourceCell": "C9",
+            "sourceItem": 6,
+            "sourceText": "Agent Charlie for planning pack consolidation"
+          }
+        ],
+        "2027": [
+          {
+            "name": "Capex dashboard",
+            "description": "Capex dashboard",
+            "sourceCell": "E9",
+            "sourceItem": 1,
+            "sourceText": "Capex dashboard"
+          },
+          {
+            "name": "Planning & assumptions gathering tool",
+            "description": "Planning & assumptions gathering tool",
+            "sourceCell": "E9",
+            "sourceItem": 2,
+            "sourceText": "Planning & assumptions gathering tool"
+          },
+          {
+            "name": "AI Draft Analysis and Commentary",
+            "description": "AI for draft analysis and commentaries",
+            "sourceCell": "E9",
+            "sourceItem": 3,
+            "sourceText": "AI for draft analysis and commentaries"
+          }
+        ]
       },
       "notes": {},
       "sourceCounts": {
-        "2026": 0,
-        "2027": 0
+        "2026": 6,
+        "2027": 3
       },
       "countSourceCells": {
         "2026": "D9",
@@ -334,15 +435,73 @@
     "spleen": {
       "tower": "Tax",
       "status": "populated",
-      "dependencies": [],
+      "dependencies": [
+        {
+          "tower": "P2P",
+          "description": "Invoice processing for tax codes determination",
+          "sourceCell": "B10",
+          "sourceText": "P2P: Invoice processing for tax codes determination "
+        },
+        {
+          "tower": "R2R",
+          "description": "Balance sheet reconciliations for tax accounts",
+          "sourceCell": "B10",
+          "sourceText": "R2R: Balance sheet reconciliations for tax accounts "
+        },
+        {
+          "tower": "C2C",
+          "description": "Tax payments initiation",
+          "sourceCell": "B10",
+          "sourceText": "C2C: Tax payments initiation "
+        }
+      ],
       "projects": {
-        "2026": [],
-        "2027": []
+        "2026": [
+          {
+            "name": "GL Analyzer",
+            "description": "GL Analyzer",
+            "sourceCell": "C10",
+            "sourceItem": 1,
+            "sourceText": "GL Analyzer "
+          },
+          {
+            "name": "Tax Reporting Automated Journal",
+            "description": "Tax Reporting Automated Journal",
+            "sourceCell": "C10",
+            "sourceItem": 2,
+            "sourceText": "Tax Reporting Automated Journal "
+          },
+          {
+            "name": "Automation of Tax Impact Reporting",
+            "description": "Automation of Tax Impact Reporting",
+            "sourceCell": "C10",
+            "sourceItem": 3,
+            "sourceText": "Automation of Tax Impact Reporting "
+          }
+        ],
+        "2027": [
+          {
+            "name": "Direct Tax Automation",
+            "description": "Direct Tax Automation (POC) completed for Group Tax consideration, continue to scale across other markets, regions to assist CIT Review.",
+            "sourceCell": "E10",
+            "sourceItem": 1,
+            "sourceText": "Direct Tax Automation (POC) completed for Group Tax consideration, continue to scale across other markets, regions to assist CIT Review. "
+          },
+          {
+            "name": "Indirect Tax Automation",
+            "description": "Indirect Tax Automation (POC) in progress for Group Tax consideration, continue to scale across other business requirements in WHT, Customs Duty. Key design: from regulatory change to controlled SAP implementation.",
+            "sourceCell": "E10",
+            "sourceItem": 2,
+            "sourceText": "Indirect Tax Automation (POC) in progress for Group Tax consideration, continue to scale across other business requirements in WHT, Customs Duty. Key design: from regulatory change to controlled SAP implementation.  "
+          }
+        ]
       },
-      "notes": {},
+      "notes": {
+        "2027": "The workbook counts two blank lines. It lists two named projects."
+      },
       "sourceCounts": {
-        "2026": 0,
-        "2027": 0
+        "2026": 3,
+        "2027": 4
       },
       "countSourceCells": {
         "2026": "D10",

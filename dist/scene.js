@@ -1,18 +1,18 @@
 import * as T from 'three';
 import {syncAnatomyLayout,elementDisplayScale} from './anatomy-layout.js?v=20261102-display';
-import {REAL,KPI} from './real-data.js?v=20261103-lt-review';
-import {CARD_BRIEFS} from './tower-briefs.js?v=20261103-lt-review';
-import {bindTower,initExperience,hideMap,openMap} from './real-experience.js?v=20261103-lt-review';
-import {createProcessNeurons,updateProcessNeurons} from './process-neurons.js?v=20261103-lt-review';
+import {REAL,KPI} from './real-data.js?v=20261103-tower-workbook';
+import {CARD_BRIEFS} from './tower-briefs.js?v=20261103-tower-workbook';
+import {bindTower,initExperience,hideMap,openMap} from './real-experience.js?v=20261103-tower-workbook';
+import {createProcessNeurons,updateProcessNeurons} from './process-neurons.js?v=20261103-tower-workbook';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
-import {loadReplacement} from './models.js?v=20261103-lt-review';
+import {loadReplacement} from './models.js?v=20261103-tower-workbook';
 import {buildVesselNetwork} from './vessels.js';
 import {mountAstralOrgan,mountAstralSkeleton,mountAstralVessel,createAstralRenderer} from './astral-anatomy.js';
-import {cardMarkup,metricsSentence,accentFor,towerNameFor,towerAcronymFor,overviewNameFor} from './health.js?v=20261103-lt-review';
+import {cardMarkup,metricsSentence,accentFor,towerNameFor,towerAcronymFor,overviewNameFor} from './health.js?v=20261103-tower-workbook';
 import {createHelpdesk} from './helpdesk.js?v=20261102-sizing';
 const $=s=>document.querySelector(s);
 syncAnatomyLayout();
-const configs=[['brain','FP&A Commercial','Brain',-1,0,.18],['liver','CAPEX','Liver',-1,1,.25],['kidneys','Controlling','Kidneys',-1,2,.23],['spleen','Tax','Spleen',-1,3,.12],['lungs','R2R','Lungs',1,0,.32],['stomach','P2P','Stomach',1,1,.17],['pancreas','FP&A Operations','Pancreas',1,2,.20],['intestines','O2C','Intestines',1,3,.29]];
+const configs=[['brain','FP&A Commercial','Brain',-1,0,.18],['liver',REAL.liver.name,'Liver',-1,1,.25],['kidneys','Controlling','Kidneys',-1,2,.23],['spleen','Tax','Spleen',-1,3,.12],['lungs',REAL.lungs.name,'Lungs',1,0,.32],['stomach','P2P','Stomach',1,1,.17],['pancreas','FP&A Operations','Pancreas',1,2,.20],['intestines','O2C','Intestines',1,3,.29]];
 document.addEventListener('visibilitychange',()=>document.body.classList.toggle('page-hidden',document.hidden));
 const reduced=matchMedia('(prefers-reduced-motion: reduce)'), fine=matchMedia('(hover: hover) and (pointer: fine)');
 const skeletonOpacity=.6; // 1 = solid bones; lower values make the skeleton more see-through

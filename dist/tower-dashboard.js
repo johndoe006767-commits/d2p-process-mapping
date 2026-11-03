@@ -1,11 +1,11 @@
 import {getScenario,setScenario,scenarioLabel,scenarioControl,bindScenarioControl} from './process-scenario.js';
 import {cancelPageNavigation} from './page-navigation.js';
-import {REAL,KPI,getTower,escapeHTML as esc} from './real-data.js?v=20261103-lt-review';
-import {towerAcronymFor} from './health.js?v=20261103-lt-review';
+import {REAL,KPI,getTower,escapeHTML as esc} from './real-data.js?v=20261103-tower-workbook';
+import {towerAcronymFor} from './health.js?v=20261103-tower-workbook';
 import {loadSourceRegisters} from './source-registers.js?v=20261103-lt-review';
 import {createHandoffNeural} from './handoff-neural.js?v=typography-1';
-import {overviewVisuals,activityRing} from './overview-visuals.js?v=20261103-lt-review';
-import {handoffContext} from './handoff-context.js?v=20261103-lt-review';
+import {overviewVisuals,activityRing} from './overview-visuals.js?v=20261103-tower-workbook';
+import {handoffContext} from './handoff-context.js?v=20261103-tower-workbook';
 const $=s=>document.querySelector(s), reduced=matchMedia('(prefers-reduced-motion: reduce)');
 const NAV=[['overview','Overview','overview'],['handoffs','Handoffs','handoffs'],['activities','Activity register','activities'],['pain','Pain points','pain'],['tpis','Process improvements','tpis'],['controls','Controls & KPIs','controls'],['ai','AI suggestions','ai'],['notes','Source notes','notes']];
 const paths={plus:'M12 5v14M5 12h14',minus:'M5 12h14',expand:'M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5',collapse:'M3 8h5V3m8 0v5h5M8 21v-5H3m13 5v-5h5',back:'m15 18-6-6 6-6M9 12h12',close:'m6 6 12 12M6 18 18 6',arrow:'M5 12h14m-5-5 5 5-5 5',search:'M21 21l-5-5m2-6a7 7 0 1 1-14 0 7 7 0 0 1 14 0',overview:'M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z',handoffs:'M3 7h17m-4-4 4 4-4 4M21 17H4m4-4-4 4 4 4',activities:'M9 5h12M9 12h12M9 19h12M3 5h1M3 12h1M3 19h1',pain:'M12 3 2 21h20L12 3Zm0 6v5m0 3v1',tpis:'M4 20V9m8 11V4m8 16v-7M2 20h20',controls:'m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Zm-4 9 3 3 5-6',ai:'m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3Z',notes:'M5 3h10l4 4v14H5V3Zm10 0v5h4M8 12h8M8 16h8',map:'m3 5 6-2 6 2 6-2v16l-6 2-6-2-6 2V5Zm6-2v16m6-14v16'};

@@ -55,17 +55,17 @@ Each tower has an **As Is / AI Suggested** selector shared by its high-level map
 
 The process workspace opens from **High-level flow**, **Detailed flow**, or a stage shortcut (`+` or the mobile stage picker). It replaces the organ view until **Back to Organ** is selected, so scrolling stays within the flow. Handoffs remain accessible through dependency links and the insights navigation.
 
-Tower cards use `dist/data/tower-briefs.json` for dependencies and the 2026 / 2027 TPI lists, transcribed from **Source/8_Tower_TPI_Interdependencies_Template(Tower Input).csv**, rows 5–12 (columns A–F). All eight towers are represented: the CSV supplies 18 key interdependencies, 15 TPI projects for 2026 and 13 AI-suggested TPI projects for 2027. FP&A Ops and Tax have blank dependency/project cells and explicit zero project counts; the site displays those zeros and identifies the blank lists as not supplied. Project titles are concise restatements, while descriptions and source text preserve the supplied entries. Records retain source cells and the CSV's explicit project counts. The R2R 2027 GPO/GPDD note is separate from its three projects. Run `python3 tests/source-csv.py` to compare every dependency, project, note and count with the CSV. Manual percentages and As Is / To Be activity mixes are populated for all eight towers from `kpi-summary.json`, independently of this CSV.
+Tower cards use `dist/data/tower-briefs.json` for dependencies and annual TPI projects. The source is **Source/8_Tower_TPI_Interdependencies_Template.xlsx**, worksheet **Tower Input**, range **A4:F12**. Across all eight towers, the workbook lists 27 key interdependencies, 24 projects for 2026 and 18 AI-suggested projects for 2027. The site counts named projects. The Tax count formula in F10 includes two blank lines, so the Tax card lists the two named projects and explains the discrepancy. The R2R 2027 GPO/GPDD note appears separately from its three projects. Records retain the original text, cell references and workbook counts. Manual percentages and activity mixes come from `kpi-summary.json`.
 
 `Source/` retains the supplied source maps and supporting registers. Baseline map records use `dist/neural/<TOWER>.json`; AI records use `<TOWER>-ai.json`. `dist/data/suggested-processes.json` supplies the AI activity registers and adopted activity mix. Source files are retained for comparison and are not served or published by the website.
 
-The 3 November 2026 refresh uses **D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html**. It contains 46 stages, 106 processes, 489 activities per scenario and 305 documented handoff connections across eight towers. In either map or the Handoffs view, expand **Demand to Profit stages & LT handoff review** to read the tower’s stage impacts and review notes. The 18 review entries identify new links and requested changes, including proposals that apply only to the AI scenario. High-level trigger and handoff cards use the source’s revised wording. The detailed HTML TPI registers are separate from the CSV’s annual project lists.
+The 3 November 2026 refresh uses **D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html**. It contains 46 stages, 106 processes, 489 activities per scenario and 305 documented handoff connections across eight towers. In either map or the Handoffs view, expand **Demand to Profit stages & LT handoff review** to read the tower’s stage impacts and review notes. The 18 review entries identify new links and requested changes, including proposals that apply only to the AI scenario. High-level trigger and handoff cards use the source’s revised wording. The detailed HTML TPI registers are separate from the workbook’s annual project lists.
 
-Three independent checks cover the source refresh:
+The workbook check requires openpyxl. Three independent checks cover the source refresh.
 
 ```sh
 python3 tests/source-html.py
-python3 tests/source-csv.py
+python3 tests/source-workbook.py
 python3 tests/source-rendered.py
 ```
 
@@ -73,4 +73,4 @@ The rendered check uses `.runtime/source-sync/capture.json`, captured from the s
 
 Push changes to `main` to deploy. GitHub Actions publishes only `dist/` to GitHub Pages, retaining relative paths so the site also works under `/d2p-process-mapping/`.
 
-The local and published sites use the same `dist/` files. The release marker is `20261103-lt-review`. Updated data and dependent assets carry this version tag to refresh browser caches.
+The local and published sites use the same `dist/` files. The release marker is `20261103-tower-workbook`. Updated data and dependent assets carry this version tag to refresh browser caches.

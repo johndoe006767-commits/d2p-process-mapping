@@ -18,16 +18,20 @@ try{
  for(const [id,tower] of Object.entries(real)){
   // Use the app's keyboard tower button, including towers obscured in the 3D view.
   const label=await page.locator('.keyboard-organ').evaluateAll((ns,name)=>ns.findIndex(n=>n.textContent.includes(name)),
-   {brain:'FP&A Commercial',pancreas:'FP&A Operations',liver:'CAPEX',stomach:'Purchase To Pay',intestines:'Order to Cash',spleen:'Tax',lungs:'Record to Report',kidneys:'Controlling'}[id]);
+   {brain:'FP&A Commercial',pancreas:'FP&A Operations',liver:'CAPEX / Fixed Assets',stomach:'Purchase To Pay',intestines:'Order to Cash',spleen:'Tax',lungs:'Record to Report Operations',kidneys:'Controlling'}[id]);
   assert.ok(label>=0,`${id} keyboard entry`);
   await page.locator('.keyboard-organ').nth(label).evaluate(n=>n.click());
   await page.waitForFunction(()=>!document.querySelector('#detail').hidden);
+  if(id==='liver'||id==='lungs'){
+   for(const selector of ['#tower-name','#hud-tower-title'])assert.equal(await page.locator(selector).textContent(),tower.name);
+  }
   assert.equal(await page.locator('#hud-pain-count').textContent(),String(tower.counts.pain));
   assert.equal(await page.locator('#hud-dependencies [data-dependency]').count(),briefs[id].dependencies.length);
   for(const year of ['2026','2027']){
    await page.locator(`#hud-year-${year}`).click();
    assert.equal(await page.locator(`#hud-year-${year} .hud-year-count`).textContent(),String(briefs[id].projects[year].length));
    assert.deepEqual(await page.locator('.hud-project-list li p').allTextContents(),briefs[id].projects[year].map(p=>p.description));
+   if(briefs[id].notes[year])assert.equal(await page.locator('.hud-project-note').textContent(),briefs[id].notes[year]);
    if(!briefs[id].projects[year].length)assert.match(await page.locator('#hud-year-panel').textContent(),/No .*TPI Projects Supplied|No .*TPI projects supplied/i);
   }
   for(const scenario of ['asis','tobe']){
