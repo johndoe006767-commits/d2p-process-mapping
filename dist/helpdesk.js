@@ -9,7 +9,15 @@ export function createHelpdesk(host, {onOpen, onClose}) {
   root.innerHTML = `
     <button class="helpdesk-launcher" type="button" aria-label="Explore GFS Finance Operations Support" aria-controls="helpdesk-detail" disabled>
       <span class="helpdesk-art">
-        <img class="helpdesk-full" src="assets/helpdesk/nursa-full.webp" alt="" decoding="async" draggable="false">
+        <svg class="helpdesk-full" viewBox="0 0 490 952" aria-hidden="true">
+          <g transform="translate(490 0) scale(-1 1)">
+            <image id="nursa-standing-art" href="assets/helpdesk/nursa-full.webp" width="490" height="952"/>
+            <!-- Reflect the badge lettering back into reading order. -->
+            <svg x="224" y="371" width="44" height="21" viewBox="224 371 44 21" overflow="hidden">
+              <use href="#nursa-standing-art" transform="translate(492 0) scale(-1 1)"/>
+            </svg>
+          </g>
+        </svg>
         <img class="helpdesk-portrait" src="assets/helpdesk/nursa-portrait.webp" alt="" decoding="async" draggable="false">
       </span>
       <span class="helpdesk-dock-label"><span>GFS Finance</span><span>Operations Support</span></span>
@@ -106,7 +114,7 @@ export function createHelpdesk(host, {onOpen, onClose}) {
     const mobile=width<768, t=Math.max(0,Math.min(1,progress));
     const head=shoulderY+height*.014;
     const bodyHeight=mobile?Math.min(midThighY-head,width*.65):midThighY-head;
-    const bodyWidth=bodyHeight*fullAspect,bodyX=width*(mobile?.80:.69)-bodyWidth/2;
+    const bodyWidth=bodyHeight*fullAspect,bodyX=width*(mobile?.80:.69)-bodyWidth/2-15;
     const bodyY=floorY-bodyHeight;
     const dockWidth=mobile?48:Math.max(64,Math.min(240,width*.065));
     const dockGap=mobile?8:Math.max(8,Math.min(18,width*.005));

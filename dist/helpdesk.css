@@ -4,7 +4,7 @@
 #helpdesk .helpdesk-launcher{position:absolute;top:0;left:0;display:block;border:0;padding:0;border-radius:0;background:none;pointer-events:auto;transform-origin:top left;text-align:center;isolation:isolate;cursor:pointer;transition:none}
 #helpdesk .helpdesk-launcher:active{background:none}
 .helpdesk-art{position:absolute;inset:0;display:block;transition:filter 180ms ease,scale 180ms ease;transform-origin:center bottom}
-.helpdesk-art img{position:absolute;width:100%;height:100%;inset:0;object-fit:contain;user-select:none;pointer-events:none}
+.helpdesk-art>img,.helpdesk-art>svg{position:absolute;width:100%;height:100%;inset:0;object-fit:contain;user-select:none;pointer-events:none}
 .helpdesk-full{opacity:var(--helpdesk-full-opacity,1)}
 .helpdesk-portrait{opacity:var(--helpdesk-portrait-opacity,0);object-position:center bottom;padding-bottom:calc(24px + var(--helpdesk-dock-gap))}
 .helpdesk-dock-label{position:absolute;bottom:0;left:-15%;width:130%;color:#f0c5e4;font-size:clamp(10px,.65vw,25px);font-weight:550;line-height:1.2;opacity:var(--helpdesk-portrait-opacity,0);text-shadow:0 2px 8px #130b1d}
