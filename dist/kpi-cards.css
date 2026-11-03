@@ -326,6 +326,7 @@ body[data-detail=true] #experience{min-height:var(--tower-detail-height,100dvh)}
 #section-1 .label.card .hb-manual{display:flex;align-items:baseline;gap:7px;font-size:11px;line-height:1.4}
 #section-1 .label.card .hb-manual>span{font:inherit;color:inherit}
 #section-1 .label.card .hb-manual b{font:inherit;font-weight:600;font-variant-numeric:tabular-nums}
+#section-1 .label.card .kpi-manual b{font-weight:700}
 #section-1 .label.card .kpi-divider{padding:0}
 @media(min-width:2500px) and (min-height:1200px){#section-1 .label.card .hb-manual{font-size:17px}}
 @media(max-width:767px){#section-1 .label.card .hb-manual{font-size:10px;gap:4px;flex-wrap:wrap}}
