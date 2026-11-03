@@ -23,6 +23,7 @@ export function createHelpdesk(host, {onOpen, onClose}) {
       <span class="helpdesk-dock-label"><span>GFS Finance</span><span>Operations Support</span></span>
     </button>
     <aside class="helpdesk-preview" aria-label="Finance Operations Support KPI Preview" hidden>
+      <svg class="helpdesk-preview-tail" viewBox="0 0 24 28" preserveAspectRatio="none" aria-hidden="true"><path d="M24 1 Q17 10 1 15 Q15 16 24 27" vector-effect="non-scaling-stroke"/></svg>
       <h2>GFS Finance Operations Support</h2>
       <p>Placeholder Data</p>
       <dl><div><dt>KPI Name</dt><dd>—</dd></div><div><dt>KPI Name</dt><dd>—</dd></div><div><dt>KPI Name</dt><dd>—</dd></div></dl>
@@ -64,7 +65,7 @@ export function createHelpdesk(host, {onOpen, onClose}) {
   function visibleArtBounds(){
     const portrait=state.progress>.625,aspect=portrait?portraitAspect:fullAspect;
     const img=root.querySelector(portrait?'.helpdesk-portrait':'.helpdesk-full');
-    const r=img.getBoundingClientRect(),padding=(parseFloat(getComputedStyle(img).paddingBottom)||0)*elementDisplayScale(host);
+    const r=launcher.getBoundingClientRect(),padding=(parseFloat(getComputedStyle(img).paddingBottom)||0)*elementDisplayScale(host);
     const contentHeight=r.height-padding,height=Math.min(contentHeight,r.width/aspect),width=height*aspect;
     const left=r.left+(r.width-width)/2,top=r.top+(contentHeight-height)*(portrait?1:.5);
     return {left,right:left+width,top,bottom:top+height};
@@ -74,9 +75,16 @@ export function createHelpdesk(host, {onOpen, onClose}) {
     const bounds=host.getBoundingClientRect(),r=visibleArtBounds(),scale=elementDisplayScale(host);
     const card={width:preview.offsetWidth,height:preview.offsetHeight};
     const gap=Math.max(16,Math.min(32,state.width*.008)),pad=16;
-    let x=(r.right-bounds.left)/scale+gap;
-    if(x+card.width>state.width-pad)x=(r.left-bounds.left)/scale-card.width-gap;
-    const y=Math.max(16,Math.min((r.top-bounds.top+(r.bottom-r.top)*.12)/scale,state.height-card.height-24));
+    const rightX=(r.right-bounds.left)/scale+gap;
+    const fitsRight=rightX+card.width<=state.width-pad;
+    const x=fitsRight?rightX:(r.left-bounds.left)/scale-card.width-gap;
+    const capY=(r.top-bounds.top)/scale;
+    const eyeFraction=state.progress>.625 ? .45 : .17;
+    const eyeY=capY+(r.bottom-r.top)/scale*eyeFraction;
+    const y=Math.max(pad,Math.min(capY,state.height-card.height-24));
+    preview.dataset.side=fitsRight?'right':'left';
+    preview.style.setProperty('--preview-gap',gap+'px');
+    preview.style.setProperty('--preview-eye-y',(eyeY-y)+'px');
     preview.style.left=`${Math.max(pad,Math.min(x,state.width-card.width-pad))}px`;
     preview.style.top=`${y}px`;
   }
