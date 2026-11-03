@@ -12,6 +12,33 @@ const page=await browser.newPage({viewport:{width:3840,height:2160},reducedMotio
 const errors=[],failures=[],results=[];
 page.on('pageerror',e=>errors.push(e.message));
 page.on('response',r=>{if(r.status()>=400&&!r.url().endsWith('favicon.ico'))failures.push({url:r.url(),status:r.status()})});
+async function verifyFilters(view){
+ const issues=await page.evaluate(view=>{
+  const detail=view==='detail',lab=window.NeuralLab,issues=[];
+  const groups=document.querySelectorAll(detail?'#map-svg .nd':'#overview-svg .flow-node');
+  for(const filter of ['auto','hyb','man','pp','all']){
+   const button=document.querySelector(`.filters [data-filter="${filter}"]`);
+   button.click();
+   const color=getComputedStyle(button.querySelector('i')||button);
+   for(const group of groups){
+    const record=detail?lab.getNodes()[group.dataset.id].s:lab.flow.records[group.dataset.process];
+    const count=filter==='pp'?(detail?record.pp:record.pain)?.length:(detail?record.ty===filter:record[filter]);
+    const match=Boolean(count),ring=group.querySelector('.filter-highlight');
+    const trace=group.querySelector('.filter-trace');
+    const highlight=ring&&getComputedStyle(ring);
+    if(Boolean(ring)!==(filter!=='all'&&match)||
+       Boolean(trace)!==Boolean(ring)||(trace&&getComputedStyle(trace).stroke!=='none')||
+       getComputedStyle(group).opacity!==(filter==='all'||match?'1':'0.24')||
+       (highlight&&(highlight.stroke!==(filter==='pp'?color.color:color.backgroundColor)||
+        highlight.fill!==highlight.stroke||Number(highlight.fillOpacity)!==.07||!highlight.filter.includes('drop-shadow')))){
+     issues.push([filter,group.dataset.id||group.dataset.process]);
+    }
+   }
+  }
+  return issues;
+ },view);
+ assert.deepEqual(issues,[],view+' filter highlights, legend colors and dimming');
+}
 try{
  await page.goto(url,{waitUntil:'networkidle'});
  await page.waitForFunction(()=>window.FinanceLab&&document.querySelector('#loading').hidden&&document.querySelectorAll('#labels .label').length===8,{timeout:60000});
@@ -39,6 +66,7 @@ try{
    if(scenario==='tobe')await page.locator('#scenario-slot [data-scenario-option=tobe]').click();
    await page.waitForFunction(s=>window.NeuralLab?.getState().scenario===s&&document.querySelectorAll('#map-svg [data-stage-heading]').length>0,scenario);
    const data=scenario==='asis'?tower:suggested[id];
+   await verifyFilters('detail');
    const state=await page.evaluate(()=>({nodes:Object.values(window.NeuralLab.getNodes()).filter(n=>n.s&&!n.kind).map(n=>({id:n.id,title:n.s.t})),stageCount:document.querySelectorAll('#map-svg [data-stage-heading]').length}));
    assert.equal(state.stageCount,data.stages.length,`${id}/${scenario} stages`);
    assert.equal(state.nodes.length,data.activities.length,`${id}/${scenario} rendered activities`);
@@ -62,6 +90,7 @@ try{
    },{activities:data.activities,scenario});
    assert.deepEqual(badCards,[],`${id}/${scenario} activity cards`);
    await page.locator('button[data-mode=overview]').click();
+   await verifyFilters('overview');
    const expectedNodes=['FPAC','FPAO'].includes(tower.sourceKey)?data.stages.flatMap(s=>s.processes):data.stages;
    const overviewNodes=page.locator('#overview-svg .flow-node');
    assert.deepEqual((await overviewNodes.evaluateAll(ns=>ns.map(n=>n.dataset.process))).sort(),expectedNodes.map(n=>n.id).sort());

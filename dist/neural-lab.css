@@ -29,6 +29,39 @@
 #process-workspace #navigation,#process-workspace .map-intro,#process-workspace .overview-heading{width:var(--map-viewport-width,100%)}
 #process-workspace :is(h1,[tabindex="-1"]):focus-visible{outline:2px solid var(--accent);outline-offset:4px}
 
+/* One layer above the card surface and below its text. */
+#process-workspace .filter-highlight {
+  fill: var(--filter-ink);
+  fill-opacity: .07;
+  stroke: var(--filter-ink);
+  stroke-width: 1.65;
+  filter: drop-shadow(0 0 3px color-mix(in srgb, var(--filter-ink) 68%, transparent));
+  pointer-events: none;
+}
+/* Cast the diffuse shadow from the opaque card so the tint stays faint. */
+#process-workspace :is(#map-svg .nd > .b, #overview-svg .flow-node > .flow-node-body):has(+ .filter-highlight) {
+  filter: drop-shadow(0 2px 8px color-mix(in srgb, var(--filter-ink) 48%, transparent));
+}
+#process-workspace .filter-trace {
+  fill: none;
+  stroke: none;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  #process-workspace .filter-trace.in-view {
+    stroke: color-mix(in srgb, var(--filter-ink) 40%, white);
+    stroke-width: 2.1;
+    stroke-linecap: round;
+    stroke-dasharray: 3 97;
+    filter: drop-shadow(0 0 2px var(--filter-ink));
+    animation: filter-outline-lap 3.8s linear infinite;
+  }
+}
+@keyframes filter-outline-lap {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -100; }
+}
+
 /* Source context shared by both map levels and the tower insights. */
 .handoff-context{flex:none;color:inherit;font-size:inherit}
 .handoff-context>summary{cursor:pointer;width:fit-content;font-weight:600;padding:.5em 0}

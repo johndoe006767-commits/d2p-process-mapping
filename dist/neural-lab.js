@@ -77,6 +77,8 @@ function skin(){
  for(const n of Object.values(nodes)){
   let group=svg.querySelector(`[data-id="${CSS.escape(n.id)}"]`);
   if(n.s&&!n.kind&&group){const s=n.s,top=n.y-10;group.replaceChildren(el('title',{},sourceTitle(s)));group.append(el('rect',{class:'b',x:n.x,y:top,width:n.w,height:94,rx:8}));
+   // Some AI source renderers mark the group with the previous type. Filter by its visible label.
+   if(s.was&&s.was!==s.ty)group.classList.replace('ty-'+s.was,'ty-'+s.ty);
    group.append(txt(n.x+12,top+26,String(s.n).padStart(2,'0'),8.2,'var(--accent)',400));
    if(isAI&&(s.ch&&s.ch!=='same'||s.rec)){const badge=txt(n.x+29+measureText(String(s.n).padStart(2,'0'),8.2),top+26,'AI',8.2,'var(--prop)',600);group.append(badge);}
    const label=txt(n.x+n.w-12,top+26,typeNames[s.ty],8.2,'var(--muted)',400);label.setAttribute('text-anchor','end');group.append(label);group.append(el('circle',{cx:n.x+n.w-18-measureText(typeNames[s.ty],8.2),cy:top+23,r:2.1,fill:typeColors[s.ty]}));
@@ -166,6 +168,31 @@ function updateFilterStatus(){
  if($('#filter-status'))$('#filter-status').textContent=filter==='all'?`${group.length} activities${mode==='overview'?` across ${Object.keys(flow.records).length} ${['FPAC','FPAO'].includes(t.sourceKey)?'processes':'stages'}`:' in this stage'}`:`${count} of ${group.length} activities in focus${count===0?' · flow retained':''}`;
  if(mode==='overview')if($('#current-stage'))$('#current-stage').textContent=`High-Level Flow · ${t.name}`;
 }
+const traceVisibility=new IntersectionObserver(entries=>{
+ for(const {target,isIntersecting} of entries)target.classList.toggle('in-view',isIntersecting);
+});
+abort.signal.addEventListener('abort',()=>traceVisibility.disconnect(),{once:true});
+function highlightFilterMatches(pointerClick){
+ traceVisibility.disconnect();
+ $$('.filter-highlight,.filter-trace').forEach(layer=>layer.remove());
+ if(filter==='all')return;
+ const category=filter==='pp'?'.has-pp':'.ty-'+filter;
+ root.style.setProperty('--filter-ink',filter==='pp'?'var(--pain)':typeColors[filter]);
+ const activeMap=mode==='detail'?svg:$('#overview-svg');
+ for(const body of $$(`.nd${category} > .b, .flow-node:not(.unfocused) > .flow-node-body`)){
+  const highlight=body.cloneNode(false);
+  highlight.setAttribute('class','filter-highlight');
+  highlight.setAttribute('aria-hidden','true');
+  const trace=highlight.cloneNode(false);
+  trace.setAttribute('class','filter-trace');
+  trace.setAttribute('pathLength','100');
+  body.after(highlight,trace);
+  traceVisibility.observe(trace);
+  if(pointerClick&&!reduced.matches&&body.ownerSVGElement===activeMap){
+   highlight.animate([{opacity:.2},{opacity:1}],{duration:180,easing:'cubic-bezier(0.22, 1, 0.36, 1)'});
+  }
+ }
+}
 function setOverviewScale(value){const minScale=Math.min(.35,viewportWidth()/flow.width);overviewScale=Math.max(minScale,Math.min(2.5,value));flow.setScale(overviewScale);$('#zoom-value').textContent=Math.round(overviewScale*100)+'%';$('#zoom-out').disabled=overviewScale<=minScale;$('#zoom-in').disabled=overviewScale>=2.5;closeCard(false);}
 function setMode(next){mode=next;root.dataset.mode=next;$('#process-map').hidden=next!=='detail';$('.map-intro').hidden=next!=='detail';$('#overview').hidden=next!=='overview';$$('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===next)));closeCard(false);$('.skip').href=next==='overview'?'#overview':'#process-map';if(fitted[next])fitWidth();else if(next==='overview')setOverviewScale(overviewScale);else updateScale(scale);updateFilterStatus();updateHeader();}
 function showProcessCard(r,target){selectedProcess=r;opener=target;markStage(r.st-1);flow.markStage(r.st-1);$('#card-context').textContent=`Process ${String(r.index).padStart(2,'0')} · Stage ${r.st} · ${r.id}`;$('#card-content').innerHTML=`<h2 id="card-title">${esc(r.t)}</h2><p class="card-description">${r.count} activities · ${r.pain.length} documented pain point${r.pain.length===1?'':'s'}</p><dl class="record-meta"><div><dt>Owner</dt><dd>${esc(r.P?.owner||r.f.owner)}</dd></div><div><dt>Activity mix</dt><dd>${r.man} manual · ${r.hyb} semi · ${r.auto} automated</dd></div></dl>${block('Inputs',list(r.inp))}${block('Outputs',list(r.out))}${block('Documented pain points',list(r.pain),'pain')}<p class="source-note">${esc(t.name)} · ${viewLabel} Process</p>`;$('#card-next').hidden=true;$('#card-detail').hidden=false;if(!card.matches(':popover-open'))card.showPopover();positionCard(target);card.scrollTop=0;$('#close-card').focus({preventScroll:true});}
@@ -182,7 +209,11 @@ try{
  flow=makeSourceOverview($('#overview-svg'),payload,t,showProcessCard);fitSvgLabels($('#overview-svg'));overviewScale=viewportWidth()/flow.width;
  $('#total-count').textContent=activities().length;
  $$('#stages [data-stage]').forEach(b=>b.onclick=()=>jump(Number(b.dataset.stage)));$('#stage-select').onchange=e=>jump(Number(e.target.value));
- $$('[data-filter]').forEach(b=>b.onclick=()=>{filter=b.dataset.filter;engine.setFilter(filter);flow.setFilter(filter);$$('[data-filter]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));updateFilterStatus();});
+ $$('[data-filter]').forEach(b=>b.onclick=event=>{
+  filter=b.dataset.filter;engine.setFilter(filter);flow.setFilter(filter);
+  highlightFilterMatches(event.detail>0);
+  $$('[data-filter]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));updateFilterStatus();
+ });
  $$('[data-mode]').forEach(b=>b.onclick=()=>{setMode(b.dataset.mode);if(mode==='detail')jump(activeStage);else scrollPageTo(root.getBoundingClientRect().top+scrollY);});
  const manualZoom=delta=>{fitted[mode]=false;if(mode==='overview')setOverviewScale(overviewScale+delta);else updateScale(scale+delta);};
  $('#zoom-in').onclick=()=>manualZoom(.15);$('#zoom-out').onclick=()=>manualZoom(-.15);

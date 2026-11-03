@@ -45,7 +45,7 @@ archives/                      Inactive feature archives (local only)
 
 Only the four Start/Stop launcher files remain loose at the top level; `Source/` stays directly accessible there. Documentation lives in `docs/`. Hidden repository and local configuration files retain their required locations. The ignored `.runtime/` folder contains local server state and logs. `.git/` contains repository history. Asset and library licenses are retained alongside the files they cover.
 
-The former chatbot is archived locally in `archives/ai-chatbot-2026-11-02/`. Its interface, backend, configuration and saved sessions are disconnected from the active site. The archive is excluded from Git and GitHub Pages.
+The latest Ask Nacey chatbot archive is stored locally in `archives/ai-chatbot-2026-11-03/`, including its interface, backend, configuration and saved sessions. The local launcher serves the same static site that GitHub Pages publishes. Git ignores the archive directory.
 
 ## Edit and publish
 

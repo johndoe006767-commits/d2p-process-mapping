@@ -1,6 +1,6 @@
 import {getScenario,setScenario,scenarioControl,bindScenarioControl,scenarioLabel} from './process-scenario.js';
 import {REAL,getTower} from './real-data.js?v=20261103-tower-workbook';
-import {mountNeuralLab} from './neural-lab.js?v=20261103-tower-workbook';
+import {mountNeuralLab} from './neural-lab.js?v=filter-trace-1';
 import {titleCase,normalizeHeadings} from './title-case.js';
 import {handoffContext} from './handoff-context.js?v=20261103-tower-workbook';
 const root=document.querySelector('#process-workspace');let api=null,current=null,request=0,shellPromise,pending=null,returnHandler;let scenarioRefresh=0;const sources=new Map();
