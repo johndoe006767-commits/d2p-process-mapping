@@ -1,4 +1,4 @@
-import {openMap} from './real-experience.js?v=20261104-navigation';
+import {openMap} from './real-experience.js?v=20261104-controlling-copy';
 import * as T from 'three';
 
 // Labels use the actual soma objects from the supplied organ-specific network.

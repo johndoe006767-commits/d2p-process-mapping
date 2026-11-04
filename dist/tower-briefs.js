@@ -1,5 +1,5 @@
 // Card content is supplied separately from the detailed process-map registers.
-const response = await fetch('./data/tower-briefs.json?v=20261104-excel-source');
+const response = await fetch('./data/tower-briefs.json?v=20261104-controlling-copy');
 if (!response.ok) throw new Error('The tower card data could not be loaded.');
 const workbook = await response.json();
 export const CARD_BRIEFS = workbook.towers;

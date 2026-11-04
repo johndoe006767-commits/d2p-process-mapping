@@ -1,7 +1,7 @@
 let pending;
 // The badge and destination share one source and one cached request.
 export function loadSourceRegisters(){
- return pending??=(fetch('./data/tower-content.json?v=20261104-excel-source').then(r=>{
+ return pending??=(fetch('./data/tower-content.json?v=20261104-controlling-copy').then(r=>{
   if(!r.ok)throw Error('The source registers could not be loaded.');
   return r.json();
  }).catch(error=>{pending=null;throw error;}));

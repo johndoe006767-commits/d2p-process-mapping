@@ -190,6 +190,22 @@ for key, (organ, map_key, name) in TOWERS.items():
                 source_corrections.append({'tower': key, 'scenario': 'tobe', 'stage': frame['id'],
                                            'field': 'tpi', 'basis': 'As Is Excel shortlist in the same source HTML'})
                 frame['tpi'] = copy.deepcopy(shortlist)
+    # User corrections dated 4 November 2026 supersede these two source phrases.
+    # Keep the supplied source files intact; see docs/content-corrections.md.
+    if key == 'CTRL':
+        for data in (A, B):
+            frame = next(f for f in data['frames'] if f['id'] == 'CTRL-01')
+            process = next(p for p in frame['procs'] if p['id'] == 'CTRL-01.01')
+            step = next(s for s in flatten(process['steps']) if s.get('n') == 4)
+            for field in ('d', 'sys'):
+                step[field] = step[field].replace('Sub zero reference for specific reconciliations',
+                                                  'Subzero validates key and non-key tests')
+            for entry in frame.get('tpi', []):
+                if '(MJV-07)' in entry['t']:
+                    entry['t'] = entry['t'].replace('enhancements from Subzero', 'enhancements for Subzero')
+        source_corrections.append({'tower': key, 'scenarios': ['asis', 'tobe'],
+                                   'fields': ['CTRL-01.01 step 4 d/sys', 'MJV-07 t'],
+                                   'basis': 'User corrections, 4 November 2026; docs/content-corrections.md'})
     original_types = {(f['id'], p['id'], s['n']): s['ty']
                       for f in A['frames'] for p in f['procs'] for s in flatten(p['steps'])}
     graph, handoffs = source_graph(baseline, key)

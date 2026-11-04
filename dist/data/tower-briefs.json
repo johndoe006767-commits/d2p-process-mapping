@@ -618,7 +618,7 @@
           },
           {
             "name": "Pre-Submission AI Checks (MJV-07)",
-            "description": "Pre-submission AI checks which includes GSOP compliance, enigma rules - enhancements from Subzero (MJV-07)",
+            "description": "Pre-submission AI checks which includes GSOP compliance, enigma rules - enhancements for Subzero (MJV-07)",
             "sourceCell": "E12",
             "sourceItem": 2,
             "sourceText": "Pre-submission AI checks which includes GSOP compliance, enigma rules - enhancements from Subzero (MJV-07)"

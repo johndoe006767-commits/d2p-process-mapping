@@ -1,4 +1,4 @@
-import {REAL} from './real-data.js?v=20261104-excel-source';
+import {REAL} from './real-data.js?v=20261104-controlling-copy';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';

@@ -239,6 +239,18 @@ def main():
             (False, map_from_html(html, asis_binding)["asis"], real[organ]),
             (True, map_from_html(html, ai_binding)["tobe"], suggested[organ]),
         ]
+        # The user's dated corrections supersede only these source fields.
+        if tower == 'CTRL':
+            for _, data, _ in scenarios:
+                frame = next(f for f in data['frames'] if f['id'] == 'CTRL-01')
+                process = next(p for p in frame['procs'] if p['id'] == 'CTRL-01.01')
+                step = next(s for s in activities(process['steps']) if s.get('n') == 4)
+                step['d'] = step['d'].replace('Sub zero reference for specific reconciliations.',
+                                             'Subzero validates key and non-key tests.')
+                step['sys'] = 'BlackLine · Subzero validates key and non-key tests'
+                for entry in frame.get('tpi', []):
+                    if '(MJV-07)' in entry['t']:
+                        entry['t'] = entry['t'].replace('enhancements from Subzero', 'enhancements for Subzero')
         mixes = []
         for ai, source_data, record in scenarios:
             path = ROOT / "dist/neural" / f"{tower}{'-ai' if ai else ''}.json"

@@ -1,4 +1,4 @@
-import {escapeHTML as esc} from './real-data.js?v=20261104-excel-source';
+import {escapeHTML as esc} from './real-data.js?v=20261104-controlling-copy';
 
 export function handoffContext(tower){
  const stages=tower.d2pStages.map(stage=>

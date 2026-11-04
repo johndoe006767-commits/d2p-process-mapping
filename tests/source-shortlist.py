@@ -30,12 +30,15 @@ for row in shortlist:
     expected = Counter((year, normalize(title)) for year in ('2026', '2027') for title in row['y' + year])
     cards = Counter((year, normalize(p['sourceText'])) for year, projects in briefs[organ]['projects'].items() for p in projects)
     assert cards == expected, (key, 'tower cards differ from HTML Excel shortlist', cards - expected, expected - cards)
+    # Preserve verbatim sourceText while auditing the user's corrected display copy.
+    display_expected = Counter((year, text.replace('enhancements from Subzero', 'enhancements for Subzero')
+                                if key == 'CTRL' else text) for year, text in expected.elements())
     baseline = None
     for suffix in ('', '-ai'):
         payload = json.loads((ROOT / f'dist/neural/{key}{suffix}.json').read_text())
         frames = payload['data']['frames']
         actual = Counter((t['st'].split()[0], normalize(t['t'])) for f in frames for t in f.get('tpi', []))
-        assert actual == expected, (key + suffix, 'map TPI shortlist mismatch', actual - expected, expected - actual)
+        assert actual == display_expected, (key + suffix, 'map TPI shortlist mismatch', actual - display_expected, display_expected - actual)
         mapped = {f['id']: f.get('tpi', []) for f in frames}
         if baseline is not None:
             assert mapped == baseline, (key, 'scenario TPI stage mappings differ')
