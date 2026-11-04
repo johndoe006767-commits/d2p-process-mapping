@@ -71,8 +71,8 @@ The workbook check requires openpyxl. Four independent checks cover the source r
 python3 tests/source-html.py
 python3 tests/source-workbook.py
 python3 tests/source-rendered.py
-```
 python3 tests/source-shortlist.py
+```
 
 The rendered check uses `.runtime/source-sync/capture.json`, captured from the selected HTML in Chrome by `scripts/capture-source.mjs`. To refresh that capture, pass the absolute path to an installed `playwright/index.mjs` as the script's first argument. `python3 scripts/import-source.py` regenerates the HTML-derived site data from the capture and requires BeautifulSoup. The shortlist check independently compares both map scenarios and the tower cards with the new HTML's Excel-only TPI section. `tests/source-browser.mjs` accepts the same Playwright path and verifies all towers at 3840 × 2160 against the local server, including exact KPI mixes, manual percentages, every activity and TPI card, and both map levels in both scenarios. The final check results and source hashes are recorded in `docs/source-verification.json`.
 

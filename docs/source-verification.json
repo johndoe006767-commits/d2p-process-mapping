@@ -1,7 +1,7 @@
 {
   "verifiedDate": "2026-11-04",
   "timezone": "Asia/Kuala_Lumpur",
-  "scope": "Local site verified for GitHub Pages publication",
+  "scope": "Verified local site and published GitHub Pages files",
   "status": "PASS",
   "sources": [
     {
@@ -658,5 +658,16 @@
     "gitDiffWhitespace": "PASS",
     "visualReview": "PASS: Tax KPI card and Controlling AI high-level map at 3840 × 2160"
   },
-  "release": "20261104-excel-source"
+  "release": "20261104-excel-source",
+  "publication": {
+    "status": "PASS",
+    "url": "https://johndoe006767-commits.github.io/d2p-process-mapping/",
+    "sourceCommit": "13a8e2a1c60778da9dd2735151733e4cff3c402a",
+    "deploymentRun": "https://github.com/johndoe006767-commits/d2p-process-mapping/actions/runs/41771761109",
+    "fileIntegrity": {
+      "status": "PASS",
+      "files": 37,
+      "method": "SHA-256 equality of live assets against verified local files"
+    }
+  }
 }
