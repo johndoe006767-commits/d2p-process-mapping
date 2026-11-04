@@ -1,0 +1,84 @@
+/* The process workspace keeps scenario and view choices in one reading group.
+   Desktop only: smaller screens retain the existing navigation arrangement. */
+#process-workspace .navigation-group{display:contents}
+#process-workspace .map-modes .view-icon,
+#process-workspace .lab-return .return-icon{display:none}
+
+@media(min-width:1200px){
+ #process-workspace #navigation{
+  --nav-text:#f7edf7;
+  --nav-muted:#c9b5d0;
+  --nav-surface:#261c2e;
+  --nav-line:#5d4869;
+  --nav-selected:#efd9eb;
+  --nav-size:14px;
+  --nav-height:44px;
+  --nav-gap:24px;
+  background:#302238;
+  border-bottom-color:#604b6a;
+  padding-top:0;
+ }
+ #process-workspace #navigation .mast{
+  display:grid;
+  grid-template-columns:minmax(240px,1fr) auto auto minmax(150px,1fr);
+  gap:var(--nav-gap);
+  min-height:96px;
+  padding-block:18px;
+ }
+ #process-workspace #navigation .identity{gap:14px;align-items:center;justify-self:start}
+ #process-workspace #navigation .identity>svg{display:none}
+ #process-workspace #navigation .identity strong{font-size:22px;line-height:1.25;font-weight:650;color:var(--nav-text)}
+ #process-workspace #navigation .identity small{font-size:13px;line-height:1.4;color:var(--nav-muted);margin-top:5px}
+ #process-workspace #navigation .navigation-group{display:flex;align-items:center;gap:12px;min-width:0}
+ #process-workspace #navigation .navigation-view{border-left:1px solid var(--nav-line);padding-left:var(--nav-gap)}
+ #process-workspace #navigation :is(.scenario-switch,.map-modes){
+  display:flex;align-items:center;gap:4px;padding:4px;margin:0;
+  min-width:0;width:auto;background:var(--nav-surface);
+  border:1px solid var(--nav-line);border-radius:10px;
+ }
+ #process-workspace #navigation .scenario-switch::before{display:none}
+ #process-workspace #navigation :is(.scenario-switch,.map-modes) button{
+  min-height:var(--nav-height);padding:10px 18px;gap:9px;
+  border:1px solid transparent;border-radius:6px;
+  background:transparent;color:var(--nav-muted);
+  font-size:var(--nav-size);font-weight:500;line-height:1.25;
+  transition:background-color 160ms ease-out,color 160ms ease-out,border-color 160ms ease-out;
+ }
+ #process-workspace #navigation .scenario-switch button{min-width:96px}
+ #process-workspace #navigation .scenario-switch [aria-checked=true]{background:var(--nav-selected);color:#39253f;border-color:var(--nav-selected);font-weight:650}
+ #process-workspace #navigation .map-modes [aria-pressed=true]{background:#584260;border-color:#9e80a6;color:var(--nav-text);font-weight:650}
+ #process-workspace #navigation .map-modes .view-icon{display:block;width:18px;height:18px;flex:none;stroke-width:1.5}
+ #process-workspace #navigation .lab-return{
+  display:inline-flex;justify-self:end;gap:10px;margin:0;
+  min-height:var(--nav-height);padding:10px 12px;
+  border:1px solid transparent;border-radius:6px;
+  background:transparent;color:var(--nav-muted);font-size:var(--nav-size);font-weight:500;
+  transition:background-color 160ms ease-out,color 160ms ease-out;
+ }
+ #process-workspace #navigation .lab-return .return-icon{display:block;width:18px;height:18px;flex:none}
+ #process-workspace #navigation :is(button,a):focus-visible{outline:2px solid var(--nav-selected);outline-offset:4px}
+ #process-workspace #navigation .identity:focus-visible{border-radius:4px}
+ #process-workspace #navigation .lab-return:focus:not(:focus-visible){outline:none}
+ #process-workspace #navigation #stages{margin-top:8px}
+ #process-workspace #navigation #stages [aria-current=step] .stage-number{box-shadow:none}
+ #process-workspace #navigation .control-bar{border-top-color:#513e5b}
+ #process-workspace #navigation ::selection{background:#efd9eb;color:#39253f}
+}
+@media(min-width:2500px){
+ #process-workspace #navigation{--nav-size:18px;--nav-height:52px;--nav-gap:32px}
+ #process-workspace #navigation .mast{min-height:112px;padding-block:22px}
+ #process-workspace #navigation .identity strong{font-size:28px}
+ #process-workspace #navigation .identity small{font-size:16px}
+ #process-workspace #navigation .navigation-group{gap:16px}
+ #process-workspace #navigation :is(.scenario-switch,.map-modes) button{padding-inline:22px}
+ #process-workspace #navigation .scenario-switch button{min-width:118px}
+ #process-workspace #navigation :is(.view-icon,.return-icon){width:20px;height:20px}
+}
+@media(min-width:1200px) and (hover:hover){
+ #process-workspace #navigation :is(.scenario-switch [aria-checked=false],.map-modes [aria-pressed=false],.lab-return):hover{background:#41314b;color:var(--nav-text)}
+ #process-workspace #navigation .identity:hover strong{color:#efd9eb}
+}
+@media(prefers-reduced-motion:reduce){
+ #process-workspace #navigation :is(.scenario-switch,.map-modes) button,
+ #process-workspace #navigation .lab-return{transition:none}
+}

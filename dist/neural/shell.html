@@ -2,9 +2,9 @@
  <header id="navigation">
   <div class="mast">
    <a class="identity" href="#stage-1" aria-label="{{NAME}}, first stage"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M15.5 6C12 2 7 5 7 9c-5 1-5 8-2 10-2 5 2 9 6 8 3 3 5 1 5-2V8m1-2c4-4 9-1 9 3 5 1 5 8 2 10 2 5-2 9-6 8-3 3-5 1-5-2V8M7 9c1 2 4 1 5 4m-7 6c3-2 6 0 6 3m15-13c-1 2-4 1-5 4m7 6c-3-2-6 0-6 3"/></svg><span><strong>{{NAME}}</strong><small>Process anatomy <span>·</span> As-Is</small></span></a>
-   <div id="scenario-slot"></div>
-   <div class="map-modes" aria-label="Map view"><button type="button" data-mode="overview" aria-pressed="false">High-level flow</button><button type="button" data-mode="detail" aria-pressed="true">Detailed processes</button></div>
-   <button class="lab-return" id="lab-return">Back to Organ</button>
+   <div class="navigation-group navigation-scenario"><div id="scenario-slot"></div></div>
+   <div class="navigation-group navigation-view"><div class="map-modes" role="group" aria-label="Map view"><button type="button" data-mode="overview" aria-pressed="false"><svg class="view-icon" viewBox="0 0 20 20" aria-hidden="true"><rect x="1.5" y="6.5" width="5" height="7" rx="1.5"/><rect x="13.5" y="6.5" width="5" height="7" rx="1.5"/><path d="M6.5 10h7"/></svg>High-level flow</button><button type="button" data-mode="detail" aria-pressed="true"><svg class="view-icon" viewBox="0 0 20 20" aria-hidden="true"><rect x="2" y="2" width="6" height="6" rx="1.5"/><rect x="12" y="2" width="6" height="6" rx="1.5"/><rect x="2" y="12" width="6" height="6" rx="1.5"/><rect x="12" y="12" width="6" height="6" rx="1.5"/></svg>Detailed processes</button></div></div>
+   <button class="lab-return" id="lab-return" type="button"><svg class="return-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M16 10H4m5-5-5 5 5 5"/></svg>Back to Organ</button>
   </div>
   <nav id="stages" aria-label="Process stages"></nav>
   <div class="mobile-stages"><label for="stage-select">Stage</label><select id="stage-select"></select><button id="map-controls-toggle" aria-expanded="false" aria-controls="map-controls">Controls<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button></div>

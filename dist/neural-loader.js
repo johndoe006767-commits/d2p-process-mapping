@@ -1,10 +1,10 @@
 import {getScenario,setScenario,scenarioControl,bindScenarioControl,scenarioLabel} from './process-scenario.js';
 import {REAL,getTower} from './real-data.js?v=20261104-excel-source';
-import {mountNeuralLab} from './neural-lab.js?v=20261104-challenges';
+import {mountNeuralLab} from './neural-lab.js?v=20261104-navigation';
 import {titleCase,normalizeHeadings} from './title-case.js';
 import {handoffContext} from './handoff-context.js?v=20261104-excel-source';
 const root=document.querySelector('#process-workspace');let api=null,current=null,request=0,shellPromise,pending=null,returnHandler;let scenarioRefresh=0;const sources=new Map();
-const shell=()=>shellPromise??=fetch('./neural/shell.html?v=labels-1').then(r=>{if(!r.ok)throw Error('The Process Workspace Could Not Load.');return r.text();}).catch(e=>{shellPromise=null;throw e;});
+const shell=()=>shellPromise??=fetch('./neural/shell.html?v=20261104-navigation').then(r=>{if(!r.ok)throw Error('The Process Workspace Could Not Load.');return r.text();}).catch(e=>{shellPromise=null;throw e;});
 const source=key=>{if(!sources.has(key))sources.set(key,fetch(`./neural/${key}.json?v=20261104-excel-source`).then(r=>{if(!r.ok)throw Error('The Process Records Could Not Load.');return r.json();}).catch(e=>{sources.delete(key);throw e;}));return sources.get(key);};
 function flatten(steps){return steps.flatMap(s=>s.split?s.branches.flatMap(b=>flatten(b.steps)):s.fork?s.branches.flatMap(b=>flatten([b.step])):s.gate?(s.fix?[s.fix]:[]):[s]);}
 function preserveChallenges(data){for(const f of data.frames){f.stagePain=[...new Set([...(f.pp||[]),...(f.ch||[]).map(c=>c.full||c.t)])];for(const c of f.ch||[]){for(const ref of c.steps||[]){const match=f.procs.flatMap(p=>flatten(p.steps).map(s=>({p,s}))).find(({p,s})=>`${p.id}|${s.n}`===ref);if(match){match.s.pp=[...new Set([...(match.s.pp||[]),c.full||c.t])];}}}}}

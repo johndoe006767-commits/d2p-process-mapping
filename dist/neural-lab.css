@@ -96,3 +96,35 @@
 #process-workspace .source-tags { display: flex; flex-wrap: wrap; gap: .4em; margin-top: .5em; }
 #process-workspace .source-tag { display: inline-block; padding: .25em .6em; border-radius: 4px; background: var(--annotation-fill); color: #fff; font-size: .9em; line-height: 1.5; overflow-wrap: anywhere; }
 #process-workspace .source-tag[data-tone="context"] { color: #ead7e6; }
+
+/* Local register redesign: clear descriptions and separate source references. */
+#process-workspace #map-svg .register-card {
+ --register-accent: #f2b4c8;
+ --register-muted: #d0b6c8;
+ --register-surface: #332737;
+ --register-border: #705365;
+ --register-badge: #513342;
+}
+#process-workspace #map-svg .register-card[data-register-kind="tpi"] {
+ --register-accent: #96e1e8;
+ --register-muted: #b1cbd2;
+ --register-surface: #292e40;
+ --register-border: #4b6674;
+ --register-badge: #294853;
+}
+#process-workspace #map-svg .register-card > rect.b {
+ fill: var(--register-surface); stroke: var(--register-border); stroke-width: .8;
+ transition: fill .16s ease-out, stroke .16s ease-out;
+}
+#process-workspace #map-svg .register-card .register-badge { fill: var(--register-badge); stroke: none; }
+#process-workspace #map-svg .register-card .register-divider { stroke: var(--register-border); stroke-width: .6; }
+#process-workspace #map-svg .register-card .register-open { stroke: var(--register-accent); stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
+#process-workspace #map-svg .register-card:hover > rect.b,
+#process-workspace #map-svg .register-card.sel > rect.b,
+#process-workspace #map-svg .register-card:focus-visible > rect.b { stroke: var(--register-accent); stroke-width: 1.4; fill: #3b3045; }
+#process-workspace #map-svg .register-card:focus { outline: 2px solid var(--register-accent); outline-offset: 5px; border-radius: 12px; }
+#process-workspace #map-svg .register-card .register-copy { fill: #f4edf5; }
+#process-workspace #map-svg .register-heading { pointer-events: none; }
+@media (prefers-reduced-motion: reduce) {
+ #process-workspace #map-svg .register-card > rect.b { transition: none; }
+}

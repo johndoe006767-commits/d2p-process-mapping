@@ -11,9 +11,10 @@ page.on('pageerror',e=>errors.push(e.message));
 const towers={FPAC:'FP&A Commercial',FPAO:'FP&A Operations',CAPEX:'CAPEX / Fixed Assets',P2P:'Purchase To Pay',O2C:'Order to Cash',TAX:'Tax',R2R:'Record to Report Operations',CTRL:'Controlling'};
 const flatten=steps=>steps.flatMap(s=>s.split?s.branches.flatMap(b=>flatten(b.steps)):s.fork?s.branches.flatMap(b=>flatten([b.step])):s.gate?(s.fix?[s.fix]:[]):[s]);
 function expected(data,scenario){
- const challenges=[],tagged=[];
+ const challenges=[],initiatives=[],tagged=[];
  for(const f of data.frames){
-  (f.ch||[]).forEach((c,i)=>challenges.push({id:`${f.id}|ch${i}`,frame:f.id,...c}));
+  (f.ch||[]).forEach((c,i)=>challenges.push({id:`${f.id}|ch${i}`,frame:f.id,kind:'ch',...c}));
+  (f.tpi||[]).forEach((c,i)=>initiatives.push({id:`${f.id}|tpi${i}`,frame:f.id,kind:'tpi',...c}));
   const add=(s,p,id,key)=>{
    if(scenario!=='tobe')return;
    const review=data.review?.[key]||data.review?.[s.t]||{};
@@ -26,20 +27,21 @@ function expected(data,scenario){
   }
   if(f.opp)add(f.opp,null,`${f.id}|opp`,`${f.id}|opp`);
  }
- return {challenges,tagged};
+ return {challenges,initiatives,tagged};
 }
 async function detailCheck(expected){return page.evaluate(expected=>{
  const issues=[],lab=window.NeuralLab,svg=document.querySelector('#map-svg'),bounds=svg.viewBox.baseVal;
- const groups=[...svg.querySelectorAll('[data-id]')],obstacles=[...svg.querySelectorAll('.stage-handoffs,.process-heading,[data-stage-heading],.node-annotation,.step-output')];
+ const groups=[...svg.querySelectorAll('[data-id]')],obstacles=[...svg.querySelectorAll('.stage-handoffs,.process-heading,[data-stage-heading],.node-annotation,.step-output,.register-heading')];
  const intersects=(a,b)=>a.x<b.x+b.width-.5&&a.x+a.width>b.x+.5&&a.y<b.y+b.height-.5&&a.y+a.height>b.y+.5;
  const luminance=v=>{const c=v.match(/[\d.]+/g).slice(0,3).map(Number).map(x=>(x/=255)<=.04045?x/12.92:((x+.055)/1.055)**2.4);return .2126*c[0]+.7152*c[1]+.0722*c[2]};
  if(svg.querySelectorAll('.challenge-node').length!==expected.challenges.length)issues.push('challenge count');
- for(const c of expected.challenges){
+ if(svg.querySelectorAll('[data-register-kind="tpi"]').length!==expected.initiatives.length)issues.push('initiative count');
+ for(const c of [...expected.challenges,...expected.initiatives]){
   const g=svg.querySelector(`[data-id="${CSS.escape(c.id)}"]`),n=lab.getNodes()[c.id];
   if(!g||!n){issues.push([c.id,'missing']);continue}
   const body=g.querySelector('.b'),b=body.getBBox(),copy=[...g.querySelectorAll('.register-copy')].map(t=>t.textContent).join(' ');
   if(copy!==(c.full||c.t).replace(/\s+/g,' ').trim())issues.push([c.id,'source text',copy]);
-  if(!g.textContent.includes('[CHALLENGE]')||(c.ref&&!g.textContent.includes(c.ref)))issues.push([c.id,'header/reference']);
+  if(g.querySelector('.register-label')?.textContent!==(c.kind==='ch'?'CHALLENGE':`SOLUTION ${c.st||'TPI'}`)||(c.ref&&!g.textContent.includes(c.ref)))issues.push([c.id,'header/reference']);
   if(b.x<bounds.x||b.y<bounds.y||b.x+b.width>bounds.x+bounds.width||b.y+b.height>bounds.y+bounds.height)issues.push([c.id,'outside map']);
   for(const t of g.querySelectorAll(':scope > text')){
    const tb=t.getBBox();if(tb.x<b.x+5||tb.x+tb.width>b.x+b.width-5||tb.y<b.y||tb.y+tb.height>b.y+b.height)issues.push([c.id,'text outside card']);
@@ -47,11 +49,21 @@ async function detailCheck(expected){return page.evaluate(expected=>{
   }
   for(const o of groups){if(o===g)continue;const r=o.querySelector(':scope > .b');if(r&&intersects(b,r.getBBox()))issues.push([c.id,'overlap node',o.dataset.id]);}
   for(const o of obstacles)if(intersects(b,o.getBBox()))issues.push([c.id,'overlap label',o.classList.value]);
+  const downstream=svg.querySelector(`.stage-handoffs[data-frame="${c.frame}"][data-direction="down"]`);
+  if(downstream&&b.y+b.height>downstream.getBBox().y)issues.push([c.id,'not above Downstream']);
   if(getComputedStyle(g).display==='none'||getComputedStyle(g).visibility!=='visible')issues.push([c.id,'hidden']);
   g.dispatchEvent(new MouseEvent('click',{bubbles:true}));
   const text=document.querySelector('#card-content').textContent;
   if(!text.includes(c.full||c.t)||(c.src&&!text.includes(c.src)))issues.push([c.id,'card source']);
-  for(const ref of c.steps||[]){const activity=lab.getNodes()[`${c.frame}|${ref}`];if(activity){const el=svg.querySelector(`[data-id="${CSS.escape(activity.id)}"]`);if(!el.classList.contains('sel')||!text.includes(activity.s.t)||!activity.s.pp.includes(c.full||c.t))issues.push([c.id,'activity link',ref]);}}
+  for(const ref of c.kind==='ch'?c.steps||[]:[]){const activity=lab.getNodes()[`${c.frame}|${ref}`];if(activity){const el=svg.querySelector(`[data-id="${CSS.escape(activity.id)}"]`);if(!el.classList.contains('sel')||!text.includes(activity.s.t)||!activity.s.pp.includes(c.full||c.t))issues.push([c.id,'activity link',ref]);}}
+ }
+ for(const kind of ['ch','tpi']){
+  const records=kind==='ch'?expected.challenges:expected.initiatives;
+  for(const frame of new Set(records.map(c=>c.frame))){
+   const cards=records.filter(c=>c.frame===frame).map(c=>lab.getNodes()[c.id]).filter(Boolean);
+   const rows=[...new Set(cards.map(c=>c.y))];
+   if(rows.length!==Math.ceil(cards.length/4)||rows.some((y,i)=>cards.filter(c=>c.y===y).length!==Math.min(4,cards.length-i*4)))issues.push([frame,kind,'four-card wrapping']);
+  }
  }
  document.querySelector('#close-card').click();
  return issues;

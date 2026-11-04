@@ -84,6 +84,52 @@ function drawAnnotations(group,n){
   group.append(tag);y+=item.height+4;
  }
 }
+// A shared reading grid keeps challenge and initiative rows aligned.
+const registerGap=18;
+const registerColumns=items=>Math.min(items.length,4);
+function registerWidth(items,min,kind){
+ const columns=registerColumns(items,kind);
+ return columns<=2?560:368;
+}
+function registerContent(c,width){
+ const copy=fitLines(c.full||c.t,width-40,12,Infinity,450);
+ const reference=fitLines(c.ref||'',width-72,9.5,Infinity,400);
+ const bodyLines=Math.max(2,copy.length),referenceLines=Math.max(1,reference.length);
+ return {copy,reference,height:132+(bodyLines-2)*17+(referenceLines-1)*13};
+}
+function drawRegisterCard(group,n){
+ const challenge=n.kind==='ch',layout=registerContent(n.c,n.w);
+ const label=challenge?'CHALLENGE':`SOLUTION ${n.c.st||'TPI'}`;
+ const badgeWidth=measureText(label,9,600)+18;
+ group.classList.add('register-card');group.classList.toggle('challenge-node',challenge);
+ group.dataset.registerKind=n.kind;
+ group.replaceChildren(el('title',{},`${label}: ${n.c.full||n.c.t}${n.c.ref?' · '+n.c.ref:''}`),
+  el('rect',{class:'b',x:n.x,y:n.y,width:n.w,height:n.h,rx:12}),
+  el('rect',{class:'register-badge',x:n.x+18,y:n.y+15,width:badgeWidth,height:19,rx:5}));
+ const badge=txt(n.x+27,n.y+28,label,9,'var(--register-accent)',600);badge.classList.add('register-label');group.append(badge);
+ layout.copy.forEach((line,i)=>{
+  const text=txt(n.x+20,n.y+55+i*17,line,12,'var(--ink)',450);text.classList.add('register-copy');group.append(text);
+ });
+ const footerY=n.y+n.h-19-(Math.max(1,layout.reference.length)-1)*13;
+ group.append(el('line',{class:'register-divider',x1:n.x+20,x2:n.x+n.w-20,y1:footerY-18,y2:footerY-18}));
+ layout.reference.forEach((line,i)=>{
+  const text=txt(n.x+20,footerY+i*13,line,9.5,'var(--register-muted)');text.classList.add('register-reference');group.append(text);
+ });
+ // The complete card remains the existing pointer and keyboard target.
+ const arrowX=n.x+n.w-29,arrowY=n.y+n.h-25;
+ group.append(el('path',{class:'register-open',d:`M${arrowX-4},${arrowY+8} l8,-8 m-7,0 h7 v7`,fill:'none','aria-hidden':'true'}));
+}
+function drawRegisterHeadings(){
+ svg.querySelectorAll('.source-register-heading').forEach(g=>g.remove());
+ for(const f of frames)for(const kind of ['ch','tpi']){
+  const entries=Object.values(nodes).filter(n=>n.f===f&&n.kind===kind);if(!entries.length)continue;
+  const first=entries[0],columns=registerColumns(entries,kind),width=first.w*columns+registerGap*(columns-1);
+  const group=el('g',{class:'register-heading','data-register-heading':kind,'data-frame':f.id});
+  group.append(txt(first.x,first.y-16,kind==='ch'?'Challenges':'TPI / CI initiatives',14,'var(--ink)',600));
+  const count=txt(first.x+width,first.y-16,`${entries.length} ${kind==='ch'?'documented':entries.length===1?'initiative':'initiatives'}`,10,'var(--muted)',400);count.setAttribute('text-anchor','end');group.append(count);
+  svg.append(group);
+ }
+}
 function stageHeadingName(f){return titleCase(cleanName(f));}
 function drawHandoffs(f,direction,y){
  const items=f[direction]||[];if(!items.length)return;
@@ -137,27 +183,19 @@ function skin(){
    if(group){group.dataset.id=n.id;group.classList.add('source-io');group.setAttribute('tabindex','0');group.setAttribute('role','button');if(n.kind==='in'){const top=n.y-10;group.replaceChildren(el('title',{},`${n.lab}: ${n.txt}`),el('rect',{x:n.x,y:top,width:n.w,height:94,rx:8,fill:'#47304b',stroke:'#725c7b','stroke-width':.7}),txt(n.x+12,top+24,fitLines(n.lab,n.w-24,10.5,1)[0],10.5,'var(--accent)'));const copy=n.P.id==='FPAC-01.01'?'Planning cycle begins':n.txt;fitLines(copy,n.w-24,11.2,3).forEach((line,i)=>group.append(txt(n.x+12,top+47+i*15.4,line,11.2,'var(--ink)',400)));}}
   }
   if(group&&n.kind==='dec'){const question=group.querySelector(':scope > text');if(question){const lines=fitLines(n.dec.q,130,9.5,2,500),cx=n.x+n.w/2,start=n.y-8-(lines.length-1)*13;question.remove();group.querySelectorAll(':scope > rect').forEach(r=>r.remove());const label=el('g',{class:'decision-label'}),width=Math.max(...lines.map(l=>measureText(l,9.5,500)))+20;label.append(el('rect',{x:cx-width/2,y:start-11,width,height:lines.length*13+3,rx:3,fill:'var(--base)'}));lines.forEach((line,i)=>{const text=txt(cx,start+i*13,line,9.5,'var(--accent)',500);text.setAttribute('text-anchor','middle');label.append(text);});group.append(label);}}
-  if(group&&['ch','tpi'].includes(n.kind)){
-   const challenge=n.kind==='ch',color=challenge?'var(--pain)':'var(--auto)';
-   group.classList.toggle('challenge-node',challenge);
-   group.querySelectorAll(':scope > text').forEach(t=>t.remove());
-   group.append(txt(n.x+10,n.y+14,challenge?'[CHALLENGE]':`[SOLUTION] ${n.c.st||'TPI'}`,9.5,color,500));
-   if(n.c.ref){const ref=txt(n.x+n.w-10,n.y+14,n.c.ref,8.8,color,500);ref.setAttribute('text-anchor','end');group.append(ref);}
-   fitLines(challenge?n.c.full||n.c.t:n.c.t,n.w-20,9.8,challenge?Infinity:2).forEach((line,i)=>{
-    const label=txt(n.x+10,n.y+29+i*13.3,line,9.8,'var(--ink)');label.classList.add('register-copy');group.append(label);
-   });
-  }
+  if(group&&['ch','tpi'].includes(n.kind))drawRegisterCard(group,n);
   if(group&&n.opp){const o=n.opp;group.replaceChildren(el('title',{},o.t),el('rect',{class:'b',x:n.x,y:n.y,width:n.w,height:n.h,rx:8,fill:'#3a304b',stroke:'#bda6df'}));group.append(txt(n.x+12,n.y+20,'AI Opportunity',9,'var(--prop)',600));fitLines(titleCase(o.t),n.w-24,10.6,3).forEach((line,i)=>group.append(txt(n.x+12,n.y+39+i*14.8,line,10.6,'var(--ink)')));}
   if(group&&n.kind==='out'){group.querySelectorAll('text').forEach(t=>t.remove());fitLines(n.doc,n.w-28,10,3,500).forEach((line,i)=>group.append(txt(n.x+12,n.y+21+i*13.5,line,10,'var(--ink)',500)));}
   if(group){if(n.s||n.opp)drawAnnotations(group,n);group.onclick=()=>showCard(n.id,group);group.onkeydown=e=>{if(['Enter',' '].includes(e.key)){e.preventDefault();showCard(n.id,group);}};group.setAttribute('aria-haspopup','dialog');const label=n.s?`${n.s.n}. ${sourceTitle(n.s)}. ${typeNames[n.s.ty]}. Open details.`:n.kind==='dec'?`Decision: ${n.dec.q}. Open details.`:n.kind==='in'?`${n.lab}. ${n.txt}`:n.kind==='out'?`Output: ${n.doc}`:n.opp?.t||n.c?.full||n.c?.t||'Open details';group.setAttribute('aria-label',[label,...nodeAnnotations(n).map(a=>`${titleCase(a.kind)}: ${a.label}`)].join(' '));}
  }
+ drawRegisterHeadings();
  // A reserved header band keeps labels independent of node and dependency geometry.
  svg.querySelectorAll('.source-process-heading').forEach(g=>g.remove());
  frames.forEach((f,fi)=>f.procs.forEach((p,pi)=>{const first=nodes[`${f.id}|${p.id}|in`];if(!first)return;const x=first.x,y=p._headingY-4,g=el('g',{class:'process-heading','data-process-heading':p.id});const badge=`Process ${fi+1}.${pi+1}`,bw=measureText(badge,9.5,500)+18,titleX=x+bw+14;
  g.append(el('rect',{x,y:y-13,width:bw,height:20,rx:10,fill:'#403047'}),txt(x+9,y,badge,9.5,'var(--muted)',500),txt(titleX,y,titleCase(p.name),12,'var(--ink)',600),txt(titleX,y+19,`${p.id} · ${p.owner}`,10.5,'var(--muted)'));
  svg.append(g);
  }));
- svg.querySelectorAll('text:not(.register-copy)').forEach(t=>{for(const node of t.childNodes){if(node.nodeType===3)node.nodeValue=node.nodeValue.replace(/semi[- ]automated/gi,'Semi');}});
+ svg.querySelectorAll('text:not(.register-copy):not(.register-reference)').forEach(t=>{for(const node of t.childNodes){if(node.nodeType===3)node.nodeValue=node.nodeValue.replace(/semi[- ]automated/gi,'Semi');}});
  fitSvgLabels(svg);
  svg.querySelectorAll(':scope > text').forEach(t=>{if(/^(Flow |Phase |Process |TPI \/ CI)/.test(t.textContent)){t.childNodes.forEach(n=>{if(n.nodeType===3)n.nodeValue=titleCase(n.nodeValue);});t.setAttribute('font-weight','600');}});
  // Keep endpoint arrowheads on the resized card boundary; route interiors are unchanged.
@@ -255,7 +293,7 @@ function processContext(r){
 }
 function processSourceDetails(r){
  const {challenges,tagged}=processContext(r);
- const challengeRows=challenges.map(n=>`<li data-source-challenge="${esc(n.id)}"><div class="challenge-label"><strong>[CHALLENGE]</strong><span>${esc(n.c.ref)}</span></div><p>${esc(n.c.full||n.c.t)}</p></li>`).join('');
+ const challengeRows=challenges.map(n=>`<li data-source-challenge="${esc(n.id)}"><div class="challenge-label"><strong>CHALLENGE</strong><span>${esc(n.c.ref)}</span></div><p>${esc(n.c.full||n.c.t)}</p></li>`).join('');
  const tagRows=tagged.map(n=>`<li data-source-node="${esc(n.id)}"><p>${esc(n.s?`Activity ${n.s.n} · ${sourceTitle(n.s)}`:`${n.P?'Process':'Stage'} opportunity · ${n.opp.t}`)}</p><div class="source-tags">${nodeAnnotations(n).map(a=>`<span class="source-tag" data-source-tag="${a.kind}" data-tone="${a.tone}">${esc(a.label)}</span>`).join('')}</div></li>`).join('');
  const challengeText=new Set(challenges.map(n=>n.c.full||n.c.t));
  return block('Challenges',challengeRows?`<ul class="source-challenges">${challengeRows}</ul>`:'','pain')+
@@ -273,10 +311,8 @@ async function openDetailedProcess(){if(!selectedProcess)return;const r=selected
 function updateScroll(){if(mode!=='detail')return;const y=(window.scrollY+$('#navigation').offsetHeight+35-($('#process-map').getBoundingClientRect().top+window.scrollY))/scale+mapOriginY;let idx=0;frames.forEach((f,i)=>{if(f._box.top<=y)idx=i;});markStage(idx);signalRecords.forEach(({path,signal})=>{const r=path.getBoundingClientRect();signal.style.animationPlayState=r.bottom>$('#navigation').offsetHeight&&r.top<innerHeight&&!paused?'running':'paused';});}
 let ticking=false;listen('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(()=>{updateScroll();ticking=false;});}}, {passive:true});
 try{
- engine=window.TowerRenderers[t.sourceKey](payload.key,{[scenario]:data},{svg:'#map-svg',det:'#native-detail',leg:'#native-legend',scroll:'#process-map',frameHeaderHeight:100,handoffStripHeight:52,processInputGap:64,feedHeight:134,feedTopGap:34,processWidths,processFooterGap,frameFooterGap,opportunityWidth:Math.max(280,...frames.flatMap(f=>f.procs.filter(p=>p.opp).map(p=>textWidth(p.opp.t,10.6,3,280,24)))),frameOpportunityWidth:Math.max(460,...frames.filter(f=>f.opp).map(f=>textWidth(f.opp.t,10.6,3,460,24))),stripWidth:(items,min,kind)=>Math.max(min,...items.map(c=>Math.max(
-  kind==='ch'?Math.min(520,textWidth(c.full||c.t,9.8,2,min,20)):textWidth(c.t,9.8,2,min,20),
-  measureText(kind==='ch'?'[CHALLENGE]':`[SOLUTION] ${c.st||'TPI'}`,9.5,500)+measureText(c.ref||'',8.8,500)+32))),
- stripHeight:(items,width,kind)=>kind==='ch'?Math.max(50,...items.map(c=>38+(fitLines(c.full||c.t,width-20,9.8,Infinity).length-1)*13.3)):50});engine.render(scenario,'all');nodes=engine.getNodes();
+ engine=window.TowerRenderers[t.sourceKey](payload.key,{[scenario]:data},{svg:'#map-svg',det:'#native-detail',leg:'#native-legend',scroll:'#process-map',frameHeaderHeight:100,handoffStripHeight:52,processInputGap:64,feedHeight:134,feedTopGap:34,processWidths,processFooterGap,frameFooterGap,opportunityWidth:Math.max(280,...frames.flatMap(f=>f.procs.filter(p=>p.opp).map(p=>textWidth(p.opp.t,10.6,3,280,24)))),frameOpportunityWidth:Math.max(460,...frames.filter(f=>f.opp).map(f=>textWidth(f.opp.t,10.6,3,460,24))),stripWidth:registerWidth,stripColumns:registerColumns,stripGap:registerGap,stripRowGap:16,stripHeaderHeight:36,stripFooterGap:32,
+ stripHeight:(items,width)=>Math.max(...items.map(c=>registerContent(c,width).height))});engine.render(scenario,'all');nodes=engine.getNodes();
  const geometry=Object.values(nodes).map(n=>({id:n.id,x:n.x,y:n.y,w:n.w,h:n.h,kind:n.kind||'activity'}));
  const edgePaths=[...svg.querySelectorAll('path.fl,path.rw')].map(p=>p.getAttribute('d'));
  skin();mapOriginY=Math.max(0,frames[0]._box.top-20);

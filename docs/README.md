@@ -82,4 +82,6 @@ The rendered check uses `.runtime/source-sync/capture.json`, captured from the s
 
 Push changes to `main` to deploy. GitHub Actions publishes only `dist/` to GitHub Pages, retaining relative paths so the site also works under `/d2p-process-mapping/`.
 
-The local and published sites use the same `dist/` files. The release marker is `20261104-challenges`. Updated data and dependent assets carry this version tag to refresh browser caches.
+The local and published sites use the same `dist/` files. The release marker is `20261104-navigation`. Updated data and dependent assets carry this version tag to refresh browser caches.
+
+The process navigation groups the As Is / AI Suggested and map-view controls without extra visible group labels. Challenge and TPI / CI cards use four columns before wrapping, retain full source text and references, and show CHALLENGE / SOLUTION without brackets.
