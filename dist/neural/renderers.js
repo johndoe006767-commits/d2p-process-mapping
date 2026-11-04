@@ -60,10 +60,10 @@ function layout(d){
     if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:E.frameOpportunityWidth||460,h:86,kind:"fopp",opp:f.opp,f};y+=98+(E.frameFooterGap?.get(f)||0)}
     // challenge / TPI strips
     if((f.ch&&f.ch.length)||(f.tpi&&f.tpi.length)){y+=4;
-      const strip=(items,kind,lab,fill,stroke,col,bw)=>{bw=E.stripWidth?.(items,bw)||bw;h+=text(x0,y+12,[lab],{fs:10.5,fw:700,fill:col,a:"start"});y+=20;let bx=x0;
-        items.forEach((c,i)=>{if(i&&i%4===0){bx=x0;y+=58}const id=`${f.id}|${kind}${i}`;const head=kind==="ch"?"[CHALLENGE]":`[SOLUTION] ${c.st||"TPI"}`;const tl=wrap(c.t,Math.floor(bw/5.6),2);nodes[id]={id,kind,c,f,x:bx,y,w:bw,h:50};
-          h+=`<g class="opn ${sel===id?"sel":""}" tabindex="0" role="button" data-id="${id}"><title>${esc2(head)}: ${esc2(c.t)}${c.ref?" - "+esc2(c.ref):""}</title><rect class="b" x="${bx}" y="${y}" width="${bw}" height="50" rx="8" fill="${fill}" stroke="${stroke}" stroke-width="1.4"/>${text(bx+10,y+14,[head],{fs:9.5,fw:700,fill:col,a:"start"})}${c.ref?text(bx+bw-8,y+14,[c.ref],{fs:8.8,fill:col,a:"end"}):""}${text(bx+10,y+29,tl,{fs:9.8,fill:"var(--navy)",a:"start"})}</g>`;bx+=bw+12});
-        maxX=Math.max(maxX,bx);y+=50+14};
+      const strip=(items,kind,lab,fill,stroke,col,bw)=>{bw=E.stripWidth?.(items,bw,kind)||bw;const bh=E.stripHeight?.(items,bw,kind)||50;h+=text(x0,y+12,[lab],{fs:10.5,fw:700,fill:col,a:"start"});y+=20;let bx=x0;
+        items.forEach((c,i)=>{if(i&&i%4===0){bx=x0;y+=bh+8}const id=`${f.id}|${kind}${i}`;const head=kind==="ch"?"[CHALLENGE]":`[SOLUTION] ${c.st||"TPI"}`;const tl=wrap(c.t,Math.floor(bw/5.6),2);nodes[id]={id,kind,c,f,x:bx,y,w:bw,h:bh};
+          h+=`<g class="opn ${sel===id?"sel":""}" tabindex="0" role="button" data-id="${id}"><title>${esc2(head)}: ${esc2(c.t)}${c.ref?" - "+esc2(c.ref):""}</title><rect class="b" x="${bx}" y="${y}" width="${bw}" height="${bh}" rx="8" fill="${fill}" stroke="${stroke}" stroke-width="1.4"/>${text(bx+10,y+14,[head],{fs:9.5,fw:700,fill:col,a:"start"})}${c.ref?text(bx+bw-8,y+14,[c.ref],{fs:8.8,fill:col,a:"end"}):""}${text(bx+10,y+29,tl,{fs:9.8,fill:"var(--navy)",a:"start"})}</g>`;bx+=bw+12;maxX=Math.max(maxX,bx)});
+        maxX=Math.max(maxX,bx);y+=bh+14};
       if(f.ch&&f.ch.length)strip(f.ch,"ch","Pain points (register)","#fdecec","var(--pain)","#a00015",330);
       if(f.tpi&&f.tpi.length)strip(f.tpi,"tpi","TPI / CI initiatives (register)","#e6f4ec","var(--ok)","#13643a",430);
     }
@@ -262,10 +262,10 @@ function layout(d){
     if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:E.frameOpportunityWidth||460,h:86,kind:"fopp",opp:f.opp,f};y+=98+(E.frameFooterGap?.get(f)||0)}
     // challenge / TPI strips
     if((f.ch&&f.ch.length)||(f.tpi&&f.tpi.length)){y+=4;
-      const strip=(items,kind,lab,fill,stroke,col,bw)=>{bw=E.stripWidth?.(items,bw)||bw;h+=text(x0,y+12,[lab],{fs:10.5,fw:700,fill:col,a:"start"});y+=20;let bx=x0;
-        items.forEach((c,i)=>{if(i&&i%4===0){bx=x0;y+=58}const id=`${f.id}|${kind}${i}`;const head=kind==="ch"?"[CHALLENGE]":`[SOLUTION] ${c.st||"TPI"}`;const tl=wrap(c.t,Math.floor(bw/5.6),2);nodes[id]={id,kind,c,f,x:bx,y,w:bw,h:50};
-          h+=`<g class="opn ${sel===id?"sel":""}" tabindex="0" role="button" data-id="${id}"><title>${esc2(head)}: ${esc2(c.t)}${c.ref?" - "+esc2(c.ref):""}</title><rect class="b" x="${bx}" y="${y}" width="${bw}" height="50" rx="8" fill="${fill}" stroke="${stroke}" stroke-width="1.4"/>${text(bx+10,y+14,[head],{fs:9.5,fw:700,fill:col,a:"start"})}${c.ref?text(bx+bw-8,y+14,[c.ref],{fs:8.8,fill:col,a:"end"}):""}${text(bx+10,y+29,tl,{fs:9.8,fill:"var(--navy)",a:"start"})}</g>`;bx+=bw+12});
-        maxX=Math.max(maxX,bx);y+=50+14};
+      const strip=(items,kind,lab,fill,stroke,col,bw)=>{bw=E.stripWidth?.(items,bw,kind)||bw;const bh=E.stripHeight?.(items,bw,kind)||50;h+=text(x0,y+12,[lab],{fs:10.5,fw:700,fill:col,a:"start"});y+=20;let bx=x0;
+        items.forEach((c,i)=>{if(i&&i%4===0){bx=x0;y+=bh+8}const id=`${f.id}|${kind}${i}`;const head=kind==="ch"?"[CHALLENGE]":`[SOLUTION] ${c.st||"TPI"}`;const tl=wrap(c.t,Math.floor(bw/5.6),2);nodes[id]={id,kind,c,f,x:bx,y,w:bw,h:bh};
+          h+=`<g class="opn ${sel===id?"sel":""}" tabindex="0" role="button" data-id="${id}"><title>${esc2(head)}: ${esc2(c.t)}${c.ref?" - "+esc2(c.ref):""}</title><rect class="b" x="${bx}" y="${y}" width="${bw}" height="${bh}" rx="8" fill="${fill}" stroke="${stroke}" stroke-width="1.4"/>${text(bx+10,y+14,[head],{fs:9.5,fw:700,fill:col,a:"start"})}${c.ref?text(bx+bw-8,y+14,[c.ref],{fs:8.8,fill:col,a:"end"}):""}${text(bx+10,y+29,tl,{fs:9.8,fill:"var(--navy)",a:"start"})}</g>`;bx+=bw+12;maxX=Math.max(maxX,bx)});
+        maxX=Math.max(maxX,bx);y+=bh+14};
       if(f.ch&&f.ch.length)strip(f.ch,"ch","Pain points (register)","#fdecec","var(--pain)","#a00015",330);
       if(f.tpi&&f.tpi.length)strip(f.tpi,"tpi","TPI / CI initiatives (register)","#e6f4ec","var(--ok)","#13643a",430);
     }
@@ -460,10 +460,10 @@ function layout(d){
     if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:E.frameOpportunityWidth||460,h:86,kind:"fopp",opp:f.opp,f};y+=98+(E.frameFooterGap?.get(f)||0)}
     // challenge / TPI strips
     if((f.ch&&f.ch.length)||(f.tpi&&f.tpi.length)){y+=4;
-      const strip=(items,kind,lab,fill,stroke,col,bw)=>{bw=E.stripWidth?.(items,bw)||bw;h+=text(x0,y+12,[lab],{fs:10.5,fw:700,fill:col,a:"start"});y+=20;let bx=x0;
-        items.forEach((c,i)=>{if(i&&i%4===0){bx=x0;y+=58}const id=`${f.id}|${kind}${i}`;const head=kind==="ch"?"[CHALLENGE]":`[SOLUTION] ${c.st||"TPI"}`;const tl=wrap(c.t,Math.floor(bw/5.6),2);nodes[id]={id,kind,c,f,x:bx,y,w:bw,h:50};
-          h+=`<g class="opn ${sel===id?"sel":""}" tabindex="0" role="button" data-id="${id}"><title>${esc2(head)}: ${esc2(c.t)}${c.ref?" - "+esc2(c.ref):""}</title><rect class="b" x="${bx}" y="${y}" width="${bw}" height="50" rx="8" fill="${fill}" stroke="${stroke}" stroke-width="1.4"/>${text(bx+10,y+14,[head],{fs:9.5,fw:700,fill:col,a:"start"})}${c.ref?text(bx+bw-8,y+14,[c.ref],{fs:8.8,fill:col,a:"end"}):""}${text(bx+10,y+29,tl,{fs:9.8,fill:"var(--navy)",a:"start"})}</g>`;bx+=bw+12});
-        maxX=Math.max(maxX,bx);y+=50+14};
+      const strip=(items,kind,lab,fill,stroke,col,bw)=>{bw=E.stripWidth?.(items,bw,kind)||bw;const bh=E.stripHeight?.(items,bw,kind)||50;h+=text(x0,y+12,[lab],{fs:10.5,fw:700,fill:col,a:"start"});y+=20;let bx=x0;
+        items.forEach((c,i)=>{if(i&&i%4===0){bx=x0;y+=bh+8}const id=`${f.id}|${kind}${i}`;const head=kind==="ch"?"[CHALLENGE]":`[SOLUTION] ${c.st||"TPI"}`;const tl=wrap(c.t,Math.floor(bw/5.6),2);nodes[id]={id,kind,c,f,x:bx,y,w:bw,h:bh};
+          h+=`<g class="opn ${sel===id?"sel":""}" tabindex="0" role="button" data-id="${id}"><title>${esc2(head)}: ${esc2(c.t)}${c.ref?" - "+esc2(c.ref):""}</title><rect class="b" x="${bx}" y="${y}" width="${bw}" height="${bh}" rx="8" fill="${fill}" stroke="${stroke}" stroke-width="1.4"/>${text(bx+10,y+14,[head],{fs:9.5,fw:700,fill:col,a:"start"})}${c.ref?text(bx+bw-8,y+14,[c.ref],{fs:8.8,fill:col,a:"end"}):""}${text(bx+10,y+29,tl,{fs:9.8,fill:"var(--navy)",a:"start"})}</g>`;bx+=bw+12;maxX=Math.max(maxX,bx)});
+        maxX=Math.max(maxX,bx);y+=bh+14};
       if(f.ch&&f.ch.length)strip(f.ch,"ch","Pain points (register)","#fdecec","var(--pain)","#a00015",330);
       if(f.tpi&&f.tpi.length)strip(f.tpi,"tpi","TPI / CI initiatives (register)","#e6f4ec","var(--ok)","#13643a",430);
     }
@@ -649,10 +649,10 @@ function layout(d){
     if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:E.frameOpportunityWidth||460,h:86,kind:"fopp",opp:f.opp,f};y+=98+(E.frameFooterGap?.get(f)||0)}
     // challenge / TPI strips
     if((f.ch&&f.ch.length)||(f.tpi&&f.tpi.length)){y+=4;
-      const strip=(items,kind,lab,fill,stroke,col,bw)=>{bw=E.stripWidth?.(items,bw)||bw;h+=text(x0,y+12,[lab],{fs:10.5,fw:700,fill:col,a:"start"});y+=20;let bx=x0;
-        items.forEach((c,i)=>{if(i&&i%4===0){bx=x0;y+=58}const id=`${f.id}|${kind}${i}`;const head=kind==="ch"?"[CHALLENGE]":`[SOLUTION] ${c.st||"TPI"}`;const tl=wrap(c.t,Math.floor(bw/5.6),2);nodes[id]={id,kind,c,f,x:bx,y,w:bw,h:50};
-          h+=`<g class="opn ${sel===id?"sel":""}" tabindex="0" role="button" data-id="${id}"><title>${esc2(head)}: ${esc2(c.t)}${c.ref?" - "+esc2(c.ref):""}</title><rect class="b" x="${bx}" y="${y}" width="${bw}" height="50" rx="8" fill="${fill}" stroke="${stroke}" stroke-width="1.4"/>${text(bx+10,y+14,[head],{fs:9.5,fw:700,fill:col,a:"start"})}${c.ref?text(bx+bw-8,y+14,[c.ref],{fs:8.8,fill:col,a:"end"}):""}${text(bx+10,y+29,tl,{fs:9.8,fill:"var(--navy)",a:"start"})}</g>`;bx+=bw+12});
-        maxX=Math.max(maxX,bx);y+=50+14};
+      const strip=(items,kind,lab,fill,stroke,col,bw)=>{bw=E.stripWidth?.(items,bw,kind)||bw;const bh=E.stripHeight?.(items,bw,kind)||50;h+=text(x0,y+12,[lab],{fs:10.5,fw:700,fill:col,a:"start"});y+=20;let bx=x0;
+        items.forEach((c,i)=>{if(i&&i%4===0){bx=x0;y+=bh+8}const id=`${f.id}|${kind}${i}`;const head=kind==="ch"?"[CHALLENGE]":`[SOLUTION] ${c.st||"TPI"}`;const tl=wrap(c.t,Math.floor(bw/5.6),2);nodes[id]={id,kind,c,f,x:bx,y,w:bw,h:bh};
+          h+=`<g class="opn ${sel===id?"sel":""}" tabindex="0" role="button" data-id="${id}"><title>${esc2(head)}: ${esc2(c.t)}${c.ref?" - "+esc2(c.ref):""}</title><rect class="b" x="${bx}" y="${y}" width="${bw}" height="${bh}" rx="8" fill="${fill}" stroke="${stroke}" stroke-width="1.4"/>${text(bx+10,y+14,[head],{fs:9.5,fw:700,fill:col,a:"start"})}${c.ref?text(bx+bw-8,y+14,[c.ref],{fs:8.8,fill:col,a:"end"}):""}${text(bx+10,y+29,tl,{fs:9.8,fill:"var(--navy)",a:"start"})}</g>`;bx+=bw+12;maxX=Math.max(maxX,bx)});
+        maxX=Math.max(maxX,bx);y+=bh+14};
       if(f.ch&&f.ch.length)strip(f.ch,"ch","Pain points (register)","#fdecec","var(--pain)","#a00015",330);
       if(f.tpi&&f.tpi.length)strip(f.tpi,"tpi","TPI / CI initiatives (register)","#e6f4ec","var(--ok)","#13643a",430);
     }
@@ -841,10 +841,10 @@ function layout(d){
     if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:E.frameOpportunityWidth||460,h:86,kind:"fopp",opp:f.opp,f};y+=98+(E.frameFooterGap?.get(f)||0)}
     // challenge / TPI strips
     if((f.ch&&f.ch.length)||(f.tpi&&f.tpi.length)){y+=4;
-      const strip=(items,kind,lab,fill,stroke,col,bw)=>{bw=E.stripWidth?.(items,bw)||bw;h+=text(x0,y+12,[lab],{fs:10.5,fw:700,fill:col,a:"start"});y+=20;let bx=x0;
-        items.forEach((c,i)=>{const id=`${f.id}|${kind}${i}`;const head=kind==="ch"?"[CHALLENGE]":`[SOLUTION] ${c.st||"TPI"}`;const tl=wrap(c.t,Math.floor(bw/5.6),2);nodes[id]={id,kind,c,f,x:bx,y,w:bw,h:50};
-          h+=`<g class="opn ${sel===id?"sel":""}" tabindex="0" role="button" data-id="${id}"><title>${esc2(head)}: ${esc2(c.t)}${c.ref?" - "+esc2(c.ref):""}</title><rect class="b" x="${bx}" y="${y}" width="${bw}" height="50" rx="8" fill="${fill}" stroke="${stroke}" stroke-width="1.4"/>${text(bx+10,y+14,[head],{fs:9.5,fw:700,fill:col,a:"start"})}${c.ref?text(bx+bw-8,y+14,[c.ref],{fs:8.8,fill:col,a:"end"}):""}${text(bx+10,y+29,tl,{fs:9.8,fill:"var(--navy)",a:"start"})}</g>`;bx+=bw+12});
-        maxX=Math.max(maxX,bx);y+=50+14};
+      const strip=(items,kind,lab,fill,stroke,col,bw)=>{bw=E.stripWidth?.(items,bw,kind)||bw;const bh=E.stripHeight?.(items,bw,kind)||50;h+=text(x0,y+12,[lab],{fs:10.5,fw:700,fill:col,a:"start"});y+=20;let bx=x0;
+        items.forEach((c,i)=>{const id=`${f.id}|${kind}${i}`;const head=kind==="ch"?"[CHALLENGE]":`[SOLUTION] ${c.st||"TPI"}`;const tl=wrap(c.t,Math.floor(bw/5.6),2);nodes[id]={id,kind,c,f,x:bx,y,w:bw,h:bh};
+          h+=`<g class="opn ${sel===id?"sel":""}" tabindex="0" role="button" data-id="${id}"><title>${esc2(head)}: ${esc2(c.t)}${c.ref?" - "+esc2(c.ref):""}</title><rect class="b" x="${bx}" y="${y}" width="${bw}" height="${bh}" rx="8" fill="${fill}" stroke="${stroke}" stroke-width="1.4"/>${text(bx+10,y+14,[head],{fs:9.5,fw:700,fill:col,a:"start"})}${c.ref?text(bx+bw-8,y+14,[c.ref],{fs:8.8,fill:col,a:"end"}):""}${text(bx+10,y+29,tl,{fs:9.8,fill:"var(--navy)",a:"start"})}</g>`;bx+=bw+12;maxX=Math.max(maxX,bx)});
+        maxX=Math.max(maxX,bx);y+=bh+14};
       if(f.ch&&f.ch.length)strip(f.ch,"ch","Pain points (register)","#fdecec","var(--pain)","#a00015",330);
       if(f.tpi&&f.tpi.length)strip(f.tpi,"tpi","TPI / CI initiatives (register)","#e6f4ec","var(--ok)","#13643a",430);
     }
@@ -1029,10 +1029,10 @@ function layout(d){
     if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:E.frameOpportunityWidth||460,h:86,kind:"fopp",opp:f.opp,f};y+=98+(E.frameFooterGap?.get(f)||0)}
     // challenge / TPI strips
     if((f.ch&&f.ch.length)||(f.tpi&&f.tpi.length)){y+=4;
-      const strip=(items,kind,lab,fill,stroke,col,bw)=>{bw=E.stripWidth?.(items,bw)||bw;h+=text(x0,y+12,[lab],{fs:10.5,fw:700,fill:col,a:"start"});y+=20;let bx=x0;
-        items.forEach((c,i)=>{const id=`${f.id}|${kind}${i}`;const head=kind==="ch"?"[CHALLENGE]":`[SOLUTION] ${c.st||"TPI"}`;const tl=wrap(c.t,Math.floor(bw/5.6),2);nodes[id]={id,kind,c,f,x:bx,y,w:bw,h:50};
-          h+=`<g class="opn ${sel===id?"sel":""}" tabindex="0" role="button" data-id="${id}"><title>${esc2(head)}: ${esc2(c.t)}${c.ref?" - "+esc2(c.ref):""}</title><rect class="b" x="${bx}" y="${y}" width="${bw}" height="50" rx="8" fill="${fill}" stroke="${stroke}" stroke-width="1.4"/>${text(bx+10,y+14,[head],{fs:9.5,fw:700,fill:col,a:"start"})}${c.ref?text(bx+bw-8,y+14,[c.ref],{fs:8.8,fill:col,a:"end"}):""}${text(bx+10,y+29,tl,{fs:9.8,fill:"var(--navy)",a:"start"})}</g>`;bx+=bw+12;maxX=Math.max(maxX,bx);if((i+1)%4===0&&i<items.length-1){bx=x0;y+=50+10}});
-        y+=50+14};
+      const strip=(items,kind,lab,fill,stroke,col,bw)=>{bw=E.stripWidth?.(items,bw,kind)||bw;const bh=E.stripHeight?.(items,bw,kind)||50;h+=text(x0,y+12,[lab],{fs:10.5,fw:700,fill:col,a:"start"});y+=20;let bx=x0;
+        items.forEach((c,i)=>{const id=`${f.id}|${kind}${i}`;const head=kind==="ch"?"[CHALLENGE]":`[SOLUTION] ${c.st||"TPI"}`;const tl=wrap(c.t,Math.floor(bw/5.6),2);nodes[id]={id,kind,c,f,x:bx,y,w:bw,h:bh};
+          h+=`<g class="opn ${sel===id?"sel":""}" tabindex="0" role="button" data-id="${id}"><title>${esc2(head)}: ${esc2(c.t)}${c.ref?" - "+esc2(c.ref):""}</title><rect class="b" x="${bx}" y="${y}" width="${bw}" height="${bh}" rx="8" fill="${fill}" stroke="${stroke}" stroke-width="1.4"/>${text(bx+10,y+14,[head],{fs:9.5,fw:700,fill:col,a:"start"})}${c.ref?text(bx+bw-8,y+14,[c.ref],{fs:8.8,fill:col,a:"end"}):""}${text(bx+10,y+29,tl,{fs:9.8,fill:"var(--navy)",a:"start"})}</g>`;bx+=bw+12;maxX=Math.max(maxX,bx);if((i+1)%4===0&&i<items.length-1){bx=x0;y+=bh+10}});
+        y+=bh+14};
       if(f.ch&&f.ch.length)strip(f.ch,"ch","Pain points (register)","#fdecec","var(--pain)","#a00015",330);
       if(f.tpi&&f.tpi.length)strip(f.tpi,"tpi","TPI register items (Aug 2026)","#e6f4ec","var(--ok)","#13643a",430);
     }
@@ -1217,10 +1217,10 @@ function layout(d){
     if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:E.frameOpportunityWidth||460,h:86,kind:"fopp",opp:f.opp,f};y+=98+(E.frameFooterGap?.get(f)||0)}
     // challenge / TPI strips
     if((f.ch&&f.ch.length)||(f.tpi&&f.tpi.length)){y+=4;
-      const strip=(items,kind,lab,fill,stroke,col,bw)=>{bw=E.stripWidth?.(items,bw)||bw;h+=text(x0,y+12,[lab],{fs:10.5,fw:700,fill:col,a:"start"});y+=20;let bx=x0;
-        items.forEach((c,i)=>{const id=`${f.id}|${kind}${i}`;const head=kind==="ch"?"[CHALLENGE]":`[SOLUTION] ${c.st||"TPI"}`;const tl=wrap(c.t,Math.floor(bw/5.6),2);nodes[id]={id,kind,c,f,x:bx,y,w:bw,h:50};
-          h+=`<g class="opn ${sel===id?"sel":""}" tabindex="0" role="button" data-id="${id}"><title>${esc2(head)}: ${esc2(c.t)}${c.ref?" - "+esc2(c.ref):""}</title><rect class="b" x="${bx}" y="${y}" width="${bw}" height="50" rx="8" fill="${fill}" stroke="${stroke}" stroke-width="1.4"/>${text(bx+10,y+14,[head],{fs:9.5,fw:700,fill:col,a:"start"})}${c.ref?text(bx+bw-8,y+14,[c.ref],{fs:8.8,fill:col,a:"end"}):""}${text(bx+10,y+29,tl,{fs:9.8,fill:"var(--navy)",a:"start"})}</g>`;bx+=bw+12;maxX=Math.max(maxX,bx);if((i+1)%4===0&&i<items.length-1){bx=x0;y+=50+10}});
-        y+=50+14};
+      const strip=(items,kind,lab,fill,stroke,col,bw)=>{bw=E.stripWidth?.(items,bw,kind)||bw;const bh=E.stripHeight?.(items,bw,kind)||50;h+=text(x0,y+12,[lab],{fs:10.5,fw:700,fill:col,a:"start"});y+=20;let bx=x0;
+        items.forEach((c,i)=>{const id=`${f.id}|${kind}${i}`;const head=kind==="ch"?"[CHALLENGE]":`[SOLUTION] ${c.st||"TPI"}`;const tl=wrap(c.t,Math.floor(bw/5.6),2);nodes[id]={id,kind,c,f,x:bx,y,w:bw,h:bh};
+          h+=`<g class="opn ${sel===id?"sel":""}" tabindex="0" role="button" data-id="${id}"><title>${esc2(head)}: ${esc2(c.t)}${c.ref?" - "+esc2(c.ref):""}</title><rect class="b" x="${bx}" y="${y}" width="${bw}" height="${bh}" rx="8" fill="${fill}" stroke="${stroke}" stroke-width="1.4"/>${text(bx+10,y+14,[head],{fs:9.5,fw:700,fill:col,a:"start"})}${c.ref?text(bx+bw-8,y+14,[c.ref],{fs:8.8,fill:col,a:"end"}):""}${text(bx+10,y+29,tl,{fs:9.8,fill:"var(--navy)",a:"start"})}</g>`;bx+=bw+12;maxX=Math.max(maxX,bx);if((i+1)%4===0&&i<items.length-1){bx=x0;y+=bh+10}});
+        y+=bh+14};
       if(f.ch&&f.ch.length)strip(f.ch,"ch","Pain points (register)","#fdecec","var(--pain)","#a00015",330);
       if(f.tpi&&f.tpi.length)strip(f.tpi,"tpi","TPI register items (Jul-Aug 2026)","#e6f4ec","var(--ok)","#13643a",430);
     }
@@ -1405,10 +1405,10 @@ function layout(d){
     if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:E.frameOpportunityWidth||460,h:86,kind:"fopp",opp:f.opp,f};y+=98+(E.frameFooterGap?.get(f)||0)}
     // challenge / TPI strips
     if((f.ch&&f.ch.length)||(f.tpi&&f.tpi.length)){y+=4;
-      const strip=(items,kind,lab,fill,stroke,col,bw)=>{bw=E.stripWidth?.(items,bw)||bw;h+=text(x0,y+12,[lab],{fs:10.5,fw:700,fill:col,a:"start"});y+=20;let bx=x0;
-        items.forEach((c,i)=>{if(i&&i%4===0){bx=x0;y+=58}const id=`${f.id}|${kind}${i}`;const head=kind==="ch"?"[CHALLENGE]":`[SOLUTION] ${c.st||"TPI"}`;const tl=wrap(c.t,Math.floor(bw/5.6),2);nodes[id]={id,kind,c,f,x:bx,y,w:bw,h:50};
-          h+=`<g class="opn ${sel===id?"sel":""}" tabindex="0" role="button" data-id="${id}"><title>${esc2(head)}: ${esc2(c.t)}${c.ref?" - "+esc2(c.ref):""}</title><rect class="b" x="${bx}" y="${y}" width="${bw}" height="50" rx="8" fill="${fill}" stroke="${stroke}" stroke-width="1.4"/>${text(bx+10,y+14,[head],{fs:9.5,fw:700,fill:col,a:"start"})}${c.ref?text(bx+bw-8,y+14,[c.ref],{fs:8.8,fill:col,a:"end"}):""}${text(bx+10,y+29,tl,{fs:9.8,fill:"var(--navy)",a:"start"})}</g>`;bx+=bw+12});
-        maxX=Math.max(maxX,bx);y+=50+14};
+      const strip=(items,kind,lab,fill,stroke,col,bw)=>{bw=E.stripWidth?.(items,bw,kind)||bw;const bh=E.stripHeight?.(items,bw,kind)||50;h+=text(x0,y+12,[lab],{fs:10.5,fw:700,fill:col,a:"start"});y+=20;let bx=x0;
+        items.forEach((c,i)=>{if(i&&i%4===0){bx=x0;y+=bh+8}const id=`${f.id}|${kind}${i}`;const head=kind==="ch"?"[CHALLENGE]":`[SOLUTION] ${c.st||"TPI"}`;const tl=wrap(c.t,Math.floor(bw/5.6),2);nodes[id]={id,kind,c,f,x:bx,y,w:bw,h:bh};
+          h+=`<g class="opn ${sel===id?"sel":""}" tabindex="0" role="button" data-id="${id}"><title>${esc2(head)}: ${esc2(c.t)}${c.ref?" - "+esc2(c.ref):""}</title><rect class="b" x="${bx}" y="${y}" width="${bw}" height="${bh}" rx="8" fill="${fill}" stroke="${stroke}" stroke-width="1.4"/>${text(bx+10,y+14,[head],{fs:9.5,fw:700,fill:col,a:"start"})}${c.ref?text(bx+bw-8,y+14,[c.ref],{fs:8.8,fill:col,a:"end"}):""}${text(bx+10,y+29,tl,{fs:9.8,fill:"var(--navy)",a:"start"})}</g>`;bx+=bw+12;maxX=Math.max(maxX,bx)});
+        maxX=Math.max(maxX,bx);y+=bh+14};
       if(f.ch&&f.ch.length)strip(f.ch,"ch","Pain points (register)","#fdecec","var(--pain)","#a00015",330);
       if(f.tpi&&f.tpi.length)strip(f.tpi,"tpi",d.key==="tobe"?"TPI register items (Controlling.xlsx) - [SOLUTION] with workbook status":"TPI 2026 initiatives (workbook)","#e6f4ec","var(--ok)","#13643a",430);
     }

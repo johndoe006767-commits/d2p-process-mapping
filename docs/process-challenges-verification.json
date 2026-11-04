@@ -1,0 +1,347 @@
+{
+  "status": "PASS",
+  "viewport": "3840\u00d72160",
+  "results": [
+    {
+      "tower": "FPAC",
+      "scenario": "asis",
+      "challenges": 46,
+      "highLevelChallenges": 46,
+      "taggedNodes": 0,
+      "sourceTags": 0,
+      "issues": []
+    },
+    {
+      "tower": "FPAC",
+      "scenario": "tobe",
+      "challenges": 46,
+      "highLevelChallenges": 46,
+      "taggedNodes": 98,
+      "sourceTags": 98,
+      "issues": []
+    },
+    {
+      "tower": "FPAO",
+      "scenario": "asis",
+      "challenges": 48,
+      "highLevelChallenges": 48,
+      "taggedNodes": 0,
+      "sourceTags": 0,
+      "issues": []
+    },
+    {
+      "tower": "FPAO",
+      "scenario": "tobe",
+      "challenges": 48,
+      "highLevelChallenges": 48,
+      "taggedNodes": 67,
+      "sourceTags": 101,
+      "issues": []
+    },
+    {
+      "tower": "CAPEX",
+      "scenario": "asis",
+      "challenges": 5,
+      "highLevelChallenges": 5,
+      "taggedNodes": 0,
+      "sourceTags": 0,
+      "issues": []
+    },
+    {
+      "tower": "CAPEX",
+      "scenario": "tobe",
+      "challenges": 5,
+      "highLevelChallenges": 5,
+      "taggedNodes": 45,
+      "sourceTags": 50,
+      "issues": []
+    },
+    {
+      "tower": "P2P",
+      "scenario": "asis",
+      "challenges": 22,
+      "highLevelChallenges": 22,
+      "taggedNodes": 0,
+      "sourceTags": 0,
+      "issues": []
+    },
+    {
+      "tower": "P2P",
+      "scenario": "tobe",
+      "challenges": 22,
+      "highLevelChallenges": 22,
+      "taggedNodes": 53,
+      "sourceTags": 53,
+      "issues": []
+    },
+    {
+      "tower": "O2C",
+      "scenario": "asis",
+      "challenges": 14,
+      "highLevelChallenges": 14,
+      "taggedNodes": 0,
+      "sourceTags": 0,
+      "issues": []
+    },
+    {
+      "tower": "O2C",
+      "scenario": "tobe",
+      "challenges": 14,
+      "highLevelChallenges": 14,
+      "taggedNodes": 43,
+      "sourceTags": 44,
+      "issues": []
+    },
+    {
+      "tower": "TAX",
+      "scenario": "asis",
+      "challenges": 0,
+      "highLevelChallenges": 0,
+      "taggedNodes": 0,
+      "sourceTags": 0,
+      "issues": []
+    },
+    {
+      "tower": "TAX",
+      "scenario": "tobe",
+      "challenges": 0,
+      "highLevelChallenges": 0,
+      "taggedNodes": 40,
+      "sourceTags": 45,
+      "issues": []
+    },
+    {
+      "tower": "R2R",
+      "scenario": "asis",
+      "challenges": 9,
+      "highLevelChallenges": 9,
+      "taggedNodes": 0,
+      "sourceTags": 0,
+      "issues": []
+    },
+    {
+      "tower": "R2R",
+      "scenario": "tobe",
+      "challenges": 9,
+      "highLevelChallenges": 9,
+      "taggedNodes": 20,
+      "sourceTags": 24,
+      "issues": []
+    },
+    {
+      "tower": "CTRL",
+      "scenario": "asis",
+      "challenges": 14,
+      "highLevelChallenges": 14,
+      "taggedNodes": 0,
+      "sourceTags": 0,
+      "issues": []
+    },
+    {
+      "tower": "CTRL",
+      "scenario": "tobe",
+      "challenges": 14,
+      "highLevelChallenges": 14,
+      "taggedNodes": 18,
+      "sourceTags": 18,
+      "issues": []
+    }
+  ],
+  "errors": [],
+  "verifiedDate": "2026-11-04",
+  "timezone": "Asia/Kuala_Lumpur",
+  "release": "20261104-challenges",
+  "totals": {
+    "mapViews": 32,
+    "challengesPerScenario": 158,
+    "challengeCardsBothScenarios": 316,
+    "aiSourceTags": 433
+  },
+  "coverage": [
+    "All source challenge cards, exact full wording and references, across both scenarios.",
+    "Detailed challenge geometry, full text wrapping, contrast, and no overlap with nodes, tags or stage labels at fit-width and readable zoom.",
+    "Challenge selection highlights affected activities and preserves source detail and activity pain-point links.",
+    "High-level process and stage information cards preserve every applicable challenge and source tag.",
+    "Scenario switching, keyboard access, and absence of stale AI annotations in As Is.",
+    "Tax has no separate source challenge register; its documented activity pain points are retained."
+  ],
+  "tagRegression": {
+    "status": "PASS",
+    "viewport": "3840\u00d72160",
+    "results": [
+      {
+        "tower": "FPAC",
+        "issues": [],
+        "counts": {
+          "feasibility": 98,
+          "reference": 0,
+          "scope": 0
+        },
+        "nodes": 123
+      },
+      {
+        "tower": "FPAO",
+        "issues": [],
+        "counts": {
+          "feasibility": 67,
+          "reference": 9,
+          "scope": 25
+        },
+        "nodes": 79
+      },
+      {
+        "tower": "CAPEX",
+        "issues": [],
+        "counts": {
+          "feasibility": 45,
+          "reference": 0,
+          "scope": 5
+        },
+        "nodes": 85
+      },
+      {
+        "tower": "P2P",
+        "issues": [],
+        "counts": {
+          "feasibility": 53,
+          "reference": 0,
+          "scope": 0
+        },
+        "nodes": 95
+      },
+      {
+        "tower": "O2C",
+        "issues": [],
+        "counts": {
+          "feasibility": 43,
+          "reference": 1,
+          "scope": 0
+        },
+        "nodes": 51
+      },
+      {
+        "tower": "TAX",
+        "issues": [],
+        "counts": {
+          "feasibility": 40,
+          "reference": 0,
+          "scope": 5
+        },
+        "nodes": 89
+      },
+      {
+        "tower": "R2R",
+        "issues": [],
+        "counts": {
+          "feasibility": 20,
+          "reference": 0,
+          "scope": 4
+        },
+        "nodes": 46
+      },
+      {
+        "tower": "CTRL",
+        "issues": [],
+        "counts": {
+          "feasibility": 18,
+          "reference": 0,
+          "scope": 0
+        },
+        "nodes": 18
+      }
+    ],
+    "errors": []
+  },
+  "mapRegression": {
+    "status": "PASS",
+    "viewport": "3840\u00d72160",
+    "results": [
+      {
+        "tower": "FPAC",
+        "scenarios": 2,
+        "mapViews": 4,
+        "activities": 102,
+        "handoffs": 55,
+        "reviewEntries": 3,
+        "status": "PASS"
+      },
+      {
+        "tower": "FPAO",
+        "scenarios": 2,
+        "mapViews": 4,
+        "activities": 61,
+        "handoffs": 65,
+        "reviewEntries": 3,
+        "status": "PASS"
+      },
+      {
+        "tower": "CAPEX",
+        "scenarios": 2,
+        "mapViews": 4,
+        "activities": 75,
+        "handoffs": 16,
+        "reviewEntries": 2,
+        "status": "PASS"
+      },
+      {
+        "tower": "P2P",
+        "scenarios": 2,
+        "mapViews": 4,
+        "activities": 84,
+        "handoffs": 55,
+        "reviewEntries": 3,
+        "status": "PASS"
+      },
+      {
+        "tower": "O2C",
+        "scenarios": 2,
+        "mapViews": 4,
+        "activities": 37,
+        "handoffs": 41,
+        "reviewEntries": 1,
+        "status": "PASS"
+      },
+      {
+        "tower": "TAX",
+        "scenarios": 2,
+        "mapViews": 4,
+        "activities": 77,
+        "handoffs": 21,
+        "reviewEntries": 2,
+        "status": "PASS"
+      },
+      {
+        "tower": "R2R",
+        "scenarios": 2,
+        "mapViews": 4,
+        "activities": 39,
+        "handoffs": 36,
+        "reviewEntries": 3,
+        "status": "PASS"
+      },
+      {
+        "tower": "CTRL",
+        "scenarios": 2,
+        "mapViews": 4,
+        "activities": 14,
+        "handoffs": 16,
+        "reviewEntries": 1,
+        "status": "PASS"
+      }
+    ],
+    "errors": [],
+    "failures": []
+  },
+  "visualReview": {
+    "status": "PASS",
+    "examples": [
+      "FP&A Commercial detailed challenges and tags",
+      "High-level challenges and per-activity source tags",
+      "Long CAPEX challenge description"
+    ]
+  },
+  "designCheck": {
+    "status": "PASS for requested change",
+    "notes": "Only two existing Inter font warnings; Inter is required by docs/DESIGN.md."
+  }
+}

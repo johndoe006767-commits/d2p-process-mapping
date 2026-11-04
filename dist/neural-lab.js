@@ -137,7 +137,16 @@ function skin(){
    if(group){group.dataset.id=n.id;group.classList.add('source-io');group.setAttribute('tabindex','0');group.setAttribute('role','button');if(n.kind==='in'){const top=n.y-10;group.replaceChildren(el('title',{},`${n.lab}: ${n.txt}`),el('rect',{x:n.x,y:top,width:n.w,height:94,rx:8,fill:'#47304b',stroke:'#725c7b','stroke-width':.7}),txt(n.x+12,top+24,fitLines(n.lab,n.w-24,10.5,1)[0],10.5,'var(--accent)'));const copy=n.P.id==='FPAC-01.01'?'Planning cycle begins':n.txt;fitLines(copy,n.w-24,11.2,3).forEach((line,i)=>group.append(txt(n.x+12,top+47+i*15.4,line,11.2,'var(--ink)',400)));}}
   }
   if(group&&n.kind==='dec'){const question=group.querySelector(':scope > text');if(question){const lines=fitLines(n.dec.q,130,9.5,2,500),cx=n.x+n.w/2,start=n.y-8-(lines.length-1)*13;question.remove();group.querySelectorAll(':scope > rect').forEach(r=>r.remove());const label=el('g',{class:'decision-label'}),width=Math.max(...lines.map(l=>measureText(l,9.5,500)))+20;label.append(el('rect',{x:cx-width/2,y:start-11,width,height:lines.length*13+3,rx:3,fill:'var(--base)'}));lines.forEach((line,i)=>{const text=txt(cx,start+i*13,line,9.5,'var(--accent)',500);text.setAttribute('text-anchor','middle');label.append(text);});group.append(label);}}
-  if(group&&n.kind==='tpi'){group.querySelectorAll(':scope > text').forEach(t=>t.remove());group.append(txt(n.x+10,n.y+14,`[SOLUTION] ${n.c.st||'TPI'}`,9.5,'var(--auto)',500));if(n.c.ref){const ref=txt(n.x+n.w-10,n.y+14,n.c.ref,8.8,'var(--auto)',500);ref.setAttribute('text-anchor','end');group.append(ref);}fitLines(n.c.t,n.w-20,9.8,2).forEach((line,i)=>group.append(txt(n.x+10,n.y+29+i*13.3,line,9.8,'var(--ink)')));}
+  if(group&&['ch','tpi'].includes(n.kind)){
+   const challenge=n.kind==='ch',color=challenge?'var(--pain)':'var(--auto)';
+   group.classList.toggle('challenge-node',challenge);
+   group.querySelectorAll(':scope > text').forEach(t=>t.remove());
+   group.append(txt(n.x+10,n.y+14,challenge?'[CHALLENGE]':`[SOLUTION] ${n.c.st||'TPI'}`,9.5,color,500));
+   if(n.c.ref){const ref=txt(n.x+n.w-10,n.y+14,n.c.ref,8.8,color,500);ref.setAttribute('text-anchor','end');group.append(ref);}
+   fitLines(challenge?n.c.full||n.c.t:n.c.t,n.w-20,9.8,challenge?Infinity:2).forEach((line,i)=>{
+    const label=txt(n.x+10,n.y+29+i*13.3,line,9.8,'var(--ink)');label.classList.add('register-copy');group.append(label);
+   });
+  }
   if(group&&n.opp){const o=n.opp;group.replaceChildren(el('title',{},o.t),el('rect',{class:'b',x:n.x,y:n.y,width:n.w,height:n.h,rx:8,fill:'#3a304b',stroke:'#bda6df'}));group.append(txt(n.x+12,n.y+20,'AI Opportunity',9,'var(--prop)',600));fitLines(titleCase(o.t),n.w-24,10.6,3).forEach((line,i)=>group.append(txt(n.x+12,n.y+39+i*14.8,line,10.6,'var(--ink)')));}
   if(group&&n.kind==='out'){group.querySelectorAll('text').forEach(t=>t.remove());fitLines(n.doc,n.w-28,10,3,500).forEach((line,i)=>group.append(txt(n.x+12,n.y+21+i*13.5,line,10,'var(--ink)',500)));}
   if(group){if(n.s||n.opp)drawAnnotations(group,n);group.onclick=()=>showCard(n.id,group);group.onkeydown=e=>{if(['Enter',' '].includes(e.key)){e.preventDefault();showCard(n.id,group);}};group.setAttribute('aria-haspopup','dialog');const label=n.s?`${n.s.n}. ${sourceTitle(n.s)}. ${typeNames[n.s.ty]}. Open details.`:n.kind==='dec'?`Decision: ${n.dec.q}. Open details.`:n.kind==='in'?`${n.lab}. ${n.txt}`:n.kind==='out'?`Output: ${n.doc}`:n.opp?.t||n.c?.full||n.c?.t||'Open details';group.setAttribute('aria-label',[label,...nodeAnnotations(n).map(a=>`${titleCase(a.kind)}: ${a.label}`)].join(' '));}
@@ -148,7 +157,7 @@ function skin(){
  g.append(el('rect',{x,y:y-13,width:bw,height:20,rx:10,fill:'#403047'}),txt(x+9,y,badge,9.5,'var(--muted)',500),txt(titleX,y,titleCase(p.name),12,'var(--ink)',600),txt(titleX,y+19,`${p.id} · ${p.owner}`,10.5,'var(--muted)'));
  svg.append(g);
  }));
- svg.querySelectorAll('text').forEach(t=>{for(const node of t.childNodes){if(node.nodeType===3)node.nodeValue=node.nodeValue.replace(/semi[- ]automated/gi,'Semi');}});
+ svg.querySelectorAll('text:not(.register-copy)').forEach(t=>{for(const node of t.childNodes){if(node.nodeType===3)node.nodeValue=node.nodeValue.replace(/semi[- ]automated/gi,'Semi');}});
  fitSvgLabels(svg);
  svg.querySelectorAll(':scope > text').forEach(t=>{if(/^(Flow |Phase |Process |TPI \/ CI)/.test(t.textContent)){t.childNodes.forEach(n=>{if(n.nodeType===3)n.nodeValue=titleCase(n.nodeValue);});t.setAttribute('font-weight','600');}});
  // Keep endpoint arrowheads on the resized card boundary; route interiors are unchanged.
@@ -238,18 +247,46 @@ function highlightFilterMatches(pointerClick){
 }
 function setOverviewScale(value){const minScale=Math.min(.35,viewportWidth()/flow.width);overviewScale=Math.max(minScale,Math.min(2.5,value));flow.setScale(overviewScale);$('#zoom-value').textContent=Math.round(overviewScale*100)+'%';$('#zoom-out').disabled=overviewScale<=minScale;$('#zoom-in').disabled=overviewScale>=2.5;closeCard(false);}
 function setMode(next){mode=next;root.dataset.mode=next;$('#process-map').hidden=next!=='detail';$('.map-intro').hidden=next!=='detail';$('#overview').hidden=next!=='overview';$$('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===next)));closeCard(false);$('.skip').href=next==='overview'?'#overview':'#process-map';if(fitted[next])fitWidth();else if(next==='overview')setOverviewScale(overviewScale);else updateScale(scale);updateFilterStatus();updateHeader();}
-function showProcessCard(r,target){selectedProcess=r;opener=target;markStage(r.st-1);flow.markStage(r.st-1);$('#card-context').textContent=`Process ${String(r.index).padStart(2,'0')} · Stage ${r.st} · ${r.id}`;$('#card-content').innerHTML=`<h2 id="card-title">${esc(r.t)}</h2><p class="card-description">${r.count} activities · ${r.pain.length} documented pain point${r.pain.length===1?'':'s'}</p><dl class="record-meta"><div><dt>Owner</dt><dd>${esc(r.P?.owner||r.f.owner)}</dd></div><div><dt>Activity mix</dt><dd>${r.man} manual · ${r.hyb} semi · ${r.auto} automated</dd></div></dl>${block('Inputs',list(r.inp))}${block('Outputs',list(r.out))}${block('Documented pain points',list(r.pain),'pain')}<p class="source-note">${esc(t.name)} · ${viewLabel} Process</p>`;$('#card-next').hidden=true;$('#card-detail').hidden=false;if(!card.matches(':popover-open'))card.showPopover();positionCard(target);card.scrollTop=0;$('#close-card').focus({preventScroll:true});}
+function processContext(r){
+ const related=Object.values(nodes).filter(n=>n.f===r.f&&(!r.P||!n.P||n.P===r.P));
+ const challenges=related.filter(n=>n.kind==='ch'&&(!r.P||!n.c.steps?.length||n.c.steps.some(ref=>ref.startsWith(r.P.id+'|'))));
+ const tagged=related.filter(n=>nodeAnnotations(n).length);
+ return {challenges,tagged};
+}
+function processSourceDetails(r){
+ const {challenges,tagged}=processContext(r);
+ const challengeRows=challenges.map(n=>`<li data-source-challenge="${esc(n.id)}"><div class="challenge-label"><strong>[CHALLENGE]</strong><span>${esc(n.c.ref)}</span></div><p>${esc(n.c.full||n.c.t)}</p></li>`).join('');
+ const tagRows=tagged.map(n=>`<li data-source-node="${esc(n.id)}"><p>${esc(n.s?`Activity ${n.s.n} · ${sourceTitle(n.s)}`:`${n.P?'Process':'Stage'} opportunity · ${n.opp.t}`)}</p><div class="source-tags">${nodeAnnotations(n).map(a=>`<span class="source-tag" data-source-tag="${a.kind}" data-tone="${a.tone}">${esc(a.label)}</span>`).join('')}</div></li>`).join('');
+ const challengeText=new Set(challenges.map(n=>n.c.full||n.c.t));
+ return block('Challenges',challengeRows?`<ul class="source-challenges">${challengeRows}</ul>`:'','pain')+
+  block('Documented pain points',list(r.pain.filter(p=>!challengeText.has(p))),'pain')+
+  block('Source tags',tagRows?`<ul class="source-tag-register">${tagRows}</ul>`:'');
+}
+function showProcessCard(r,target){
+ selectedProcess=r;opener=target;markStage(r.st-1);flow.markStage(r.st-1);
+ $('#card-context').textContent=`Process ${String(r.index).padStart(2,'0')} · Stage ${r.st} · ${r.id}`;
+ $('#card-content').innerHTML=`<h2 id="card-title">${esc(r.t)}</h2><p class="card-description">${r.count} activities · ${r.pain.length} documented pain point${r.pain.length===1?'':'s'}</p><dl class="record-meta"><div><dt>Owner</dt><dd>${esc(r.P?.owner||r.f.owner)}</dd></div><div><dt>Activity mix</dt><dd>${r.man} manual · ${r.hyb} semi · ${r.auto} automated</dd></div></dl>${processSourceDetails(r)}${block('Inputs',list(r.inp))}${block('Outputs',list(r.out))}<p class="source-note">${esc(t.name)} · ${viewLabel} Process</p>`;
+ $('#card-next').hidden=true;$('#card-detail').hidden=false;
+ if(!card.matches(':popover-open'))card.showPopover();positionCard(target);card.scrollTop=0;$('#close-card').focus({preventScroll:true});
+}
 async function openDetailedProcess(){if(!selectedProcess)return;const r=selectedProcess;setMode('detail');fitWidth();const first=activities().find(n=>r.P?n.P.id===r.id:n.f===r.f);if(first){const target=svg.querySelector(`[data-id="${CSS.escape(first.id)}"]`);if(await scrollToNode(target))showCard(first.id,target);}else jump(r.st-1);}
 function updateScroll(){if(mode!=='detail')return;const y=(window.scrollY+$('#navigation').offsetHeight+35-($('#process-map').getBoundingClientRect().top+window.scrollY))/scale+mapOriginY;let idx=0;frames.forEach((f,i)=>{if(f._box.top<=y)idx=i;});markStage(idx);signalRecords.forEach(({path,signal})=>{const r=path.getBoundingClientRect();signal.style.animationPlayState=r.bottom>$('#navigation').offsetHeight&&r.top<innerHeight&&!paused?'running':'paused';});}
 let ticking=false;listen('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(()=>{updateScroll();ticking=false;});}}, {passive:true});
 try{
- engine=window.TowerRenderers[t.sourceKey](payload.key,{[scenario]:data},{svg:'#map-svg',det:'#native-detail',leg:'#native-legend',scroll:'#process-map',frameHeaderHeight:100,handoffStripHeight:52,processInputGap:64,feedHeight:134,feedTopGap:34,hideChallenges:true,processWidths,processFooterGap,frameFooterGap,opportunityWidth:Math.max(280,...frames.flatMap(f=>f.procs.filter(p=>p.opp).map(p=>textWidth(p.opp.t,10.6,3,280,24)))),frameOpportunityWidth:Math.max(460,...frames.filter(f=>f.opp).map(f=>textWidth(f.opp.t,10.6,3,460,24))),stripWidth:(items,min)=>Math.max(min,...items.map(c=>Math.max(textWidth(c.t,9.8,2,min,20),measureText(`[SOLUTION] ${c.st||'TPI'}`,9.5,500)+measureText(c.ref||'',8.8,500)+32)))});engine.render(scenario,'all');nodes=engine.getNodes();
+ engine=window.TowerRenderers[t.sourceKey](payload.key,{[scenario]:data},{svg:'#map-svg',det:'#native-detail',leg:'#native-legend',scroll:'#process-map',frameHeaderHeight:100,handoffStripHeight:52,processInputGap:64,feedHeight:134,feedTopGap:34,processWidths,processFooterGap,frameFooterGap,opportunityWidth:Math.max(280,...frames.flatMap(f=>f.procs.filter(p=>p.opp).map(p=>textWidth(p.opp.t,10.6,3,280,24)))),frameOpportunityWidth:Math.max(460,...frames.filter(f=>f.opp).map(f=>textWidth(f.opp.t,10.6,3,460,24))),stripWidth:(items,min,kind)=>Math.max(min,...items.map(c=>Math.max(
+  kind==='ch'?Math.min(520,textWidth(c.full||c.t,9.8,2,min,20)):textWidth(c.t,9.8,2,min,20),
+  measureText(kind==='ch'?'[CHALLENGE]':`[SOLUTION] ${c.st||'TPI'}`,9.5,500)+measureText(c.ref||'',8.8,500)+32))),
+ stripHeight:(items,width,kind)=>kind==='ch'?Math.max(50,...items.map(c=>38+(fitLines(c.full||c.t,width-20,9.8,Infinity).length-1)*13.3)):50});engine.render(scenario,'all');nodes=engine.getNodes();
  const geometry=Object.values(nodes).map(n=>({id:n.id,x:n.x,y:n.y,w:n.w,h:n.h,kind:n.kind||'activity'}));
  const edgePaths=[...svg.querySelectorAll('path.fl,path.rw')].map(p=>p.getAttribute('d'));
  skin();mapOriginY=Math.max(0,frames[0]._box.top-20);
  $('#stages').innerHTML=names.map((name,i)=>`<button data-stage="${i}" aria-current="${i===0?'step':'false'}" aria-label="Stage ${i+1}: ${esc(cleanName(frames[i]))}"><span class="stage-number">${i+1}</span><span>${esc(name)}</span></button>`).join('');
  $('#stage-select').innerHTML=frames.map((f,i)=>`<option value="${i}">${i+1}. ${esc(cleanName(f))}</option>`).join('');
- flow=makeSourceOverview($('#overview-svg'),payload,t,showProcessCard);fitSvgLabels($('#overview-svg'));overviewScale=viewportWidth()/flow.width;
+ flow=makeSourceOverview($('#overview-svg'),payload,t,showProcessCard);
+ $$('#overview-svg .flow-node').forEach(g=>{
+  const {challenges,tagged}=processContext(flow.records[g.dataset.process]),count=tagged.reduce((sum,n)=>sum+nodeAnnotations(n).length,0);
+  g.setAttribute('aria-label',g.getAttribute('aria-label')+` ${challenges.length} challenges. ${count} source tags.`);
+ });fitSvgLabels($('#overview-svg'));overviewScale=viewportWidth()/flow.width;
  $('#total-count').textContent=activities().length;
  $$('#stages [data-stage]').forEach(b=>b.onclick=()=>jump(Number(b.dataset.stage)));$('#stage-select').onchange=e=>jump(Number(e.target.value));
  $$('[data-filter]').forEach(b=>b.onclick=event=>{

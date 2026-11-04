@@ -1,13 +1,13 @@
 import {getScenario,setScenario,scenarioControl,bindScenarioControl,scenarioLabel} from './process-scenario.js';
 import {REAL,getTower} from './real-data.js?v=20261104-excel-source';
-import {mountNeuralLab} from './neural-lab.js?v=20261104-ai-node-tags';
+import {mountNeuralLab} from './neural-lab.js?v=20261104-challenges';
 import {titleCase,normalizeHeadings} from './title-case.js';
 import {handoffContext} from './handoff-context.js?v=20261104-excel-source';
 const root=document.querySelector('#process-workspace');let api=null,current=null,request=0,shellPromise,pending=null,returnHandler;let scenarioRefresh=0;const sources=new Map();
 const shell=()=>shellPromise??=fetch('./neural/shell.html?v=labels-1').then(r=>{if(!r.ok)throw Error('The Process Workspace Could Not Load.');return r.text();}).catch(e=>{shellPromise=null;throw e;});
 const source=key=>{if(!sources.has(key))sources.set(key,fetch(`./neural/${key}.json?v=20261104-excel-source`).then(r=>{if(!r.ok)throw Error('The Process Records Could Not Load.');return r.json();}).catch(e=>{sources.delete(key);throw e;}));return sources.get(key);};
 function flatten(steps){return steps.flatMap(s=>s.split?s.branches.flatMap(b=>flatten(b.steps)):s.fork?s.branches.flatMap(b=>flatten([b.step])):s.gate?(s.fix?[s.fix]:[]):[s]);}
-function preserveChallenges(data){for(const f of data.frames){f.stagePain=[...new Set([...(f.pp||[]),...(f.ch||[]).map(c=>c.full||c.t)])];for(const c of f.ch||[]){for(const ref of c.steps||[]){const match=f.procs.flatMap(p=>flatten(p.steps).map(s=>({p,s}))).find(({p,s})=>`${p.id}|${s.n}`===ref);if(match){match.s.pp=[...new Set([...(match.s.pp||[]),c.full||c.t])];}}}f.ch=[];}}
+function preserveChallenges(data){for(const f of data.frames){f.stagePain=[...new Set([...(f.pp||[]),...(f.ch||[]).map(c=>c.full||c.t)])];for(const c of f.ch||[]){for(const ref of c.steps||[]){const match=f.procs.flatMap(p=>flatten(p.steps).map(s=>({p,s}))).find(({p,s})=>`${p.id}|${s.n}`===ref);if(match){match.s.pp=[...new Set([...(match.s.pp||[]),c.full||c.t])];}}}}}
 export function prepareNeural(id,onReturn){
  const selection=id+':'+getScenario(id);
  if(current===selection&&api)return Promise.resolve(api);
@@ -28,7 +28,7 @@ async function loadNeural(id,onReturn){
  root.querySelector('.map-intro h1').textContent=`${titleCase(t.name)} Process Anatomy`;
  root.querySelector('.map-intro p').textContent=`Explore ${tower.counts.total} ${scenario==='tobe'?'source activities with AI recommendations':'documented activities'} across ${tower.stages.length} stages. Select an activity, decision or stage number for its complete source record.`;
  root.querySelector('#overview h1').textContent=`${titleCase(t.name)} High-Level Flow`;
- root.querySelector('.overview-intro').textContent=['FPAC','FPAO'].includes(t.sourceKey)?`${payload.data.frames.reduce((n,f)=>n+f.procs.length,0)} source processes across ${t.stages.length} stages. Select a process to inspect its inputs, outputs and activity mix.`:`${t.stages.length} connected stages covering ${payload.data.frames.reduce((n,f)=>n+f.procs.length,0)} source processes. Select a stage to inspect its inputs, outputs and activity mix.`;
+ root.querySelector('.overview-intro').textContent=['FPAC','FPAO'].includes(t.sourceKey)?`${payload.data.frames.reduce((n,f)=>n+f.procs.length,0)} source processes across ${t.stages.length} stages. Select a process to inspect its challenges, source tags, inputs, outputs and activity mix.`:`${t.stages.length} connected stages covering ${payload.data.frames.reduce((n,f)=>n+f.procs.length,0)} source processes. Select a stage to inspect its challenges, source tags, inputs, outputs and activity mix.`;
  root.querySelector('.overview-heading>span').textContent=scenario==='tobe'?'AI Suggested · Potential mix if adopted':'Inputs → Processes → Outputs';
  root.querySelector('#map-svg').setAttribute('aria-label',`${t.name} Detailed Process Map`);root.querySelector('#overview-svg').setAttribute('aria-label',`${t.name} High-Level Flow`);
  payload.scenario=scenario;api=mountNeuralLab(root,payload,tower,onReturn);if(!api)throw Error('The Process Map Could Not Be Rendered.');current=selection;returnHandler=onReturn;normalizeHeadings(root);return api;

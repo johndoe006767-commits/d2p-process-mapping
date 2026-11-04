@@ -73,13 +73,26 @@
 #process-workspace .handoff-context{box-sizing:border-box;width:var(--map-viewport-width,100%);padding:.2em 2em;background:var(--base);border-bottom:1px solid var(--line)}
 
 /* Source feasibility, reference and scope tags stay attached to their node. */
-#process-workspace #map-svg .node-annotation { --annotation-fill: #535c6a; }
-#process-workspace #map-svg .node-annotation[data-tone="explore"] { --annotation-fill: #18743c; }
-#process-workspace #map-svg .node-annotation[data-tone="implemented"] { --annotation-fill: #275c9e; }
-#process-workspace #map-svg .node-annotation[data-tone="review"] { --annotation-fill: #8a520a; }
-#process-workspace #map-svg .node-annotation[data-tone="future"] { --annotation-fill: #5d4b7a; }
-#process-workspace #map-svg .node-annotation[data-tone="blocked"] { --annotation-fill: #9a334d; }
-#process-workspace #map-svg .node-annotation[data-tone="context"] { --annotation-fill: #403047; }
+#process-workspace #map-svg .node-annotation, #process-workspace .source-tag { --annotation-fill: #535c6a; }
+#process-workspace #map-svg .node-annotation[data-tone="explore"], #process-workspace .source-tag[data-tone="explore"] { --annotation-fill: #18743c; }
+#process-workspace #map-svg .node-annotation[data-tone="implemented"], #process-workspace .source-tag[data-tone="implemented"] { --annotation-fill: #275c9e; }
+#process-workspace #map-svg .node-annotation[data-tone="review"], #process-workspace .source-tag[data-tone="review"] { --annotation-fill: #8a520a; }
+#process-workspace #map-svg .node-annotation[data-tone="future"], #process-workspace .source-tag[data-tone="future"] { --annotation-fill: #5d4b7a; }
+#process-workspace #map-svg .node-annotation[data-tone="blocked"], #process-workspace .source-tag[data-tone="blocked"] { --annotation-fill: #9a334d; }
+#process-workspace #map-svg .node-annotation[data-tone="context"], #process-workspace .source-tag[data-tone="context"] { --annotation-fill: #403047; }
 #process-workspace #map-svg .node-annotation rect { fill: var(--annotation-fill); stroke: none; }
 #process-workspace #map-svg .node-annotation text { fill: #fff; }
 #process-workspace #map-svg .node-annotation[data-tone="context"] text { fill: #ead7e6; }
+
+/* Challenge registers retain the source wording and step references. */
+#process-workspace #map-svg .challenge-node > .b { fill: #482e42; stroke: var(--pain); }
+#process-workspace .record-section .source-challenges,
+#process-workspace .record-section .source-tag-register { list-style: none; padding: 0; margin: 0; }
+#process-workspace .source-challenges li + li,
+#process-workspace .source-tag-register li + li { margin-top: 1em; padding-top: 1em; border-top: 1px solid #c88ca533; }
+#process-workspace .challenge-label { display: flex; justify-content: space-between; gap: 1em; color: var(--pain); margin-bottom: .35em; }
+#process-workspace .challenge-label strong { flex-shrink: 0; }
+#process-workspace .challenge-label span { min-width: 0; white-space: normal; overflow-wrap: anywhere; text-align: right; }
+#process-workspace .source-tags { display: flex; flex-wrap: wrap; gap: .4em; margin-top: .5em; }
+#process-workspace .source-tag { display: inline-block; padding: .25em .6em; border-radius: 4px; background: var(--annotation-fill); color: #fff; font-size: .9em; line-height: 1.5; overflow-wrap: anywhere; }
+#process-workspace .source-tag[data-tone="context"] { color: #ead7e6; }

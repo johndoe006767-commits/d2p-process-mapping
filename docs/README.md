@@ -55,6 +55,8 @@ Each tower has an **As Is / AI Suggested** selector shared by its high-level map
 
 AI Suggested activity and opportunity nodes display their supplied feasibility, scope and reference tags beneath the card. Statuses are read from the node, held suggestion metadata or its source review entry. Long labels wrap, and process and branch spacing accommodates the tags. Nodes without supplied annotations remain unlabelled. `tests/ai-node-tags.mjs` accepts the same Playwright path as the map browser check and verifies every node; results are recorded in `docs/ai-node-tags-verification.json`.
 
+Challenge registers are retained on detailed maps in both As Is and AI Suggested. All 158 source challenges per scenario show their complete text and references, with linked activities available on selection. High-level process and stage information cards include the applicable challenges and per-activity or opportunity source tags. Long challenge text and references wrap. Tax has no separate challenge register in the supplied source; its activity pain points remain available. `tests/process-challenges.mjs` checks all four map/scenario combinations for every tower; results are recorded in `docs/process-challenges-verification.json`.
+
 The process workspace opens from **High-level flow**, **Detailed flow**, or a stage shortcut (`+` or the mobile stage picker). It replaces the organ view until **Back to Organ** is selected, so scrolling stays within the flow. Handoffs remain accessible through dependency links and the insights navigation.
 
 Tower cards use `dist/data/tower-briefs.json` for dependencies and annual TPI projects. The source is **Source/8_Tower_TPI_Interdependencies_Template.xlsx**, worksheet **Tower Input**, range **A4:F12**. Across all eight towers, the workbook lists 27 key interdependencies, 24 projects for 2026 and 18 AI-suggested projects for 2027. The site counts named projects. The Tax count formula in F10 includes two blank lines, so the Tax card lists the two named projects and explains the discrepancy. The R2R 2027 GPO/GPDD note appears separately from its three projects. Records retain the original text, cell references and workbook counts. Manual percentages and activity mixes come from `kpi-summary.json`.
@@ -80,4 +82,4 @@ The rendered check uses `.runtime/source-sync/capture.json`, captured from the s
 
 Push changes to `main` to deploy. GitHub Actions publishes only `dist/` to GitHub Pages, retaining relative paths so the site also works under `/d2p-process-mapping/`.
 
-The local and published sites use the same `dist/` files. The release marker is `20261104-ai-node-tags`. Updated data and dependent assets carry this version tag to refresh browser caches.
+The local and published sites use the same `dist/` files. The release marker is `20261104-challenges`. Updated data and dependent assets carry this version tag to refresh browser caches.
