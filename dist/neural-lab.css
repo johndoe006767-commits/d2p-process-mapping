@@ -71,3 +71,15 @@
 .handoff-context-body p{margin:.3em 0 .65em}
 .handoff-context-body .lt-review li+li{margin-top:.65em}
 #process-workspace .handoff-context{box-sizing:border-box;width:var(--map-viewport-width,100%);padding:.2em 2em;background:var(--base);border-bottom:1px solid var(--line)}
+
+/* Source feasibility, reference and scope tags stay attached to their node. */
+#process-workspace #map-svg .node-annotation { --annotation-fill: #535c6a; }
+#process-workspace #map-svg .node-annotation[data-tone="explore"] { --annotation-fill: #18743c; }
+#process-workspace #map-svg .node-annotation[data-tone="implemented"] { --annotation-fill: #275c9e; }
+#process-workspace #map-svg .node-annotation[data-tone="review"] { --annotation-fill: #8a520a; }
+#process-workspace #map-svg .node-annotation[data-tone="future"] { --annotation-fill: #5d4b7a; }
+#process-workspace #map-svg .node-annotation[data-tone="blocked"] { --annotation-fill: #9a334d; }
+#process-workspace #map-svg .node-annotation[data-tone="context"] { --annotation-fill: #403047; }
+#process-workspace #map-svg .node-annotation rect { fill: var(--annotation-fill); stroke: none; }
+#process-workspace #map-svg .node-annotation text { fill: #fff; }
+#process-workspace #map-svg .node-annotation[data-tone="context"] text { fill: #ead7e6; }

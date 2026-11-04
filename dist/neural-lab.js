@@ -36,11 +36,54 @@ function textWidth(value,size,lines,min,padding=24,weight=400){
  return low;
 }
 function sourceSteps(steps){return steps.flatMap(s=>s.split?s.branches.flatMap(b=>sourceSteps(b.steps)):s.fork?s.branches.flatMap(b=>sourceSteps([b.step])):s.gate?(s.fix?[s.fix]:[]):[s]);}
+// The source stores statuses on records, held suggestions and review entries.
+// Keep their wording intact when rebuilding the activity and opportunity cards.
+function sourceReview(record,processId,frameId,opportunity=false){
+ return data.review?.[opportunity?`${processId||frameId}|opp`:`${processId}|${record.n}`]||data.review?.[record.t]||{};
+}
+function annotations(record,review={}){
+ if(!isAI||!record)return [];
+ const feasibility=record.feas||record.holdfeas||review.feas;
+ const values=[['feasibility',feasibility],['reference',record.feasn],['scope',record.scope]];
+ return values.filter(([,value])=>String(value||'').trim()).map(([kind,value])=>{
+  const label=String(value).trim();
+  const tone=kind!=='feasibility'?'context':/not feasible/i.test(label)?'blocked':/not (?:relevant|applicable|necessary|required)/i.test(label)?'neutral':/review|assess|progress/i.test(label)?'review':/future/i.test(label)?'future':/implemented/i.test(label)?'implemented':/explor|feasible/i.test(label)?'explore':'neutral';
+  return {kind,label,tone};
+ });
+}
+function nodeAnnotations(n){
+ const record=n.s||n.opp;
+ return record?annotations(record,sourceReview(record,n.P?.id,n.f.id,!!n.opp)):[];
+}
+function annotationLayout(items,width){
+ return items.map(item=>{
+  const size=item.kind==='feasibility'?8.8:8.2,weight=item.kind==='feasibility'?600:500;
+  const lines=fitLines(item.label,width-16,size,Infinity,weight);
+  return {...item,size,weight,lines,height:Math.max(18,lines.length*11.5+7)};
+ });
+}
+const annotationHeight=(items,width)=>annotationLayout(items,width).reduce((sum,item)=>sum+item.height+4,0);
 const processWidths=new Map(frames.flatMap(f=>f.procs.map(p=>[p,{
  activity:Math.max(158,...sourceSteps(p.steps).map(s=>Math.max(textWidth(titleCase(shortTitle(s)),10.6,3,158),textWidth((s.sys||'').replace(/;\s*/g,' · '),8,1,158,24+(s.pp?.length?measureText('Pain Point',8)+10:0))))),
  input:Math.max(textWidth(p.inbox[0],10.5,1,118),textWidth(p.id==='FPAC-01.01'?'Planning cycle begins':p.inbox[1],11.2,3,118)),
  output:textWidth(p.outdoc||'',10,3,150,28,500)
 }])));
+const processFooterGap=new Map(frames.flatMap(f=>f.procs.map(p=>[p,Math.max(0,
+ ...sourceSteps(p.steps).map(s=>annotationHeight(annotations(s,sourceReview(s,p.id,f.id)),processWidths.get(p).activity)),
+ annotationHeight(annotations(p.opp,sourceReview(p.opp||{},p.id,f.id,true)),280))])));
+const frameFooterGap=new Map(frames.map(f=>[f,annotationHeight(annotations(f.opp,sourceReview(f.opp||{},null,f.id,true)),460)]));
+function drawAnnotations(group,n){
+ let y=n.s?n.y+90+(n.s.out?.length?16:0):n.y+n.h+6;
+ for(const item of annotationLayout(nodeAnnotations(n),n.w)){
+  const tag=el('g',{class:'node-annotation','data-node-annotation':item.kind,'data-tone':item.tone,'data-label':item.label,role:'img','aria-label':`${titleCase(item.kind)}: ${item.label}`});
+  tag.append(el('title',{},item.label),el('rect',{x:n.x,y,width:n.w,height:item.height,rx:4}));
+  item.lines.forEach((line,i)=>{
+   const label=txt(n.x+n.w/2,y+12+i*11.5,line,item.size,'#fff',item.weight);
+   label.setAttribute('text-anchor','middle');tag.append(label);
+  });
+  group.append(tag);y+=item.height+4;
+ }
+}
 function stageHeadingName(f){return titleCase(cleanName(f));}
 function drawHandoffs(f,direction,y){
  const items=f[direction]||[];if(!items.length)return;
@@ -97,7 +140,7 @@ function skin(){
   if(group&&n.kind==='tpi'){group.querySelectorAll(':scope > text').forEach(t=>t.remove());group.append(txt(n.x+10,n.y+14,`[SOLUTION] ${n.c.st||'TPI'}`,9.5,'var(--auto)',500));if(n.c.ref){const ref=txt(n.x+n.w-10,n.y+14,n.c.ref,8.8,'var(--auto)',500);ref.setAttribute('text-anchor','end');group.append(ref);}fitLines(n.c.t,n.w-20,9.8,2).forEach((line,i)=>group.append(txt(n.x+10,n.y+29+i*13.3,line,9.8,'var(--ink)')));}
   if(group&&n.opp){const o=n.opp;group.replaceChildren(el('title',{},o.t),el('rect',{class:'b',x:n.x,y:n.y,width:n.w,height:n.h,rx:8,fill:'#3a304b',stroke:'#bda6df'}));group.append(txt(n.x+12,n.y+20,'AI Opportunity',9,'var(--prop)',600));fitLines(titleCase(o.t),n.w-24,10.6,3).forEach((line,i)=>group.append(txt(n.x+12,n.y+39+i*14.8,line,10.6,'var(--ink)')));}
   if(group&&n.kind==='out'){group.querySelectorAll('text').forEach(t=>t.remove());fitLines(n.doc,n.w-28,10,3,500).forEach((line,i)=>group.append(txt(n.x+12,n.y+21+i*13.5,line,10,'var(--ink)',500)));}
-  if(group){group.onclick=()=>showCard(n.id,group);group.onkeydown=e=>{if(['Enter',' '].includes(e.key)){e.preventDefault();showCard(n.id,group);}};group.setAttribute('aria-haspopup','dialog');group.setAttribute('aria-label',n.s?`${n.s.n}. ${sourceTitle(n.s)}. ${typeNames[n.s.ty]}. Open details.`:n.kind==='dec'?`Decision: ${n.dec.q}. Open details.`:n.kind==='in'?`${n.lab}. ${n.txt}`:n.kind==='out'?`Output: ${n.doc}`:n.opp?.t||n.c?.full||n.c?.t||'Open details');}
+  if(group){if(n.s||n.opp)drawAnnotations(group,n);group.onclick=()=>showCard(n.id,group);group.onkeydown=e=>{if(['Enter',' '].includes(e.key)){e.preventDefault();showCard(n.id,group);}};group.setAttribute('aria-haspopup','dialog');const label=n.s?`${n.s.n}. ${sourceTitle(n.s)}. ${typeNames[n.s.ty]}. Open details.`:n.kind==='dec'?`Decision: ${n.dec.q}. Open details.`:n.kind==='in'?`${n.lab}. ${n.txt}`:n.kind==='out'?`Output: ${n.doc}`:n.opp?.t||n.c?.full||n.c?.t||'Open details';group.setAttribute('aria-label',[label,...nodeAnnotations(n).map(a=>`${titleCase(a.kind)}: ${a.label}`)].join(' '));}
  }
  // A reserved header band keeps labels independent of node and dependency geometry.
  svg.querySelectorAll('.source-process-heading').forEach(g=>g.remove());
@@ -132,7 +175,7 @@ function aiDetails(s,n){
  const activity=t.activities.find(a=>a.stageId===n.f.id&&a.processId===n.P.id&&a.n===s.n);
  return block('AI suggestion',paragraph(s.rec||s.sug||review.sug||(!s.ch||s.ch==='same'?'No change proposed for this step.':'')))+
  block('Activity type if adopted',paragraph(typeNames[activity.effectiveType]))+block('As Is activity type',paragraph(typeNames[activity.asIsType]))+
- block('Tools',paragraph(s.tools||review.tools))+block('Proposal basis',paragraph(s.opp))+block('Feasibility',paragraph(s.feas||review.feas))+
+ block('Tools',paragraph(s.tools||review.tools))+block('Proposal basis',paragraph(s.opp))+block('Feasibility',paragraph(s.feas||s.holdfeas||review.feas))+
  block(s.feasl||'Review comments',paragraph(s.feasc||review.comment))+block('Scope',paragraph(s.scope))+block('Copilot / Microsoft AI option',detailFields(s.cop))+
  block('Proposed pain-point resolutions',list((s.pp||[]).map(p=>valueText(data.fixes?.[p])).filter(Boolean)))+block('Source review',detailFields(review));
 }
@@ -200,7 +243,7 @@ async function openDetailedProcess(){if(!selectedProcess)return;const r=selected
 function updateScroll(){if(mode!=='detail')return;const y=(window.scrollY+$('#navigation').offsetHeight+35-($('#process-map').getBoundingClientRect().top+window.scrollY))/scale+mapOriginY;let idx=0;frames.forEach((f,i)=>{if(f._box.top<=y)idx=i;});markStage(idx);signalRecords.forEach(({path,signal})=>{const r=path.getBoundingClientRect();signal.style.animationPlayState=r.bottom>$('#navigation').offsetHeight&&r.top<innerHeight&&!paused?'running':'paused';});}
 let ticking=false;listen('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(()=>{updateScroll();ticking=false;});}}, {passive:true});
 try{
- engine=window.TowerRenderers[t.sourceKey](payload.key,{[scenario]:data},{svg:'#map-svg',det:'#native-detail',leg:'#native-legend',scroll:'#process-map',frameHeaderHeight:100,handoffStripHeight:52,processInputGap:64,feedHeight:134,feedTopGap:34,hideChallenges:true,processWidths,opportunityWidth:Math.max(280,...frames.flatMap(f=>f.procs.filter(p=>p.opp).map(p=>textWidth(p.opp.t,10.6,3,280,24)))),frameOpportunityWidth:Math.max(460,...frames.filter(f=>f.opp).map(f=>textWidth(f.opp.t,10.6,3,460,24))),stripWidth:(items,min)=>Math.max(min,...items.map(c=>Math.max(textWidth(c.t,9.8,2,min,20),measureText(`[SOLUTION] ${c.st||'TPI'}`,9.5,500)+measureText(c.ref||'',8.8,500)+32)))});engine.render(scenario,'all');nodes=engine.getNodes();
+ engine=window.TowerRenderers[t.sourceKey](payload.key,{[scenario]:data},{svg:'#map-svg',det:'#native-detail',leg:'#native-legend',scroll:'#process-map',frameHeaderHeight:100,handoffStripHeight:52,processInputGap:64,feedHeight:134,feedTopGap:34,hideChallenges:true,processWidths,processFooterGap,frameFooterGap,opportunityWidth:Math.max(280,...frames.flatMap(f=>f.procs.filter(p=>p.opp).map(p=>textWidth(p.opp.t,10.6,3,280,24)))),frameOpportunityWidth:Math.max(460,...frames.filter(f=>f.opp).map(f=>textWidth(f.opp.t,10.6,3,460,24))),stripWidth:(items,min)=>Math.max(min,...items.map(c=>Math.max(textWidth(c.t,9.8,2,min,20),measureText(`[SOLUTION] ${c.st||'TPI'}`,9.5,500)+measureText(c.ref||'',8.8,500)+32)))});engine.render(scenario,'all');nodes=engine.getNodes();
  const geometry=Object.values(nodes).map(n=>({id:n.id,x:n.x,y:n.y,w:n.w,h:n.h,kind:n.kind||'activity'}));
  const edgePaths=[...svg.querySelectorAll('path.fl,path.rw')].map(p=>p.getAttribute('d'));
  skin();mapOriginY=Math.max(0,frames[0]._box.top-20);

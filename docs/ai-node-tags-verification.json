@@ -1,0 +1,199 @@
+{
+  "status": "PASS",
+  "viewport": "3840×2160",
+  "results": [
+    {
+      "tower": "FPAC",
+      "issues": [],
+      "counts": {
+        "feasibility": 98,
+        "reference": 0,
+        "scope": 0
+      },
+      "nodes": 123
+    },
+    {
+      "tower": "FPAO",
+      "issues": [],
+      "counts": {
+        "feasibility": 67,
+        "reference": 9,
+        "scope": 25
+      },
+      "nodes": 79
+    },
+    {
+      "tower": "CAPEX",
+      "issues": [],
+      "counts": {
+        "feasibility": 45,
+        "reference": 0,
+        "scope": 5
+      },
+      "nodes": 85
+    },
+    {
+      "tower": "P2P",
+      "issues": [],
+      "counts": {
+        "feasibility": 53,
+        "reference": 0,
+        "scope": 0
+      },
+      "nodes": 95
+    },
+    {
+      "tower": "O2C",
+      "issues": [],
+      "counts": {
+        "feasibility": 43,
+        "reference": 1,
+        "scope": 0
+      },
+      "nodes": 51
+    },
+    {
+      "tower": "TAX",
+      "issues": [],
+      "counts": {
+        "feasibility": 40,
+        "reference": 0,
+        "scope": 5
+      },
+      "nodes": 89
+    },
+    {
+      "tower": "R2R",
+      "issues": [],
+      "counts": {
+        "feasibility": 20,
+        "reference": 0,
+        "scope": 4
+      },
+      "nodes": 46
+    },
+    {
+      "tower": "CTRL",
+      "issues": [],
+      "counts": {
+        "feasibility": 18,
+        "reference": 0,
+        "scope": 0
+      },
+      "nodes": 18
+    }
+  ],
+  "errors": [],
+  "verifiedDate": "2026-11-04",
+  "timezone": "Asia/Kuala_Lumpur",
+  "release": "20261104-ai-node-tags",
+  "totals": {
+    "nodes": 586,
+    "feasibility": 384,
+    "scope": 39,
+    "reference": 10
+  },
+  "coverage": [
+    "Exact annotation wording from map records, held suggestion statuses and source review entries.",
+    "All activity and opportunity nodes at fit-width and readable zoom.",
+    "No tag overlap with nodes, stage headings, process headings or handoff text.",
+    "All tag text fits within its background and the map bounds; text contrast is at least 4.5:1.",
+    "Keyboard and pointer access to node details; scenario switching removes and restores tags without duplicates."
+  ],
+  "mapRegression": {
+    "status": "PASS",
+    "viewport": "3840×2160",
+    "results": [
+      {
+        "tower": "FPAC",
+        "scenarios": 2,
+        "mapViews": 4,
+        "activities": 102,
+        "handoffs": 55,
+        "reviewEntries": 3,
+        "status": "PASS"
+      },
+      {
+        "tower": "FPAO",
+        "scenarios": 2,
+        "mapViews": 4,
+        "activities": 61,
+        "handoffs": 65,
+        "reviewEntries": 3,
+        "status": "PASS"
+      },
+      {
+        "tower": "CAPEX",
+        "scenarios": 2,
+        "mapViews": 4,
+        "activities": 75,
+        "handoffs": 16,
+        "reviewEntries": 2,
+        "status": "PASS"
+      },
+      {
+        "tower": "P2P",
+        "scenarios": 2,
+        "mapViews": 4,
+        "activities": 84,
+        "handoffs": 55,
+        "reviewEntries": 3,
+        "status": "PASS"
+      },
+      {
+        "tower": "O2C",
+        "scenarios": 2,
+        "mapViews": 4,
+        "activities": 37,
+        "handoffs": 41,
+        "reviewEntries": 1,
+        "status": "PASS"
+      },
+      {
+        "tower": "TAX",
+        "scenarios": 2,
+        "mapViews": 4,
+        "activities": 77,
+        "handoffs": 21,
+        "reviewEntries": 2,
+        "status": "PASS"
+      },
+      {
+        "tower": "R2R",
+        "scenarios": 2,
+        "mapViews": 4,
+        "activities": 39,
+        "handoffs": 36,
+        "reviewEntries": 3,
+        "status": "PASS"
+      },
+      {
+        "tower": "CTRL",
+        "scenarios": 2,
+        "mapViews": 4,
+        "activities": 14,
+        "handoffs": 16,
+        "reviewEntries": 1,
+        "status": "PASS"
+      }
+    ],
+    "errors": [],
+    "failures": []
+  },
+  "visualReview": {
+    "status": "PASS",
+    "examples": [
+      "SKU exception list against SAP MM60",
+      "Automated distribution with return tracking"
+    ],
+    "towers": [
+      "FPAC",
+      "FPAO",
+      "TAX"
+    ]
+  },
+  "designCheck": {
+    "status": "PASS for requested change",
+    "notes": "The detector reports only two existing Inter font warnings. Inter is explicitly required by docs/DESIGN.md and remains unchanged."
+  }
+}

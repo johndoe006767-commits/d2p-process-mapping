@@ -1,6 +1,6 @@
 import {getScenario,setScenario,scenarioControl,bindScenarioControl,scenarioLabel} from './process-scenario.js';
 import {REAL,getTower} from './real-data.js?v=20261104-excel-source';
-import {mountNeuralLab} from './neural-lab.js?v=20261104-excel-source';
+import {mountNeuralLab} from './neural-lab.js?v=20261104-ai-node-tags';
 import {titleCase,normalizeHeadings} from './title-case.js';
 import {handoffContext} from './handoff-context.js?v=20261104-excel-source';
 const root=document.querySelector('#process-workspace');let api=null,current=null,request=0,shellPromise,pending=null,returnHandler;let scenarioRefresh=0;const sources=new Map();

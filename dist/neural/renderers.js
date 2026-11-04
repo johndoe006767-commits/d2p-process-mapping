@@ -43,7 +43,7 @@ function layout(d){
         if(s.gate){P._gates=true;x+=60+(W-158)/2;const gid=`${f.id}|${P.id}|${s.n}`;nodes[gid]={id:gid,x,y:rowY+H/2-DW/2,w:DW,h:DW,kind:"dec",gate:true,dec:s,f,P,j,ln:P.steps.slice(j+1).filter(q=>q.gate&&q.nx&&!q.nx.end).length};seq.push(gid);
           if(s.fix){const fs=s.fix,fid=`${f.id}|${P.id}|${fs.n}`;nodes[fid]={id:fid,x:x+DW/2-W/2,y:rowY+H+56,w:W,h:H,s:fs,f,P,j,fixOf:gid};fext=56+H+4;P._rb=rowY+H+fext-4}
           x+=DW+G+76+(W-158)/2;return}
-        if(s.fork){P._gates=true;const BG=56,nb=s.branches.length;x+=30;const dx=x,sx=dx+DW+G+40,bx=sx+W+30;
+        if(s.fork){P._gates=true;const BG=56+(E.processFooterGap?.get(P)||0),nb=s.branches.length;x+=30;const dx=x,sx=dx+DW+G+40,bx=sx+W+30;
           s.branches.forEach((b,bi)=>{const by=rowY+bi*(H+BG);const nq=s.branches[bi+1];const did=`${f.id}|${P.id}|${b.step.n}|d`;
             nodes[did]={id:did,x:dx,y:by+H/2-DW/2,w:DW,h:DW,kind:"dec",fork:true,f,P,dec:{q:b.q,ex:b.ex,o:b.o,d:b.d,src:b.src,yes:`Step ${b.step.n} - ${b.step.t}`,no:nq?`Check: ${nq.q}`:(s.elseLab||"No")+" - release"}};
             const sid=`${f.id}|${P.id}|${b.step.n}`;nodes[sid]={id:sid,x:sx,y:by,w:W,h:H,s:b.step,f,P,j,br:true}});
@@ -55,9 +55,9 @@ function layout(d){
       if(P.outdoc){x+=14;nodes[`${f.id}|${P.id}|out`]={id:`${f.id}|${P.id}|out`,x,y:rowY+8,w:OUTW,h:H-16,kind:"out",doc:P.outdoc,f,P,from:P._gates?seq[seq.length-1]:items[items.length-1]};seq.push(`${f.id}|${P.id}|out`);x+=OUTW+G}
       if(d.key==="tobe"&&P.opp){x+=6;nodes[`${f.id}|${P.id}|opp`]={id:`${f.id}|${P.id}|opp`,x,y:rowY-6,w:E.opportunityWidth||190,h:H+12,kind:"opp",opp:P.opp,f,P,from:items[items.length-1]};x+=(E.opportunityWidth||190)+20}
       maxX=Math.max(maxX,x);
-      y=rowY+H+POUT+RGAP+fext+(P.steps.some(s=>s.dec&&s.dec.nx)?30:0);
+      y=rowY+H+POUT+RGAP+fext+(E.processFooterGap?.get(P)||0)+(P.steps.some(s=>s.dec&&s.dec.nx)?30:0);
     });
-    if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:E.frameOpportunityWidth||460,h:86,kind:"fopp",opp:f.opp,f};y+=98}
+    if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:E.frameOpportunityWidth||460,h:86,kind:"fopp",opp:f.opp,f};y+=98+(E.frameFooterGap?.get(f)||0)}
     // challenge / TPI strips
     if((f.ch&&f.ch.length)||(f.tpi&&f.tpi.length)){y+=4;
       const strip=(items,kind,lab,fill,stroke,col,bw)=>{bw=E.stripWidth?.(items,bw)||bw;h+=text(x0,y+12,[lab],{fs:10.5,fw:700,fill:col,a:"start"});y+=20;let bx=x0;
@@ -238,14 +238,14 @@ function layout(d){
       P._headingY=y;h+=`<g class="source-process-heading">`;const multi=f.procs.length>1,lx=multi?x0+76:x0;if(multi)h+=`<g><rect x="${x0}" y="${y-17}" width="68" height="18" rx="9" fill="${d.accent}"/>`+text(x0+34,y-4.5,[`Process ${fi+1}.${pi+1}`],{fs:9.5,fw:700,fill:"#fff"})+`</g>`;h+=text(lx,y-4,[`${P.name}`],{fs:12,fw:700,fill:"var(--navy)",a:"start"});h+=text(lx+P.name.length*7.2+10,y-4,[`${P.id} · ${P.owner}`],{fs:10.5,fill:"var(--muted)",a:"start"});h+=`</g>`;
       const seq=[`${f.id}|${P.id}|in`];let fext=0;P._rb=rowY+H;P._gates=false;
       P.steps.forEach((s,j)=>{
-        if(s.split){P._gates=true;const BG=58;x+=24;const sx=x;let maxEnd=sx+40;const rows=[];
+        if(s.split){P._gates=true;const BG=58+(E.processFooterGap?.get(P)||0);x+=24;const sx=x;let maxEnd=sx+40;const rows=[];
           s.branches.forEach((b,bi)=>{const by=rowY+bi*(H+BG);let xx=sx+128;b.steps.forEach((st,k)=>{const sid=`${f.id}|${P.id}|${st.n}`;nodes[sid]={id:sid,x:xx,y:by,w:W,h:H,s:st,f,P,j,br:true,bi,k};xx+=W+G});maxEnd=Math.max(maxEnd,xx-G);rows.push({by,first:b.steps[0],last:b.steps[b.steps.length-1],lab:b.lab})});
           const bx=maxEnd+26;const fid=`${f.id}|${P.id}|split${j}`;nodes[fid]={id:fid,kind:"split",sp:s,f,P,x:sx,w:bx-sx,sx,bx,rowY,rows};seq.push(fid);
           const nb=s.branches.length;fext=Math.max(fext,(nb-1)*(H+BG)+34);P._rb=Math.max(P._rb,rowY+H+(nb-1)*(H+BG)+30);x=bx+44;return}
         if(s.gate){P._gates=true;x+=60+(W-158)/2;const gid=`${f.id}|${P.id}|${s.n}`;nodes[gid]={id:gid,x,y:rowY+H/2-DW/2,w:DW,h:DW,kind:"dec",gate:true,dec:s,f,P,j,ln:P.steps.slice(j+1).filter(q=>q.gate&&q.nx&&!q.nx.end).length};seq.push(gid);
           if(s.fix){const fs=s.fix,fid=`${f.id}|${P.id}|${fs.n}`;nodes[fid]={id:fid,x:x+DW/2-W/2,y:rowY+H+56,w:W,h:H,s:fs,f,P,j,fixOf:gid};fext=56+H+4;P._rb=rowY+H+fext-4}
           x+=DW+G+76+(W-158)/2;return}
-        if(s.fork){P._gates=true;const BG=56,nb=s.branches.length;x+=30;const dx=x,sx=dx+DW+G+40,bx=sx+W+30;
+        if(s.fork){P._gates=true;const BG=56+(E.processFooterGap?.get(P)||0),nb=s.branches.length;x+=30;const dx=x,sx=dx+DW+G+40,bx=sx+W+30;
           s.branches.forEach((b,bi)=>{const by=rowY+bi*(H+BG);const nq=s.branches[bi+1];const did=`${f.id}|${P.id}|${b.step.n}|d`;
             nodes[did]={id:did,x:dx,y:by+H/2-DW/2,w:DW,h:DW,kind:"dec",fork:true,f,P,dec:{q:b.q,ex:b.ex,o:b.o,d:b.d,src:b.src,yes:`Step ${b.step.n} - ${b.step.t}`,no:nq?`Check: ${nq.q}`:(s.elseLab||"No")+" - release"}};
             const sid=`${f.id}|${P.id}|${b.step.n}`;nodes[sid]={id:sid,x:sx,y:by,w:W,h:H,s:b.step,f,P,j,br:true}});
@@ -257,9 +257,9 @@ function layout(d){
       if(P.outdoc){x+=14;nodes[`${f.id}|${P.id}|out`]={id:`${f.id}|${P.id}|out`,x,y:rowY+8,w:OUTW,h:H-16,kind:"out",doc:P.outdoc,f,P,from:P._gates?seq[seq.length-1]:items[items.length-1]};seq.push(`${f.id}|${P.id}|out`);x+=OUTW+G}
       if(d.key==="tobe"&&P.opp){x+=6;nodes[`${f.id}|${P.id}|opp`]={id:`${f.id}|${P.id}|opp`,x,y:rowY-6,w:E.opportunityWidth||190,h:H+12,kind:"opp",opp:P.opp,f,P,from:items[items.length-1]};x+=(E.opportunityWidth||190)+20}
       maxX=Math.max(maxX,x);
-      y=rowY+H+POUT+RGAP+fext+(P.steps.some(s=>s.dec&&s.dec.nx)?30:0);
+      y=rowY+H+POUT+RGAP+fext+(E.processFooterGap?.get(P)||0)+(P.steps.some(s=>s.dec&&s.dec.nx)?30:0);
     });
-    if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:E.frameOpportunityWidth||460,h:86,kind:"fopp",opp:f.opp,f};y+=98}
+    if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:E.frameOpportunityWidth||460,h:86,kind:"fopp",opp:f.opp,f};y+=98+(E.frameFooterGap?.get(f)||0)}
     // challenge / TPI strips
     if((f.ch&&f.ch.length)||(f.tpi&&f.tpi.length)){y+=4;
       const strip=(items,kind,lab,fill,stroke,col,bw)=>{bw=E.stripWidth?.(items,bw)||bw;h+=text(x0,y+12,[lab],{fs:10.5,fw:700,fill:col,a:"start"});y+=20;let bx=x0;
@@ -443,7 +443,7 @@ function layout(d){
         if(s.gate){P._gates=true;x+=60+(W-158)/2;const gid=`${f.id}|${P.id}|${s.n}`;nodes[gid]={id:gid,x,y:rowY+H/2-DW/2,w:DW,h:DW,kind:"dec",gate:true,dec:s,f,P,j,ln:P.steps.slice(j+1).filter(q=>q.gate&&q.nx&&!q.nx.end).length};seq.push(gid);
           if(s.fix){const fs=s.fix,fid=`${f.id}|${P.id}|${fs.n}`;nodes[fid]={id:fid,x:x+DW/2-W/2,y:rowY+H+56,w:W,h:H,s:fs,f,P,j,fixOf:gid};fext=56+H+4;P._rb=rowY+H+fext-4}
           x+=DW+G+76+(W-158)/2;return}
-        if(s.fork){P._gates=true;const BG=56,nb=s.branches.length;x+=30;const dx=x,sx=dx+DW+G+40,bx=sx+W+30;
+        if(s.fork){P._gates=true;const BG=56+(E.processFooterGap?.get(P)||0),nb=s.branches.length;x+=30;const dx=x,sx=dx+DW+G+40,bx=sx+W+30;
           s.branches.forEach((b,bi)=>{const by=rowY+bi*(H+BG);const nq=s.branches[bi+1];const did=`${f.id}|${P.id}|${b.step.n}|d`;
             nodes[did]={id:did,x:dx,y:by+H/2-DW/2,w:DW,h:DW,kind:"dec",fork:true,f,P,dec:{q:b.q,ex:b.ex,o:b.o,d:b.d,src:b.src,yes:`Step ${b.step.n} - ${b.step.t}`,no:nq?`Check: ${nq.q}`:(s.elseLab||"No")+" - release"}};
             const sid=`${f.id}|${P.id}|${b.step.n}`;nodes[sid]={id:sid,x:sx,y:by,w:W,h:H,s:b.step,f,P,j,br:true}});
@@ -455,9 +455,9 @@ function layout(d){
       if(P.outdoc){x+=14;nodes[`${f.id}|${P.id}|out`]={id:`${f.id}|${P.id}|out`,x,y:rowY+8,w:OUTW,h:H-16,kind:"out",doc:P.outdoc,f,P,from:P._gates?seq[seq.length-1]:items[items.length-1]};seq.push(`${f.id}|${P.id}|out`);x+=OUTW+G}
       if(d.key==="tobe"&&P.opp){x+=6;nodes[`${f.id}|${P.id}|opp`]={id:`${f.id}|${P.id}|opp`,x,y:rowY-6,w:E.opportunityWidth||190,h:H+12,kind:"opp",opp:P.opp,f,P,from:items[items.length-1]};x+=(E.opportunityWidth||190)+20}
       maxX=Math.max(maxX,x);
-      y=rowY+H+POUT+RGAP+fext+(P.steps.some(s=>s.dec&&s.dec.nx)?30:0);
+      y=rowY+H+POUT+RGAP+fext+(E.processFooterGap?.get(P)||0)+(P.steps.some(s=>s.dec&&s.dec.nx)?30:0);
     });
-    if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:E.frameOpportunityWidth||460,h:86,kind:"fopp",opp:f.opp,f};y+=98}
+    if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:E.frameOpportunityWidth||460,h:86,kind:"fopp",opp:f.opp,f};y+=98+(E.frameFooterGap?.get(f)||0)}
     // challenge / TPI strips
     if((f.ch&&f.ch.length)||(f.tpi&&f.tpi.length)){y+=4;
       const strip=(items,kind,lab,fill,stroke,col,bw)=>{bw=E.stripWidth?.(items,bw)||bw;h+=text(x0,y+12,[lab],{fs:10.5,fw:700,fill:col,a:"start"});y+=20;let bx=x0;
@@ -632,7 +632,7 @@ function layout(d){
         if(s.gate){P._gates=true;x+=60+(W-158)/2;const gid=`${f.id}|${P.id}|${s.n}`;nodes[gid]={id:gid,x,y:rowY+H/2-DW/2,w:DW,h:DW,kind:"dec",gate:true,dec:s,f,P,j,ln:P.steps.slice(j+1).filter(q=>q.gate&&q.nx&&!q.nx.end).length};seq.push(gid);
           if(s.fix){const fs=s.fix,fid=`${f.id}|${P.id}|${fs.n}`;nodes[fid]={id:fid,x:x+DW/2-W/2,y:rowY+H+56,w:W,h:H,s:fs,f,P,j,fixOf:gid};fext=56+H+4;P._rb=rowY+H+fext-4}
           x+=DW+G+76+(W-158)/2;return}
-        if(s.fork){P._gates=true;const BG=56,nb=s.branches.length;x+=30;const dx=x,sx=dx+DW+G+40,bx=sx+W+30;
+        if(s.fork){P._gates=true;const BG=56+(E.processFooterGap?.get(P)||0),nb=s.branches.length;x+=30;const dx=x,sx=dx+DW+G+40,bx=sx+W+30;
           s.branches.forEach((b,bi)=>{const by=rowY+bi*(H+BG);const nq=s.branches[bi+1];const did=`${f.id}|${P.id}|${b.step.n}|d`;
             nodes[did]={id:did,x:dx,y:by+H/2-DW/2,w:DW,h:DW,kind:"dec",fork:true,f,P,dec:{q:b.q,ex:b.ex,o:b.o,d:b.d,src:b.src,yes:`Step ${b.step.n} - ${b.step.t}`,no:nq?`Check: ${nq.q}`:(s.elseLab||"No")+" - release"}};
             const sid=`${f.id}|${P.id}|${b.step.n}`;nodes[sid]={id:sid,x:sx,y:by,w:W,h:H,s:b.step,f,P,j,br:true}});
@@ -644,9 +644,9 @@ function layout(d){
       if(P.outdoc){x+=14;nodes[`${f.id}|${P.id}|out`]={id:`${f.id}|${P.id}|out`,x,y:rowY+8,w:OUTW,h:H-16,kind:"out",doc:P.outdoc,f,P,from:P._gates?seq[seq.length-1]:items[items.length-1]};seq.push(`${f.id}|${P.id}|out`);x+=OUTW+G}
       if(d.key==="tobe"&&P.opp){x+=6;nodes[`${f.id}|${P.id}|opp`]={id:`${f.id}|${P.id}|opp`,x,y:rowY-6,w:E.opportunityWidth||190,h:H+12,kind:"opp",opp:P.opp,f,P,from:items[items.length-1]};x+=(E.opportunityWidth||190)+20}
       maxX=Math.max(maxX,x);
-      y=rowY+H+POUT+RGAP+fext+(P.steps.some(s=>s.dec&&s.dec.nx)?30:0);
+      y=rowY+H+POUT+RGAP+fext+(E.processFooterGap?.get(P)||0)+(P.steps.some(s=>s.dec&&s.dec.nx)?30:0);
     });
-    if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:E.frameOpportunityWidth||460,h:86,kind:"fopp",opp:f.opp,f};y+=98}
+    if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:E.frameOpportunityWidth||460,h:86,kind:"fopp",opp:f.opp,f};y+=98+(E.frameFooterGap?.get(f)||0)}
     // challenge / TPI strips
     if((f.ch&&f.ch.length)||(f.tpi&&f.tpi.length)){y+=4;
       const strip=(items,kind,lab,fill,stroke,col,bw)=>{bw=E.stripWidth?.(items,bw)||bw;h+=text(x0,y+12,[lab],{fs:10.5,fw:700,fill:col,a:"start"});y+=20;let bx=x0;
@@ -824,7 +824,7 @@ function layout(d){
         if(s.gate){P._gates=true;x+=60+(W-158)/2;const gid=`${f.id}|${P.id}|${s.n}`;nodes[gid]={id:gid,x,y:rowY+H/2-DW/2,w:DW,h:DW,kind:"dec",gate:true,dec:s,f,P,j,ln:P.steps.slice(j+1).filter(q=>q.gate&&q.nx&&!q.nx.end).length};seq.push(gid);
           if(s.fix){const fs=s.fix,fid=`${f.id}|${P.id}|${fs.n}`;nodes[fid]={id:fid,x:x+DW/2-W/2,y:rowY+H+56,w:W,h:H,s:fs,f,P,j,fixOf:gid};fext=56+H+4;P._rb=rowY+H+fext-4}
           x+=DW+G+76+(W-158)/2;return}
-        if(s.fork){P._gates=true;const BG=56,nb=s.branches.length;x+=30;const dx=x,sx=dx+DW+G+40,bx=sx+W+30;
+        if(s.fork){P._gates=true;const BG=56+(E.processFooterGap?.get(P)||0),nb=s.branches.length;x+=30;const dx=x,sx=dx+DW+G+40,bx=sx+W+30;
           s.branches.forEach((b,bi)=>{const by=rowY+bi*(H+BG);const nq=s.branches[bi+1];const did=`${f.id}|${P.id}|${b.step.n}|d`;
             nodes[did]={id:did,x:dx,y:by+H/2-DW/2,w:DW,h:DW,kind:"dec",fork:true,f,P,dec:{q:b.q,ex:b.ex,o:b.o,d:b.d,src:b.src,yes:`Step ${b.step.n} - ${b.step.t}`,no:nq?`Check: ${nq.q}`:(s.elseLab||"No")+" - release"}};
             const sid=`${f.id}|${P.id}|${b.step.n}`;nodes[sid]={id:sid,x:sx,y:by,w:W,h:H,s:b.step,f,P,j,br:true}});
@@ -836,9 +836,9 @@ function layout(d){
       if(P.outdoc){x+=14;nodes[`${f.id}|${P.id}|out`]={id:`${f.id}|${P.id}|out`,x,y:rowY+8,w:OUTW,h:H-16,kind:"out",doc:P.outdoc,f,P,from:P._gates?seq[seq.length-1]:items[items.length-1]};seq.push(`${f.id}|${P.id}|out`);x+=OUTW+G}
       if(d.key==="tobe"&&P.opp){x+=6;nodes[`${f.id}|${P.id}|opp`]={id:`${f.id}|${P.id}|opp`,x,y:rowY-6,w:E.opportunityWidth||190,h:H+12,kind:"opp",opp:P.opp,f,P,from:items[items.length-1]};x+=(E.opportunityWidth||190)+20}
       maxX=Math.max(maxX,x);
-      y=rowY+H+POUT+RGAP+fext+(P.steps.some(s=>s.dec&&s.dec.nx)?30:0);
+      y=rowY+H+POUT+RGAP+fext+(E.processFooterGap?.get(P)||0)+(P.steps.some(s=>s.dec&&s.dec.nx)?30:0);
     });
-    if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:E.frameOpportunityWidth||460,h:86,kind:"fopp",opp:f.opp,f};y+=98}
+    if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:E.frameOpportunityWidth||460,h:86,kind:"fopp",opp:f.opp,f};y+=98+(E.frameFooterGap?.get(f)||0)}
     // challenge / TPI strips
     if((f.ch&&f.ch.length)||(f.tpi&&f.tpi.length)){y+=4;
       const strip=(items,kind,lab,fill,stroke,col,bw)=>{bw=E.stripWidth?.(items,bw)||bw;h+=text(x0,y+12,[lab],{fs:10.5,fw:700,fill:col,a:"start"});y+=20;let bx=x0;
@@ -1012,7 +1012,7 @@ function layout(d){
         if(s.gate){P._gates=true;x+=60+(W-158)/2;const gid=`${f.id}|${P.id}|${s.n}`;nodes[gid]={id:gid,x,y:rowY+H/2-DW/2,w:DW,h:DW,kind:"dec",gate:true,dec:s,f,P,j,ln:P.steps.slice(j+1).filter(q=>q.gate&&q.nx&&!q.nx.end).length};seq.push(gid);
           if(s.fix){const fs=s.fix,fid=`${f.id}|${P.id}|${fs.n}`;nodes[fid]={id:fid,x:x+DW/2-W/2,y:rowY+H+56,w:W,h:H,s:fs,f,P,j,fixOf:gid};fext=56+H+4;P._rb=rowY+H+fext-4}
           x+=DW+G+76+(W-158)/2;return}
-        if(s.fork){P._gates=true;const BG=56,nb=s.branches.length;x+=30;const dx=x,sx=dx+DW+G+40,bx=sx+W+30;
+        if(s.fork){P._gates=true;const BG=56+(E.processFooterGap?.get(P)||0),nb=s.branches.length;x+=30;const dx=x,sx=dx+DW+G+40,bx=sx+W+30;
           s.branches.forEach((b,bi)=>{const by=rowY+bi*(H+BG);const nq=s.branches[bi+1];const did=`${f.id}|${P.id}|${b.step.n}|d`;
             nodes[did]={id:did,x:dx,y:by+H/2-DW/2,w:DW,h:DW,kind:"dec",fork:true,f,P,dec:{q:b.q,ex:b.ex,o:b.o,d:b.d,src:b.src,yes:`Step ${b.step.n} - ${b.step.t}`,no:nq?`Check: ${nq.q}`:(s.elseLab||"No")+" - release"}};
             const sid=`${f.id}|${P.id}|${b.step.n}`;nodes[sid]={id:sid,x:sx,y:by,w:W,h:H,s:b.step,f,P,j,br:true}});
@@ -1024,9 +1024,9 @@ function layout(d){
       if(P.outdoc){x+=14;nodes[`${f.id}|${P.id}|out`]={id:`${f.id}|${P.id}|out`,x,y:rowY+8,w:OUTW,h:H-16,kind:"out",doc:P.outdoc,f,P,from:P._gates?seq[seq.length-1]:items[items.length-1]};seq.push(`${f.id}|${P.id}|out`);x+=OUTW+G}
       if(d.key==="tobe"&&P.opp){x+=6;nodes[`${f.id}|${P.id}|opp`]={id:`${f.id}|${P.id}|opp`,x,y:rowY-6,w:E.opportunityWidth||250,h:H+12,kind:"opp",opp:P.opp,f,P,from:items[items.length-1]};x+=(E.opportunityWidth||250)+20}
       maxX=Math.max(maxX,x);
-      y=rowY+H+POUT+RGAP+fext+(P.steps.some(s=>s.dec&&s.dec.nx)?30:0);
+      y=rowY+H+POUT+RGAP+fext+(E.processFooterGap?.get(P)||0)+(P.steps.some(s=>s.dec&&s.dec.nx)?30:0);
     });
-    if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:E.frameOpportunityWidth||460,h:86,kind:"fopp",opp:f.opp,f};y+=98}
+    if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:E.frameOpportunityWidth||460,h:86,kind:"fopp",opp:f.opp,f};y+=98+(E.frameFooterGap?.get(f)||0)}
     // challenge / TPI strips
     if((f.ch&&f.ch.length)||(f.tpi&&f.tpi.length)){y+=4;
       const strip=(items,kind,lab,fill,stroke,col,bw)=>{bw=E.stripWidth?.(items,bw)||bw;h+=text(x0,y+12,[lab],{fs:10.5,fw:700,fill:col,a:"start"});y+=20;let bx=x0;
@@ -1200,7 +1200,7 @@ function layout(d){
         if(s.gate){P._gates=true;x+=60+(W-158)/2;const gid=`${f.id}|${P.id}|${s.n}`;nodes[gid]={id:gid,x,y:rowY+H/2-DW/2,w:DW,h:DW,kind:"dec",gate:true,dec:s,f,P,j,ln:P.steps.slice(j+1).filter(q=>q.gate&&q.nx&&!q.nx.end).length};seq.push(gid);
           if(s.fix){const fs=s.fix,fid=`${f.id}|${P.id}|${fs.n}`;nodes[fid]={id:fid,x:x+DW/2-W/2,y:rowY+H+56,w:W,h:H,s:fs,f,P,j,fixOf:gid};fext=56+H+4;P._rb=rowY+H+fext-4}
           x+=DW+G+76+(W-158)/2;return}
-        if(s.fork){P._gates=true;const BG=56,nb=s.branches.length;x+=30;const dx=x,sx=dx+DW+G+40,bx=sx+W+30;
+        if(s.fork){P._gates=true;const BG=56+(E.processFooterGap?.get(P)||0),nb=s.branches.length;x+=30;const dx=x,sx=dx+DW+G+40,bx=sx+W+30;
           s.branches.forEach((b,bi)=>{const by=rowY+bi*(H+BG);const nq=s.branches[bi+1];const did=`${f.id}|${P.id}|${b.step.n}|d`;
             nodes[did]={id:did,x:dx,y:by+H/2-DW/2,w:DW,h:DW,kind:"dec",fork:true,f,P,dec:{q:b.q,ex:b.ex,o:b.o,d:b.d,src:b.src,yes:`Step ${b.step.n} - ${b.step.t}`,no:nq?`Check: ${nq.q}`:(s.elseLab||"No")+" - release"}};
             const sid=`${f.id}|${P.id}|${b.step.n}`;nodes[sid]={id:sid,x:sx,y:by,w:W,h:H,s:b.step,f,P,j,br:true}});
@@ -1212,9 +1212,9 @@ function layout(d){
       if(P.outdoc){x+=14;nodes[`${f.id}|${P.id}|out`]={id:`${f.id}|${P.id}|out`,x,y:rowY+8,w:OUTW,h:H-16,kind:"out",doc:P.outdoc,f,P,from:P._gates?seq[seq.length-1]:items[items.length-1]};seq.push(`${f.id}|${P.id}|out`);x+=OUTW+G}
       if(d.key==="tobe"&&P.opp){x+=6;nodes[`${f.id}|${P.id}|opp`]={id:`${f.id}|${P.id}|opp`,x,y:rowY-6,w:E.opportunityWidth||250,h:H+12,kind:"opp",opp:P.opp,f,P,from:items[items.length-1]};x+=(E.opportunityWidth||250)+20}
       maxX=Math.max(maxX,x);
-      y=rowY+H+POUT+RGAP+fext+(P.steps.some(s=>s.dec&&s.dec.nx)?30:0);
+      y=rowY+H+POUT+RGAP+fext+(E.processFooterGap?.get(P)||0)+(P.steps.some(s=>s.dec&&s.dec.nx)?30:0);
     });
-    if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:E.frameOpportunityWidth||460,h:86,kind:"fopp",opp:f.opp,f};y+=98}
+    if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:E.frameOpportunityWidth||460,h:86,kind:"fopp",opp:f.opp,f};y+=98+(E.frameFooterGap?.get(f)||0)}
     // challenge / TPI strips
     if((f.ch&&f.ch.length)||(f.tpi&&f.tpi.length)){y+=4;
       const strip=(items,kind,lab,fill,stroke,col,bw)=>{bw=E.stripWidth?.(items,bw)||bw;h+=text(x0,y+12,[lab],{fs:10.5,fw:700,fill:col,a:"start"});y+=20;let bx=x0;
@@ -1388,7 +1388,7 @@ function layout(d){
         if(s.gate){P._gates=true;x+=60+(W-158)/2;const gid=`${f.id}|${P.id}|${s.n}`;nodes[gid]={id:gid,x,y:rowY+H/2-DW/2,w:DW,h:DW,kind:"dec",gate:true,dec:s,f,P,j,ln:P.steps.slice(j+1).filter(q=>q.gate&&q.nx&&!q.nx.end).length};seq.push(gid);
           if(s.fix){const fs=s.fix,fid=`${f.id}|${P.id}|${fs.n}`;nodes[fid]={id:fid,x:x+DW/2-W/2,y:rowY+H+56,w:W,h:H,s:fs,f,P,j,fixOf:gid};fext=56+H+4;P._rb=rowY+H+fext-4}
           x+=DW+G+76+(W-158)/2;return}
-        if(s.fork){P._gates=true;const BG=56,nb=s.branches.length;x+=30;const dx=x,sx=dx+DW+G+40,bx=sx+W+30;
+        if(s.fork){P._gates=true;const BG=56+(E.processFooterGap?.get(P)||0),nb=s.branches.length;x+=30;const dx=x,sx=dx+DW+G+40,bx=sx+W+30;
           s.branches.forEach((b,bi)=>{const by=rowY+bi*(H+BG);const nq=s.branches[bi+1];const did=`${f.id}|${P.id}|${b.step.n}|d`;
             nodes[did]={id:did,x:dx,y:by+H/2-DW/2,w:DW,h:DW,kind:"dec",fork:true,f,P,dec:{q:b.q,ex:b.ex,o:b.o,d:b.d,src:b.src,yes:`Step ${b.step.n} - ${b.step.t}`,no:nq?`Check: ${nq.q}`:(s.elseLab||"No")+" - release"}};
             const sid=`${f.id}|${P.id}|${b.step.n}`;nodes[sid]={id:sid,x:sx,y:by,w:W,h:H,s:b.step,f,P,j,br:true}});
@@ -1400,9 +1400,9 @@ function layout(d){
       if(P.outdoc){x+=14;nodes[`${f.id}|${P.id}|out`]={id:`${f.id}|${P.id}|out`,x,y:rowY+8,w:OUTW,h:H-16,kind:"out",doc:P.outdoc,f,P,from:P._gates?seq[seq.length-1]:items[items.length-1]};seq.push(`${f.id}|${P.id}|out`);x+=OUTW+G}
       if(d.key==="tobe"&&P.opp){x+=6;nodes[`${f.id}|${P.id}|opp`]={id:`${f.id}|${P.id}|opp`,x,y:rowY-6,w:E.opportunityWidth||190,h:H+12,kind:"opp",opp:P.opp,f,P,from:items[items.length-1]};x+=(E.opportunityWidth||190)+20}
       maxX=Math.max(maxX,x);
-      y=rowY+H+POUT+RGAP+fext+(P.steps.some(s=>s.dec&&s.dec.nx)?30:0);
+      y=rowY+H+POUT+RGAP+fext+(E.processFooterGap?.get(P)||0)+(P.steps.some(s=>s.dec&&s.dec.nx)?30:0);
     });
-    if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:E.frameOpportunityWidth||460,h:86,kind:"fopp",opp:f.opp,f};y+=98}
+    if(d.key==="tobe"&&f.opp){nodes[`${f.id}|opp`]={id:`${f.id}|opp`,x:x0,y:y-18,w:E.frameOpportunityWidth||460,h:86,kind:"fopp",opp:f.opp,f};y+=98+(E.frameFooterGap?.get(f)||0)}
     // challenge / TPI strips
     if((f.ch&&f.ch.length)||(f.tpi&&f.tpi.length)){y+=4;
       const strip=(items,kind,lab,fill,stroke,col,bw)=>{bw=E.stripWidth?.(items,bw)||bw;h+=text(x0,y+12,[lab],{fs:10.5,fw:700,fill:col,a:"start"});y+=20;let bx=x0;
