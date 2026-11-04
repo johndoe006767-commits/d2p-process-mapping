@@ -180,7 +180,7 @@ def audit_graph(source_svg, records, label):
 
 def main():
     capture = read(CAPTURE_PATH)
-    source, = (ROOT / 'Source').glob('*.html')
+    source = ROOT / 'Source' / read(ROOT / 'Source/manifest.json')['html']
     equal(capture['source'], source.name, 'capture.source')
     equal(capture['sha256'], hashlib.sha256(source.read_bytes()).hexdigest(), 'capture.sha256')
     real = read(ROOT / 'dist/data/real-processes.json')

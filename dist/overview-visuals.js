@@ -1,4 +1,4 @@
-import {escapeHTML as esc} from './real-data.js?v=20261103-tower-workbook';
+import {escapeHTML as esc} from './real-data.js?v=20261104-excel-source';
 const clean=name=>name.replace(/^\d+\.\s*/,'').replace(/^Stage\s+\d+:\s*/i,'');
 export function activityRing(n){
  const total=n.total||1,parts=[['man',n.manual],['hyb',n.semi],['auto',n.auto]];

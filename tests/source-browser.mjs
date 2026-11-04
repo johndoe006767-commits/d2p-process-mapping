@@ -6,6 +6,7 @@ const {chromium}=await import(pathToFileURL(process.argv[2]).href);
 const url=process.argv[3]||'http://127.0.0.1:8767/';
 const real=JSON.parse(await fs.readFile('dist/data/real-processes.json','utf8'));
 const suggested=JSON.parse(await fs.readFile('dist/data/suggested-processes.json','utf8'));
+const kpis=JSON.parse(await fs.readFile('dist/data/kpi-summary.json','utf8'));
 const briefs=JSON.parse(await fs.readFile('dist/data/tower-briefs.json','utf8')).towers;
 const browser=await chromium.launch({channel:'chrome',headless:true});
 const page=await browser.newPage({viewport:{width:3840,height:2160},reducedMotion:'reduce'});
@@ -53,6 +54,10 @@ try{
    for(const selector of ['#tower-name','#hud-tower-title'])assert.equal(await page.locator(selector).textContent(),tower.name);
   }
   assert.equal(await page.locator('#hud-pain-count').textContent(),String(tower.counts.pain));
+  assert.equal(await page.locator('#hud-score-pct').textContent(),String(Math.round(tower.counts.manual/tower.counts.total*100)),`${id} manual percentage`);
+  const comparison=await page.locator('#hud-comparison .kpi-stack').evaluateAll(ns=>ns.map(n=>n.getAttribute('aria-label')));
+  assert.deepEqual(comparison,[['As Is',kpis[id].asIs],['To Be',kpis[id].toBe]].map(([label,mix])=>`${label}: ${mix.auto} Automated, ${mix.semi} Semi, ${mix.manual} Manual`),`${id} comparison activity mix`);
+  if(['spleen','kidneys'].includes(id))await page.screenshot({path:`.runtime/source-sync/${tower.sourceKey}-kpis.png`});
   assert.equal(await page.locator('#hud-dependencies [data-dependency]').count(),briefs[id].dependencies.length);
   for(const year of ['2026','2027']){
    await page.locator(`#hud-year-${year}`).click();
@@ -71,6 +76,21 @@ try{
    assert.equal(state.stageCount,data.stages.length,`${id}/${scenario} stages`);
    assert.equal(state.nodes.length,data.activities.length,`${id}/${scenario} rendered activities`);
    for(const a of data.activities)assert.ok(state.nodes.some(n=>n.id===`${a.stageId}|${a.processId}|${a.n}`&&n.title===a.t),`${id}/${scenario} activity ${a.processId}|${a.n}`);
+   const payload=JSON.parse(await fs.readFile(`dist/neural/${tower.sourceKey}${scenario==='tobe'?'-ai':''}.json`,'utf8'));
+   const expectedTpis=payload.data.frames.flatMap(f=>(f.tpi||[]).map(c=>({stage:f.id,...c})));
+   const renderedTpis=await page.evaluate(()=>Object.values(window.NeuralLab.getNodes()).filter(n=>n.kind==='tpi').map(n=>({stage:n.f.id,...n.c})));
+   assert.deepEqual(renderedTpis,expectedTpis,`${id}/${scenario} mapped TPI shortlist`);
+   const tpiCardIssues=await page.evaluate(()=>{
+    const issues=[];
+    for(const n of Object.values(window.NeuralLab.getNodes()).filter(n=>n.kind==='tpi')){
+     document.querySelector(`#map-svg [data-id="${CSS.escape(n.id)}"]`).dispatchEvent(new MouseEvent('click',{bubbles:true}));
+     const text=document.querySelector('#card-content').textContent;
+     if(![n.c.t,n.c.st,n.c.ref,n.c.src].filter(Boolean).every(v=>text.includes(v)))issues.push(n.id);
+    }
+    document.querySelector('#close-card').click();
+    return issues;
+   });
+   assert.deepEqual(tpiCardIssues,[],`${id}/${scenario} TPI card details`);
    await page.locator('#first-step').evaluate(n=>n.click());
    await page.waitForFunction(()=>document.querySelector('#information-card').matches(':popover-open'));
    assert.ok((await page.locator('#information-card').textContent()).includes(data.activities[0].d),`${id}/${scenario} full activity detail`);
@@ -94,6 +114,9 @@ try{
    const expectedNodes=['FPAC','FPAO'].includes(tower.sourceKey)?data.stages.flatMap(s=>s.processes):data.stages;
    const overviewNodes=page.locator('#overview-svg .flow-node');
    assert.deepEqual((await overviewNodes.evaluateAll(ns=>ns.map(n=>n.dataset.process))).sort(),expectedNodes.map(n=>n.id).sort());
+   const overviewMix=await page.evaluate(()=>Object.values(window.NeuralLab.flow.records).reduce((sum,r)=>({auto:sum.auto+r.auto,semi:sum.semi+r.hyb,manual:sum.manual+r.man}),{auto:0,semi:0,manual:0}));
+   assert.deepEqual(overviewMix,{auto:data.counts.auto,semi:data.counts.semi,manual:data.counts.manual},`${id}/${scenario} overview activity mix`);
+   if(['spleen','kidneys'].includes(id))await page.screenshot({path:`.runtime/source-sync/${tower.sourceKey}-${scenario}-overview.png`});
    const cardIssues=await overviewNodes.evaluateAll(ns=>ns.flatMap(n=>{
     const r=window.NeuralLab.flow.records[n.dataset.process];
     n.dispatchEvent(new MouseEvent('click',{bubbles:true}));

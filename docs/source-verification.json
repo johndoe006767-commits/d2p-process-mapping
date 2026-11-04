@@ -1,16 +1,16 @@
 {
-  "verifiedDate": "2026-11-03",
+  "verifiedDate": "2026-11-04",
   "timezone": "Asia/Kuala_Lumpur",
-  "scope": "Verified local site files prepared for GitHub Pages publication",
+  "scope": "Local site verified for GitHub Pages publication",
   "status": "PASS",
   "sources": [
     {
-      "file": "Source/8_Tower_TPI_Interdependencies_Template.xlsx",
-      "sha256": "fa6d9498e2095c22884397b02cf5ee7b79df10004101e180698f8d81ccb4fd78"
+      "file": "Source/All_Tower_Process_TPI_Excel_Only_November_4_Fixed.html",
+      "sha256": "229d35ad581de41fe2ee26b1b7d3da64be9af5449eff448ebd49fe0e12d2f4ad"
     },
     {
-      "file": "Source/D2P_All_Towers_Process_Maps_November 3_LT_Handoff_Review_D2P_Stage_Names_Final_v2.html",
-      "sha256": "dd7a2e17f86511af359294fd089a95e1522da5a831e187dc8d9593a245682eef"
+      "file": "Source/8_Tower_TPI_Interdependencies_Template.xlsx",
+      "sha256": "fa6d9498e2095c22884397b02cf5ee7b79df10004101e180698f8d81ccb4fd78"
     }
   ],
   "totals": {
@@ -24,13 +24,14 @@
     "ltHandoffReviewEntries": 18,
     "workbookKeyInterdependencies": 27,
     "workbookTpi2026": 24,
-    "workbookTpi2027AiSuggested": 18
+    "workbookTpi2027AiSuggested": 18,
+    "mappedTpiCalloutsPerScenario": 42
   },
   "checks": [
     {
       "check": "independent raw HTML data audit",
       "status": "PASS",
-      "assertions": 89499,
+      "assertions": 88527,
       "towers": [
         {
           "tower": "FPAC",
@@ -122,15 +123,15 @@
           "stages": 3,
           "processes": 20,
           "asIs": {
-            "auto": 4,
-            "semi": 0,
-            "manual": 73,
+            "auto": 6,
+            "semi": 14,
+            "manual": 57,
             "total": 77
           },
           "aiSuggested": {
             "auto": 6,
-            "semi": 20,
-            "manual": 51,
+            "semi": 32,
+            "manual": 39,
             "total": 77
           }
         },
@@ -157,14 +158,14 @@
           "processes": 2,
           "asIs": {
             "auto": 0,
-            "semi": 0,
-            "manual": 14,
+            "semi": 2,
+            "manual": 12,
             "total": 14
           },
           "aiSuggested": {
             "auto": 0,
-            "semi": 14,
-            "manual": 0,
+            "semi": 8,
+            "manual": 6,
             "total": 14
           }
         }
@@ -234,7 +235,7 @@
     {
       "check": "independent rendered source audit",
       "status": "PASS",
-      "assertions": 12025,
+      "assertions": 12010,
       "towers": [
         {
           "tower": "FPAC",
@@ -280,7 +281,7 @@
           "tower": "TAX",
           "scenarios": 2,
           "sourceSections": 10,
-          "tableRows": 126,
+          "tableRows": 122,
           "handoffs": 21,
           "aiOpportunities": 12
         },
@@ -296,13 +297,72 @@
           "tower": "CTRL",
           "scenarios": 2,
           "sourceSections": 11,
-          "tableRows": 148,
+          "tableRows": 137,
           "handoffs": 16,
           "aiOpportunities": 4
         }
       ],
       "failureCount": 0,
       "failures": []
+    },
+    {
+      "check": "independent Excel shortlist and map reconciliation",
+      "status": "PASS",
+      "source": "All_Tower_Process_TPI_Excel_Only_November_4_Fixed.html",
+      "towers": [
+        {
+          "tower": "FPAC",
+          "2026": 2,
+          "2027": 2,
+          "scenarios": 2
+        },
+        {
+          "tower": "FPAO",
+          "2026": 6,
+          "2027": 3,
+          "scenarios": 2
+        },
+        {
+          "tower": "P2P",
+          "2026": 2,
+          "2027": 2,
+          "scenarios": 2
+        },
+        {
+          "tower": "CAPEX",
+          "2026": 2,
+          "2027": 1,
+          "scenarios": 2
+        },
+        {
+          "tower": "O2C",
+          "2026": 4,
+          "2027": 3,
+          "scenarios": 2
+        },
+        {
+          "tower": "TAX",
+          "2026": 3,
+          "2027": 2,
+          "scenarios": 2
+        },
+        {
+          "tower": "R2R",
+          "2026": 3,
+          "2027": 3,
+          "scenarios": 2
+        },
+        {
+          "tower": "CTRL",
+          "2026": 2,
+          "2027": 2,
+          "scenarios": 2
+        }
+      ],
+      "totals": {
+        "2026": 24,
+        "2027": 18
+      }
     }
   ],
   "browser": {
@@ -384,7 +444,7 @@
     ],
     "errors": [],
     "failures": [],
-    "coverage": "Both map levels for each tower in both scenarios, including every activity card, all high-level process or stage cards, expanded LT reviews, AI opportunities and TPI subregisters."
+    "coverage": "All 8 towers, both scenarios and both map levels (32 views); all 978 activity cards; 84 mapped TPI callouts and cards; exact KPI mixes and manual percentages; annual project lists, handoffs, reviews, filters and source registers."
   },
   "towers": {
     "brain": {
@@ -484,15 +544,15 @@
     },
     "spleen": {
       "asIs": {
-        "auto": 4,
-        "semi": 0,
-        "manual": 73,
+        "auto": 6,
+        "semi": 14,
+        "manual": 57,
         "total": 77
       },
       "aiSuggested": {
         "auto": 6,
-        "semi": 20,
-        "manual": 51,
+        "semi": 32,
+        "manual": 39,
         "total": 77
       },
       "stages": 3,
@@ -523,14 +583,14 @@
     "kidneys": {
       "asIs": {
         "auto": 0,
-        "semi": 0,
-        "manual": 14,
+        "semi": 2,
+        "manual": 12,
         "total": 14
       },
       "aiSuggested": {
         "auto": 0,
-        "semi": 14,
-        "manual": 0,
+        "semi": 8,
+        "manual": 6,
         "total": 14
       },
       "stages": 2,
@@ -540,42 +600,63 @@
       "documentedHandoffs": 16
     }
   },
-  "sourceNotes": [
-    "Tax lists two projects in Tower Input!E10. The count formula in F10 also counts two blank lines and returns four. The site displays the two named projects.",
-    "Tax has three source stages, 20 processes and 77 activities.",
-    "The R2R 2027 GPO/GPDD parenthetical remains a note, separate from its three projects.",
-    "Detailed HTML TPI registers are distinct from the annual project lists supplied in the workbook.",
-    "Several grid maps retain their earlier trigger and handoff paragraphs in the rendered source. The site applies the replacement text declared in the HTML overlay to both scenarios."
+  "sourceCorrections": [
+    {
+      "tower": "TAX",
+      "scenario": "tobe",
+      "stage": "TAX-01",
+      "field": "tpi",
+      "basis": "As Is Excel shortlist in the same source HTML"
+    },
+    {
+      "tower": "TAX",
+      "scenario": "tobe",
+      "stage": "TAX-02",
+      "field": "tpi",
+      "basis": "As Is Excel shortlist in the same source HTML"
+    },
+    {
+      "tower": "TAX",
+      "scenario": "tobe",
+      "stage": "TAX-03",
+      "field": "tpi",
+      "basis": "As Is Excel shortlist in the same source HTML"
+    },
+    {
+      "tower": "R2R",
+      "scenario": "tobe",
+      "stage": "R2R-01",
+      "field": "tpi",
+      "basis": "As Is Excel shortlist in the same source HTML"
+    },
+    {
+      "tower": "R2R",
+      "scenario": "tobe",
+      "stage": "R2R-02",
+      "field": "tpi",
+      "basis": "As Is Excel shortlist in the same source HTML"
+    },
+    {
+      "tower": "R2R",
+      "scenario": "tobe",
+      "stage": "R2R-03",
+      "field": "tpi",
+      "basis": "As Is Excel shortlist in the same source HTML"
+    }
   ],
-  "displayFixes": [
-    "FP&A Commercial uses its supplied high-level map in both scenarios.",
-    "Updated Demand to Profit stage labels and LT review notes are available in maps and insights.",
-    "Tabbed source TPI registers open as native disclosures.",
-    "AI activity details show the baseline and feasibility-adjusted activity types."
+  "sourceNotes": [
+    "Tax and R2R have stale TPI strips in their separate AI source bindings. Only these strips are reconciled to the updated Excel shortlist in the same HTML; all other map fields are verified against their active source bindings.",
+    "Tax has 77 activities: As Is 6 automated / 14 semi / 57 manual (74% manual); AI suggested 6 / 32 / 39.",
+    "Controlling has 14 activities: As Is 0 automated / 2 semi / 12 manual (86% manual); AI suggested 0 / 8 / 6. The second process is Statutory Reporting & Audit.",
+    "Tax lists two named 2027 projects in Tower Input!E10. The formula in F10 also counts two blank lines; the site displays the two named projects.",
+    "The R2R 2027 GPO/GPDD parenthetical remains a note, separate from its three projects.",
+    "Detailed HTML opportunity registers remain separate from the 42 annual Excel-shortlisted map callouts and project cards.",
+    "Several grid maps retain earlier trigger and handoff paragraphs in the rendered source. The site applies the replacement text declared in the HTML overlay to both scenarios."
   ],
   "additionalChecks": {
-    "javascriptSyntax": "PASS",
+    "javascriptSyntax": "PASS (30 files)",
     "gitDiffWhitespace": "PASS",
-    "anatomyRegressionTests": "3 passed"
+    "visualReview": "PASS: Tax KPI card and Controlling AI high-level map at 3840 × 2160"
   },
-  "release": "20261103-tower-workbook",
-  "prepublicationSourceChecks": {
-    "htmlAssertions": 89499,
-    "renderedAssertions": 12025,
-    "sourceHashes": "MATCH",
-    "workbook": "PASS"
-  },
-  "mapPaletteVerification": {
-    "status": "PASS",
-    "towers": 8,
-    "scenarios": 16,
-    "mapViews": 32,
-    "manual": "#830051",
-    "semi": "#f0ab00",
-    "automated": "#68d2df",
-    "fpAndALabels": [
-      "FP&A Operations",
-      "FP&A Commercial"
-    ]
-  }
+  "release": "20261104-excel-source"
 }

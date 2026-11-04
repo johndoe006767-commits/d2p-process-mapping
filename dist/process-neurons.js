@@ -1,4 +1,4 @@
-import {openMap} from './real-experience.js?v=20261103-tower-workbook';
+import {openMap} from './real-experience.js?v=20261104-excel-source';
 import * as T from 'three';
 
 // Labels use the actual soma objects from the supplied organ-specific network.

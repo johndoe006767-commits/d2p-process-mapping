@@ -6,12 +6,11 @@ import path from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const {chromium}=await import(pathToFileURL(process.argv[2]).href);
-const input=(await fs.readdir(path.join(root,'Source'))).filter(n=>n.endsWith('.html'));
-if(input.length!==1)throw Error('Expected one authoritative source HTML');
-const source=await fs.readFile(path.join(root,'Source',input[0]),'utf8');
+const {html:input}=JSON.parse(await fs.readFile(path.join(root,'Source/manifest.json'),'utf8'));
+const source=await fs.readFile(path.join(root,'Source',input),'utf8');
 const embedded=Object.fromEntries([...source.matchAll(/<script type="application\/json" id="src-([^"]+)">([\s\S]*?)<\/script>/g)].map(m=>[m[1],JSON.parse(m[2])]));
 const browser=await chromium.launch({channel:'chrome',headless:true});
-const capture={source:input[0],sha256:createHash('sha256').update(source).digest('hex'),towers:{}};
+const capture={source:input,sha256:createHash('sha256').update(source).digest('hex'),towers:{}};
 try {
  const shell=await browser.newPage();
  await shell.route(/^https?:/,r=>r.abort());

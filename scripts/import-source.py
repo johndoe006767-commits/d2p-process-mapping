@@ -13,7 +13,7 @@ from bs4 import BeautifulSoup
 
 ROOT = Path(__file__).resolve().parents[1]
 CAPTURE = json.loads((ROOT / '.runtime/source-sync/capture.json').read_text())
-source_file, = (ROOT / 'Source').glob('*.html')
+source_file = ROOT / 'Source' / json.loads((ROOT / 'Source/manifest.json').read_text())['html']
 source_hash = hashlib.sha256(source_file.read_bytes()).hexdigest()
 if (CAPTURE['source'], CAPTURE.get('sha256')) != (source_file.name, source_hash):
     raise ValueError('Recapture the current source HTML before importing.')
@@ -173,11 +173,23 @@ def source_graph(scenario, source_key):
 
 
 real, suggested, content, kpis = {}, {}, {}, {}
+source_corrections = []
 for key, (organ, map_key, name) in TOWERS.items():
     src = CAPTURE['towers'][key]
     assert not src['errors'], (key, src['errors'])
     baseline, ai = src['scenarios'][map_key], src['scenarios']['AIS']
-    A, B = baseline['tower']['data']['asis'], ai['tower']['data']['tobe']
+    A, B = baseline['tower']['data']['asis'], copy.deepcopy(ai['tower']['data']['tobe'])
+    # The November 4 source updates the shared Excel shortlist in every As Is
+    # map, but TAXAIMAP and R2RAIMAP retain stale copies of the TPI strips.
+    # Carry the source's new shortlist into those AI strips without changing
+    # their activities, feasibility, opportunities or detailed registers.
+    if key in ('TAX', 'R2R'):
+        for frame in B['frames']:
+            shortlist = next(f for f in A['frames'] if f['id'] == frame['id']).get('tpi', [])
+            if frame.get('tpi', []) != shortlist:
+                source_corrections.append({'tower': key, 'scenario': 'tobe', 'stage': frame['id'],
+                                           'field': 'tpi', 'basis': 'As Is Excel shortlist in the same source HTML'})
+                frame['tpi'] = copy.deepcopy(shortlist)
     original_types = {(f['id'], p['id'], s['n']): s['ty']
                       for f in A['frames'] for p in f['procs'] for s in flatten(p['steps'])}
     graph, handoffs = source_graph(baseline, key)
@@ -257,6 +269,7 @@ for organ, tower in real.items():
 for filename, records in [('real-processes', real), ('suggested-processes', suggested), ('tower-content', content), ('kpi-summary', kpis)]:
     write(f'data/{filename}.json', records)
 manifest = {'html': CAPTURE['source'], 'sha256': hashlib.sha256((ROOT/'Source'/CAPTURE['source']).read_bytes()).hexdigest(),
+            'sourceCorrections': source_corrections,
             'towers': {organ: {'asIs': kpis[organ]['asIs'], 'aiSuggested': kpis[organ]['toBe'], 'stages': len(t['stages']),
                                'processes': sum(len(s['processes']) for s in t['stages']), 'pain': len(t['pain']),
                                'registerEntries': len(t['tpis']), 'documentedHandoffs': len(t['handoffs'])} for organ, t in real.items()}}

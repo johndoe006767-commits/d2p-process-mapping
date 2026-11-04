@@ -2,7 +2,7 @@ import {scrollPageTo,cancelPageNavigation} from './page-navigation.js';
 import {fitLines,measureText,fitSvgLabels} from './svg-text.js?v=astral-3';
 import {mountAstralBackground} from './astral-background.js?v=galaxy-2';
 import {titleCase} from './title-case.js';
-import {makeSourceOverview} from './neural-overview.js?v=20261103-lt-review';
+import {makeSourceOverview} from './neural-overview.js?v=20261104-excel-source';
 /* Presentation layer over the source renderer's process layout and routing. */
 export function mountNeuralLab(root,payload,t,onReturn){
 'use strict';

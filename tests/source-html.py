@@ -7,6 +7,7 @@ are used to establish expectations.
 """
 
 from collections import Counter
+import copy
 import json
 from pathlib import Path
 import re
@@ -14,7 +15,7 @@ import sys
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE, = (ROOT / "Source").glob("*.html")
+SOURCE = ROOT / 'Source' / json.loads((ROOT / 'Source/manifest.json').read_text())['html']
 # These bindings are the data properties of the source's active TOWERS entries.
 BINDINGS = {
     "FPAC": ("brain", "FPA", "FPAMAP", "FPAMAP"),
@@ -242,7 +243,14 @@ def main():
         for ai, source_data, record in scenarios:
             path = ROOT / "dist/neural" / f"{tower}{'-ai' if ai else ''}.json"
             exported = load_json(path)
-            compare(clean(exported["data"]), clean(source_data), f"{tower}.{'AI' if ai else 'AsIs'}.map")
+            expected_map = copy.deepcopy(source_data)
+            # Only the stale Tax/R2R AI TPI strips are reconciled to the
+            # November 4 As Is shortlist; all other source fields stay exact.
+            if ai and tower in {'TAX', 'R2R'}:
+                for frame in expected_map['frames']:
+                    frame['tpi'] = copy.deepcopy(next(f for f in scenarios[0][1]['frames']
+                                                     if f['id'] == frame['id']).get('tpi', []))
+            compare(clean(exported["data"]), clean(expected_map), f"{tower}.{'AI' if ai else 'AsIs'}.map")
             mixes.append(audit_record(tower, organ, map_key, source_data, record, ai, kpis[organ]["toBe" if ai else "asIs"]))
             audit_register(tower, scenarios[1][1], record)
         audit_graph(tower, real[organ], suggested[organ], scenarios[0][1], scenarios[1][1])
