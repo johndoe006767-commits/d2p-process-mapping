@@ -1,18 +1,19 @@
 import * as T from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { isAstral, onAppearanceChange } from './anatomy-appearance.js';
+import { ACTIVITY_COLORS, activityMix, neuronTypes } from './organ-activity.js?v=20261105-activity-organs';
 
 // The approved illustrations are the material reference. All source meshes,
 // transforms, hit targets and stage anchors stay resident for an exact undo.
 const palette = {
-  brain:      { shell: '#9a73c5', signal: '#68d2df', accent: '#f0ab00' },
-  lungs:      { shell: '#68d2df', signal: '#68d2df', accent: '#f0ab00' },
-  liver:      { shell: '#f0ab00', signal: '#f0ab00', accent: '#68d2df' },
-  kidneys:    { shell: '#7941a8', signal: '#d0006f', accent: '#f2a9dc' },
-  spleen:     { shell: '#a62472', signal: '#d0006f', accent: '#f0ab00' },
-  stomach:    { shell: '#68d2df', signal: '#68d2df', accent: '#f0ab00' },
-  pancreas:   { shell: '#f0ab00', signal: '#d0006f', accent: '#f0ab00' },
-  intestines: { shell: '#c4d600', signal: '#c4d600', accent: '#f0ab00' },
+  brain:      { shell: '#ffffff', signal: '#68d2df', accent: '#f0ab00' },
+  lungs:      { shell: '#ffffff', signal: '#68d2df', accent: '#f0ab00' },
+  liver:      { shell: '#ffffff', signal: '#f0ab00', accent: '#68d2df' },
+  kidneys:    { shell: '#ffffff', signal: '#d0006f', accent: '#f2a9dc' },
+  spleen:     { shell: '#ffffff', signal: '#d0006f', accent: '#f0ab00' },
+  stomach:    { shell: '#ffffff', signal: '#68d2df', accent: '#f0ab00' },
+  pancreas:   { shell: '#ffffff', signal: '#d0006f', accent: '#f0ab00' },
+  intestines: { shell: '#ffffff', signal: '#c4d600', accent: '#f0ab00' },
   heart:      { shell: '#d0006f', signal: '#f0ab00', accent: '#d0006f' },
 };
 const clock = { value: 0 }, viewport = { value: 2160 };
@@ -26,15 +27,19 @@ void main() {
   gl_Position = projectionMatrix * p;
 }`;
 
-function glassMaterial(color, { bone = false, back = false } = {}) {
+function glassMaterial(color, { bone = false, back = false, activity = null } = {}) {
   const material = new T.ShaderMaterial({
     uniforms: {
       tint: { value: new T.Color(color) }, alpha: { value: 1 },
       bone: { value: bone ? 1 : 0 }, back: { value: back ? 1 : 0 },
+      manualTint: { value: new T.Color(ACTIVITY_COLORS.manual) },
+      manualRatio: { value: activity ? activityMix(activity).manual : 0 },
     },
-    vertexShader: normalVertex,
+    vertexShader: activity ? normalVertex.replace('void main()', 'attribute float surfaceProgress; varying float vSurfaceProgress;\nvoid main()').replace('vLocal = position;', 'vLocal = position; vSurfaceProgress = surfaceProgress;') : normalVertex,
     fragmentShader: `
       uniform vec3 tint; uniform float alpha, bone, back;
+      uniform vec3 manualTint; uniform float manualRatio;
+      ${activity ? 'varying float vSurfaceProgress;' : ''}
       varying vec3 vNormal; varying vec3 vView; varying vec3 vLocal;
       void main() {
         vec3 n = normalize(vNormal), v = normalize(vView);
@@ -46,12 +51,15 @@ function glassMaterial(color, { bone = false, back = false } = {}) {
         float broad = pow(1.0 - facing, 0.8);
         float texture = 0.5 + 0.5 * sin(vLocal.y * 110.0 + sin(vLocal.x * 75.0) * 1.6);
         vec3 pearl = mix(vec3(1.0, 0.84, 0.94), vec3(0.88, 1.0, 0.97), bone);
-        vec3 color = tint * (0.16 + broad * 0.78) + mix(tint, pearl, 0.48) * rim * 1.05;
+        ${activity ? `float blendWidth = min(0.055, min(manualRatio, 1.0 - manualRatio));
+        float manual = manualRatio <= 0.0 ? 0.0 : manualRatio >= 1.0 ? 1.0 : 1.0 - smoothstep(manualRatio - blendWidth, manualRatio + blendWidth, vSurfaceProgress);
+        vec3 shellTint = mix(tint, manualTint, manual);` : 'vec3 shellTint = tint;'}
+        vec3 color = shellTint * (0.16 + broad * 0.78) + mix(shellTint, pearl, 0.48) * rim * 1.05;
         color += pearl * (key * 1.6 + strip * 1.05);
         float a = alpha * (0.09 + broad * 0.21 + rim * 0.42 + key * 0.4 + strip * 0.25);
         a *= mix(1.0, 0.45, back) * mix(1.0, 1.8, bone);
         color *= mix(1.85, 1.4, bone);
-        color += tint * texture * 0.015;
+        color += shellTint * texture * 0.015;
         gl_FragColor = vec4(color, clamp(a, 0.0, 0.88));
         #include <colorspace_fragment>
       }`,
@@ -105,15 +113,16 @@ function sampleSurface(geometry, count, rand) {
   return points;
 }
 
-function branchMaterial(colors) {
+function branchMaterial(colors, activity = false) {
   return new T.ShaderMaterial({
     uniforms: { signalColor: { value: new T.Color(colors.signal) }, accent: { value: new T.Color(colors.accent) }, time: clock },
-    vertexShader: `varying vec2 vUv; varying vec3 vP; void main(){vUv=uv;vP=position;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,
+    vertexShader: `${activity ? 'attribute vec3 activityColor; varying vec3 vActivityColor;' : ''} varying vec2 vUv; varying vec3 vP; void main(){${activity ? 'vActivityColor=activityColor;' : ''}vUv=uv;vP=position;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,
     fragmentShader: `uniform vec3 signalColor,accent;uniform float time;varying vec2 vUv;varying vec3 vP;
+      ${activity ? 'varying vec3 vActivityColor;' : ''}
       void main(){
         float pulse=pow(0.5+0.5*sin(vUv.x*7.0-time*1.8+vP.y*14.0),12.0);
         float colorMix=smoothstep(-0.2,0.2,sin(vP.x*9.0+vP.y*5.0));
-        vec3 color=mix(signalColor,accent,colorMix*0.65)*(2.3+pulse*1.6);
+        vec3 color=${activity ? 'vActivityColor' : 'mix(signalColor,accent,colorMix*0.65)'}*(2.3+pulse*1.6);
         color+=vec3(1.0,0.93,0.82)*pulse*0.65;
         gl_FragColor=vec4(color,0.94);
         #include <colorspace_fragment>
@@ -123,19 +132,20 @@ function branchMaterial(colors) {
   });
 }
 
-function pointsMaterial(colors) {
+function pointsMaterial(colors, activity = false) {
   return new T.ShaderMaterial({
     uniforms: { tint: { value: new T.Color(colors.signal) }, time: clock, viewportHeight: viewport },
-    vertexShader: `attribute float intensity; uniform float viewportHeight;varying float vI;
-      void main(){vI=intensity;vec4 p=modelViewMatrix*vec4(position,1.0);gl_Position=projectionMatrix*p;
+    vertexShader: `${activity ? 'attribute vec3 activityColor; varying vec3 vActivityColor;' : ''} attribute float intensity; uniform float viewportHeight;varying float vI;
+      void main(){${activity ? 'vActivityColor=activityColor;' : ''}vI=intensity;vec4 p=modelViewMatrix*vec4(position,1.0);gl_Position=projectionMatrix*p;
         float scale=length(modelViewMatrix[0].xyz);
         gl_PointSize=clamp(viewportHeight*projectionMatrix[1][1]*scale*0.014*intensity,3.0,28.0);
       }`,
     fragmentShader: `uniform vec3 tint;uniform float time;varying float vI;
+      ${activity ? 'varying vec3 vActivityColor;' : ''}
       void main(){float d=length(gl_PointCoord-0.5)*2.0;if(d>1.0)discard;
         float core=exp(-d*d*28.0),glow=exp(-d*d*5.0)*0.52;
         float pulse=0.8+0.2*sin(time*1.4+vI*20.0);
-        gl_FragColor=vec4(mix(tint*1.7,vec3(1.0,0.95,0.9)*2.0,core), (core+glow)*pulse);
+        gl_FragColor=vec4(mix(${activity ? 'vActivityColor' : 'tint'}*1.7,vec3(1.0,0.95,0.9)*2.0,core), (core+glow)*pulse);
         #include <colorspace_fragment>
       }`,
     transparent: true, depthWrite: false, depthTest: false, toneMapped: false,
@@ -181,7 +191,7 @@ function growTree(points, from, pieces, nodes, rand, depth = 0) {
   if (depth < 4) nodes.push(next);
 }
 
-function makeInterior(geometries, id, seed) {
+function makeInterior(geometries, id, seed, activity = null, surfaceProgress = null) {
   const group = new T.Group(); group.name = 'Astral scientific filaments';
   const rand = random(seed), pieces = [], nodes = [], colors = palette[id];
   const count = id === 'brain' || id === 'lungs' ? 520 : 320;
@@ -203,61 +213,124 @@ function makeInterior(geometries, id, seed) {
       growTree(points, origin, pieces, nodes, rand);
     }
   }
+  const types = activity ? neuronTypes(nodes.length, activity, seed) : [];
+  const nodeColors = types.map(type => new T.Color(ACTIVITY_COLORS[type] || colors.signal));
+  if (activity) {
+    group.userData.activityMix = activityMix(activity);
+    group.userData.neuronCounts = Object.fromEntries(Object.keys(ACTIVITY_COLORS).map(type => [type, types.filter(value => value === type).length]));
+    for (const piece of pieces) {
+      // Every terminal inherits its nearest neuron's category. Colouring adds
+      // attributes only; the original branching geometry and animation remain.
+      const endpoint = piece.parameters.path.getPoint(1);
+      let nearest = 0, distance = Infinity;
+      nodes.forEach((node, index) => { const d = node.distanceToSquared(endpoint); if (d < distance) { distance = d; nearest = index; } });
+      const color = nodeColors[nearest], values = new Float32Array(piece.attributes.position.count * 3);
+      for (let i = 0; i < piece.attributes.position.count; i++) color.toArray(values, i * 3);
+      piece.setAttribute('activityColor', new T.BufferAttribute(values, 3));
+    }
+  }
   if (pieces.length) {
     const geometry = mergeGeometries(pieces, false); pieces.forEach(piece => piece.dispose());
-    const branches = new T.Mesh(geometry, branchMaterial(colors));
+    const branches = new T.Mesh(geometry, branchMaterial(colors, Boolean(activity)));
     branches.renderOrder = 6; branches.layers.enable(1); branches.raycast = noHit; group.add(branches);
   }
   const pointGeometry = new T.BufferGeometry();
   pointGeometry.setAttribute('position', new T.Float32BufferAttribute(nodes.flatMap(p => p.toArray()), 3));
   pointGeometry.setAttribute('intensity', new T.Float32BufferAttribute(nodes.map(() => 0.45 + rand() * 0.85), 1));
-  const points = new T.Points(pointGeometry, pointsMaterial(colors));
+  if (activity) pointGeometry.setAttribute('activityColor', new T.Float32BufferAttribute(nodeColors.flatMap(color => color.toArray()), 3));
+  const points = new T.Points(pointGeometry, pointsMaterial(colors, Boolean(activity)));
   points.renderOrder = 8; points.layers.enable(1); points.raycast = noHit; group.add(points);
   if (id === 'lungs') {
     // Small translucent sacs at the branching tips give the lungs their own structure.
-    const spheres = new T.InstancedMesh(new T.SphereGeometry(1, 7, 5), glassMaterial(colors.shell), nodes.length * 3);
+    const spheres = new T.InstancedMesh(new T.SphereGeometry(1, 7, 5), glassMaterial(colors.shell, { activity }), nodes.length * 3);
+    const progress = new Float32Array(nodes.length * 3);
     const matrix = new T.Matrix4(), q = new T.Quaternion(); let i = 0;
     for (const p of nodes) for (let j = 0; j < 3; j++) {
       const radius = 0.0035 + rand() * 0.005;
       const position = p.clone().add(new T.Vector3(rand() - 0.5, rand() - 0.5, rand() - 0.5).multiplyScalar(0.015));
-      matrix.compose(position, q, new T.Vector3(radius, radius, radius)); spheres.setMatrixAt(i++, matrix);
+      matrix.compose(position, q, new T.Vector3(radius, radius, radius)); spheres.setMatrixAt(i, matrix);
+      progress[i++] = surfaceProgress?.(position.y) || 0;
     }
     // Custom shell vertex shader must account for instance transforms.
-    spheres.material.vertexShader = normalVertex.replace('vec4 p = modelViewMatrix * vec4(position, 1.0);', 'vec4 p = modelViewMatrix * instanceMatrix * vec4(position, 1.0);');
+    if (activity) spheres.geometry.setAttribute('surfaceProgress', new T.InstancedBufferAttribute(progress, 1));
+    spheres.material.vertexShader = spheres.material.vertexShader.replace('vec4 p = modelViewMatrix * vec4(position, 1.0);', 'vec4 p = modelViewMatrix * instanceMatrix * vec4(position, 1.0);');
     spheres.instanceMatrix.needsUpdate = true; spheres.renderOrder = 7; spheres.raycast = noHit; group.add(spheres);
   }
   return group;
 }
 
-function themeNetwork(network, id) {
+function themeNetwork(network, id, activity = null) {
   const originals = [], cache = new Map();
+  const neurons = network.children.filter(object => object.name.startsWith('Neuron '));
+  const types = activity ? neuronTypes(neurons.length, activity) : [];
+  const neuronIndex = object => {
+    while (object.parent && object.parent !== network) object = object.parent;
+    return neurons.indexOf(object);
+  };
+  const links = [];
+  network.traverse(object => { if (object.isMesh && neuronIndex(object) < 0) links.push(object); });
+  const linkTypes = activity ? neuronTypes(links.length, activity, 932) : [];
   network.traverse(object => {
     if (!object.isMesh) return;
     const original = object.material;
-    if (!cache.has(original)) {
+    const index = neuronIndex(object);
+    const type = index < 0 ? linkTypes[links.indexOf(object)] : types[index];
+    const color = ACTIVITY_COLORS[type] || palette[id].accent;
+    if (!cache.has(original)) cache.set(original, new Map());
+    const variants = cache.get(original);
+    if (!variants.has(color)) {
       const material = original.clone();
-      if (material.color) material.color.set(palette[id].accent).multiplyScalar(4.8);
-      if (material.uniforms?.glowColor) material.uniforms.glowColor.value.set(palette[id].accent).multiplyScalar(4.8);
+      if (material.color) material.color.set(color).multiplyScalar(4.8);
+      if (material.uniforms?.glowColor) material.uniforms.glowColor.value.set(color).multiplyScalar(4.8);
       material.toneMapped = false;
-      cache.set(original, material);
+      variants.set(color, material);
     }
-    originals.push({ object, material: original, layers: object.layers.mask });
+    originals.push({ object, material: original, themed: variants.get(color), layers: object.layers.mask });
   });
   cleanups.push(onAppearanceChange(enabled => originals.forEach(entry => {
-    entry.object.material = enabled ? cache.get(entry.material) : entry.material;
+    entry.object.material = enabled ? entry.themed : entry.material;
     entry.object.layers.mask = entry.layers;
     if (enabled) entry.object.layers.enable(1);
   })));
 }
 
-export function mountAstralOrgan(organ, model, network) {
+// Area-weighted height makes 86% manual cover approximately 86% of the
+// membrane, rather than 86% of an irregular organ's bounding box. The narrow
+// transition remains anchored to the organ while it rotates.
+function addSurfaceProgress(geometry) {
+  geometry.computeBoundingBox();
+  const positions = geometry.attributes.position, min = geometry.boundingBox.min.y;
+  const height = geometry.boundingBox.max.y - min || 1, bins = new Float64Array(256);
+  const a = new T.Vector3(), b = new T.Vector3(), c = new T.Vector3(), ab = new T.Vector3(), ac = new T.Vector3();
+  let area = 0;
+  for (let i = 0; i < positions.count; i += 3) {
+    a.fromBufferAttribute(positions, i); b.fromBufferAttribute(positions, i + 1); c.fromBufferAttribute(positions, i + 2);
+    const weight = ab.subVectors(b, a).cross(ac.subVectors(c, a)).length() * 0.5;
+    const bin = Math.min(255, Math.max(0, Math.floor(((a.y + b.y + c.y) / 3 - min) / height * 256)));
+    bins[bin] += weight; area += weight;
+  }
+  const cumulative = [0];
+  for (const bin of bins) cumulative.push(cumulative.at(-1) + bin / (area || 1));
+  const progressAt = y => {
+    const scaled = T.MathUtils.clamp((y - min) / height, 0, 1) * 256;
+    const bin = Math.min(255, Math.floor(scaled));
+    return T.MathUtils.lerp(cumulative[bin], cumulative[bin + 1], scaled - bin);
+  };
+  const values = new Float32Array(positions.count);
+  for (let i = 0; i < positions.count; i++) values[i] = progressAt(positions.getY(i));
+  geometry.setAttribute('surfaceProgress', new T.BufferAttribute(values, 1));
+  return progressAt;
+}
+
+export function mountAstralOrgan(organ, model, network, activity = null) {
+  const modelId = organ.modelId || organ.id;
   organ.root.updateMatrixWorld(true);
   const inverse = organ.root.matrixWorld.clone().invert(), sources = [], regions = new Map();
   const networkObjects = new Set(); network.traverse(o => networkObjects.add(o));
   model.traverseVisible(mesh => {
     if (!mesh.isMesh || mesh.parent?.isMesh || networkObjects.has(mesh)) return;
     sources.push({ mesh, visible: mesh.visible });
-    if (organ.id === 'brain') {
+    if (modelId === 'brain') {
       let owner = mesh;
       while (owner.parent && !owner.userData.bx_cat) owner = owner.parent;
       if (!['cortex', 'cerebellum', 'brainstem'].includes(owner.userData.bx_cat)) return;
@@ -273,17 +346,19 @@ export function mountAstralOrgan(organ, model, network) {
     const geometry = mergeGeometries(pieces, false); pieces.forEach(g => g.dispose()); return geometry;
   });
   const shellGeometry = mergeGeometries(regional, false), group = new T.Group();
+  const surfaceProgress = activity ? addSurfaceProgress(shellGeometry) : null;
   group.name = 'Astral ' + organ.organ;
-  const shell = new T.Mesh(shellGeometry, glassMaterial(palette[organ.id].shell));
+  group.userData.activityMix = activity ? activityMix(activity) : null;
+  const shell = new T.Mesh(shellGeometry, glassMaterial(palette[modelId].shell, { activity }));
   shell.renderOrder = 10; shell.userData.organ = organ;
-  const back = new T.Mesh(shellGeometry, glassMaterial(palette[organ.id].shell, { back: true }));
+  const back = new T.Mesh(shellGeometry, glassMaterial(palette[modelId].shell, { back: true, activity }));
   back.renderOrder = 1; back.raycast = noHit;
   // Show the nearest membrane, not every overlapping fold of the cortex.
   const depth = new T.Mesh(shellGeometry, new T.MeshBasicMaterial({ colorWrite: false, depthWrite: true, polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 1 }));
   depth.renderOrder = 2; depth.raycast = noHit;
-  group.add(back, depth, makeInterior(regional, organ.id, 1307 + Object.keys(palette).indexOf(organ.id) * 137), shell);
+  group.add(back, depth, makeInterior(regional, modelId, 1307 + Object.keys(palette).indexOf(modelId) * 137, activity, surfaceProgress), shell);
   regional.forEach(g => g.dispose()); organ.root.add(group);
-  themeNetwork(network, organ.id);
+  themeNetwork(network, modelId, activity);
   cleanups.push(onAppearanceChange(enabled => {
     group.visible = enabled;
     sources.forEach(({ mesh, visible }) => { mesh.visible = enabled ? false : visible; });

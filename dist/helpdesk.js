@@ -1,5 +1,5 @@
 // GFS support companion. It deliberately has no process-map or source-register bindings.
-import {elementDisplayScale} from './anatomy-layout.js';
+import {elementDisplayScale} from './anatomy-layout.js?v=20261105-desktop-sizing';
 export function createHelpdesk(host, {onOpen, onClose}) {
   // Both cutouts are trimmed to their visible bounds.
   const fullAspect=490/952, portraitAspect=495/512;

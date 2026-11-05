@@ -1,4 +1,4 @@
-/* Large desktop displays share the approved 2560 × 1440 composition.
+/* Desktop displays share the approved 2560 × 1440 composition.
    Keep the full-bleed page background; center any spare aspect-ratio space. */
 #section-1[data-scaled-desktop=true]{
   position:fixed;

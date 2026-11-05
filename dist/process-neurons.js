@@ -1,4 +1,4 @@
-import {openMap} from './real-experience.js?v=20261104-controlling-copy';
+import {openMap} from './real-experience.js?v=20261105-desktop-sizing';
 import * as T from 'three';
 
 // Labels use the actual soma objects from the supplied organ-specific network.
@@ -70,7 +70,24 @@ export function updateProcessNeurons(organ, active, camera, width, height, time,
         const rect={x:x-5,y:y-5,w:cw+10,h:ch+10};
         const collisions=obstacles.reduce((sum,r)=>sum+overlap(rect,r),0);
         const cost=collisions*10000+(x-preferredX)**2*1.4+(y-preferredY)**2;
-        if(cost<bestCost){bestCost=cost;best={x,y,rect}}
+        if(cost<bestCost){bestCost=cost;best={x,y,rect,collisions}}
+      }
+    }
+    // Font and target-size floors need more room on compact desktops. If the
+    // nearby search is crowded, also try the free edges of existing labels
+    // and shortcuts. Keep the soma fixed and preserve unconflicted placements.
+    if(best.collisions>0){
+      const xs=[preferredX,layout.L,layout.R-cw,...obstacles.flatMap(r=>[r.x-cw-5,r.x+r.w+5])];
+      const ys=[preferredY,layout.T,layout.B-ch,...obstacles.flatMap(r=>[r.y-ch-5,r.y+r.h+5])];
+      for(const candidateX of xs)for(const candidateY of ys){
+        const x=Math.max(layout.L,Math.min(layout.R-cw,candidateX));
+        const y=Math.max(layout.T,Math.min(layout.B-ch,candidateY));
+        const rect={x:x-5,y:y-5,w:cw+10,h:ch+10};
+        const collisions=obstacles.reduce((sum,r)=>sum+overlap(rect,r),0);
+        const cost=collisions*10000+(x-preferredX)**2*1.4+(y-preferredY)**2;
+        if(collisions<best.collisions||(collisions===best.collisions&&cost<bestCost)){
+          bestCost=cost;best={x,y,rect,collisions};
+        }
       }
     }
     node.nameX=best.x;node.nameY=best.y;placed.push(best.rect);

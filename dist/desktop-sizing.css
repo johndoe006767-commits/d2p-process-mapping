@@ -1,0 +1,84 @@
+/* Desktop sizing is part of the site. The anatomy keeps one logical stage;
+   process-map chrome uses fluid units while SVGs retain their own viewBox.
+   3840 × 2160 is the visual reference. Smaller-screen fallbacks stay intact. */
+@media(min-width:1024px){
+ #section-1[data-scaled-desktop=true]{--floor:var(--anatomy-font-floor);--density:var(--anatomy-density)}
+ #section-1[data-scaled-desktop=true] .label.card{width:440px;max-width:none;min-width:0;padding:calc(24px * var(--density));border-radius:20px}
+ #section-1[data-scaled-desktop=true] .label.card>strong{font-size:max(34px,var(--floor));line-height:1.18}
+ #section-1[data-scaled-desktop=true] .label.card .hb-brief{margin-top:calc(12px * var(--density))}
+ #section-1[data-scaled-desktop=true] .label.card .hb-manual{font-size:max(17px,var(--floor));margin-bottom:calc(12px * var(--density));flex-wrap:wrap;gap:7px}
+ #section-1[data-scaled-desktop=true] .label.card .hb-manual>span{font:inherit}
+ #section-1[data-scaled-desktop=true] .label.card .kpi-mix-head{font-size:max(16px,var(--floor));gap:12px 7px;line-height:1.4;margin-bottom:calc(8px * var(--density));padding-inline:7px}
+ #section-1[data-scaled-desktop=true] .label.card .kpi-mix-row{grid-template-columns:max(48px,calc(var(--floor) * 2.6)) minmax(0,1fr);gap:6px;min-height:18px}
+ #section-1[data-scaled-desktop=true] .label.card .kpi-state{font-size:max(17px,var(--floor));line-height:1.35}
+ #section-1[data-scaled-desktop=true] .label.card .kpi-stack{height:7px;margin:0}
+ #section-1[data-scaled-desktop=true] .label.card .kpi-mix-row+.kpi-mix-row{margin-top:calc(8px * var(--density))}
+ #section-1[data-scaled-desktop=true] .label.card .kpi-mix+.hb-year{margin-top:calc(12px * var(--density))}
+ #section-1[data-scaled-desktop=true] .label.card .hb-year{font-size:max(11px,var(--floor));line-height:1.7;gap:12px}
+ #section-1[data-scaled-desktop=true] .label.card .hb-year b{font-size:max(12px,var(--floor))}
+ #section-1[data-scaled-desktop=true] .label.card .hb-year+.hb-year{margin-top:4px}
+ #section-1[data-scaled-desktop=true] #overview-intro p{font-size:max(14px,var(--floor))}
+ #section-1[data-scaled-desktop=true] .assembly-control{bottom:24px}
+ #section-1[data-scaled-desktop=true] #detail #back{left:auto;right:max(100px,calc(76px / var(--anatomy-scale)));top:18px;font-size:max(17px,var(--floor));min-height:max(44px,var(--anatomy-hit-floor));padding:0}
+ #section-1[data-scaled-desktop=true] .detail-title{top:auto;bottom:25px;left:32px;max-width:50%}
+ #section-1[data-scaled-desktop=true] .detail-title h2{font-size:max(30px,var(--floor));line-height:1.12}
+ #section-1[data-scaled-desktop=true] .detail-title p{font-size:max(16px,var(--floor))}
+ #section-1[data-scaled-desktop=true] .detail-title .demo-data{font-size:max(14px,var(--floor))}
+ #section-1[data-scaled-desktop=true] #detail .process-node{width:246px;gap:14px}
+ #section-1[data-scaled-desktop=true] #detail .process-name{flex-basis:246px;width:246px;max-width:246px!important;font-size:max(17px,var(--floor))!important;padding:14px 16px!important;display:block!important}
+ #section-1[data-scaled-desktop=true] #detail .process-plus{flex-basis:max(56px,var(--anatomy-hit-floor));width:max(56px,var(--anatomy-hit-floor))!important;height:max(56px,var(--anatomy-hit-floor))!important;min-width:max(56px,var(--anatomy-hit-floor))!important;min-height:max(56px,var(--anatomy-hit-floor))!important;max-width:none;max-height:none;font-size:34px!important}
+ #section-1[data-scaled-desktop=true] #detail .process-plus::after{width:max(21px,var(--floor));height:max(21px,var(--floor));font-size:max(14px,var(--floor))}
+ #section-1[data-scaled-desktop=true] #tower-telemetry-hud{--floor:var(--anatomy-hud-font-floor);--hud-scale:1.5;width:650px;max-width:none;padding:24px;zoom:1.5;left:auto;right:32px;top:50%;transform:translateY(-50%);max-height:864px}
+ #section-1[data-scaled-desktop=true] #tower-telemetry-hud .hud-header{margin-bottom:18px}
+ #section-1[data-scaled-desktop=true] #tower-telemetry-hud .hud-summary-title{font-size:max(16px,var(--floor));line-height:1.333}
+ #section-1[data-scaled-desktop=true] #tower-telemetry-hud .hud-tower-name{font-size:max(26.667px,var(--floor));line-height:1.2}
+ #section-1[data-scaled-desktop=true] #tower-telemetry-hud .hud-header-footer{display:flex;flex-direction:column;align-items:flex-start;gap:14px;margin-top:6px}
+ #section-1[data-scaled-desktop=true] #tower-telemetry-hud .hud-actions{margin:0;gap:8px;flex-direction:row;width:auto}
+ #section-1[data-scaled-desktop=true] #tower-telemetry-hud .hud-nav-action{font-size:max(12px,var(--floor));padding:8px 12px;gap:8px;min-height:max(40px,calc(var(--anatomy-hit-floor) / 1.5));line-height:1.333}
+ #section-1[data-scaled-desktop=true] #tower-telemetry-hud .hud-manual{padding-bottom:17px;gap:14px 22px}
+ #section-1[data-scaled-desktop=true] #tower-telemetry-hud .hud-manual-copy>span:first-child{font-size:max(13px,var(--floor))}
+ #section-1[data-scaled-desktop=true] #tower-telemetry-hud .hud-score strong{font-size:32px;line-height:1.083}
+ #section-1[data-scaled-desktop=true] #tower-telemetry-hud .hud-section-heading{margin:14px 0 8px}
+ #section-1[data-scaled-desktop=true] #tower-telemetry-hud .hud-section-heading h4{font-size:max(16px,var(--floor));line-height:1.333;font-weight:400}
+ #section-1[data-scaled-desktop=true] #tower-telemetry-hud :is(.hud-project-list strong,.hud-dependency-copy strong){font-size:max(14.667px,var(--floor));line-height:1.364;font-weight:600}
+ #section-1[data-scaled-desktop=true] #tower-telemetry-hud :is(.hud-project-list p,.hud-dependency-copy>span,.hud-empty,.hud-project-empty p){font-size:max(13.333px,var(--floor));line-height:1.5}
+ #section-1[data-scaled-desktop=true] #tower-telemetry-hud :is(.hud-subtitle,.hud-mix-legend,.hud-year-tabs button,.kpi-state,.hud-project-note,.hud-manual-copy small){font-size:max(12px,var(--floor));line-height:1.333}
+ #section-1[data-scaled-desktop=true] #tower-telemetry-hud :is(.hud-year-count,.hud-project-empty strong){font-size:max(10px,var(--floor))}
+ #section-1[data-scaled-desktop=true] #tower-telemetry-hud .hud-context-grid{grid-template-columns:.85fr 1.15fr;gap:24px;margin-top:14px}
+ #section-1[data-scaled-desktop=true] #tower-telemetry-hud .hud-context-grid .hud-section-heading{margin:14px 0 12px}
+ #section-1[data-scaled-desktop=true] #tower-telemetry-hud .hud-dependency-row{min-height:44px;padding:7px 0}
+ #section-1[data-scaled-desktop=true] #tower-telemetry-hud .mobile-stage-picker{display:none}
+ #section-1[data-scaled-desktop=true] #helpdesk{--helpdesk-unit:max(20.48px,calc(var(--floor) / .78));position:absolute;inset:0;min-height:0}
+ #section-1[data-scaled-desktop=true] .helpdesk-dock-label{font-size:max(16.64px,var(--floor))}
+ #section-1[data-scaled-desktop=true] #helpdesk-detail{position:absolute;grid-template-columns:minmax(0,.25fr) minmax(0,.75fr);gap:32px;padding:100.8px 71.68px 43.2px}
+ #section-1[data-scaled-desktop=true] #helpdesk .helpdesk-back{right:max(100px,calc(76px / var(--anatomy-scale)));font-size:max(17.92px,var(--floor))}
+ #section-1[data-scaled-desktop=true] .helpdesk-hero{height:auto;max-width:none;width:auto;justify-self:stretch}
+ #section-1[data-scaled-desktop=true] .helpdesk-hero>.helpdesk-hero-full{display:block}
+ #section-1[data-scaled-desktop=true] .helpdesk-hero>.helpdesk-hero-portrait{display:none}
+ #section-1[data-scaled-desktop=true] .helpdesk-caption{bottom:0;max-width:none}
+ #section-1[data-scaled-desktop=true] .helpdesk-caption strong{font-size:1.3em}
+ #section-1[data-scaled-desktop=true] .helpdesk-dashboard{max-width:none;width:auto;gap:calc(var(--helpdesk-unit) * 1.4);padding:calc(var(--helpdesk-unit) * 2);max-height:100%;overflow:auto}
+ #section-1[data-scaled-desktop=true] .helpdesk-period{font-size:.78em}
+ #section-1[data-scaled-desktop=true] .helpdesk-period select{max-width:15em;padding:.7em 3em .7em .9em}
+ #section-1[data-scaled-desktop=true] .helpdesk-metrics{padding:1em 0}
+ #section-1[data-scaled-desktop=true] .helpdesk-metrics dt{font-size:.9em}
+ #section-1[data-scaled-desktop=true] .helpdesk-metrics dd{font-size:2.4em}
+ #section-1[data-scaled-desktop=true] .helpdesk-chart{height:9em}
+ #section-1[data-scaled-desktop=true] .helpdesk-kpis{padding-top:1.2em}
+ #section-1[data-scaled-desktop=true] .helpdesk-kpis :is(th,td){padding:.65em .7em}
+
+ /* Map controls stay readable; only their chrome scales. Node geometry and
+    source renderer text are already scaled together by the map's viewBox. */
+ #process-workspace{--desktop-unit:min(.026041667vw,.046296296dvh);--lab-unit:clamp(14px,calc(22 * var(--desktop-unit)),28px);font-size:var(--lab-unit)}
+ #process-workspace #navigation{--nav-size:clamp(12px,calc(18 * var(--desktop-unit)),24px);--nav-height:clamp(36px,calc(52 * var(--desktop-unit)),64px);--nav-gap:clamp(12px,calc(32 * var(--desktop-unit)),40px)}
+ #process-workspace #navigation .mast{min-height:clamp(76px,calc(112 * var(--desktop-unit)),144px);gap:var(--nav-gap);padding-block:clamp(12px,calc(22 * var(--desktop-unit)),28px)}
+ #process-workspace #navigation .identity strong{font-size:clamp(18px,calc(28 * var(--desktop-unit)),36px);line-height:1.25}
+ #process-workspace #navigation .identity small{font-size:clamp(11px,calc(16 * var(--desktop-unit)),20px)}
+ #process-workspace #navigation .navigation-group{gap:clamp(8px,calc(16 * var(--desktop-unit)),20px)}
+ #process-workspace #navigation :is(.scenario-switch,.map-modes) button{font-size:var(--nav-size);min-height:var(--nav-height);padding:clamp(7px,calc(10 * var(--desktop-unit)),14px) clamp(10px,calc(22 * var(--desktop-unit)),28px)}
+ #process-workspace #navigation .scenario-switch button{min-width:clamp(78px,calc(118 * var(--desktop-unit)),148px)}
+ #process-workspace #navigation .scenario-switch{min-width:0}
+ #process-workspace #navigation .lab-return{font-size:var(--nav-size);min-height:var(--nav-height)}
+ #process-workspace #navigation :is(.view-icon,.return-icon){width:clamp(16px,calc(20 * var(--desktop-unit)),26px);height:clamp(16px,calc(20 * var(--desktop-unit)),26px)}
+ #process-workspace #information-card{max-width:calc(100vw - 32px);max-height:calc(100dvh - 32px)}
+}

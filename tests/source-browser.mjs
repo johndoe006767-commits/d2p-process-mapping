@@ -46,7 +46,7 @@ try{
  for(const [id,tower] of Object.entries(real)){
   // Use the app's keyboard tower button, including towers obscured in the 3D view.
   const label=await page.locator('.keyboard-organ').evaluateAll((ns,name)=>ns.findIndex(n=>n.textContent.includes(name)),
-   {brain:'FP&A Commercial',pancreas:'FP&A Operations',liver:'CAPEX / Fixed Assets',stomach:'Purchase To Pay',intestines:'Order to Cash',spleen:'Tax',lungs:'Record to Report Operations',kidneys:'Controlling'}[id]);
+   {brain:'FP&A Commercial',pancreas:'FP&A Operations',liver:'CAPEX',stomach:'Purchase To Pay',intestines:'Order to Cash',spleen:'Tax',lungs:'Record to Report Operations',kidneys:'Controlling'}[id]);
   assert.ok(label>=0,`${id} keyboard entry`);
   await page.locator('.keyboard-organ').nth(label).evaluate(n=>n.click());
   await page.waitForFunction(()=>!document.querySelector('#detail').hidden);
@@ -58,7 +58,7 @@ try{
   const comparison=await page.locator('#hud-comparison .kpi-stack').evaluateAll(ns=>ns.map(n=>n.getAttribute('aria-label')));
   assert.deepEqual(comparison,[['As Is',kpis[id].asIs],['To Be',kpis[id].toBe]].map(([label,mix])=>`${label}: ${mix.auto} Automated, ${mix.semi} Semi, ${mix.manual} Manual`),`${id} comparison activity mix`);
   if(['spleen','kidneys'].includes(id))await page.screenshot({path:`.runtime/source-sync/${tower.sourceKey}-kpis.png`});
-  assert.equal(await page.locator('#hud-dependencies [data-dependency]').count(),briefs[id].dependencies.length);
+  assert.equal(await page.locator('#hud-dependencies .hud-dependency-row').count(),briefs[id].dependencies.length);
   for(const year of ['2026','2027']){
    await page.locator(`#hud-year-${year}`).click();
    assert.equal(await page.locator(`#hud-year-${year} .hud-year-count`).textContent(),String(briefs[id].projects[year].length));
@@ -145,27 +145,8 @@ try{
    await page.locator('#close-card').click();
    await page.locator('#lab-return').click();
   }
-  await page.evaluate(id=>window.FinanceLab.openDashboard(id,'activities'),id);
-  await page.waitForSelector('[data-activity-record]');
-  assert.equal(await page.locator('[data-activity-record]').count(),suggested[id].activities.length);
-  await page.locator('[data-nav="tpis"]').click();
-  await page.waitForSelector('.tw-tpi-row');
-  assert.equal(await page.locator('.tw-tpi-row').count(),tower.tpis.length);
-  for(const pane of await page.locator('.tw-source details.sc-tpitab').all()){
-   if(!await pane.evaluate(n=>n.open))await pane.locator('summary').click();
-   assert.ok(await pane.locator('tbody tr').first().isVisible(),`${id} TPI subregister`);
-  }
-  await page.locator('[data-nav="ai"]').click();
-  await page.waitForSelector('.sc-opp');
-  assert.equal(await page.locator('.sc-opp').count(),tower.ai.length);
-  const opportunity=page.locator('details.sc-opp').first();
-  await opportunity.locator('summary').click();
-  assert.equal(await opportunity.evaluate(n=>n.open),true);
-  await page.locator('[data-nav="handoffs"]').click();
-  await page.locator('[data-handoff-view="register"]').click();
-  await page.waitForSelector('#tw-connection-panel');
-  assert.equal(await page.locator('#tw-connection-panel tbody tr').count(),tower.handoffs.length);
-  await page.locator('#tw-close').click();
+  assert.equal(await page.locator('#tower-workbench').count(),0,'dashboard is archived');
+  assert.equal(await page.evaluate(()=>typeof window.FinanceLab.openDashboard),'undefined');
   await page.locator('#back').click();
   results.push({tower:tower.sourceKey,scenarios:2,mapViews:4,activities:tower.activities.length,handoffs:tower.handoffs.length,reviewEntries:tower.handoffReview.length,status:'PASS'});
   console.log(JSON.stringify(results.at(-1)));

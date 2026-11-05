@@ -2,6 +2,10 @@ import * as THREE from 'three';
 import { STLLoader } from 'three/addons/loaders/STLLoader.js';
 import { mergeVertices } from 'three/addons/utils/BufferGeometryUtils.js';
 
+// Source data predates the new mapping, so keep its keys stable and choose the
+// physical mesh independently: CAPEX (liver key) → intestines, O2C → liver.
+export const organModelFor = id => ({liver: 'intestines', intestines: 'liver'})[id] || id;
+
 export const organs = [
   { id: 'brain', label: 'Brain', color: '#e4eaf5', neurons: '#ff164f' },
   { id: 'liver', label: 'Liver', color: '#f0ab00', neurons: '#00fff2', files: ['7197'] },

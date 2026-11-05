@@ -2,9 +2,9 @@
 
 Optimize for a 3840 × 2160 desktop display. Preserve the existing anatomy composition, card layout, source content and navigation.
 
-Desktop sizing follow-up: the anatomy composition now uses 2560 × 1440 as its reference and fits proportionally on large desktop displays. At 3840 × 2160 all anatomy-view dimensions scale by 1.5; at 3180 × 2160 they scale by 1.2421875 and center vertically. Keep the full-bleed background and the existing smaller-screen fallbacks. `docs/anatomy-layout.md` records the coordinate-space handling and browser verification. This supersedes the fixed 4K sizes below for the anatomy view; the process workspace retains its existing sizing.
+Desktop sizing follow-up: preserve the 3840 × 2160 composition while fitting the anatomy's 2560 × 1440 logical stage continuously across desktop viewports at least 1024px wide. At 3840 × 2160 the anatomy scale is 1.5. Center spare aspect-ratio space over the full-bleed background. Compact desktop typography has a 9px displayed floor and tighter card spacing. Process-map controls use fluid dimensions with readable minimums; SVG geometry and labels retain their shared zoom. `docs/anatomy-layout.md` records the embedded sizing, coordinate-space handling and browser verification. This supersedes the earlier large-screen-only sizing and monitor-specific zoom exception.
 
-Latest refinement: apply an additional 75% application zoom specifically for the 3180 × 2160 display, centered in the viewport. A top-right icon-only button toggles document fullscreen. The overview uses CAPEX, Controlling, FP&A Commercial and FP&A Operations; expanded names remain in Executive Summary. Give Manual Processes and Pain Points identical label, As Is subtitle and value styling, without the pain dot. Their overview typography also matches. These requests supersede the earlier expanded overview naming and pain treatment below.
+The top-right icon-only button toggles document fullscreen. The overview uses CAPEX, Controlling, FP&A Commercial and FP&A Operations; expanded names remain in Executive Summary. Give Manual Processes and Pain Points identical label, As Is subtitle and value styling, without the pain dot. Their overview typography also matches. These requests supersede the earlier expanded overview naming and pain treatment below.
 
 ## Colour
 
@@ -30,7 +30,7 @@ The user approved an interactive 3D interpretation of the astral concept images,
 
 The anatomy uses transparent glass-like membranes, platinum skeletal highlights, bright branching signals and fine heart-to-organ connections. The material palette uses AZ Gold `#f0ab00`, Magenta `#d0006f`, Light Blue `#68d2df`, Lime `#c4d600`, platinum and violet highlights. Preserve the source mesh silhouettes and process anchors. These are interactive procedural interpretations, not pixel-identical copies of the generated images or new medical atlas data.
 
-The original page markup and every existing stylesheet were restored byte-for-byte from `backups/before-astral-20261102-084742/site.tar.gz`. The additional appearance control was removed to restore the original interface. The local source backup remains available. Material changes live in `dist/astral-anatomy.js`; the existing renderer retains its original canvas sizing and pixel ratio.
+The original page markup and every existing stylesheet were restored byte-for-byte from `archives/backups/before-astral-20261102-084742/site.tar.gz`. The additional appearance control was removed to restore the original interface. The local source backup remains available. Material changes live in `dist/astral-anatomy.js`; the existing renderer retains its original canvas sizing and pixel ratio.
 
 ## Typography
 
@@ -51,3 +51,13 @@ Align the logo at the top left with 10px padding. Keep its layer behind the anat
 ## Overview spacing and fullscreen refinement
 
 The scaled desktop cards retain their 440px logical width with 24px padding. Use 12px between the title, metrics, activity mix and TPI group; 8px around comparison rows; and 4px between TPI rows. The project tabs read “2026 TPI” and “2027 AI Suggested TPI.” The fullscreen control has no visible container and retains its hit area and keyboard focus indicator.
+
+## As Is organ colours and dashboard archive — 5 November 2026
+
+This refinement supersedes fixed organ signal colours. Preserve the existing glass membranes, mesh silhouettes, branching geometry, glow, lighting, movement and interface. O2C uses the existing liver model; CAPEX uses the existing intestines model. All other organ designs stay the same.
+
+Use the As Is activity bar palette for neurons: Automated `#68d2df`, Semi `#f0ab00`, Manual `#830051` (manual red/mulberry). Allocate neuron colours proportionally from each tower's As Is counts, including the larger process-neuron connections. Use the manual proportion to cover the membrane in mulberry, blending over a narrow boundary into a white base. Calibrate the boundary against surface area rather than bounding-box height. A 12/14 manual Controlling mix therefore yields approximately 86% manual-coloured membrane and 14% white. Keep the colour field attached to the organ during rotation. As Is remains authoritative even when a process map switches to AI Suggested.
+
+The full tower dashboard and every navigation section, including AI Suggestions, are archived beside the existing chatbot archive and removed locally. Dependencies stay as non-interactive text in the summary. Retain the high-level/detailed process maps, their scenarios and annual project summaries. Verification targets the existing 3840 × 2160 desktop display.
+
+Latest colour follow-up: all eight tower organs use a white `#ffffff` base membrane with the existing As Is manual-mulberry gradient and proportional neuron colours. This supersedes the earlier individual organ base colours, including Controlling's purple. All glass materials, geometry, lighting and interface styling remain unchanged.

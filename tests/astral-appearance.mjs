@@ -13,6 +13,9 @@ const T = await import('three');
 const { setAstral } = await import('../dist/anatomy-appearance.js');
 const { mountAstralOrgan, mountAstralSkeleton, mountAstralVessel } = await import('../dist/astral-anatomy.js');
 const { buildVesselNetwork } = await import('../dist/vessels.js');
+const { ACTIVITY_COLORS, activityMix, neuronTypes } = await import('../dist/organ-activity.js');
+const { organModelFor } = await import('../dist/organs.js');
+const fs = await import('node:fs/promises');
 
 test('Material restoration retains geometry, transforms, anchors and original material references', () => {
   const root = new T.Group(), model = new T.Group(), content = new T.Group(), network = new T.Group();
@@ -64,4 +67,63 @@ test('Vessel appearance preserves endpoint geometry and live layout uniforms; cl
   assert.deepEqual(geometry.attributes.position.array, positions); assert.deepEqual(geometry.attributes.expandedPosition.array, expanded);
   assert.ok([...geometry.attributes.pathCenter.array].every(Number.isFinite));
   cleanup(); setAstral(true); assert.equal(mesh.material, original);
+});
+
+test('Every tower uses its As Is mix; neuron proportions are stable and within one neuron', async () => {
+  const kpis = JSON.parse(await fs.readFile(new URL('../dist/data/kpi-summary.json', import.meta.url)));
+  for (const {asIs} of Object.values(kpis)) {
+    for (const count of [2, 320, 550]) {
+      const types = neuronTypes(count, asIs), mix = activityMix(asIs);
+      assert.deepEqual(types, neuronTypes(count, asIs));
+      for (const type of Object.keys(ACTIVITY_COLORS)) {
+        assert.ok(Math.abs(types.filter(value => value === type).length - mix[type] * count) < 1);
+        if (!asIs[type]) assert.ok(!types.includes(type));
+      }
+    }
+  }
+  assert.deepEqual(neuronTypes(10, {manual: 10}), Array(10).fill('manual'));
+  assert.deepEqual(neuronTypes(10, {auto: 10}), Array(10).fill('auto'));
+  assert.deepEqual(neuronTypes(10, {}), Array(10).fill(null));
+  assert.equal(organModelFor('intestines'), 'liver');
+  assert.equal(organModelFor('liver'), 'intestines');
+  assert.equal(organModelFor('kidneys'), 'kidneys');
+});
+
+test('Activity colours change membrane coverage and neuron colour without changing geometry', () => {
+  const specimens = [{auto:0, semi:2, manual:12}, {auto:14, semi:0, manual:0}, {auto:0, semi:0, manual:14}].map(activity => {
+    const root = new T.Group(), model = new T.Group(), network = new T.Group();
+    // An uneven silhouette checks surface area rather than bounding-box height.
+    const geometry = new T.SphereGeometry(.45, 48, 36);
+    const positions = geometry.attributes.position;
+    for (let i = 0; i < positions.count; i++) positions.setX(i, positions.getX(i) * (1.4 + positions.getY(i)));
+    geometry.computeVertexNormals();
+    model.add(new T.Mesh(geometry, new T.MeshBasicMaterial()));root.add(model, network);
+    mountAstralOrgan({id:'kidneys', organ:'Kidneys', root}, model, network, activity);
+    const group = root.getObjectByName('Astral Kidneys');
+    return {group, shell:group.children.at(-1), interior:group.getObjectByName('Astral scientific filaments')};
+  });
+  const [manual, automated, allManual] = specimens;
+  for (const specimen of specimens) {
+    assert.deepEqual(specimen.shell.geometry.attributes.position.array, manual.shell.geometry.attributes.position.array);
+    assert.deepEqual(specimen.interior.children[0].geometry.attributes.position.array, manual.interior.children[0].geometry.attributes.position.array);
+    assert.deepEqual(specimen.interior.children[1].geometry.attributes.position.array, manual.interior.children[1].geometry.attributes.position.array);
+  }
+  assert.equal(manual.shell.material.uniforms.manualRatio.value, 12/14);
+  assert.equal(automated.shell.material.uniforms.manualRatio.value, 0);
+  assert.equal(allManual.shell.material.uniforms.manualRatio.value, 1);
+  assert.equal(manual.shell.material.uniforms.tint.value.getHexString(), 'ffffff');
+  assert.equal(manual.shell.material.uniforms.manualTint.value.getHexString(), '830051');
+  const p=manual.shell.geometry.attributes.position, progress=manual.shell.geometry.attributes.surfaceProgress;
+  let total=0, coverage=0;
+  const a=new T.Vector3(), b=new T.Vector3(), c=new T.Vector3();
+  for(let i=0;i<p.count;i+=3){
+    a.fromBufferAttribute(p,i);b.fromBufferAttribute(p,i+1);c.fromBufferAttribute(p,i+2);
+    const area=b.sub(a).cross(c.sub(a)).length()/2;
+    const rank=(progress.getX(i)+progress.getX(i+1)+progress.getX(i+2))/3;
+    total+=area;if(rank<12/14)coverage+=area;
+  }
+  assert.ok(Math.abs(coverage/total-12/14)<.02, '86% membrane coverage follows surface area');
+  const colors=automated.interior.children[1].geometry.attributes.activityColor;
+  const blue=new T.Color(ACTIVITY_COLORS.auto);
+  for(let i=0;i<colors.count;i++)assert.ok(Math.abs(colors.getX(i)-blue.r)<1e-6 && Math.abs(colors.getY(i)-blue.g)<1e-6 && Math.abs(colors.getZ(i)-blue.b)<1e-6);
 });

@@ -1,12 +1,9 @@
-import {setScenario} from './process-scenario.js';
 import {cancelPageNavigation} from './page-navigation.js';
 import {REAL,KPI,escapeHTML as esc} from './real-data.js?v=20261104-controlling-copy';
-import {CARD_BRIEFS,CARD_SOURCE} from './tower-briefs.js?v=20261104-controlling-copy';
+import {CARD_BRIEFS} from './tower-briefs.js?v=20261104-controlling-copy';
 import {comparisonMarkup} from './health.js?v=20261104-controlling-copy';
-import {openDashboard,closeDashboard,configureDashboard,destroyDashboard} from './tower-dashboard.js?v=20261104-controlling-copy';
 import {prepareNeural,clearNeural} from './neural-loader.js?v=20261104-controlling-copy';
 import {titleCase,normalizeHeadings} from './title-case.js';
-export {openDashboard,closeDashboard};
 const $=s=>document.querySelector(s);
 let currentId=null,ticket=0,mapOpener=null,organPosition={top:0,left:0};
 function returnToOrgan(){
@@ -27,8 +24,10 @@ export function bindTower(id){
  normalizeHeadings(document);
 }
 export function hideMap(){
+ const restore=$('#section-1').hidden;
  ticket++;cancelPageNavigation();clearNeural();
  $('#section-1').hidden=false;
+ if(restore)window.dispatchEvent(new Event('anatomy-visible'));
 }
 export async function openMap(id,stage=null,mode='detail',keyboard=false){
  currentId=id;const n=++ticket;cancelPageNavigation();
@@ -51,7 +50,7 @@ export async function openMap(id,stage=null,mode='detail',keyboard=false){
   $('#process-status').textContent=stage?`Opened ${REAL[id].stages.find(s=>s.id===stage)?.name||stage}.`:`Opened ${REAL[id].name} ${mode==='high'?'High-Level Flow':'Detailed Process Flow'}.`;
  }catch(e){if(n!==ticket)return;console.error(e);$('#neural-retry')?.focus({preventScroll:true});}
 }
-export function initExperience(){configureDashboard({openMap});document.addEventListener('keydown',()=>document.body.classList.add('keyboard-input'));document.addEventListener('pointerdown',()=>document.body.classList.remove('keyboard-input'));addEventListener('pagehide',()=>{destroyDashboard();clearNeural();});normalizeHeadings(document);const observer=new MutationObserver(records=>{for(const r of records){for(const n of r.addedNodes){if(n.nodeType===1){normalizeHeadings(n.parentElement||n);}}}});observer.observe(document.body,{childList:true,subtree:true});window.FinanceLab={openMap,openDashboard,closeDashboard,REAL};}
+export function initExperience(){document.addEventListener('keydown',()=>document.body.classList.add('keyboard-input'));document.addEventListener('pointerdown',()=>document.body.classList.remove('keyboard-input'));addEventListener('pagehide',()=>{clearNeural();});normalizeHeadings(document);const observer=new MutationObserver(records=>{for(const r of records){for(const n of r.addedNodes){if(n.nodeType===1){normalizeHeadings(n.parentElement||n);}}}});observer.observe(document.body,{childList:true,subtree:true});window.FinanceLab={openMap,REAL};}
 
 const projectYears=new Map();
 function renderKpiContext(id){
@@ -65,11 +64,7 @@ function renderKpiContext(id){
  $('#hud-pain-count').textContent=REAL[id].counts.pain;
  $('.hud-pain').title=`${REAL[id].counts.pain} documented As Is pain points`;
  $('#hud-comparison').innerHTML=comparisonMarkup(metrics.asIs,metrics.toBe,false);
- $('#hud-dependencies').innerHTML=populated?(brief.dependencies.length?`<ul class="hud-dependency-list">${brief.dependencies.map((d,i)=>`<li><button type="button" data-dependency="${i}" aria-label="View ${esc(d.tower)} dependency"><span class="hud-dependency-copy"><strong>${esc(d.tower)}</strong><span>${esc(d.description)}</span></span><svg class="ico" aria-hidden="true"><use href="#i-ne"/></svg></button></li>`).join('')}</ul>`:'<p class="hud-empty">No key interdependencies supplied in the source.</p>'):'<p class="hud-empty">Awaiting tower data</p>';
- $('#hud-dependencies').querySelectorAll('[data-dependency]').forEach(button=>button.onclick=()=>{
-  setScenario(id,'asis');
-  openDashboard(id,'handoffs',{dependency:brief.dependencies[Number(button.dataset.dependency)],source:CARD_SOURCE});
- });
+ $('#hud-dependencies').innerHTML=populated?(brief.dependencies.length?`<ul class="hud-dependency-list">${brief.dependencies.map(d=>`<li><div class="hud-dependency-row"><span class="hud-dependency-copy"><strong>${esc(d.tower)}</strong><span>${esc(d.description)}</span></span></div></li>`).join('')}</ul>`:'<p class="hud-empty">No key interdependencies supplied in the source.</p>'):'<p class="hud-empty">Awaiting tower data</p>';
  const tabs=[...document.querySelectorAll('[data-project-year]')];
  const selectYear=(year,focus=false)=>{
   projectYears.set(id,year);

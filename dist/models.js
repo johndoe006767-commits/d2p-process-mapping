@@ -4,7 +4,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 
-import { organs, loadOrganGeometry } from './organs.js';
+import { organs, loadOrganGeometry, organModelFor } from './organs.js?v=20261105-activity-organs';
 import { createNeuronNetwork } from './neurons.js';
 export const replacementModels = new Map();
 const vertexShader = `
@@ -76,8 +76,9 @@ function bodyMaterial(color) {
 }
 
 export async function loadReplacement(id) {
+ const modelId = organModelFor(id);
  let root, network;
- if (id === 'brain') {
+ if (modelId === 'brain') {
   const brain = new THREE.Group();
   const draco = new DRACOLoader().setDecoderPath('./assets/draco/').setWorkerLimit(2);
   const loader = new GLTFLoader().setDRACOLoader(draco);
@@ -136,7 +137,7 @@ export async function loadReplacement(id) {
   draco.dispose();
   root = brain;
  } else {
- const config = organs.find(o => o.id === id);
+ const config = organs.find(o => o.id === modelId);
       const { root: loadedRoot, meshes } = await loadOrganGeometry(config);
       const surfaceMaterial = material(0.86, config.color, 3.3);
       surfaceMaterial.depthTest = true;
@@ -164,17 +165,17 @@ export async function loadReplacement(id) {
       }
 
 
- network = createNeuronNetwork(loadedRoot, meshes, {generic:true,color:config.neurons,count:REAL[id].stages.length,seed:715+organs.findIndex(o=>o.id===id)*137});
+ network = createNeuronNetwork(loadedRoot, meshes, {generic:true,color:config.neurons,count:REAL[id].stages.length,seed:715+organs.findIndex(o=>o.id===modelId)*137});
  root = loadedRoot;
  }
 
  // Keep geometry, shader passes and network from the supplied viewer together.
  const wrapper = new THREE.Group();
  wrapper.add(root);
- if (id === 'brain') wrapper.rotation.set(0.12, Math.atan2(0.92,0.37), 0);
+ if (modelId === 'brain') wrapper.rotation.set(0.12, Math.atan2(0.92,0.37), 0);
  else wrapper.rotation.set(0.06, -0.12, 0);
  const model = new THREE.Group(); model.add(wrapper);
- const physicalSize = {brain:0.18,lungs:0.30,liver:0.25,stomach:0.18,kidneys:0.25,pancreas:0.20,spleen:0.13,intestines:0.30}[id];
+ const physicalSize = {brain:0.18,lungs:0.30,liver:0.25,stomach:0.18,kidneys:0.25,pancreas:0.20,spleen:0.13,intestines:0.30}[modelId];
  model.scale.setScalar(physicalSize / 3.55);
  model.updateMatrixWorld(true);
  const pieces=[];

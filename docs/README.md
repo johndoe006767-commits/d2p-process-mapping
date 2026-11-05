@@ -2,7 +2,7 @@
 
 Interactive finance tower anatomy, KPI cards, process flows, handoffs, TPI projects, and source registers.
 
-The design target for this project is a **3840 × 2160 desktop display**. Future UI work and visual verification should focus on this resolution; mobile optimization is not required.
+The primary design target is a **3840 × 2160 desktop display**, with automatic sizing across desktop windows. The sizing is embedded in the site and responds to window size and browser zoom; no sizing script needs to be run. See `anatomy-layout.md` for the implementation and verified desktop sizes. Mobile optimization is not required.
 
 - Live site: https://johndoe006767-commits.github.io/d2p-process-mapping/
 - Repository: https://github.com/johndoe006767-commits/d2p-process-mapping
@@ -38,12 +38,13 @@ dist/                          Website served directly, including data and asset
 scripts/                       Local start/stop controller
 docs/                          README, design and project instructions
 tests/                         Site verification
-backups/                       Original site undo backup (local only)
-archives/                      Inactive feature archives (local only)
+archives/                      Backups, inactive features and past development work (local only)
 .github/workflows/pages.yml     GitHub Pages deployment
 ```
 
-Only the four Start/Stop launcher files remain loose at the top level; `Source/` stays directly accessible there. Documentation lives in `docs/`. Hidden repository and local configuration files retain their required locations. The ignored `.runtime/` folder contains local server state and logs. `.git/` contains repository history. Asset and library licenses are retained alongside the files they cover.
+Only the four Start/Stop launcher files remain loose at the top level; `Source/` stays directly accessible there. Documentation lives in `docs/`. Hidden repository and local configuration files retain their required locations. The ignored `.runtime/` folder contains local server state, logs, the current source capture and local verification dependencies. `.git/` contains repository history. Asset and library licenses are retained alongside the files they cover.
+
+Local history is consolidated in `archives/`; see `archives/README.txt` for its index. The original site undo backup is in `archives/backups/before-astral-20261102-084742/`. Previous development previews, experiment scripts, patches and verification outputs are preserved in `archives/development-2026-11-04.tar.gz`, with original paths and SHA-256 checksums in the adjacent manifest. Extract into a separate folder when recovering individual files so current work is preserved.
 
 The latest Ask Nacey chatbot archive is stored locally in `archives/ai-chatbot-2026-11-03/`, including its interface, backend, configuration and saved sessions. The local launcher serves the same static site that GitHub Pages publishes. Git ignores the archive directory.
 
@@ -51,19 +52,19 @@ The latest Ask Nacey chatbot archive is stored locally in `archives/ai-chatbot-2
 
 Edit the files in `dist/` and refresh the local site. There is one website copy and no generated build output to synchronize. All eight towers load their process records from `dist/neural/` and their KPI/register data from `dist/data/`.
 
-Each tower has an **As Is / AI Suggested** selector shared by its high-level map, detailed map, and insights. The selection is remembered per tower until the page is reloaded. AI activity mixes describe the potential outcome if the source suggestions are adopted. Handoff networks retain the documented As Is connections; proposed dependencies from the AI source are listed separately.
+Each tower has an **As Is / AI Suggested** selector shared by its high-level and detailed process maps. The selection is remembered per tower until the page is reloaded. AI activity mixes describe the potential outcome if the source suggestions are adopted. Handoff networks retain the documented As Is connections; proposed dependencies from the AI source are listed separately.
 
 AI Suggested activity and opportunity nodes display their supplied feasibility, scope and reference tags beneath the card. Statuses are read from the node, held suggestion metadata or its source review entry. Long labels wrap, and process and branch spacing accommodates the tags. Nodes without supplied annotations remain unlabelled. `tests/ai-node-tags.mjs` accepts the same Playwright path as the map browser check and verifies every node; results are recorded in `docs/ai-node-tags-verification.json`.
 
 Challenge registers are retained on detailed maps in both As Is and AI Suggested. All 158 source challenges per scenario show their complete text and references, with linked activities available on selection. High-level process and stage information cards include the applicable challenges and per-activity or opportunity source tags. Long challenge text and references wrap. Tax has no separate challenge register in the supplied source; its activity pain points remain available. `tests/process-challenges.mjs` checks all four map/scenario combinations for every tower; results are recorded in `docs/process-challenges-verification.json`.
 
-The process workspace opens from **High-level flow**, **Detailed flow**, or a stage shortcut (`+` or the mobile stage picker). It replaces the organ view until **Back to Organ** is selected, so scrolling stays within the flow. Handoffs remain accessible through dependency links and the insights navigation.
+The process workspace opens from **High-level flow**, **Detailed flow**, or a stage shortcut (`+` or the mobile stage picker). It replaces the organ view until **Back to Organ** is selected, so scrolling stays within the flow. Key interdependencies remain readable in the Executive Summary; their dashboard links have been removed.
 
 Tower cards use `dist/data/tower-briefs.json` for dependencies and annual TPI projects. The source is **Source/8_Tower_TPI_Interdependencies_Template.xlsx**, worksheet **Tower Input**, range **A4:F12**. Across all eight towers, the workbook lists 27 key interdependencies, 24 projects for 2026 and 18 AI-suggested projects for 2027. The site counts named projects. The Tax count formula in F10 includes two blank lines, so the Tax card lists the two named projects and explains the discrepancy. The R2R 2027 GPO/GPDD note appears separately from its three projects. Records retain the original text, cell references and workbook counts. Manual percentages and activity mixes come from `kpi-summary.json`.
 
 `Source/` retains the supplied source maps and supporting registers. Baseline map records use `dist/neural/<TOWER>.json`; AI records use `<TOWER>-ai.json`. `dist/data/suggested-processes.json` supplies the AI activity registers and adopted activity mix. Source files are retained for comparison and are not served or published by the website.
 
-The 4 November 2026 refresh uses **All_Tower_Process_TPI_Excel_Only_November_4_Fixed.html**, selected explicitly by **Source/manifest.json**. The previous HTML is retained for reference. The new source contains 46 stages, 106 processes, 489 activities per scenario and 305 documented handoff connections across eight towers. In either map or the Handoffs view, expand **Demand to Profit stages & LT handoff review** to read the tower’s stage impacts and 18 review notes. High-level trigger and handoff cards use the source’s revised wording.
+The 4 November 2026 refresh uses **All_Tower_Process_TPI_Excel_Only_November_4_Fixed.html**, selected explicitly by **Source/manifest.json**. The previous HTML is retained for reference. The new source contains 46 stages, 106 processes, 489 activities per scenario and 305 documented handoff connections across eight towers. In either process map, expand **Demand to Profit stages & LT handoff review** to read the tower’s stage impacts and 18 review notes. High-level trigger and handoff cards use the source’s revised wording.
 
 Tax's As Is mix is now 6 automated, 14 semi-automated and 57 manual activities; its AI-suggested mix is 6 / 32 / 39. Controlling's As Is mix is 0 / 2 / 12; its AI-suggested mix is 0 / 8 / 6. The Controlling map now names the second process **Statutory Reporting & Audit**. Manual percentages are calculated from these counts: 74% for Tax and 86% for Controlling.
 
@@ -82,8 +83,18 @@ The rendered check uses `.runtime/source-sync/capture.json`, captured from the s
 
 Push changes to `main` to deploy. GitHub Actions publishes only `dist/` to GitHub Pages, retaining relative paths so the site also works under `/d2p-process-mapping/`.
 
-The local and published sites use the same `dist/` files. The release marker is `20261104-controlling-copy`. Updated data and dependent assets carry this version tag to refresh browser caches.
+The local and published sites use the same `dist/` files. The release marker is `20261105-desktop-sizing`. Updated dependent assets carry version tags to refresh browser caches. `tests/desktop-sizing.mjs` accepts an installed Playwright path and checks the desktop sizing against the local server.
 
 The process navigation groups the As Is / AI Suggested and map-view controls without extra visible group labels. Challenge and TPI / CI cards use four columns before wrapping, retain full source text and references, and show CHALLENGE / SOLUTION without brackets.
 
 User-supplied wording corrections that supersede the source are documented in `content-corrections.md`, including Controlling MJV step 4 and the MJV-07 project description.
+
+## Anatomy and desktop sizing update — 5 November 2026
+
+All eight sections of the tower dashboard, including its AI Suggestions section and both scenarios, are archived locally in `archives/tower-dashboard-2026-11-05/` alongside the AI chatbot archives. Its modules, stylesheet, entry points and dependency links have been removed from the active site. A complete pre-change website snapshot, removed files and checksums are included for recovery. Shared source records remain available to the source verification tools. The high-level and detailed process maps, their As Is / AI Suggested selector, and annual TPI summaries remain active.
+
+Order to Cash now uses the liver; CAPEX uses the intestines. `organModelFor` in `dist/organs.js` selects the physical mesh without renaming the historical source-data keys (`intestines` for O2C, `liver` for CAPEX). Mesh-specific placement, scale, palette and neural layout follow the selected model; process records and stage shortcuts remain attached to their tower.
+
+All eight organ appearances read `KPI[id].asIs`, the same counts used by the As Is activity bar. Automated neurons use AZ Light Blue `#68d2df`, semi-automated neurons AZ Gold `#f0ab00`, and manual neurons AZ Mulberry `#830051` (the existing manual red). Rounded neuron counts preserve each proportion within one neuron. All eight tower organs have a white base; the membrane blends from manual mulberry into white, with surface-area-weighted coverage controlled by the manual share; Controlling uses 12/14, displayed as 86%. Colours recalculate from the source counts on page load, independently of the process-map scenario. Geometry, transparency, lighting, animation, controls and card layout are retained.
+
+`node --test tests/astral-appearance.mjs` checks colour proportions, zero/all-manual cases, membrane coverage and unchanged geometry. The browser check covers all eight towers and both map scenarios at 3840 × 2160, with dashboard checks replaced by archive-removal assertions. Desktop sizing checks cover 14 viewport sizes and high-density displays. Archives and local verification artifacts are excluded from GitHub and the published site.

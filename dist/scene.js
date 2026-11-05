@@ -1,18 +1,19 @@
 import * as T from 'three';
-import {syncAnatomyLayout,elementDisplayScale} from './anatomy-layout.js?v=20261102-display';
+import {syncAnatomyLayout,elementDisplayScale} from './anatomy-layout.js?v=20261105-desktop-sizing';
 import {REAL,KPI} from './real-data.js?v=20261104-controlling-copy';
 import {CARD_BRIEFS} from './tower-briefs.js?v=20261104-controlling-copy';
-import {bindTower,initExperience,hideMap,openMap} from './real-experience.js?v=20261104-controlling-copy';
-import {createProcessNeurons,updateProcessNeurons} from './process-neurons.js?v=20261104-controlling-copy';
+import {bindTower,initExperience,hideMap,openMap} from './real-experience.js?v=20261105-desktop-sizing';
+import {createProcessNeurons,updateProcessNeurons} from './process-neurons.js?v=20261105-desktop-sizing';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
-import {loadReplacement} from './models.js?v=20261104-controlling-copy';
+import {loadReplacement} from './models.js?v=20261105-activity-organs';
+import {organModelFor} from './organs.js?v=20261105-activity-organs';
 import {buildVesselNetwork} from './vessels.js';
-import {mountAstralOrgan,mountAstralSkeleton,mountAstralVessel,createAstralRenderer} from './astral-anatomy.js';
+import {mountAstralOrgan,mountAstralSkeleton,mountAstralVessel,createAstralRenderer} from './astral-anatomy.js?v=20261105-activity-organs';
 import {cardMarkup,metricsSentence,accentFor,towerNameFor,towerAcronymFor,overviewNameFor} from './health.js?v=20261104-controlling-copy';
-import {createHelpdesk} from './helpdesk.js?v=20261103-nursa-floor';
+import {createHelpdesk} from './helpdesk.js?v=20261105-desktop-sizing';
 const $=s=>document.querySelector(s);
 syncAnatomyLayout();
-const configs=[['brain','FP&A Commercial','Brain',-1,0,.18],['liver',REAL.liver.name,'Liver',-1,1,.25],['kidneys','Controlling','Kidneys',-1,2,.23],['spleen','Tax','Spleen',-1,3,.12],['lungs',REAL.lungs.name,'Lungs',1,0,.32],['stomach','P2P','Stomach',1,1,.17],['pancreas','FP&A Operations','Pancreas',1,2,.20],['intestines','O2C','Intestines',1,3,.29]];
+const configs=[['brain','FP&A Commercial','Brain',-1,0,.18],['liver',REAL.liver.name,'Intestines',-1,1,.29],['kidneys','Controlling','Kidneys',-1,2,.23],['spleen','Tax','Spleen',-1,3,.12],['lungs',REAL.lungs.name,'Lungs',1,0,.32],['stomach','P2P','Stomach',1,1,.17],['pancreas','FP&A Operations','Pancreas',1,2,.20],['intestines','O2C','Liver',1,3,.25]];
 document.addEventListener('visibilitychange',()=>document.body.classList.toggle('page-hidden',document.hidden));
 const reduced=matchMedia('(prefers-reduced-motion: reduce)'), fine=matchMedia('(hover: hover) and (pointer: fine)');
 const skeletonOpacity=.6; // 1 = solid bones; lower values make the skeleton more see-through
@@ -51,10 +52,11 @@ function resize(){syncAnatomyLayout();if($('#section-1').hidden)return;syncCardH
 function syncCardHeight(){
  if(!selected)return;
  const cardHeight=$('#tower-telemetry-hud').getBoundingClientRect().height;
- const height=innerWidth<1100?Math.max(innerHeight,72+cardHeight+640):$('#section-1').dataset.scaledDesktop==='true'?1440:innerHeight;
+ const height=$('#section-1').dataset.scaledDesktop==='true'?1440:innerWidth<1100?Math.max(innerHeight,72+cardHeight+640):innerHeight;
  $('#experience').style.setProperty('--tower-detail-height',height+'px');
 }
 addEventListener('tower-card-layout',()=>{if(ready&&selected)resize();});
+addEventListener('anatomy-visible',()=>{if(ready)resize();});
 // Zoomed-in layout: measure the HUD, title and controls, then give the organ the largest free square,
 // keeping the organ centered in the space beside or below the KPI panel.
 function detailLayout(){
@@ -145,7 +147,7 @@ function buildConnections(){organs.forEach((o,index)=>{
       const mesh = new T.Mesh(geometry, material);
       mesh.frustumCulled = false;
 
- mesh.renderOrder=4;scene.add(mesh);o.vein=mesh;o.vesselUniforms=uniforms;o.disposeVesselAppearance=mountAstralVessel(mesh,uniforms,o.id);
+ mesh.renderOrder=4;scene.add(mesh);o.vein=mesh;o.vesselUniforms=uniforms;o.disposeVesselAppearance=mountAstralVessel(mesh,uniforms,o.modelId);
 });}
 function fail(error){console.error(error);$('#loading').hidden=false;$('#load-message').textContent='The anatomy could not load. Please retry in a WebGL-enabled browser.';$('#retry').hidden=false;}
 async function init(){try{
@@ -165,15 +167,15 @@ anatomyLandmarks={
 const grouped=new Map(),homes=new Map();for(const part of atlas.parts){const bounds=new T.Box3(new T.Vector3(...part.bounds[0]),new T.Vector3(...part.bounds[1]));if(!homes.has(part.group))homes.set(part.group,bounds);else homes.get(part.group).union(bounds);if(!['skeleton','heart'].includes(part.group))continue;const g=new T.BufferGeometry();g.setAttribute('position',new T.BufferAttribute(new Float32Array(buffer,part.positions,part.vertexCount*3),3));g.setAttribute('normal',new T.BufferAttribute(new Int16Array(buffer,part.normals,part.vertexCount*3),3,true));g.setIndex(new T.BufferAttribute(new Uint32Array(buffer,part.indices,part.indexCount),1));const id=part.group==='skeleton'&&part.bounds[0][1]>1.45?'skull':part.group;if(!grouped.has(id))grouped.set(id,[]);grouped.get(id).push(g);}
 for(const [id,pieces]of grouped){const geo=mergeGeometries(pieces,false);pieces.forEach(g=>g.dispose());const mat=new T.MeshPhysicalMaterial({color:id==='heart'?0xd0006f:0xe1ddd2,roughness:.45,metalness:.02,clearcoat:.16,depthTest:false,transparent:true,opacity:1});const mesh=new T.Mesh(geo,mat);mesh.renderOrder=id==='heart'?11:-1/* skeleton draws first, behind organs, vessels and heart */;if(id==='heart'){geo.computeBoundingBox();const c=geo.boundingBox.getCenter(new T.Vector3());geo.translate(-c.x,-c.y,-c.z);mesh.position.copy(c);heart=mesh;heart.position.z=.23;scene.add(mesh);}else{bones.add(mesh);if(id==='skull')skull=mesh;}}
 mountAstralSkeleton(bones,heart);
-for(const [id,name,organ,side,row,size] of configs){const {model,geometry,network}=await loadReplacement(id);geometry.computeBoundingBox();const visibleBounds=geometry.boundingBox.clone();const root=new T.Group();root.add(model);root.updateMatrixWorld(true);const box=visibleBounds;const center=box.getCenter(new T.Vector3());model.position.sub(center);const max=Math.max(...box.getSize(new T.Vector3()).toArray());model.scale.multiplyScalar(1/max);model.position.multiplyScalar(1/max);const home=homes.get(id).getCenter(new T.Vector3());home.z=Math.max(home.z,.13);if(id==='brain')home.z=.015;// Include the full visible silhouette (including the brainstem), while
+for(const [id,name,organ,side,row,size] of configs){const {model,geometry,network}=await loadReplacement(id);geometry.computeBoundingBox();const visibleBounds=geometry.boundingBox.clone();const root=new T.Group();root.add(model);root.updateMatrixWorld(true);const box=visibleBounds;const center=box.getCenter(new T.Vector3());model.position.sub(center);const max=Math.max(...box.getSize(new T.Vector3()).toArray());model.scale.multiplyScalar(1/max);model.position.multiplyScalar(1/max);const home=homes.get(organModelFor(id)).getCenter(new T.Vector3());home.z=Math.max(home.z,.13);if(id==='brain')home.z=.015;// Include the full visible silhouette (including the brainstem), while
 // retaining the original normalization and scale for the assembled anatomy.
 root.updateMatrixWorld(true);
 const renderedBounds=new T.Box3(),vertex=new T.Vector3();
 model.traverseVisible(mesh=>{if(!mesh.isMesh)return;const positions=mesh.geometry.getAttribute('position');if(!positions)return;for(let i=0;i<positions.count;i++){vertex.fromBufferAttribute(positions,i).applyMatrix4(mesh.matrixWorld);renderedBounds.expandByPoint(vertex);}});
 root.position.copy(home);root.scale.setScalar(size);scene.add(root);
 const label=document.createElement('button');const m=CARD_BRIEFS[id];label.className=`label ${side<0?'left':'right'}${m?' card':''}`;if(m)label.style.setProperty('--accent-c',accentFor(id));label.innerHTML=`<small>${organ}</small><strong>${overviewNameFor(id)}</strong>${m?cardMarkup(m,KPI[id],REAL[id].counts.pain):''}<span class="cta">Explore tower<svg class="ico ico-ne" aria-hidden="true"><use href="#i-ne"/></svg></span>`;label.setAttribute('aria-label',`Explore ${overviewNameFor(id)}, ${organ}.${m?' '+metricsSentence(m,KPI[id],REAL[id].counts.pain):''}`);$('#labels').append(label);
-const o={id,name,organ,side,row,size,root,home,label,m,normalizedSize:renderedBounds.getSize(new T.Vector3()),normalizedCenter:renderedBounds.getCenter(new T.Vector3()),hb:label.querySelector('.hb'),hbOn:false,from:home.clone(),to:home.clone(),fromScale:size,toScale:size,start:0,duration:0,fromQuat:new T.Quaternion(),toQuat:new T.Quaternion(),hoverAmount:0};root.traverse(m=>{if(m.isMesh)m.userData.organ=o;});label.onclick=()=>select(o,label);label.onpointerenter=()=>{if(fine.matches)hover=o;};label.onpointerleave=()=>{hover=null;};
-mountAstralOrgan(o,model,network);
+const o={id,modelId:organModelFor(id),name,organ,side,row,size,root,home,label,m,normalizedSize:renderedBounds.getSize(new T.Vector3()),normalizedCenter:renderedBounds.getCenter(new T.Vector3()),hb:label.querySelector('.hb'),hbOn:false,from:home.clone(),to:home.clone(),fromScale:size,toScale:size,start:0,duration:0,fromQuat:new T.Quaternion(),toQuat:new T.Quaternion(),hoverAmount:0};root.traverse(m=>{if(m.isMesh)m.userData.organ=o;});label.onclick=()=>select(o,label);label.onpointerenter=()=>{if(fine.matches)hover=o;};label.onpointerleave=()=>{hover=null;};
+mountAstralOrgan(o,model,network,KPI[id].asIs);
 o.processNeurons=createProcessNeurons(o,network,REAL[id].stages,$('#process-neurons'));network.visible=false;geometry.dispose();organs.push(o);$('#load-message').textContent=`Preparing ${organ.toLowerCase()}…`;}
 ready=true;resize();document.fonts.ready.then(resize);$('#loading').hidden=true;addEventListener('resize',resize);new ResizeObserver(()=>{if($('#experience').clientHeight!==h)resize();}).observe($('#experience'));frame(performance.now());
 }catch(error){fail(error);}}
@@ -256,7 +258,7 @@ $('#assembly').addEventListener('input',e=>setSeparation(Number(e.target.value)/
 // Wheel/trackpad progress is continuous and reversible; no document scroll listener.
 $('#experience').addEventListener('wheel',e=>{if(e.ctrlKey||!ready||selected||helpdesk.isOpen)return;e.preventDefault();const unit=e.deltaMode===1?16:e.deltaMode===2?h:1;const delta=T.MathUtils.clamp(e.deltaY*unit,-120,120);setSeparation(separationTarget+delta/1800);},{passive:false});
 const canvas=$('#scene');canvas.addEventListener('pointerdown',e=>{if(!ready||e.button!==0)return;if(selected)selected.rotationTarget.copy(selected.root.quaternion);drag={x:e.clientX,y:e.clientY,startX:e.clientX,startY:e.clientY};canvas.setPointerCapture(e.pointerId);});canvas.addEventListener('pointermove',e=>{if(!ready)return;if(drag&&selected){const displayScale=elementDisplayScale(canvas),dx=(e.clientX-drag.x)/displayScale,dy=(e.clientY-drag.y)/displayScale;selected.root.quaternion.premultiply(new T.Quaternion().setFromEuler(new T.Euler(dy*.009,dx*.009,0)));selected.rotationTarget.copy(selected.root.quaternion);selected.duration=0;drag.x=e.clientX;drag.y=e.clientY;}else if(drag&&!selected&&e.pointerType==='touch'){setSeparation(separationTarget+(drag.y-e.clientY)/650);drag.x=e.clientX;drag.y=e.clientY;}else if(!selected&&fine.matches){hover=hit(e);canvas.style.cursor=hover?'pointer':'default';}});canvas.addEventListener('pointerup',e=>{if(drag&&!selected&&Math.hypot(e.clientX-drag.startX,e.clientY-drag.startY)<6){const o=hit(e);if(o)select(o);}drag=null;if(canvas.hasPointerCapture(e.pointerId))canvas.releasePointerCapture(e.pointerId);});canvas.addEventListener('pointercancel',()=>drag=null);canvas.addEventListener('lostpointercapture',()=>drag=null);canvas.addEventListener('pointerleave',()=>hover=null);
-addEventListener('keydown',e=>{if(e.defaultPrevented||!$('#tower-workbench').hidden||!$('#process-workspace').hidden)return;if(e.key==='Escape'&&e.target.closest?.('#process-workspace'))return;if(e.key==='Escape')close();if(selected&&e.target===canvas&&['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)){e.preventDefault();selected.duration=0;selected.root.quaternion.premultiply(new T.Quaternion().setFromEuler(new T.Euler(e.key==='ArrowUp'?-.15:e.key==='ArrowDown'?.15:0,e.key==='ArrowLeft'?-.15:e.key==='ArrowRight'?.15:0,0)));selected.rotationTarget.copy(selected.root.quaternion);}});
+addEventListener('keydown',e=>{if(e.defaultPrevented||!$('#process-workspace').hidden)return;if(e.key==='Escape'&&e.target.closest?.('#process-workspace'))return;if(e.key==='Escape')close();if(selected&&e.target===canvas&&['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)){e.preventDefault();selected.duration=0;selected.root.quaternion.premultiply(new T.Quaternion().setFromEuler(new T.Euler(e.key==='ArrowUp'?-.15:e.key==='ArrowDown'?.15:0,e.key==='ArrowLeft'?-.15:e.key==='ArrowRight'?.15:0,0)));selected.rotationTarget.copy(selected.root.quaternion);}});
 canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();cancelAnimationFrame(animation);fail(new Error('WebGL context lost'));});
 // Keyboard users can explore each organ in either view, without visual label overlap.
 for(const config of configs){const b=document.createElement('button');b.textContent=`Explore ${overviewNameFor(config[0])}`;b.className='keyboard-organ';b.onclick=()=>{const o=organs.find(o=>o.id===config[0]);if(o)select(o,b);};$('#experience').append(b);}

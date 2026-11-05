@@ -1,6 +1,6 @@
 // Only the anatomy rendering differs from the original site. Keep the previous
 // materials resident for restoration checks; the complete original site is also
-// saved in backups/before-astral-20261102-084742.
+// saved in archives/backups/before-astral-20261102-084742.
 const listeners = new Set();
 let enabled = true;
 
