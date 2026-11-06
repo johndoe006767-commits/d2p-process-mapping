@@ -10,7 +10,7 @@ import {organModelFor} from './organs.js?v=20261105-activity-organs';
 import {buildVesselNetwork} from './vessels.js';
 import {mountAstralOrgan,mountAstralSkeleton,mountAstralVessel,createAstralRenderer} from './astral-anatomy.js?v=20261105-activity-organs';
 import {cardMarkup,metricsSentence,accentFor,towerNameFor,towerAcronymFor,overviewNameFor} from './health.js?v=20261104-controlling-copy';
-import {createHelpdesk} from './helpdesk.js?v=20261105-desktop-sizing';
+import {createHelpdesk} from './helpdesk.js?v=20261106-gfs-ytd';
 const $=s=>document.querySelector(s);
 syncAnatomyLayout();
 const configs=[['brain','FP&A Commercial','Brain',-1,0,.18],['liver',REAL.liver.name,'Intestines',-1,1,.29],['kidneys','Controlling','Kidneys',-1,2,.23],['spleen','Tax','Spleen',-1,3,.12],['lungs',REAL.lungs.name,'Lungs',1,0,.32],['stomach','P2P','Stomach',1,1,.17],['pancreas','FP&A Operations','Pancreas',1,2,.20],['intestines','O2C','Liver',1,3,.25]];

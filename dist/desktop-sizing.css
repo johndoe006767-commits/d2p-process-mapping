@@ -57,15 +57,7 @@
  #section-1[data-scaled-desktop=true] .helpdesk-hero>.helpdesk-hero-portrait{display:none}
  #section-1[data-scaled-desktop=true] .helpdesk-caption{bottom:0;max-width:none}
  #section-1[data-scaled-desktop=true] .helpdesk-caption strong{font-size:1.3em}
- #section-1[data-scaled-desktop=true] .helpdesk-dashboard{max-width:none;width:auto;gap:calc(var(--helpdesk-unit) * 1.4);padding:calc(var(--helpdesk-unit) * 2);max-height:100%;overflow:auto}
- #section-1[data-scaled-desktop=true] .helpdesk-period{font-size:.78em}
- #section-1[data-scaled-desktop=true] .helpdesk-period select{max-width:15em;padding:.7em 3em .7em .9em}
- #section-1[data-scaled-desktop=true] .helpdesk-metrics{padding:1em 0}
- #section-1[data-scaled-desktop=true] .helpdesk-metrics dt{font-size:.9em}
- #section-1[data-scaled-desktop=true] .helpdesk-metrics dd{font-size:2.4em}
- #section-1[data-scaled-desktop=true] .helpdesk-chart{height:9em}
- #section-1[data-scaled-desktop=true] .helpdesk-kpis{padding-top:1.2em}
- #section-1[data-scaled-desktop=true] .helpdesk-kpis :is(th,td){padding:.65em .7em}
+ #section-1[data-scaled-desktop=true] .helpdesk-dashboard{max-width:none;width:auto;gap:calc(var(--helpdesk-unit) * 2);padding:calc(var(--helpdesk-unit) * 2);max-height:100%;overflow:auto}
 
  /* Map controls stay readable; only their chrome scales. Node geometry and
     source renderer text are already scaled together by the map's viewBox. */

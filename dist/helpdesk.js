@@ -1,5 +1,14 @@
 // GFS support companion. It deliberately has no process-map or source-register bindings.
 import {elementDisplayScale} from './anatomy-layout.js?v=20261105-desktop-sizing';
+// User-supplied YTD results; shared by the preview and expanded summary.
+const SUPPORT_KPIS = [
+  {label:'Average Resolution Time', value:'1.0', unit:'days'},
+  {label:'SLA', value:'93', unit:'%'},
+  {label:'Customer Satisfaction', value:'92', unit:'%'}
+];
+const supportMetrics = () => SUPPORT_KPIS.map(({label,value,unit}) =>
+  `<div><dt>${label}</dt><dd>${value}${unit==='%'?'':' '}<span class="helpdesk-metric-unit">${unit}</span></dd></div>`
+).join('');
 export function createHelpdesk(host, {onOpen, onClose}) {
   // Both cutouts are trimmed to their visible bounds.
   const fullAspect=490/952, portraitAspect=495/512;
@@ -25,9 +34,9 @@ export function createHelpdesk(host, {onOpen, onClose}) {
     <aside class="helpdesk-preview" aria-label="Finance Operations Support KPI Preview" hidden>
       <svg class="helpdesk-preview-tail" viewBox="0 0 24 28" preserveAspectRatio="none" aria-hidden="true"><path d="M24 1 Q17 10 1 15 Q15 16 24 27" vector-effect="non-scaling-stroke"/></svg>
       <h2>GFS Finance Operations Support</h2>
-      <p>Placeholder Data</p>
-      <dl><div><dt>KPI Name</dt><dd>—</dd></div><div><dt>KPI Name</dt><dd>—</dd></div><div><dt>KPI Name</dt><dd>—</dd></div></dl>
-      <button type="button" class="helpdesk-preview-open">View Operations Support <svg class="ico" aria-hidden="true"><use href="#i-ne"/></svg></button>
+      <p>Year to date (YTD)</p>
+      <dl aria-label="Year-to-date support KPIs">${supportMetrics()}</dl>
+      <button type="button" class="helpdesk-preview-open">View YTD Summary <svg class="ico" aria-hidden="true"><use href="#i-ne"/></svg></button>
     </aside>
     <section id="helpdesk-detail" aria-labelledby="helpdesk-title" hidden>
       <button type="button" class="helpdesk-back"><svg class="ico" aria-hidden="true"><use href="#i-left"/></svg>Back to Overview</button>
@@ -37,15 +46,8 @@ export function createHelpdesk(host, {onOpen, onClose}) {
         <div class="helpdesk-caption"><strong>GFS Finance Operations Support</strong><span>Service Support</span></div>
       </div>
       <div class="helpdesk-dashboard">
-        <div class="helpdesk-heading"><div><h1 id="helpdesk-title">GFS Finance Operations Support</h1><p>Placeholder Data · Reporting Period</p></div><label class="helpdesk-period">Period<select aria-label="Operations Support Reporting Period" disabled><option>Reporting Period</option></select></label></div>
-        <dl class="helpdesk-metrics">
-          <div><dt>Requests Received</dt><dd>—</dd></div><div><dt>Open Requests</dt><dd>—</dd></div><div><dt>Resolved Requests</dt><dd>—</dd></div><div><dt>SLA Compliance</dt><dd>—</dd></div>
-        </dl>
-        <div class="helpdesk-middle">
-          <section class="helpdesk-trend" aria-labelledby="helpdesk-trend-title"><h2 id="helpdesk-trend-title">Service Trend</h2><div class="helpdesk-chart" role="img" aria-label="Chart placeholder. No service trend data has been provided."><span>Chart Placeholder</span></div></section>
-          <section class="helpdesk-process" aria-labelledby="helpdesk-process-title"><h2 id="helpdesk-process-title">Process Information</h2><dl><div><dt>Process</dt><dd>Process Name</dd></div><div><dt>Owner</dt><dd>Owner Name</dd></div><div><dt>Scope</dt><dd>Process Description</dd></div></dl></section>
-        </div>
-        <section class="helpdesk-kpis" aria-labelledby="helpdesk-kpis-title"><h2 id="helpdesk-kpis-title">KPI Details</h2><table><thead><tr><th scope="col">KPI Name</th><th scope="col">Current</th><th scope="col">Target</th><th scope="col">Status</th></tr></thead><tbody><tr><th scope="row">KPI Name</th><td>—</td><td>—</td><td>Pending Data</td></tr><tr><th scope="row">KPI Name</th><td>—</td><td>—</td><td>Pending Data</td></tr></tbody></table></section>
+        <div class="helpdesk-heading"><div><h1 id="helpdesk-title">GFS Finance Operations Support</h1><p>Year to date (YTD)</p></div></div>
+        <dl class="helpdesk-metrics" aria-label="Year-to-date support KPIs">${supportMetrics()}</dl>
       </div>
     </section>`;
   host.append(root);

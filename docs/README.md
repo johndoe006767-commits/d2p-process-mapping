@@ -83,7 +83,7 @@ The rendered check uses `.runtime/source-sync/capture.json`, captured from the s
 
 Push changes to `main` to deploy. GitHub Actions publishes only `dist/` to GitHub Pages, retaining relative paths so the site also works under `/d2p-process-mapping/`.
 
-The local and published sites use the same `dist/` files. The release marker is `20261105-desktop-sizing`. Updated dependent assets carry version tags to refresh browser caches. `tests/desktop-sizing.mjs` accepts an installed Playwright path and checks the desktop sizing against the local server.
+The local server and publication workflow both use `dist/`. The release marker is `20261106-gfs-ytd`. GitHub Pages publishes the release when these files are pushed to `main`. The GFS support preview and expanded summary show Average Resolution Time **1.0 days**, SLA **93%** and Customer Satisfaction **92%**, with “Year to date (YTD)” in both views. See [KPI surface](kpi-surface.md) for the component scope and local verification. The updated helpdesk and desktop sizing stylesheets, scene entry point and helpdesk module import carry version tags to refresh browser caches. `tests/desktop-sizing.mjs` accepts an installed Playwright path and checks the desktop sizing against the local server.
 
 The process navigation groups the As Is / AI Suggested and map-view controls without extra visible group labels. Challenge and TPI / CI cards use four columns before wrapping, retain full source text and references, and show CHALLENGE / SOLUTION without brackets.
 
