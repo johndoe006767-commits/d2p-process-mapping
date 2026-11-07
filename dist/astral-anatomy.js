@@ -116,14 +116,15 @@ function sampleSurface(geometry, count, rand) {
 function branchMaterial(colors, activity = false) {
   return new T.ShaderMaterial({
     uniforms: { signalColor: { value: new T.Color(colors.signal) }, accent: { value: new T.Color(colors.accent) }, time: clock },
-    vertexShader: `${activity ? 'attribute vec3 activityColor; varying vec3 vActivityColor;' : ''} varying vec2 vUv; varying vec3 vP; void main(){${activity ? 'vActivityColor=activityColor;' : ''}vUv=uv;vP=position;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,
+    vertexShader: `${activity ? 'attribute vec4 activityColor; varying vec4 vActivityColor;' : ''} varying vec2 vUv; varying vec3 vP; void main(){${activity ? 'vActivityColor=activityColor;' : ''}vUv=uv;vP=position;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,
     fragmentShader: `uniform vec3 signalColor,accent;uniform float time;varying vec2 vUv;varying vec3 vP;
-      ${activity ? 'varying vec3 vActivityColor;' : ''}
+      ${activity ? 'varying vec4 vActivityColor;' : ''}
       void main(){
         float pulse=pow(0.5+0.5*sin(vUv.x*7.0-time*1.8+vP.y*14.0),12.0);
         float colorMix=smoothstep(-0.2,0.2,sin(vP.x*9.0+vP.y*5.0));
-        vec3 color=${activity ? 'vActivityColor' : 'mix(signalColor,accent,colorMix*0.65)'}*(2.3+pulse*1.6);
+        vec3 color=${activity ? 'vActivityColor.rgb' : 'mix(signalColor,accent,colorMix*0.65)'}*(2.3+pulse*1.6);
         color+=vec3(1.0,0.93,0.82)*pulse*0.65;
+        ${activity ? 'if (vActivityColor.w > 0.5) color = vActivityColor.rgb * mix(0.65, 1.0, pulse);' : ''}
         gl_FragColor=vec4(color,0.94);
         #include <colorspace_fragment>
       }`,
@@ -135,17 +136,19 @@ function branchMaterial(colors, activity = false) {
 function pointsMaterial(colors, activity = false) {
   return new T.ShaderMaterial({
     uniforms: { tint: { value: new T.Color(colors.signal) }, time: clock, viewportHeight: viewport },
-    vertexShader: `${activity ? 'attribute vec3 activityColor; varying vec3 vActivityColor;' : ''} attribute float intensity; uniform float viewportHeight;varying float vI;
+    vertexShader: `${activity ? 'attribute vec4 activityColor; varying vec4 vActivityColor;' : ''} attribute float intensity; uniform float viewportHeight;varying float vI;
       void main(){${activity ? 'vActivityColor=activityColor;' : ''}vI=intensity;vec4 p=modelViewMatrix*vec4(position,1.0);gl_Position=projectionMatrix*p;
         float scale=length(modelViewMatrix[0].xyz);
         gl_PointSize=clamp(viewportHeight*projectionMatrix[1][1]*scale*0.014*intensity,3.0,28.0);
       }`,
     fragmentShader: `uniform vec3 tint;uniform float time;varying float vI;
-      ${activity ? 'varying vec3 vActivityColor;' : ''}
+      ${activity ? 'varying vec4 vActivityColor;' : ''}
       void main(){float d=length(gl_PointCoord-0.5)*2.0;if(d>1.0)discard;
         float core=exp(-d*d*28.0),glow=exp(-d*d*5.0)*0.52;
         float pulse=0.8+0.2*sin(time*1.4+vI*20.0);
-        gl_FragColor=vec4(mix(${activity ? 'vActivityColor' : 'tint'}*1.7,vec3(1.0,0.95,0.9)*2.0,core), (core+glow)*pulse);
+        vec3 color=mix(${activity ? 'vActivityColor.rgb' : 'tint'}*1.7,vec3(1.0,0.95,0.9)*2.0,core);
+        ${activity ? 'if (vActivityColor.w > 0.5) color = vActivityColor.rgb * mix(0.65, 1.0, core);' : ''}
+        gl_FragColor=vec4(color, (core+glow)*pulse);
         #include <colorspace_fragment>
       }`,
     transparent: true, depthWrite: false, depthTest: false, toneMapped: false,
@@ -214,7 +217,12 @@ function makeInterior(geometries, id, seed, activity = null, surfaceProgress = n
     }
   }
   const types = activity ? neuronTypes(nodes.length, activity, seed) : [];
-  const nodeColors = types.map(type => new T.Color(ACTIVITY_COLORS[type] || colors.signal));
+  const nodeColors = types.map(type => {
+    const color = new T.Color(ACTIVITY_COLORS[type] || colors.signal);
+    // RGB is the legend swatch. W marks Semi so the glow can pulse up to
+    // that gold without clipping both red and green to full brightness.
+    return new T.Vector4(color.r, color.g, color.b, type === 'semi' ? 1 : 0);
+  });
   if (activity) {
     group.userData.activityMix = activityMix(activity);
     group.userData.neuronCounts = Object.fromEntries(Object.keys(ACTIVITY_COLORS).map(type => [type, types.filter(value => value === type).length]));
@@ -224,9 +232,9 @@ function makeInterior(geometries, id, seed, activity = null, surfaceProgress = n
       const endpoint = piece.parameters.path.getPoint(1);
       let nearest = 0, distance = Infinity;
       nodes.forEach((node, index) => { const d = node.distanceToSquared(endpoint); if (d < distance) { distance = d; nearest = index; } });
-      const color = nodeColors[nearest], values = new Float32Array(piece.attributes.position.count * 3);
-      for (let i = 0; i < piece.attributes.position.count; i++) color.toArray(values, i * 3);
-      piece.setAttribute('activityColor', new T.BufferAttribute(values, 3));
+      const color = nodeColors[nearest], values = new Float32Array(piece.attributes.position.count * 4);
+      for (let i = 0; i < piece.attributes.position.count; i++) color.toArray(values, i * 4);
+      piece.setAttribute('activityColor', new T.BufferAttribute(values, 4));
     }
   }
   if (pieces.length) {
@@ -237,7 +245,7 @@ function makeInterior(geometries, id, seed, activity = null, surfaceProgress = n
   const pointGeometry = new T.BufferGeometry();
   pointGeometry.setAttribute('position', new T.Float32BufferAttribute(nodes.flatMap(p => p.toArray()), 3));
   pointGeometry.setAttribute('intensity', new T.Float32BufferAttribute(nodes.map(() => 0.45 + rand() * 0.85), 1));
-  if (activity) pointGeometry.setAttribute('activityColor', new T.Float32BufferAttribute(nodeColors.flatMap(color => color.toArray()), 3));
+  if (activity) pointGeometry.setAttribute('activityColor', new T.Float32BufferAttribute(nodeColors.flatMap(color => color.toArray()), 4));
   const points = new T.Points(pointGeometry, pointsMaterial(colors, Boolean(activity)));
   points.renderOrder = 8; points.layers.enable(1); points.raycast = noHit; group.add(points);
   if (id === 'lungs') {
@@ -280,8 +288,9 @@ function themeNetwork(network, id, activity = null) {
     const variants = cache.get(original);
     if (!variants.has(color)) {
       const material = original.clone();
-      if (material.color) material.color.set(color).multiplyScalar(4.8);
-      if (material.uniforms?.glowColor) material.uniforms.glowColor.value.set(color).multiplyScalar(4.8);
+      const intensity = type === 'semi' ? 1 : 4.8;
+      if (material.color) material.color.set(color).multiplyScalar(intensity);
+      if (material.uniforms?.glowColor) material.uniforms.glowColor.value.set(color).multiplyScalar(intensity);
       material.toneMapped = false;
       variants.set(color, material);
     }

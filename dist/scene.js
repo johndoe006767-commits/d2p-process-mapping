@@ -8,7 +8,7 @@ import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
 import {loadReplacement} from './models.js?v=20261105-activity-organs';
 import {organModelFor} from './organs.js?v=20261105-activity-organs';
 import {buildVesselNetwork} from './vessels.js';
-import {mountAstralOrgan,mountAstralSkeleton,mountAstralVessel,createAstralRenderer} from './astral-anatomy.js?v=20261105-activity-organs';
+import {mountAstralOrgan,mountAstralSkeleton,mountAstralVessel,createAstralRenderer} from './astral-anatomy.js?v=20261107-semi-gold';
 import {cardMarkup,metricsSentence,accentFor,towerNameFor,towerAcronymFor,overviewNameFor} from './health.js?v=20261104-controlling-copy';
 import {createHelpdesk} from './helpdesk.js?v=20261106-gfs-ytd';
 const $=s=>document.querySelector(s);
