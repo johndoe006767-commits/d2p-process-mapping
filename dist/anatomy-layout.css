@@ -26,8 +26,6 @@ body[data-detail=true] #section-1[data-scaled-desktop=true] #experience{height:1
 #section-1[data-scaled-desktop=true] #overview-intro{top:20.48px;width:1040px}
 #section-1[data-scaled-desktop=true] #overview-intro h1{font-size:42.66752px}
 #section-1[data-scaled-desktop=true] #overview-intro p{font-size:14px}
-body[data-disassembled=true] #section-1[data-scaled-desktop=true] #overview-intro{width:min(680px,var(--overview-gap,716.8px))}
-body[data-disassembled=true] #section-1[data-scaled-desktop=true] #overview-intro h1{font-size:min(29.33248px,calc(var(--overview-gap,716.8px)*.08))}
 #section-1[data-scaled-desktop=true] #helpdesk{--helpdesk-unit:20.48px}
 #section-1[data-scaled-desktop=true] .helpdesk-dock-label{font-size:16.64px}
 #section-1[data-scaled-desktop=true] .helpdesk-preview{width:460.8px}

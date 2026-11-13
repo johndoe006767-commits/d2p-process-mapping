@@ -1,8 +1,8 @@
 import {cancelPageNavigation} from './page-navigation.js';
-import {REAL,KPI,escapeHTML as esc} from './real-data.js?v=20261104-controlling-copy';
-import {CARD_BRIEFS} from './tower-briefs.js?v=20261104-controlling-copy';
-import {comparisonMarkup} from './health.js?v=20261104-controlling-copy';
-import {prepareNeural,clearNeural} from './neural-loader.js?v=20261104-controlling-copy';
+import {REAL,KPI,escapeHTML as esc} from './real-data.js?v=20261112-source-parity';
+import {CARD_BRIEFS} from './tower-briefs.js?v=20261112-source-parity';
+import {comparisonMarkup} from './health.js?v=20261112-source-parity';
+import {prepareNeural,clearNeural} from './neural-loader.js?v=20261113-unified-nav';
 import {titleCase,normalizeHeadings} from './title-case.js';
 const $=s=>document.querySelector(s);
 let currentId=null,ticket=0,mapOpener=null,organPosition={top:0,left:0};
@@ -41,12 +41,13 @@ export async function openMap(id,stage=null,mode='detail',keyboard=false){
   const api=await loading;if(n!==ticket||!api)return;
   api.setMode(mode==='high'?'overview':'detail');api.fitWidth();
   await new Promise(requestAnimationFrame);if(n!==ticket)return;
-  const done=mode==='high'?true:await api.go(stage||REAL[id].stages[0].id);
+  const done=mode!=='high'&&stage?await api.go(stage):true;
   if(n!==ticket)return;
-  const target=keyboard&&done?(mode==='high'?$('#overview h1'):workspace.querySelector(`[data-stage-heading="${api.getState().activeStage}"] .stage-index-label`)):$('#lab-return');
-  target?.setAttribute('tabindex','-1');target?.focus({preventScroll:true});
-  // The return button remains part of the normal keyboard sequence.
-  $('#lab-return').removeAttribute('tabindex');
+  const target=keyboard&&done
+   ? (stage?workspace.querySelector(`[data-stage-heading="${api.getState().activeStage}"] .stage-index-label`):$(mode==='high'?'#overview':'#process-map'))
+   : $('#lab-return');
+  if(target&&!target.matches('button'))target.setAttribute('tabindex','-1');
+  target?.focus({preventScroll:true});
   $('#process-status').textContent=stage?`Opened ${REAL[id].stages.find(s=>s.id===stage)?.name||stage}.`:`Opened ${REAL[id].name} ${mode==='high'?'High-Level Flow':'Detailed Process Flow'}.`;
  }catch(e){if(n!==ticket)return;console.error(e);$('#neural-retry')?.focus({preventScroll:true});}
 }
@@ -75,7 +76,7 @@ function renderKpiContext(id){
    if(active&&focus)tab.focus({preventScroll:true});
   });
   const panel=$('#hud-year-panel');panel.setAttribute('aria-labelledby','hud-year-'+year);
-  panel.innerHTML=populated?`${brief.projects[year].length?`<ul class="hud-project-list">${brief.projects[year].map(project=>`<li><strong>${esc(project.name)}</strong><p>${esc(project.description)}</p></li>`).join('')}</ul>`:`<div class="hud-project-empty"><strong>No ${year} ${year==='2027'?'AI-suggested ':''}TPI projects supplied</strong><p>The source records 0 projects for this tower.</p></div>`}${brief.notes[year]?`<p class="hud-project-note">${esc(brief.notes[year])}</p>`:''}`:'<div class="hud-project-empty"><strong>Awaiting tower data</strong><p>Project names and descriptions will appear here.</p></div>';
+  panel.innerHTML=populated?`${brief.projects[year].length?`<ul class="hud-project-list">${brief.projects[year].map(project=>`<li><strong>${esc(project.name)}</strong>${project.description&&project.description!==project.name?`<p>${esc(project.description)}</p>`:''}</li>`).join('')}</ul>`:`<div class="hud-project-empty"><strong>No ${year} ${year==='2027'?'AI-suggested ':''}TPI projects supplied</strong><p>The source records 0 projects for this tower.</p></div>`}${brief.notes[year]?`<p class="hud-project-note">${esc(brief.notes[year])}</p>`:''}`:'<div class="hud-project-empty"><strong>Awaiting tower data</strong><p>Project names and descriptions will appear here.</p></div>';
   window.dispatchEvent(new Event('tower-card-layout'));
  };
  tabs.forEach(tab=>tab.onclick=()=>selectYear(tab.dataset.projectYear));

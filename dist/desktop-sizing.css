@@ -62,15 +62,5 @@
  /* Map controls stay readable; only their chrome scales. Node geometry and
     source renderer text are already scaled together by the map's viewBox. */
  #process-workspace{--desktop-unit:min(.026041667vw,.046296296dvh);--lab-unit:clamp(14px,calc(22 * var(--desktop-unit)),28px);font-size:var(--lab-unit)}
- #process-workspace #navigation{--nav-size:clamp(12px,calc(18 * var(--desktop-unit)),24px);--nav-height:clamp(36px,calc(52 * var(--desktop-unit)),64px);--nav-gap:clamp(12px,calc(32 * var(--desktop-unit)),40px)}
- #process-workspace #navigation .mast{min-height:clamp(76px,calc(112 * var(--desktop-unit)),144px);gap:var(--nav-gap);padding-block:clamp(12px,calc(22 * var(--desktop-unit)),28px)}
- #process-workspace #navigation .identity strong{font-size:clamp(18px,calc(28 * var(--desktop-unit)),36px);line-height:1.25}
- #process-workspace #navigation .identity small{font-size:clamp(11px,calc(16 * var(--desktop-unit)),20px)}
- #process-workspace #navigation .navigation-group{gap:clamp(8px,calc(16 * var(--desktop-unit)),20px)}
- #process-workspace #navigation :is(.scenario-switch,.map-modes) button{font-size:var(--nav-size);min-height:var(--nav-height);padding:clamp(7px,calc(10 * var(--desktop-unit)),14px) clamp(10px,calc(22 * var(--desktop-unit)),28px)}
- #process-workspace #navigation .scenario-switch button{min-width:clamp(78px,calc(118 * var(--desktop-unit)),148px)}
- #process-workspace #navigation .scenario-switch{min-width:0}
- #process-workspace #navigation .lab-return{font-size:var(--nav-size);min-height:var(--nav-height)}
- #process-workspace #navigation :is(.view-icon,.return-icon){width:clamp(16px,calc(20 * var(--desktop-unit)),26px);height:clamp(16px,calc(20 * var(--desktop-unit)),26px)}
  #process-workspace #information-card{max-width:calc(100vw - 32px);max-height:calc(100dvh - 32px)}
 }

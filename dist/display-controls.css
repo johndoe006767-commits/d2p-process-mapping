@@ -9,5 +9,5 @@
 #display-status{position:fixed;z-index:211;top:90px;right:24px;max-width:340px;padding:14px 18px;border:1px solid #9674a3;border-radius:10px;background:#30203e;color:#f6f1f5;font-size:14px;line-height:1.5}
 body[data-fullscreen-control=true] #detail #back{right:100px}
 body[data-fullscreen-control=true] #helpdesk .helpdesk-back{right:100px}
-body[data-fullscreen-control=true] #process-workspace .mast{padding-right:80px}
+#process-workspace:not([hidden],[data-mode=dashboard]) ~ :is(#display-fullscreen,#display-status){display:none}
 body[data-fullscreen-control=true] #tower-workbench .tw-page-heading{padding-right:80px}

@@ -39,7 +39,7 @@ body{font-family:Inter,Arial,sans-serif}h1,h2,h3,h4,h5,h6{font-family:Inter,Aria
  #process-workspace #map-controls-toggle{font-size:12px;color:var(--accent);min-height:44px;padding:6px 8px;border:1px solid var(--line);border-radius:6px;flex:none}
  #process-workspace #map-controls-toggle svg{transition:transform .16s}
  #process-workspace #map-controls-toggle[aria-expanded=true] svg{transform:rotate(180deg)}
- #process-workspace #navigation:not(.controls-expanded) :is(.control-bar,#legend){display:none}
+ #process-workspace #navigation:not(.controls-expanded) :is(#map-adjustments,#legend){display:none}
  #process-workspace .control-bar{max-height:40dvh;overflow:auto}
  #process-workspace .filters button,#process-workspace .map-tools button{min-height:44px}
  #process-workspace .location-bar{padding:7px 0;align-items:flex-start;font-size:10px;line-height:1.4}

@@ -1,22 +1,13 @@
 // Process metrics and workbook context shared with the selected tower card.
-import {REAL} from './real-data.js?v=20261104-controlling-copy';
+import {REAL} from './real-data.js?v=20261112-source-parity';
 import {organs} from './organs.js';
 
 const ACCENT = Object.fromEntries(organs.map(o => [o.id, o.color]));
 ACCENT.brain = '#d89daf';
 export const accentFor = id => ACCENT[id] || '#cabbcf';
-const TOWER_NAMES = {
-  brain: 'Financial Planning & Analysis · Commercial',
-  pancreas: 'Financial Planning & Analysis · Operations',
-  kidneys: 'Financial Controlling',
-  spleen: 'Tax',
-  stomach: 'Purchase To Pay',
-  intestines: 'Order to Cash',
-};
-export const towerNameFor = id => TOWER_NAMES[id] || REAL[id]?.name || id;
-export const towerAcronymFor = key => ({FPAC:'FP&A Commercial',FPAO:'FP&A Operations'})[key] || key;
-const OVERVIEW_NAMES={brain:'FP&A Commercial',pancreas:'FP&A Operations',kidneys:'Controlling'};
-export const overviewNameFor=id=>OVERVIEW_NAMES[id]||towerNameFor(id);
+export const towerNameFor = id => REAL[id]?.name || id;
+export const towerAcronymFor = key => key === 'FPAC' ? 'FP&A Commercial' : key;
+export const overviewNameFor = towerNameFor;
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
 export function metricsSentence(brief, metrics, painCount) {

@@ -2,11 +2,12 @@ const minor=new Set(['a','an','and','as','at','but','by','for','from','in','into
 export function titleCase(value){
  const words=String(value??'').split(/(\s+)/);let first=true;
  return words.map((word,i)=>{if(!word.trim())return word;const clean=word.replace(/^[^\p{L}\d]+|[^\p{L}\d]+$/gu,'');if(!clean)return word;
+ if(/^as-is$/i.test(clean)){first=false;return word.replace(clean,'As-Is');}
  const v=clean.split(/([-–/])/).map((part,j,parts)=>{
   if(!/\p{L}/u.test(part))return part;
   if(/^[A-Z\d&+.]{2,}s?$/.test(part)||/[a-z][A-Z]/.test(part)||/\d/.test(part))return part;
   const lower=part.toLowerCase();
-  if(minor.has(lower)&&!(first&&j===0)&&!(i===words.length-1&&j===parts.length-1))return lower;
+  if(minor.has(lower)&&!((first||word.startsWith('('))&&j===0)&&!(i===words.length-1&&j===parts.length-1))return lower;
   return lower.replace(/^\p{L}/u,c=>c.toUpperCase());
  }).join('');first=/[:.!?]$/.test(word);return word.replace(clean,v);
  }).join('');

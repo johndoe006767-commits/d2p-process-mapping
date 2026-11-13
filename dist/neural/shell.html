@@ -1,24 +1,30 @@
  <a class="skip" href="#process-map">Skip to process map</a>
  <header id="navigation">
-  <div class="mast">
-   <a class="identity" href="#stage-1" aria-label="{{NAME}}, first stage"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M15.5 6C12 2 7 5 7 9c-5 1-5 8-2 10-2 5 2 9 6 8 3 3 5 1 5-2V8m1-2c4-4 9-1 9 3 5 1 5 8 2 10 2 5-2 9-6 8-3 3-5 1-5-2V8M7 9c1 2 4 1 5 4m-7 6c3-2 6 0 6 3m15-13c-1 2-4 1-5 4m7 6c-3-2-6 0-6 3"/></svg><span><strong>{{NAME}}</strong><small>Process anatomy <span>·</span> As-Is</small></span></a>
-   <div class="navigation-group navigation-scenario"><div id="scenario-slot"></div></div>
-   <div class="navigation-group navigation-view"><div class="map-modes" role="group" aria-label="Map view"><button type="button" data-mode="overview" aria-pressed="false"><svg class="view-icon" viewBox="0 0 20 20" aria-hidden="true"><rect x="1.5" y="6.5" width="5" height="7" rx="1.5"/><rect x="13.5" y="6.5" width="5" height="7" rx="1.5"/><path d="M6.5 10h7"/></svg>High-level flow</button><button type="button" data-mode="detail" aria-pressed="true"><svg class="view-icon" viewBox="0 0 20 20" aria-hidden="true"><rect x="2" y="2" width="6" height="6" rx="1.5"/><rect x="12" y="2" width="6" height="6" rx="1.5"/><rect x="2" y="12" width="6" height="6" rx="1.5"/><rect x="12" y="12" width="6" height="6" rx="1.5"/></svg>Detailed processes</button></div></div>
-   <button class="lab-return" id="lab-return" type="button"><svg class="return-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M16 10H4m5-5-5 5 5 5"/></svg>Back to Organ</button>
+  <div class="stage-navigation">
+   <nav id="stages" aria-label="Process stages"></nav>
+   <div class="mobile-stages"><label for="stage-select">Stage</label><select id="stage-select"></select><button id="map-controls-toggle" aria-expanded="false" aria-controls="map-adjustments">Controls<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button></div>
   </div>
-  <nav id="stages" aria-label="Process stages"></nav>
-  <div class="mobile-stages"><label for="stage-select">Stage</label><select id="stage-select"></select><button id="map-controls-toggle" aria-expanded="false" aria-controls="map-controls">Controls<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button></div>
   <div class="control-bar" id="map-controls">
-   <div class="filters" aria-label="Activity filters"><button data-filter="all" aria-pressed="true">All activities <small id="total-count"></small></button><button data-filter="man" aria-pressed="false"><i class="dot manual"></i>Manual</button><button data-filter="hyb" aria-pressed="false"><i class="dot semi"></i>Semi</button><button data-filter="auto" aria-pressed="false"><i class="dot automated"></i>Automated</button><button data-filter="pp" aria-pressed="false"><i class="pain-icon">!</i>Pain points</button></div>
-   <div class="map-tools"><button id="legend-toggle" aria-expanded="false" aria-controls="legend">Map key</button><span class="tool-divider"></span><button id="zoom-out" aria-label="Zoom out"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10"/></svg></button><output id="zoom-value" aria-live="polite">100%</output><button id="zoom-in" aria-label="Zoom in"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M8 3v10"/></svg></button><button id="fit" title="Fit the complete map width; use Readable to restore text size">Fit Width</button><button id="readable" title="Restore readable map text size">Readable</button></div>
+   <nav class="toolbar-nav" aria-label="Map navigation">
+    <div id="scenario-slot"></div>
+    <div class="map-modes" role="group" aria-label="Process views">
+     <button type="button" data-mode="dashboard" aria-controls="dashboard" aria-pressed="false"><svg class="view-icon" viewBox="0 0 20 20" aria-hidden="true"><rect x="2" y="2" width="16" height="16" rx="2"/><path d="M2 8h16M8 8v10"/></svg>Summary</button>
+     <button type="button" data-mode="overview" aria-controls="overview" aria-pressed="false"><svg class="view-icon" viewBox="0 0 20 20" aria-hidden="true"><rect x="1.5" y="6.5" width="5" height="7" rx="1.5"/><rect x="13.5" y="6.5" width="5" height="7" rx="1.5"/><path d="M6.5 10h7"/></svg>High-Level Flow</button>
+     <button type="button" data-mode="detail" aria-controls="process-map" aria-pressed="true"><svg class="view-icon" viewBox="0 0 20 20" aria-hidden="true"><rect x="2" y="2" width="6" height="6" rx="1.5"/><rect x="12" y="2" width="6" height="6" rx="1.5"/><rect x="2" y="12" width="6" height="6" rx="1.5"/><rect x="12" y="12" width="6" height="6" rx="1.5"/></svg>Detailed Processes</button>
+    </div>
+   </nav>
+   <div id="map-adjustments">
+    <div class="filters" role="group" aria-label="Activity filters"><button data-filter="all" aria-pressed="true">All activities <small id="total-count"></small></button><button data-filter="man" aria-pressed="false"><i class="dot manual"></i>Manual</button><button data-filter="hyb" aria-pressed="false"><i class="dot semi"></i>Semi</button><button data-filter="auto" aria-pressed="false"><i class="dot automated"></i>Automated</button><button data-filter="pp" aria-pressed="false"><i class="pain-icon">!</i>Pain points</button></div>
+    <div class="map-tools"><button id="legend-toggle" aria-expanded="false" aria-controls="legend">Map key</button><span class="tool-divider"></span><button id="zoom-out" aria-label="Zoom out"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10"/></svg></button><output id="zoom-value" aria-live="polite">100%</output><button id="zoom-in" aria-label="Zoom in"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M8 3v10"/></svg></button><button id="fit" title="Fit the complete map width">Fit Width</button></div>
+   </div>
+   <button class="lab-return" id="lab-return" type="button"><svg class="return-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M16 10H4m5-5-5 5 5 5"/></svg>Back to Organ</button>
   </div>
   <div id="legend" hidden><span><i class="legend-line"></i>Process flow</span><span><i class="legend-line chain"></i>Between processes</span><span><i class="legend-line loop"></i>Feedback loop</span><span><i class="decision-symbol"></i>Decision</span><span>Labels identify inputs and outputs. Bars show the activity mix: M = Manual, S = Semi, A = Automated.</span><span>Motion illustrates direction, not live activity.</span></div>
 
  </header>
  <div class="lab-main">
-  <div class="map-intro"><div><h1>Planning, reporting and control.</h1><p>Follow 102 activities through the planning and monthly cycles, with their decisions, handoffs and feedback loops.</p></div><button id="first-step">Inspect the first step <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5"/></svg></button></div>
   <section id="process-map" aria-label="{{NAME}} detailed process map" tabindex="-1"><svg id="map-svg" role="group" aria-label="Detailed Process Map"></svg></section>
-  <section id="overview" aria-label="High-level process flow" hidden><div class="overview-heading"><div><h1>From assumptions to attestation.</h1><p class="overview-intro">12 connected processes across 9 stages. Select a process to inspect its inputs, outputs and activity mix.</p></div><span>Planning → monthly cycle → feedback</span></div><svg id="overview-svg" role="group" aria-label="Planning and monthly cycles with parallel streams and feedback loops"></svg></section>
+  <section id="overview" tabindex="-1" aria-label="High-level process flow" hidden><div class="overview-heading"><div><h1>From assumptions to attestation.</h1><p class="overview-intro">12 connected processes across 9 stages. Select a process to inspect its inputs, outputs and activity mix.</p></div><span>Planning → monthly cycle → feedback</span></div><svg id="overview-svg" role="group" aria-label="Planning and monthly cycles with parallel streams and feedback loops"></svg></section>
 
  </div>
  <aside id="information-card" popover="auto" role="dialog" aria-labelledby="card-title">

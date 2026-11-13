@@ -91,15 +91,15 @@ function noBranch(n){const q=n.dec,nx=q.nx,cx=n.x+DW/2,by=n.y+DW,rowY=n.y-(H/2-D
   const T=nx.out?nodes[`${n.f.id}|${n.P.id}|out`]:nodes[`${n.f.id}|${n.P.id}|${nx.step}`];if(!T)return text(cx,n.y+DW+11,wrap("No: "+q.no,26,1),{fs:8.5,fill:"#7b3597"});
   const yb=rb+40+(n.ln||0)*12+(n.P&&page==='tobe'?30:0),ex=nx.out?T.x+T.w/2:T.x+T.w-16,ty=T.y+T.h+((T.s&&T.s.feas)?((T.s.out||[]).length?44:20):0);
   o+=`<path d="M${cx},${by} L${cx},${yb} L${ex},${yb} L${ex},${ty}" class="fl" marker-end="url(#o1)"/>`+text(cx+5,by+13,[q.swap?"Yes":"No"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"});
-  const nl=q.nl||nx.nl;if(nl){const lw=nl.length*5.4+8;o+=`<rect x="${cx+10}" y="${yb-7}" width="${lw}" height="13" rx="3" fill="var(--card)" fill-opacity=".92"/>`+text(cx+14,yb+3,[nl],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}
+  const nl=q.nl||nx.nl;if(nl){o+=text(cx+14,yb+3,[nl],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}
   return o}
 function fixBranch(n){const q=n.dec,F=nodes[`${n.f.id}|${n.P.id}|${q.fix.n}`];if(!F)return "";const W=F.w,cx=n.x+DW/2,by=n.y+DW,rowY=n.y-(H/2-DW/2),ym=rowY+H+18,ex=F.x+W+16,rx=F.x-16,cy=rowY+H/2;let o="";
   o+=`<path d="M${cx},${by} L${cx},${ym} L${ex},${ym} L${ex},${F.y+H/2} L${F.x+W},${F.y+H/2}" class="fl" marker-end="url(#o1)"/>`+text(cx+5,by+12,["No"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"});
   const S1=nodes[`${n.f.id}|${n.P.id}|1`];
   if(n.P.id==="SOC-01.1"){const S2=nodes[`${n.f.id}|${n.P.id}|1`];if(S2){const k=["1a","1b","1c"].indexOf(q.fix.n),yy=F.y+H+22+k*9,tx=S2.x+30+k*14,fx=F.x+W/2;o+=`<path d="M${fx},${F.y+H} L${fx},${yy} L${tx},${yy} L${tx},${S2.y+H}" class="fl" marker-end="url(#o1)"/>`}}else if(S1&&false){const k=["1a","1b","1c"].indexOf(q.fix.n),by=F.y+H+18+k*10,sx=S1.x+30+k*12,fx=F.x+W/2;o+=`<path d="M${fx},${F.y+H} L${fx},${by} L${sx},${by} L${sx},${S1.y+H}" class="fl" stroke-dasharray="5 3" marker-end="url(#o1)"/>`;
-  if(k===0)o+=`<rect x="${sx+8}" y="${by-7}" width="${"Retry from step 1".length*5+6}" height="13" rx="3" fill="var(--card)" fill-opacity=".92"/>`+text(sx+11,by+3,["Retry from step 1"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}
+  if(k===0)o+=text(sx+11,by+3,["Retry from step 1"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}
   else if(!q.noRetry){o+=`<path d="M${F.x},${F.y+H/2} L${rx},${F.y+H/2} L${rx},${cy} L${n.x},${cy}" class="fl" stroke-dasharray="5 3" marker-end="url(#o1)"/>`;
-  const ly=(F.y+H/2+cy)/2;o+=`<rect x="${rx-34}" y="${ly-7}" width="31" height="13" rx="3" fill="var(--card)" fill-opacity=".92"/>`+text(rx-4,ly+3,["Retry"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"end"});
+  const ly=(F.y+H/2+cy)/2;o+=text(rx-4,ly+3,["Retry"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"end"});
   }
   if(n.P.id==="SOC-05.1"){const O=nodes[`${n.f.id}|${n.P.id}|out`],S3=nodes[`${n.f.id}|${n.P.id}|3`],fx=F.x+W/2;if(O){const tx=O.x+O.w/2,jy=F.y+H+30;o+=`<path d="M${fx+12},${F.y+H} L${fx+12},${jy} L${tx},${jy} L${tx},${O.y+O.h}" class="fl" marker-end="url(#o1)"/>`}if(S3){const tx=S3.x+W-10,jy=F.y+H+16;o+=`<path d="M${fx-12},${F.y+H} L${fx-12},${jy} L${tx},${jy} L${tx},${S3.y+H}" class="fl" marker-end="url(#o1)"/>`}}else if(q.fix.join){const sq=n.P._seq||[],J=q.fix.join==="out"?nodes[`${n.f.id}|${n.P.id}|out`]:nodes[sq[sq.indexOf(n.id)+2]];if(J){const jx=F.x+W/2,jy=F.y+H+34,tx=J.x+J.w/2;if(J.kind==="dec"){const cyy=J.y+J.h/2,mx=J.x-14;o+=`<path d="M${jx},${F.y+H} L${jx},${jy} L${mx},${jy} L${mx},${cyy} L${J.x},${cyy}" class="fl" marker-end="url(#o1)"/>`}else o+=`<path d="M${jx},${F.y+H} L${jx},${jy} L${tx},${jy} L${tx},${J.y+J.h}" class="fl" marker-end="url(#o1)"/>`}}
   return o}
@@ -113,7 +113,7 @@ function draw(){
     if(f.pp&&f.pp.length)h+=`<g><title>Pain points: ${esc2(f.pp.join(" | "))}</title><circle cx="${PAD+wdt-22}" cy="${b.top+20}" r="9" fill="#fff"/><text x="${PAD+wdt-22}" y="${b.top+24.5}" font-size="12" font-weight="700" fill="var(--pain)" text-anchor="middle">!</text></g>`;
     if(f.ctl&&f.ctl.length)h+=`<g><title>Controls: ${esc2(f.ctl.join(" | "))}</title><circle cx="${PAD+wdt-48}" cy="${b.top+20}" r="9" fill="#fff"/><text x="${PAD+wdt-48}" y="${b.top+24.5}" font-size="11" font-weight="700" fill="${b.c}" text-anchor="middle">C</text></g>`;
   });
-  h+=strips;let BT="";(d.frames||[]).forEach(f=>f.procs.forEach(P=>{if(P.back){const A=nodes[`${f.id}|${P.id}|${P.back.from}`],B=nodes[`${f.id}|${P.id}|${P.back.to}`];if(A&&B){const yy=A.y+A.h+16,ax=A.x+A.w/2,bx=B.x+B.w/2+(P.back.dx||0);h+=`<path d="M${ax},${A.y+A.h} L${ax},${yy} L${bx},${yy} L${bx},${B.y+B.h}" class="fl"/>`;BT+=`<path d="M${bx},${B.y+B.h+19} L${bx},${B.y+B.h}" class="fl" marker-end="url(#o1)"/>`}}}));
+  h+=strips;(d.frames||[]).forEach(f=>f.procs.forEach(P=>{if(P.back){const A=nodes[`${f.id}|${P.id}|${P.back.from}`],B=nodes[`${f.id}|${P.id}|${P.back.to}`];if(A&&B){const yy=A.y+A.h+16,ax=A.x+A.w/2,bx=B.x+B.w/2+(P.back.dx||0);h+=`<path data-return-from="${A.id}" data-return-to="${B.id}" d="M${ax},${A.y+A.h} L${ax},${yy} L${bx},${yy} L${bx},${B.y+B.h}" class="fl" marker-end="url(#o1)"/>`}}}));
   // chain between processes and key processes (internal O2C flow)
   (d.chain||[]).forEach((e,i)=>{const A=nodes[e.a],B=nodes[e.b];if(!A||!B)return;const lane=PAD+CH+(i%(d.lanes||4))*(d.lanes?8:11);const col=d.accent;
     const ax=A.x+A.w/2,ay=A.y+A.h,yg=e.below&&A.f&&A.f._box?A.f._box.bot+7+(i%3)*6:A.y+A.h+(e.dy!=null?e.dy:(A.kind==="out"?30:34));
@@ -139,7 +139,7 @@ function draw(){
       const nxD=s.branches[bi+1]?nodes[`${f.id}|${P.id}|${s.branches[bi+1].step.n}|d`]:null;
       if(nxD)o+=`<path d="M${cxd},${D.y+DW} L${cxd},${nxD.y}" class="fl" marker-end="url(#o1)"/>`+text(cxd+5,D.y+DW+13,["No"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"});
       else{const ye=S.y+H+30;const OT=s.elseOut?nodes[`${f.id}|${P.id}|out`]:null;o+=(OT?`<path d="M${cxd},${D.y+DW} L${cxd},${ye} L${OT.x+OT.w/2},${ye} L${OT.x+OT.w/2},${OT.y+OT.h}" class="fl" marker-end="url(#o1)"/>`:`<path d="M${cxd},${D.y+DW} L${cxd},${ye} L${n.bx},${ye}" class="fl"/>`)+text(cxd+5,D.y+DW+13,["No"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"});
-        if(s.elseLab){const lw=s.elseLab.length*5.4+8;o+=`<rect x="${cxd+10}" y="${ye-7}" width="${lw}" height="13" rx="3" fill="var(--card)" fill-opacity=".92"/>`+text(cxd+14,ye+3,[s.elseLab],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}if(!OT)yEnd=Math.max(yEnd,ye)}});
+        if(s.elseLab){o+=text(cxd+14,ye+3,[s.elseLab],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}if(!OT)yEnd=Math.max(yEnd,ye)}});
     o+=`<path d="M${n.bx},${yEnd} L${n.bx},${cy0}" class="fl"/>`;if(n.next)o+=`<path d="M${n.bx},${cy0} L${n.next.x},${cy0}" class="fl" marker-end="url(#o1)"/>`;
     if(s.lab)o+=text(n.dx+DW/2,n.rowY-6,[s.lab],{fs:10,fw:700,fill:"var(--muted)"});
     h+=o});
@@ -167,7 +167,7 @@ function draw(){
       ${s.feas?`<rect x="${n.x+(s.feasdx||0)+W/2-Math.max(W,s.feas.length*4.7+14)/2}" y="${n.y+H+(outl.length?27:3)}" width="${Math.max(W,s.feas.length*4.7+14)}" height="14" rx="4" fill="${/review/i.test(s.feas)?"#b45309":/applicable/i.test(s.feas)?"#667085":/not/i.test(s.feas)?"var(--pain)":/progress/i.test(s.feas)?"var(--hyb)":"var(--ok)"}"/><text x="${n.x+(s.feasdx||0)+W/2}" y="${n.y+H+(outl.length?37:13)}" font-size="8.3" font-weight="700" fill="#fff" text-anchor="middle">${esc2(s.feas)}</text>${s.feasn?`<text x="${n.x+(s.feasdx||0)+W/2+Math.max(W,s.feas.length*4.7+14)/2+5}" y="${n.y+H+(outl.length?37:13)}" font-size="9.5" font-weight="600" fill="var(--navy)" text-anchor="start">${esc2(s.feasn)}</text>`:""}`:""}
     </g>`;
   });
-  const svg=document.querySelector(E.svg);svg.setAttribute("viewBox",`0 0 ${svgW} ${svgH}`);svg.setAttribute("data-f",filter);svg.innerHTML=h+BT;
+  const svg=document.querySelector(E.svg);svg.setAttribute("viewBox",`0 0 ${svgW} ${svgH}`);svg.setAttribute("data-f",filter);svg.innerHTML=h;
   svg.querySelectorAll(".nd,.opn").forEach(g=>{const f=()=>detail(g.dataset.id);g.onclick=f;g.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();f()}}});
 }
 function detail(id){const n=nodes[id];if(!n)return;sel=id;
@@ -303,15 +303,15 @@ function noBranch(n){const q=n.dec,nx=q.nx,cx=n.x+DW/2,by=n.y+DW,rowY=n.y-(H/2-D
   const T=nx.out?nodes[`${n.f.id}|${n.P.id}|out`]:nodes[`${n.f.id}|${n.P.id}|${nx.step}`];if(!T)return text(cx,n.y+DW+11,wrap("No: "+q.no,26,1),{fs:8.5,fill:"#7b3597"});
   const yb=rb+40+(n.ln||0)*12+(n.P&&page==='tobe'?30:0),ex=nx.out?T.x+T.w/2:T.x+T.w-16,ty=T.y+T.h+((T.s&&T.s.feas)?((T.s.out||[]).length?44:20):0);
   o+=`<path d="M${cx},${by} L${cx},${yb} L${ex},${yb} L${ex},${ty}" class="fl" marker-end="url(#o1)"/>`+text(cx+5,by+13,[q.swap?"Yes":"No"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"});
-  const nl=q.nl||nx.nl;if(nl){const lw=nl.length*5.4+8;o+=`<rect x="${cx+10}" y="${yb-7}" width="${lw}" height="13" rx="3" fill="var(--card)" fill-opacity=".92"/>`+text(cx+14,yb+3,[nl],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}
+  const nl=q.nl||nx.nl;if(nl){o+=text(cx+14,yb+3,[nl],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}
   return o}
 function fixBranch(n){const q=n.dec,F=nodes[`${n.f.id}|${n.P.id}|${q.fix.n}`];if(!F)return "";const W=F.w,cx=n.x+DW/2,by=n.y+DW,rowY=n.y-(H/2-DW/2),ym=rowY+H+18,ex=F.x+W+16,rx=F.x-16,cy=rowY+H/2;let o="";
   o+=`<path d="M${cx},${by} L${cx},${ym} L${ex},${ym} L${ex},${F.y+H/2} L${F.x+W},${F.y+H/2}" class="fl" marker-end="url(#o1)"/>`+text(cx+5,by+12,["No"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"});
   const S1=nodes[`${n.f.id}|${n.P.id}|1`];
   if(n.P.id==="SOC-01.1"){const S2=nodes[`${n.f.id}|${n.P.id}|1`];if(S2){const k=["1a","1b","1c"].indexOf(q.fix.n),yy=F.y+H+22+k*9,tx=S2.x+30+k*14,fx=F.x+W/2;o+=`<path d="M${fx},${F.y+H} L${fx},${yy} L${tx},${yy} L${tx},${S2.y+H}" class="fl" marker-end="url(#o1)"/>`}}else if(S1&&false){const k=["1a","1b","1c"].indexOf(q.fix.n),by=F.y+H+18+k*10,sx=S1.x+30+k*12,fx=F.x+W/2;o+=`<path d="M${fx},${F.y+H} L${fx},${by} L${sx},${by} L${sx},${S1.y+H}" class="fl" stroke-dasharray="5 3" marker-end="url(#o1)"/>`;
-  if(k===0)o+=`<rect x="${sx+8}" y="${by-7}" width="${"Retry from step 1".length*5+6}" height="13" rx="3" fill="var(--card)" fill-opacity=".92"/>`+text(sx+11,by+3,["Retry from step 1"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}
+  if(k===0)o+=text(sx+11,by+3,["Retry from step 1"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}
   else if(!q.noRetry){o+=`<path d="M${F.x},${F.y+H/2} L${rx},${F.y+H/2} L${rx},${cy} L${n.x},${cy}" class="fl" stroke-dasharray="5 3" marker-end="url(#o1)"/>`;
-  const ly=(F.y+H/2+cy)/2;o+=`<rect x="${rx-34}" y="${ly-7}" width="31" height="13" rx="3" fill="var(--card)" fill-opacity=".92"/>`+text(rx-4,ly+3,["Retry"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"end"});
+  const ly=(F.y+H/2+cy)/2;o+=text(rx-4,ly+3,["Retry"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"end"});
   }
   if(n.P.id==="SOC-05.1"){const O=nodes[`${n.f.id}|${n.P.id}|out`],S3=nodes[`${n.f.id}|${n.P.id}|3`],fx=F.x+W/2;if(O){const tx=O.x+O.w/2,jy=F.y+H+30;o+=`<path d="M${fx+12},${F.y+H} L${fx+12},${jy} L${tx},${jy} L${tx},${O.y+O.h}" class="fl" marker-end="url(#o1)"/>`}if(S3){const tx=S3.x+W-10,jy=F.y+H+16;o+=`<path d="M${fx-12},${F.y+H} L${fx-12},${jy} L${tx},${jy} L${tx},${S3.y+H}" class="fl" marker-end="url(#o1)"/>`}}else if(q.fix.join){const sq=n.P._seq||[],J=q.fix.join==="out"?nodes[`${n.f.id}|${n.P.id}|out`]:nodes[sq[sq.indexOf(n.id)+2]];if(J){const jx=F.x+W/2,jy=F.y+H+34,tx=J.x+J.w/2;if(J.kind==="dec"){const cyy=J.y+J.h/2,mx=J.x-14;o+=`<path d="M${jx},${F.y+H} L${jx},${jy} L${mx},${jy} L${mx},${cyy} L${J.x},${cyy}" class="fl" marker-end="url(#o1)"/>`}else o+=`<path d="M${jx},${F.y+H} L${jx},${jy} L${tx},${jy} L${tx},${J.y+J.h}" class="fl" marker-end="url(#o1)"/>`}}
   return o}
@@ -325,7 +325,7 @@ function draw(){
     if(f.pp&&f.pp.length)h+=`<g><title>Pain points: ${esc2(f.pp.join(" | "))}</title><circle cx="${PAD+wdt-22}" cy="${b.top+20}" r="9" fill="#fff"/><text x="${PAD+wdt-22}" y="${b.top+24.5}" font-size="12" font-weight="700" fill="var(--pain)" text-anchor="middle">!</text></g>`;
     if(f.ctl&&f.ctl.length)h+=`<g><title>Controls: ${esc2(f.ctl.join(" | "))}</title><circle cx="${PAD+wdt-48}" cy="${b.top+20}" r="9" fill="#fff"/><text x="${PAD+wdt-48}" y="${b.top+24.5}" font-size="11" font-weight="700" fill="${b.c}" text-anchor="middle">C</text></g>`;
   });
-  h+=strips;let BT="";(d.frames||[]).forEach(f=>f.procs.forEach(P=>{if(P.back){const A=nodes[`${f.id}|${P.id}|${P.back.from}`],B=nodes[`${f.id}|${P.id}|${P.back.to}`];if(A&&B){const yy=A.y+A.h+16,ax=A.x+A.w/2,bx=B.x+B.w/2+(P.back.dx||0);h+=`<path d="M${ax},${A.y+A.h} L${ax},${yy} L${bx},${yy} L${bx},${B.y+B.h}" class="fl"/>`;BT+=`<path d="M${bx},${B.y+B.h+19} L${bx},${B.y+B.h}" class="fl" marker-end="url(#o1)"/>`}}}));
+  h+=strips;(d.frames||[]).forEach(f=>f.procs.forEach(P=>{if(P.back){const A=nodes[`${f.id}|${P.id}|${P.back.from}`],B=nodes[`${f.id}|${P.id}|${P.back.to}`];if(A&&B){const yy=A.y+A.h+16,ax=A.x+A.w/2,bx=B.x+B.w/2+(P.back.dx||0);h+=`<path data-return-from="${A.id}" data-return-to="${B.id}" d="M${ax},${A.y+A.h} L${ax},${yy} L${bx},${yy} L${bx},${B.y+B.h}" class="fl" marker-end="url(#o1)"/>`}}}));
   // chain between processes and key processes (internal O2C flow)
   (d.chain||[]).forEach((e,i)=>{const A=nodes[e.a],B=nodes[e.b];if(!A||!B)return;const lane=PAD+CH+(i%(d.lanes||4))*(d.lanes?8:11);const col=d.accent;
     const ax=A.x+A.w/2,ay=A.y+A.h,yg=e.below&&A.f&&A.f._box?A.f._box.bot+7+(i%3)*6:A.y+A.h+(e.dy!=null?e.dy:(A.kind==="out"?30:34));
@@ -359,7 +359,7 @@ function draw(){
       const nxD=s.branches[bi+1]?nodes[`${f.id}|${P.id}|${s.branches[bi+1].step.n}|d`]:null;
       if(nxD)o+=`<path d="M${cxd},${D.y+DW} L${cxd},${nxD.y}" class="fl" marker-end="url(#o1)"/>`+text(cxd+5,D.y+DW+13,["No"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"});
       else{const ye=S.y+H+30;const OT=s.elseOut?nodes[`${f.id}|${P.id}|out`]:null;o+=(OT?`<path d="M${cxd},${D.y+DW} L${cxd},${ye} L${OT.x+OT.w/2},${ye} L${OT.x+OT.w/2},${OT.y+OT.h}" class="fl" marker-end="url(#o1)"/>`:`<path d="M${cxd},${D.y+DW} L${cxd},${ye} L${n.bx},${ye}" class="fl"/>`)+text(cxd+5,D.y+DW+13,["No"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"});
-        if(s.elseLab){const lw=s.elseLab.length*5.4+8;o+=`<rect x="${cxd+10}" y="${ye-7}" width="${lw}" height="13" rx="3" fill="var(--card)" fill-opacity=".92"/>`+text(cxd+14,ye+3,[s.elseLab],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}if(!OT)yEnd=Math.max(yEnd,ye)}});
+        if(s.elseLab){o+=text(cxd+14,ye+3,[s.elseLab],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}if(!OT)yEnd=Math.max(yEnd,ye)}});
     o+=`<path d="M${n.bx},${yEnd} L${n.bx},${cy0}" class="fl"/>`;if(n.next)o+=`<path d="M${n.bx},${cy0} L${n.next.x},${cy0}" class="fl" marker-end="url(#o1)"/>`;
     if(s.lab)o+=text(n.dx+DW/2,n.rowY-6,[s.lab],{fs:10,fw:700,fill:"var(--muted)"});
     h+=o});
@@ -387,7 +387,7 @@ function draw(){
       ${s.feas?`<rect x="${n.x+(s.feasdx||0)+W/2-Math.max(W,s.feas.length*4.7+14)/2}" y="${n.y+H+(outl.length?27:3)}" width="${Math.max(W,s.feas.length*4.7+14)}" height="14" rx="4" fill="${/review/i.test(s.feas)?"#b45309":/applicable/i.test(s.feas)?"#667085":/not/i.test(s.feas)?"var(--pain)":/progress/i.test(s.feas)?"var(--hyb)":/future/i.test(s.feas)?"#0e7490":"var(--ok)"}"/><text x="${n.x+(s.feasdx||0)+W/2}" y="${n.y+H+(outl.length?37:13)}" font-size="8.3" font-weight="700" fill="#fff" text-anchor="middle">${esc2(s.feas)}</text>${s.feasn?`<text x="${n.x+(s.feasdx||0)+W/2+Math.max(W,s.feas.length*4.7+14)/2+5}" y="${n.y+H+(outl.length?37:13)}" font-size="9.5" font-weight="600" fill="var(--navy)" text-anchor="start">${esc2(s.feasn)}</text>`:""}${s.scope?(()=>{const sl=s.scope.split(" · "),sw=Math.max(W,Math.max(...sl.map(t=>t.length))*4.7+16),sx=n.x+(s.feasdx||0)+W/2,sy=n.y+H+(outl.length?43:19);return `<g><title>${esc2(s.scope)}</title><rect x="${sx-sw/2}" y="${sy}" width="${sw}" height="${sl.length>1?25:14}" rx="4" fill="#fff" stroke="#152847" stroke-width="1.1" stroke-dasharray="3 2"/>${sl.map((t,i)=>`<text x="${sx}" y="${sy+10+i*11}" font-size="${i?8.1:7.6}" font-weight="${i?700:600}" fill="#152847" text-anchor="middle">${esc2(t)}</text>`).join("")}</g>`})():""}`:""}
     </g>`;
   });
-  const svg=document.querySelector(E.svg);svg.setAttribute("viewBox",`0 0 ${svgW} ${svgH}`);svg.setAttribute("data-f",filter);svg.innerHTML=h+BT;
+  const svg=document.querySelector(E.svg);svg.setAttribute("viewBox",`0 0 ${svgW} ${svgH}`);svg.setAttribute("data-f",filter);svg.innerHTML=h;
   svg.querySelectorAll(".nd,.opn").forEach(g=>{const f=()=>detail(g.dataset.id);g.onclick=f;g.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();f()}}});
 }
 function detail(id){const n=nodes[id];if(!n)return;sel=id;
@@ -511,15 +511,15 @@ function noBranch(n){const q=n.dec,nx=q.nx,cx=n.x+DW/2,by=n.y+DW,rowY=n.y-(H/2-D
   const T=nx.out?nodes[`${n.f.id}|${n.P.id}|out`]:nodes[`${n.f.id}|${n.P.id}|${nx.step}`];if(!T)return text(cx,n.y+DW+11,wrap("No: "+q.no,26,1),{fs:8.5,fill:"#7b3597"});
   const yb=rb+40+(n.ln||0)*12,ex=nx.out?T.x+T.w/2:T.x+T.w-16,ty=T.y+T.h;
   o+=`<path d="M${cx},${by} L${cx},${yb} L${ex},${yb} L${ex},${ty}" class="fl" marker-end="url(#o1)"/>`+text(cx+5,by+13,[q.swap?"Yes":"No"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"});
-  const nl=q.nl||nx.nl;if(nl){const lw=nl.length*5.4+8;o+=`<rect x="${cx+10}" y="${yb-7}" width="${lw}" height="13" rx="3" fill="var(--card)" fill-opacity=".92"/>`+text(cx+14,yb+3,[nl],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}
+  const nl=q.nl||nx.nl;if(nl){o+=text(cx+14,yb+3,[nl],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}
   return o}
 function fixBranch(n){const q=n.dec,F=nodes[`${n.f.id}|${n.P.id}|${q.fix.n}`];if(!F)return "";const W=F.w,cx=n.x+DW/2,by=n.y+DW,rowY=n.y-(H/2-DW/2),ym=rowY+H+18,ex=F.x+W+16,rx=F.x-16,cy=rowY+H/2;let o="";
   o+=`<path d="M${cx},${by} L${cx},${ym} L${ex},${ym} L${ex},${F.y+H/2} L${F.x+W},${F.y+H/2}" class="fl" marker-end="url(#o1)"/>`+text(cx+5,by+12,["No"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"});
   const S1=nodes[`${n.f.id}|${n.P.id}|1`];
   if(n.P.id==="SOC-01.1"){const S2=nodes[`${n.f.id}|${n.P.id}|1`];if(S2){const k=["1a","1b","1c"].indexOf(q.fix.n),yy=F.y+H+22+k*9,tx=S2.x+30+k*14,fx=F.x+W/2;o+=`<path d="M${fx},${F.y+H} L${fx},${yy} L${tx},${yy} L${tx},${S2.y+H}" class="fl" marker-end="url(#o1)"/>`}}else if(S1&&false){const k=["1a","1b","1c"].indexOf(q.fix.n),by=F.y+H+18+k*10,sx=S1.x+30+k*12,fx=F.x+W/2;o+=`<path d="M${fx},${F.y+H} L${fx},${by} L${sx},${by} L${sx},${S1.y+H}" class="fl" stroke-dasharray="5 3" marker-end="url(#o1)"/>`;
-  if(k===0)o+=`<rect x="${sx+8}" y="${by-7}" width="${"Retry from step 1".length*5+6}" height="13" rx="3" fill="var(--card)" fill-opacity=".92"/>`+text(sx+11,by+3,["Retry from step 1"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}
+  if(k===0)o+=text(sx+11,by+3,["Retry from step 1"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}
   else if(!q.noRetry){o+=`<path d="M${F.x},${F.y+H/2} L${rx},${F.y+H/2} L${rx},${cy} L${n.x},${cy}" class="fl" stroke-dasharray="5 3" marker-end="url(#o1)"/>`;
-  const ly=(F.y+H/2+cy)/2;o+=`<rect x="${rx-34}" y="${ly-7}" width="31" height="13" rx="3" fill="var(--card)" fill-opacity=".92"/>`+text(rx-4,ly+3,["Retry"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"end"});
+  const ly=(F.y+H/2+cy)/2;o+=text(rx-4,ly+3,["Retry"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"end"});
   }
   if(n.P.id==="SOC-05.1"){const O=nodes[`${n.f.id}|${n.P.id}|out`],S3=nodes[`${n.f.id}|${n.P.id}|3`],fx=F.x+W/2;if(O){const tx=O.x+O.w/2,jy=F.y+H+30;o+=`<path d="M${fx+12},${F.y+H} L${fx+12},${jy} L${tx},${jy} L${tx},${O.y+O.h}" class="fl" marker-end="url(#o1)"/>`}if(S3){const tx=S3.x+W-10,jy=F.y+H+16;o+=`<path d="M${fx-12},${F.y+H} L${fx-12},${jy} L${tx},${jy} L${tx},${S3.y+H}" class="fl" marker-end="url(#o1)"/>`}}else if(q.fix.join){const sq=n.P._seq||[],J=q.fix.join==="out"?nodes[`${n.f.id}|${n.P.id}|out`]:nodes[sq[sq.indexOf(n.id)+2]];if(J){const jx=F.x+W/2,jy=F.y+H+34,tx=J.x+J.w/2;if(J.kind==="dec"){const cyy=J.y+J.h/2,mx=J.x-14;o+=`<path d="M${jx},${F.y+H} L${jx},${jy} L${mx},${jy} L${mx},${cyy} L${J.x},${cyy}" class="fl" marker-end="url(#o1)"/>`}else o+=`<path d="M${jx},${F.y+H} L${jx},${jy} L${tx},${jy} L${tx},${J.y+J.h}" class="fl" marker-end="url(#o1)"/>`}}
   return o}
@@ -533,7 +533,7 @@ function draw(){
     if(f.pp&&f.pp.length)h+=`<g><title>Pain points: ${esc2(f.pp.join(" | "))}</title><circle cx="${PAD+wdt-22}" cy="${b.top+20}" r="9" fill="#fff"/><text x="${PAD+wdt-22}" y="${b.top+24.5}" font-size="12" font-weight="700" fill="var(--pain)" text-anchor="middle">!</text></g>`;
     if(f.ctl&&f.ctl.length)h+=`<g><title>Controls: ${esc2(f.ctl.join(" | "))}</title><circle cx="${PAD+wdt-48}" cy="${b.top+20}" r="9" fill="#fff"/><text x="${PAD+wdt-48}" y="${b.top+24.5}" font-size="11" font-weight="700" fill="${b.c}" text-anchor="middle">C</text></g>`;
   });
-  h+=strips;let BT="";(d.frames||[]).forEach(f=>f.procs.forEach(P=>{if(P.back){const A=nodes[`${f.id}|${P.id}|${P.back.from}`],B=nodes[`${f.id}|${P.id}|${P.back.to}`];if(A&&B){const yy=A.y+A.h+16,ax=A.x+A.w/2,bx=B.x+B.w/2+(P.back.dx||0);h+=`<path d="M${ax},${A.y+A.h} L${ax},${yy} L${bx},${yy} L${bx},${B.y+B.h}" class="fl"/>`;BT+=`<path d="M${bx},${B.y+B.h+19} L${bx},${B.y+B.h}" class="fl" marker-end="url(#o1)"/>`}}}));
+  h+=strips;(d.frames||[]).forEach(f=>f.procs.forEach(P=>{if(P.back){const A=nodes[`${f.id}|${P.id}|${P.back.from}`],B=nodes[`${f.id}|${P.id}|${P.back.to}`];if(A&&B){const yy=A.y+A.h+16,ax=A.x+A.w/2,bx=B.x+B.w/2+(P.back.dx||0);h+=`<path data-return-from="${A.id}" data-return-to="${B.id}" d="M${ax},${A.y+A.h} L${ax},${yy} L${bx},${yy} L${bx},${B.y+B.h}" class="fl" marker-end="url(#o1)"/>`}}}));
   // chain between processes and key processes (internal O2C flow)
   (d.chain||[]).forEach((e,i)=>{const A=nodes[e.a],B=nodes[e.b];if(!A||!B)return;const lane=PAD+CH+(i%(d.lanes||4))*(d.lanes?8:11);const col=d.accent;
     const ax=A.x+A.w/2,ay=A.y+A.h,yg=e.below&&A.f&&A.f._box?A.f._box.bot+7+(i%3)*6:A.y+A.h+(e.dy!=null?e.dy:(A.kind==="out"?30:34));
@@ -559,7 +559,7 @@ function draw(){
       const nxD=s.branches[bi+1]?nodes[`${f.id}|${P.id}|${s.branches[bi+1].step.n}|d`]:null;
       if(nxD)o+=`<path d="M${cxd},${D.y+DW} L${cxd},${nxD.y}" class="fl" marker-end="url(#o1)"/>`+text(cxd+5,D.y+DW+13,["No"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"});
       else{const ye=S.y+H+30;const OT=s.elseOut?nodes[`${f.id}|${P.id}|out`]:null;o+=(OT?`<path d="M${cxd},${D.y+DW} L${cxd},${ye} L${OT.x+OT.w/2},${ye} L${OT.x+OT.w/2},${OT.y+OT.h}" class="fl" marker-end="url(#o1)"/>`:`<path d="M${cxd},${D.y+DW} L${cxd},${ye} L${n.bx},${ye}" class="fl"/>`)+text(cxd+5,D.y+DW+13,["No"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"});
-        if(s.elseLab){const lw=s.elseLab.length*5.4+8;o+=`<rect x="${cxd+10}" y="${ye-7}" width="${lw}" height="13" rx="3" fill="var(--card)" fill-opacity=".92"/>`+text(cxd+14,ye+3,[s.elseLab],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}if(!OT)yEnd=Math.max(yEnd,ye)}});
+        if(s.elseLab){o+=text(cxd+14,ye+3,[s.elseLab],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}if(!OT)yEnd=Math.max(yEnd,ye)}});
     o+=`<path d="M${n.bx},${yEnd} L${n.bx},${cy0}" class="fl"/>`;if(n.next)o+=`<path d="M${n.bx},${cy0} L${n.next.x},${cy0}" class="fl" marker-end="url(#o1)"/>`;
     if(s.lab)o+=text(n.dx+DW/2,n.rowY-6,[s.lab],{fs:10,fw:700,fill:"var(--muted)"});
     h+=o});
@@ -588,7 +588,7 @@ function draw(){
       ${s.feas?`<rect x="${n.x+(s.feasdx||0)+W/2-Math.max(W,s.feas.length*4.7+14)/2}" y="${n.y+H+(outl.length?27:3)}" width="${Math.max(W,s.feas.length*4.7+14)}" height="14" rx="4" fill="${/review/i.test(s.feas)?"#b45309":/applicable/i.test(s.feas)?"#667085":/not/i.test(s.feas)?"var(--pain)":/progress/i.test(s.feas)?"var(--hyb)":"var(--ok)"}"/><text x="${n.x+(s.feasdx||0)+W/2}" y="${n.y+H+(outl.length?37:13)}" font-size="8.3" font-weight="700" fill="#fff" text-anchor="middle">${esc2(s.feas)}</text>${s.feasn?`<text x="${n.x+(s.feasdx||0)+W/2+Math.max(W,s.feas.length*4.7+14)/2+5}" y="${n.y+H+(outl.length?37:13)}" font-size="9.5" font-weight="600" fill="var(--navy)" text-anchor="start">${esc2(s.feasn)}</text>`:""}`:""}
     </g>`;
   });
-  const svg=document.querySelector(E.svg);svg.setAttribute("viewBox",`0 0 ${svgW} ${svgH}`);svg.setAttribute("data-f",filter);svg.innerHTML=h+BT;
+  const svg=document.querySelector(E.svg);svg.setAttribute("viewBox",`0 0 ${svgW} ${svgH}`);svg.setAttribute("data-f",filter);svg.innerHTML=h;
   svg.querySelectorAll(".nd,.opn").forEach(g=>{const f=()=>detail(g.dataset.id);g.onclick=f;g.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();f()}}});
 }
 function detail(id){const n=nodes[id];if(!n)return;sel=id;
@@ -711,17 +711,17 @@ function noBranch(n){const q=n.dec,nx=q.nx,cx=n.x+DW/2,by=n.y+DW,rowY=n.y-(H/2-D
   const T=nx.out?nodes[`${n.f.id}|${n.P.id}|out`]:nodes[`${n.f.id}|${n.P.id}|${nx.step}`];if(!T)return text(cx,n.y+DW+11,wrap("No: "+q.no,26,1),{fs:8.5,fill:"#7b3597"});
   const yb=rb+40+(n.ln||0)*12,ex=nx.out?T.x+T.w/2:T.x+T.w-16,ty=T.y+T.h;
   o+=`<path d="M${cx},${by} L${cx},${yb} L${ex},${yb} L${ex},${ty}" class="fl" marker-end="url(#o1)"/>`+text(cx+5,by+13,[q.swap?"Yes":"No"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"});
-  const nl=q.nl||nx.nl;if(nl){const lw=nl.length*5.4+8;o+=`<rect x="${cx+10}" y="${yb-7}" width="${lw}" height="13" rx="3" fill="var(--card)" fill-opacity=".92"/>`+text(cx+14,yb+3,[nl],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}
+  const nl=q.nl||nx.nl;if(nl){o+=text(cx+14,yb+3,[nl],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}
   return o}
 function fixBranch(n){const q=n.dec,F=nodes[`${n.f.id}|${n.P.id}|${q.fix.n}`];if(!F)return "";const W=F.w,cx=n.x+DW/2,by=n.y+DW,rowY=n.y-(H/2-DW/2),ym=rowY+H+18,ex=F.x+W+16,rx=F.x-16,cy=rowY+H/2;let o="";
   o+=`<path d="M${cx},${by} L${cx},${ym} L${ex},${ym} L${ex},${F.y+H/2} L${F.x+W},${F.y+H/2}" class="fl" marker-end="url(#o1)"/>`+text(cx+5,by+12,[q.fl||"No"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"});
   const S1=nodes[`${n.f.id}|${n.P.id}|1`];
   if(n.P.id==="SOC-01.1"){const S2=nodes[`${n.f.id}|${n.P.id}|1`];if(S2){const k=["1a","1b","1c"].indexOf(q.fix.n),yy=F.y+H+22+k*9,tx=S2.x+30+k*14,fx=F.x+W/2;o+=`<path d="M${fx},${F.y+H} L${fx},${yy} L${tx},${yy} L${tx},${S2.y+H}" class="fl" marker-end="url(#o1)"/>`}}else if(S1&&false){const k=["1a","1b","1c"].indexOf(q.fix.n),by=F.y+H+18+k*10,sx=S1.x+30+k*12,fx=F.x+W/2;o+=`<path d="M${fx},${F.y+H} L${fx},${by} L${sx},${by} L${sx},${S1.y+H}" class="fl" stroke-dasharray="5 3" marker-end="url(#o1)"/>`;
-  if(k===0)o+=`<rect x="${sx+8}" y="${by-7}" width="${"Retry from step 1".length*5+6}" height="13" rx="3" fill="var(--card)" fill-opacity=".92"/>`+text(sx+11,by+3,["Retry from step 1"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}
+  if(k===0)o+=text(sx+11,by+3,["Retry from step 1"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}
   else if(!q.noRetry){o+=`<path d="M${F.x},${F.y+H/2} L${rx},${F.y+H/2} L${rx},${cy} L${n.x},${cy}" class="fl" stroke-dasharray="5 3" marker-end="url(#o1)"/>`;
-  const ly=(F.y+H/2+cy)/2;o+=`<rect x="${rx-34}" y="${ly-7}" width="31" height="13" rx="3" fill="var(--card)" fill-opacity=".92"/>`+text(rx-4,ly+3,["Retry"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"end"});
+  const ly=(F.y+H/2+cy)/2;o+=text(rx-4,ly+3,["Retry"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"end"});
   }
-  if(n.P.id==="SOC-05.1"){const O=nodes[`${n.f.id}|${n.P.id}|out`],S3=nodes[`${n.f.id}|${n.P.id}|3`],fx=F.x+W/2;if(O){const tx=O.x+O.w/2,jy=F.y+H+30;o+=`<path d="M${fx+12},${F.y+H} L${fx+12},${jy} L${tx},${jy} L${tx},${O.y+O.h}" class="fl" marker-end="url(#o1)"/>`}if(S3){const tx=S3.x+W-10,jy=F.y+H+16;o+=`<path d="M${fx-12},${F.y+H} L${fx-12},${jy} L${tx},${jy} L${tx},${S3.y+H}" class="fl" marker-end="url(#o1)"/>`}}else if(q.fix.join){const sq=n.P._seq||[],J=q.fix.join==="out"?nodes[`${n.f.id}|${n.P.id}|out`]:nodes[sq[sq.indexOf(n.id)+2]];if(J){const jx=F.x+W/2,jy=F.y+H+34,tx=J.x+J.w/2;if(J.kind==="dec"){const cyy=J.y+J.h/2,mx=J.x-14;o+=`<path d="M${jx},${F.y+H} L${jx},${jy} L${mx},${jy} L${mx},${cyy} L${J.x},${cyy}" class="fl" marker-end="url(#o1)"/>`}else o+=`<path d="M${jx},${F.y+H} L${jx},${jy} L${tx},${jy} L${tx},${J.y+J.h}" class="fl" marker-end="url(#o1)"/>`}}
+  if(n.P.id==="SOC-05.1"){const O=nodes[`${n.f.id}|${n.P.id}|out`],S3=nodes[`${n.f.id}|${n.P.id}|3`],fx=F.x+W/2;if(O){const tx=O.x+O.w/2,jy=F.y+H+30;o+=`<path d="M${fx+12},${F.y+H} L${fx+12},${jy} L${tx},${jy} L${tx},${O.y+O.h}" class="fl" marker-end="url(#o1)"/>`}if(S3){const tx=S3.x+W-10,jy=F.y+H+16;o+=`<path d="M${fx-12},${F.y+H} L${fx-12},${jy} L${tx},${jy} L${tx},${S3.y+H}" class="fl" marker-end="url(#o1)"/>`}}else if(q.fix.join){const sq=n.P._seq||[],J=q.fix.join==="out"?nodes[`${n.f.id}|${n.P.id}|out`]:nodes[sq[sq.indexOf(n.id)+(q.fix.join==="next0"?1:2)]];if(J){const jx=F.x+W/2,jy=F.y+H+34,tx=J.x+J.w/2;if(J.kind==="dec"){const cyy=J.y+J.h/2,mx=J.x-14;o+=`<path d="M${jx},${F.y+H} L${jx},${jy} L${mx},${jy} L${mx},${cyy} L${J.x},${cyy}" class="fl" marker-end="url(#o1)"/>`}else o+=`<path d="M${jx},${F.y+H} L${jx},${jy} L${tx},${jy} L${tx},${J.y+J.h}" class="fl" marker-end="url(#o1)"/>`}}
   return o}
 function draw(){
   const d=DATA[page];const strips=layout(d);let h=`<defs><marker id="o1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--navy)"/></marker><marker id="o2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#7b3597"/></marker><marker id="o3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#0070c0"/></marker><marker id="o4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="${d.accent}"/></marker><marker id="o5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0L10,5L0,10z" fill="${d.accent}"/></marker></defs>
@@ -733,7 +733,7 @@ function draw(){
     if(f.pp&&f.pp.length)h+=`<g><title>Pain points: ${esc2(f.pp.join(" | "))}</title><circle cx="${PAD+wdt-22}" cy="${b.top+20}" r="9" fill="#fff"/><text x="${PAD+wdt-22}" y="${b.top+24.5}" font-size="12" font-weight="700" fill="var(--pain)" text-anchor="middle">!</text></g>`;
     if(f.ctl&&f.ctl.length)h+=`<g><title>Controls: ${esc2(f.ctl.join(" | "))}</title><circle cx="${PAD+wdt-48}" cy="${b.top+20}" r="9" fill="#fff"/><text x="${PAD+wdt-48}" y="${b.top+24.5}" font-size="11" font-weight="700" fill="${b.c}" text-anchor="middle">C</text></g>`;
   });
-  h+=strips;let BT="";(d.frames||[]).forEach(f=>f.procs.forEach(P=>{if(P.back){const A=nodes[`${f.id}|${P.id}|${P.back.from}`],B=nodes[`${f.id}|${P.id}|${P.back.to}`];if(A&&B){const yy=A.y+A.h+16,ax=A.x+A.w/2,bx=B.x+B.w/2+(P.back.dx||0);h+=`<path d="M${ax},${A.y+A.h} L${ax},${yy} L${bx},${yy} L${bx},${B.y+B.h}" class="fl"/>`;BT+=`<path d="M${bx},${B.y+B.h+19} L${bx},${B.y+B.h}" class="fl" marker-end="url(#o1)"/>`}}}));
+  h+=strips;(d.frames||[]).forEach(f=>f.procs.forEach(P=>{if(P.back){const A=nodes[`${f.id}|${P.id}|${P.back.from}`],B=nodes[`${f.id}|${P.id}|${P.back.to}`];if(A&&B){const yy=A.y+A.h+16,ax=A.x+A.w/2,bx=B.x+B.w/2+(P.back.dx||0);h+=`<path data-return-from="${A.id}" data-return-to="${B.id}" d="M${ax},${A.y+A.h} L${ax},${yy} L${bx},${yy} L${bx},${B.y+B.h}" class="fl" marker-end="url(#o1)"/>`}}}));
   // chain between processes and key processes (internal O2C flow)
   (d.chain||[]).forEach((e,i)=>{const A=nodes[e.a],B=nodes[e.b];if(!A||!B)return;const lane=PAD+CH+(i%(d.lanes||4))*(d.lanes?8:11);const col=d.accent;
     const ax=A.x+A.w/2,ay=A.y+A.h,yg=e.below&&A.f&&A.f._box?A.f._box.bot+7+(i%3)*6:A.y+A.h+(e.dy!=null?e.dy:(A.kind==="out"?30:34));
@@ -759,7 +759,7 @@ function draw(){
       const nxD=s.branches[bi+1]?nodes[`${f.id}|${P.id}|${s.branches[bi+1].step.n}|d`]:null;
       if(nxD)o+=`<path d="M${cxd},${D.y+DW} L${cxd},${nxD.y}" class="fl" marker-end="url(#o1)"/>`+text(cxd+5,D.y+DW+13,["No"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"});
       else{const ye=S.y+H+30;const OT=s.elseOut?nodes[`${f.id}|${P.id}|out`]:null;o+=(OT?`<path d="M${cxd},${D.y+DW} L${cxd},${ye} L${OT.x+OT.w/2},${ye} L${OT.x+OT.w/2},${OT.y+OT.h}" class="fl" marker-end="url(#o1)"/>`:`<path d="M${cxd},${D.y+DW} L${cxd},${ye} L${n.bx},${ye}" class="fl"/>`)+text(cxd+5,D.y+DW+13,["No"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"});
-        if(s.elseLab){const lw=s.elseLab.length*5.4+8;o+=`<rect x="${cxd+10}" y="${ye-7}" width="${lw}" height="13" rx="3" fill="var(--card)" fill-opacity=".92"/>`+text(cxd+14,ye+3,[s.elseLab],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}if(!OT)yEnd=Math.max(yEnd,ye)}});
+        if(s.elseLab){o+=text(cxd+14,ye+3,[s.elseLab],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}if(!OT)yEnd=Math.max(yEnd,ye)}});
     o+=`<path d="M${n.bx},${yEnd} L${n.bx},${cy0}" class="fl"/>`;if(n.next)o+=`<path d="M${n.bx},${cy0} L${n.next.x},${cy0}" class="fl" marker-end="url(#o1)"/>`;
     if(s.lab)o+=text(n.dx+DW/2,n.rowY-6,[s.lab],{fs:10,fw:700,fill:"var(--muted)"});
     h+=o});
@@ -788,7 +788,7 @@ function draw(){
       ${s.feas?`<rect x="${n.x+(s.feasdx||0)+W/2-Math.max(W,s.feas.length*4.7+14)/2}" y="${n.y+H+(outl.length?27:3)}" width="${Math.max(W,s.feas.length*4.7+14)}" height="14" rx="4" fill="${/review|assessment|progress/i.test(s.feas)?"#b45309":/applicable|not relevant/i.test(s.feas)?"#667085":/not/i.test(s.feas)?"var(--pain)":/implemented/i.test(s.feas)?"#1d4ed8":"var(--ok)"}"/><text x="${n.x+(s.feasdx||0)+W/2}" y="${n.y+H+(outl.length?37:13)}" font-size="8.3" font-weight="700" fill="#fff" text-anchor="middle">${esc2(s.feas)}</text>${s.feasn?`<text x="${n.x+(s.feasdx||0)+W/2+Math.max(W,s.feas.length*4.7+14)/2+5}" y="${n.y+H+(outl.length?37:13)}" font-size="9.5" font-weight="600" fill="var(--navy)" text-anchor="start">${esc2(s.feasn)}</text>`:""}`:""}
     </g>`;
   });
-  const svg=document.querySelector(E.svg);svg.setAttribute("viewBox",`0 0 ${svgW} ${svgH}`);svg.setAttribute("data-f",filter);svg.innerHTML=h+BT;
+  const svg=document.querySelector(E.svg);svg.setAttribute("viewBox",`0 0 ${svgW} ${svgH}`);svg.setAttribute("data-f",filter);svg.innerHTML=h;
   svg.querySelectorAll(".nd,.opn").forEach(g=>{const f=()=>detail(g.dataset.id);g.onclick=f;g.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();f()}}});
 }
 function detail(id){const n=nodes[id];if(!n)return;sel=id;
@@ -912,15 +912,15 @@ function noBranch(n){const q=n.dec,nx=q.nx,cx=n.x+DW/2,by=n.y+DW,rowY=n.y-(H/2-D
   const T=nx.out?nodes[`${n.f.id}|${n.P.id}|out`]:nodes[`${n.f.id}|${n.P.id}|${nx.step}`];if(!T)return text(cx,n.y+DW+11,wrap("No: "+q.no,26,1),{fs:8.5,fill:"#7b3597"});
   const yb=rb+40+(n.ln||0)*12,ex=nx.out?T.x+T.w/2:T.x+T.w-16,ty=T.y+T.h;
   o+=`<path d="M${cx},${by} L${cx},${yb} L${ex},${yb} L${ex},${ty}" class="fl" marker-end="url(#o1)"/>`+text(cx+5,by+13,[q.swap?"Yes":"No"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"});
-  const nl=q.nl||nx.nl;if(nl){const lw=nl.length*5.4+8;o+=`<rect x="${cx+10}" y="${yb-7}" width="${lw}" height="13" rx="3" fill="var(--card)" fill-opacity=".92"/>`+text(cx+14,yb+3,[nl],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}
+  const nl=q.nl||nx.nl;if(nl){o+=text(cx+14,yb+3,[nl],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}
   return o}
 function fixBranch(n){const q=n.dec,F=nodes[`${n.f.id}|${n.P.id}|${q.fix.n}`];if(!F)return "";const W=F.w,cx=n.x+DW/2,by=n.y+DW,rowY=n.y-(H/2-DW/2),ym=rowY+H+18,ex=F.x+W+16,rx=F.x-16,cy=rowY+H/2;let o="";
   o+=`<path d="M${cx},${by} L${cx},${ym} L${ex},${ym} L${ex},${F.y+H/2} L${F.x+W},${F.y+H/2}" class="fl" marker-end="url(#o1)"/>`+text(cx+5,by+12,["No"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"});
   const S1=nodes[`${n.f.id}|${n.P.id}|1`];
   if(n.P.id==="SOC-01.1"){const S2=nodes[`${n.f.id}|${n.P.id}|1`];if(S2){const k=["1a","1b","1c"].indexOf(q.fix.n),yy=F.y+H+22+k*9,tx=S2.x+30+k*14,fx=F.x+W/2;o+=`<path d="M${fx},${F.y+H} L${fx},${yy} L${tx},${yy} L${tx},${S2.y+H}" class="fl" marker-end="url(#o1)"/>`}}else if(S1&&false){const k=["1a","1b","1c"].indexOf(q.fix.n),by=F.y+H+18+k*10,sx=S1.x+30+k*12,fx=F.x+W/2;o+=`<path d="M${fx},${F.y+H} L${fx},${by} L${sx},${by} L${sx},${S1.y+H}" class="fl" stroke-dasharray="5 3" marker-end="url(#o1)"/>`;
-  if(k===0)o+=`<rect x="${sx+8}" y="${by-7}" width="${"Retry from step 1".length*5+6}" height="13" rx="3" fill="var(--card)" fill-opacity=".92"/>`+text(sx+11,by+3,["Retry from step 1"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}
+  if(k===0)o+=text(sx+11,by+3,["Retry from step 1"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}
   else if(!q.noRetry){o+=`<path d="M${F.x},${F.y+H/2} L${rx},${F.y+H/2} L${rx},${cy} L${n.x},${cy}" class="fl" stroke-dasharray="5 3" marker-end="url(#o1)"/>`;
-  const ly=(F.y+H/2+cy)/2;o+=`<rect x="${rx-34}" y="${ly-7}" width="31" height="13" rx="3" fill="var(--card)" fill-opacity=".92"/>`+text(rx-4,ly+3,["Retry"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"end"});
+  const ly=(F.y+H/2+cy)/2;o+=text(rx-4,ly+3,["Retry"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"end"});
   }
   if(n.P.id==="SOC-05.1"){const O=nodes[`${n.f.id}|${n.P.id}|out`],S3=nodes[`${n.f.id}|${n.P.id}|3`],fx=F.x+W/2;if(O){const tx=O.x+O.w/2,jy=F.y+H+30;o+=`<path d="M${fx+12},${F.y+H} L${fx+12},${jy} L${tx},${jy} L${tx},${O.y+O.h}" class="fl" marker-end="url(#o1)"/>`}if(S3){const tx=S3.x+W-10,jy=F.y+H+16;o+=`<path d="M${fx-12},${F.y+H} L${fx-12},${jy} L${tx},${jy} L${tx},${S3.y+H}" class="fl" marker-end="url(#o1)"/>`}}else if(q.fix.join){const sq=n.P._seq||[],J=q.fix.join==="out"?nodes[`${n.f.id}|${n.P.id}|out`]:nodes[sq[sq.indexOf(n.id)+2]];if(J){const jx=F.x+W/2,jy=F.y+H+34,tx=J.x+J.w/2;if(J.kind==="dec"){const cyy=J.y+J.h/2,mx=J.x-14;o+=`<path d="M${jx},${F.y+H} L${jx},${jy} L${mx},${jy} L${mx},${cyy} L${J.x},${cyy}" class="fl" marker-end="url(#o1)"/>`}else o+=`<path d="M${jx},${F.y+H} L${jx},${jy} L${tx},${jy} L${tx},${J.y+J.h}" class="fl" marker-end="url(#o1)"/>`}}
   return o}
@@ -934,7 +934,7 @@ function draw(){
     if(f.pp&&f.pp.length)h+=`<g><title>Pain points: ${esc2(f.pp.join(" | "))}</title><circle cx="${PAD+wdt-22}" cy="${b.top+20}" r="9" fill="#fff"/><text x="${PAD+wdt-22}" y="${b.top+24.5}" font-size="12" font-weight="700" fill="var(--pain)" text-anchor="middle">!</text></g>`;
     if(f.ctl&&f.ctl.length)h+=`<g><title>Controls: ${esc2(f.ctl.join(" | "))}</title><circle cx="${PAD+wdt-48}" cy="${b.top+20}" r="9" fill="#fff"/><text x="${PAD+wdt-48}" y="${b.top+24.5}" font-size="11" font-weight="700" fill="${b.c}" text-anchor="middle">C</text></g>`;
   });
-  h+=strips;let BT="";(d.frames||[]).forEach(f=>f.procs.forEach(P=>{if(P.back){const A=nodes[`${f.id}|${P.id}|${P.back.from}`],B=nodes[`${f.id}|${P.id}|${P.back.to}`];if(A&&B){const yy=A.y+A.h+16,ax=A.x+A.w/2,bx=B.x+B.w/2+(P.back.dx||0);h+=`<path d="M${ax},${A.y+A.h} L${ax},${yy} L${bx},${yy} L${bx},${B.y+B.h}" class="fl"/>`;BT+=`<path d="M${bx},${B.y+B.h+19} L${bx},${B.y+B.h}" class="fl" marker-end="url(#o1)"/>`}}}));
+  h+=strips;(d.frames||[]).forEach(f=>f.procs.forEach(P=>{if(P.back){const A=nodes[`${f.id}|${P.id}|${P.back.from}`],B=nodes[`${f.id}|${P.id}|${P.back.to}`];if(A&&B){const yy=A.y+A.h+16,ax=A.x+A.w/2,bx=B.x+B.w/2+(P.back.dx||0);h+=`<path data-return-from="${A.id}" data-return-to="${B.id}" d="M${ax},${A.y+A.h} L${ax},${yy} L${bx},${yy} L${bx},${B.y+B.h}" class="fl" marker-end="url(#o1)"/>`}}}));
   // chain between processes and key processes (internal O2C flow)
   (d.chain||[]).forEach((e,i)=>{const A=nodes[e.a],B=nodes[e.b];if(!A||!B)return;const lane=PAD+CH+(i%(d.lanes||4))*(d.lanes?8:11);const col=d.accent;
     const ax=A.x+A.w/2,ay=A.y+A.h,yg=e.below&&A.f&&A.f._box?A.f._box.bot+7+(i%3)*6:A.y+A.h+(e.dy!=null?e.dy:(A.kind==="out"?30:34));
@@ -960,7 +960,7 @@ function draw(){
       const nxD=s.branches[bi+1]?nodes[`${f.id}|${P.id}|${s.branches[bi+1].step.n}|d`]:null;
       if(nxD)o+=`<path d="M${cxd},${D.y+DW} L${cxd},${nxD.y}" class="fl" marker-end="url(#o1)"/>`+text(cxd+5,D.y+DW+13,["No"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"});
       else{const ye=S.y+H+30;const OT=s.elseOut?nodes[`${f.id}|${P.id}|out`]:null;o+=(OT?`<path d="M${cxd},${D.y+DW} L${cxd},${ye} L${OT.x+OT.w/2},${ye} L${OT.x+OT.w/2},${OT.y+OT.h}" class="fl" marker-end="url(#o1)"/>`:`<path d="M${cxd},${D.y+DW} L${cxd},${ye} L${n.bx},${ye}" class="fl"/>`)+text(cxd+5,D.y+DW+13,["No"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"});
-        if(s.elseLab){const lw=s.elseLab.length*5.4+8;o+=`<rect x="${cxd+10}" y="${ye-7}" width="${lw}" height="13" rx="3" fill="var(--card)" fill-opacity=".92"/>`+text(cxd+14,ye+3,[s.elseLab],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}if(!OT)yEnd=Math.max(yEnd,ye)}});
+        if(s.elseLab){o+=text(cxd+14,ye+3,[s.elseLab],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}if(!OT)yEnd=Math.max(yEnd,ye)}});
     o+=`<path d="M${n.bx},${yEnd} L${n.bx},${cy0}" class="fl"/>`;if(n.next)o+=`<path d="M${n.bx},${cy0} L${n.next.x},${cy0}" class="fl" marker-end="url(#o1)"/>`;
     if(s.lab)o+=text(n.dx+DW/2,n.rowY-6,[s.lab],{fs:10,fw:700,fill:"var(--muted)"});
     h+=o});
@@ -988,7 +988,7 @@ function draw(){
       ${s.feas?`<rect x="${n.x+(s.feasdx||0)+W/2-Math.max(W,s.feas.length*4.7+14)/2}" y="${n.y+H+(outl.length?27:3)}" width="${Math.max(W,s.feas.length*4.7+14)}" height="14" rx="4" fill="${/applicable|necessary|required/i.test(s.feas)?"#667085":/not/i.test(s.feas)?"var(--pain)":/progress/i.test(s.feas)?"var(--hyb)":"var(--ok)"}"/><text x="${n.x+(s.feasdx||0)+W/2}" y="${n.y+H+(outl.length?37:13)}" font-size="8.3" font-weight="700" fill="#fff" text-anchor="middle">${esc2(s.feas)}</text>${s.feasn?`<text x="${n.x+(s.feasdx||0)+W/2+Math.max(W,s.feas.length*4.7+14)/2+5}" y="${n.y+H+(outl.length?37:13)}" font-size="9.5" font-weight="600" fill="var(--navy)" text-anchor="start">${esc2(s.feasn)}</text>`:""}`:""}
     </g>`;
   });
-  const svg=document.querySelector(E.svg);svg.setAttribute("viewBox",`0 0 ${svgW} ${svgH}`);svg.setAttribute("data-f",filter);svg.innerHTML=h+BT;
+  const svg=document.querySelector(E.svg);svg.setAttribute("viewBox",`0 0 ${svgW} ${svgH}`);svg.setAttribute("data-f",filter);svg.innerHTML=h;
   svg.querySelectorAll(".nd,.opn").forEach(g=>{const f=()=>detail(g.dataset.id);g.onclick=f;g.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();f()}}});
 }
 function detail(id){const n=nodes[id];if(!n)return;sel=id;
@@ -1110,15 +1110,15 @@ function noBranch(n){const q=n.dec,nx=q.nx,cx=n.x+DW/2,by=n.y+DW,rowY=n.y-(H/2-D
   const T=nx.out?nodes[`${n.f.id}|${n.P.id}|out`]:nodes[`${n.f.id}|${n.P.id}|${nx.step}`];if(!T)return text(cx,n.y+DW+11,wrap("No: "+q.no,26,1),{fs:8.5,fill:"#7b3597"});
   const yb=rb+40+(n.ln||0)*12,ex=nx.out?T.x+T.w/2:T.x+T.w-16-(n.ln||0)*16,ty=T.y+T.h;
   o+=`<path d="M${cx},${by} L${cx},${yb} L${ex},${yb} L${ex},${ty}" class="fl" marker-end="url(#o1)"/>`+text(cx+5,by+13,[q.swap?"Yes":"No"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"});
-  const nl=q.nl||nx.nl;if(nl){const lw=nl.length*5.4+8;o+=`<rect x="${cx+10}" y="${yb-7}" width="${lw}" height="13" rx="3" fill="var(--card)" fill-opacity=".92"/>`+text(cx+14,yb+3,[nl],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}
+  const nl=q.nl||nx.nl;if(nl){o+=text(cx+14,yb+3,[nl],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}
   return o}
 function fixBranch(n){const q=n.dec,F=nodes[`${n.f.id}|${n.P.id}|${q.fix.n}`];if(!F)return "";const W=F.w,cx=n.x+DW/2,by=n.y+DW,rowY=n.y-(H/2-DW/2),ym=rowY+H+18,ex=F.x+W+16,rx=F.x-16,cy=rowY+H/2;let o="";
   o+=`<path d="M${cx},${by} L${cx},${ym} L${ex},${ym} L${ex},${F.y+H/2} L${F.x+W},${F.y+H/2}" class="fl" marker-end="url(#o1)"/>`+text(cx+5,by+12,["No"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"});
   const S1=nodes[`${n.f.id}|${n.P.id}|1`];
   if(n.P.id==="SOC-01.1"){const S2=nodes[`${n.f.id}|${n.P.id}|1`];if(S2){const k=["1a","1b","1c"].indexOf(q.fix.n),yy=F.y+H+22+k*9,tx=S2.x+30+k*14,fx=F.x+W/2;o+=`<path d="M${fx},${F.y+H} L${fx},${yy} L${tx},${yy} L${tx},${S2.y+H}" class="fl" marker-end="url(#o1)"/>`}}else if(S1&&false){const k=["1a","1b","1c"].indexOf(q.fix.n),by=F.y+H+18+k*10,sx=S1.x+30+k*12,fx=F.x+W/2;o+=`<path d="M${fx},${F.y+H} L${fx},${by} L${sx},${by} L${sx},${S1.y+H}" class="fl" stroke-dasharray="5 3" marker-end="url(#o1)"/>`;
-  if(k===0)o+=`<rect x="${sx+8}" y="${by-7}" width="${"Retry from step 1".length*5+6}" height="13" rx="3" fill="var(--card)" fill-opacity=".92"/>`+text(sx+11,by+3,["Retry from step 1"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}
+  if(k===0)o+=text(sx+11,by+3,["Retry from step 1"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}
   else if(!q.noRetry){o+=`<path d="M${F.x},${F.y+H/2} L${rx},${F.y+H/2} L${rx},${cy} L${n.x},${cy}" class="fl" stroke-dasharray="5 3" marker-end="url(#o1)"/>`;
-  const ly=(F.y+H/2+cy)/2;o+=`<rect x="${rx-34}" y="${ly-7}" width="31" height="13" rx="3" fill="var(--card)" fill-opacity=".92"/>`+text(rx-4,ly+3,["Retry"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"end"});
+  const ly=(F.y+H/2+cy)/2;o+=text(rx-4,ly+3,["Retry"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"end"});
   }
   if(n.P.id==="SOC-05.1"){const O=nodes[`${n.f.id}|${n.P.id}|out`],S3=nodes[`${n.f.id}|${n.P.id}|3`],fx=F.x+W/2;if(O){const tx=O.x+O.w/2,jy=F.y+H+30;o+=`<path d="M${fx+12},${F.y+H} L${fx+12},${jy} L${tx},${jy} L${tx},${O.y+O.h}" class="fl" marker-end="url(#o1)"/>`}if(S3){const tx=S3.x+W-10,jy=F.y+H+16;o+=`<path d="M${fx-12},${F.y+H} L${fx-12},${jy} L${tx},${jy} L${tx},${S3.y+H}" class="fl" marker-end="url(#o1)"/>`}}else if(q.fix.join){const sq=n.P._seq||[],J=q.fix.join==="out"?nodes[`${n.f.id}|${n.P.id}|out`]:nodes[sq[sq.indexOf(n.id)+2]];if(J){const jx=F.x+W/2,jy=F.y+H+34,tx=J.x+J.w/2;if(J.kind==="dec"){const cyy=J.y+J.h/2,mx=J.x-14;o+=`<path d="M${jx},${F.y+H} L${jx},${jy} L${mx},${jy} L${mx},${cyy} L${J.x},${cyy}" class="fl" marker-end="url(#o1)"/>`}else o+=`<path d="M${jx},${F.y+H} L${jx},${jy} L${tx},${jy} L${tx},${J.y+J.h}" class="fl" marker-end="url(#o1)"/>`}}
   return o}
@@ -1132,7 +1132,7 @@ function draw(){
     if(f.pp&&f.pp.length)h+=`<g><title>Pain points: ${esc2(f.pp.join(" | "))}</title><circle cx="${PAD+wdt-22}" cy="${b.top+20}" r="9" fill="#fff"/><text x="${PAD+wdt-22}" y="${b.top+24.5}" font-size="12" font-weight="700" fill="var(--pain)" text-anchor="middle">!</text></g>`;
     if(f.ctl&&f.ctl.length)h+=`<g><title>Controls: ${esc2(f.ctl.join(" | "))}</title><circle cx="${PAD+wdt-48}" cy="${b.top+20}" r="9" fill="#fff"/><text x="${PAD+wdt-48}" y="${b.top+24.5}" font-size="11" font-weight="700" fill="${b.c}" text-anchor="middle">C</text></g>`;
   });
-  h+=strips;(d.frames||[]).forEach(f=>f.procs.forEach(P=>{if(P.back){const A=nodes[`${f.id}|${P.id}|${P.back.from}`],B=nodes[`${f.id}|${P.id}|${P.back.to}`];if(A&&B){const yy=A.y+A.h+16,ax=A.x+A.w/2,bx=B.x+B.w/2+(P.back.dx||0);h+=`<path d="M${ax},${A.y+A.h} L${ax},${yy} L${bx},${yy} L${bx},${B.y+B.h}" class="fl" marker-end="url(#o1)"/>`}}}));
+  h+=strips;(d.frames||[]).forEach(f=>f.procs.forEach(P=>{if(P.back){const A=nodes[`${f.id}|${P.id}|${P.back.from}`],B=nodes[`${f.id}|${P.id}|${P.back.to}`];if(A&&B){const yy=A.y+A.h+16,ax=A.x+A.w/2,bx=B.x+B.w/2+(P.back.dx||0);h+=`<path data-return-from="${A.id}" data-return-to="${B.id}" d="M${ax},${A.y+A.h} L${ax},${yy} L${bx},${yy} L${bx},${B.y+B.h}" class="fl" marker-end="url(#o1)"/>`}}}));
   // chain between processes and key processes (internal O2C flow)
   (d.chain||[]).forEach((e,i)=>{const A=nodes[e.a],B=nodes[e.b];if(!A||!B)return;const lane=PAD+CH+(i%(d.lanes||4))*(d.lanes?8:11);const col=d.accent;
     const ax=A.x+A.w/2,ay=A.y+A.h,yg=e.below&&A.f&&A.f._box?A.f._box.bot+7+(i%3)*6:A.y+A.h+(e.dy!=null?e.dy:(A.kind==="out"?30:34));
@@ -1158,7 +1158,7 @@ function draw(){
       const nxD=s.branches[bi+1]?nodes[`${f.id}|${P.id}|${s.branches[bi+1].step.n}|d`]:null;
       if(nxD)o+=`<path d="M${cxd},${D.y+DW} L${cxd},${nxD.y}" class="fl" marker-end="url(#o1)"/>`+text(cxd+5,D.y+DW+13,["No"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"});
       else{const ye=S.y+H+30;const OT=s.elseOut?nodes[`${f.id}|${P.id}|out`]:null;o+=(OT?`<path d="M${cxd},${D.y+DW} L${cxd},${ye} L${OT.x+OT.w/2},${ye} L${OT.x+OT.w/2},${OT.y+OT.h}" class="fl" marker-end="url(#o1)"/>`:`<path d="M${cxd},${D.y+DW} L${cxd},${ye} L${n.bx},${ye}" class="fl"/>`)+text(cxd+5,D.y+DW+13,["No"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"});
-        if(s.elseLab){const lw=s.elseLab.length*5.4+8;o+=`<rect x="${cxd+10}" y="${ye-7}" width="${lw}" height="13" rx="3" fill="var(--card)" fill-opacity=".92"/>`+text(cxd+14,ye+3,[s.elseLab],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}if(!OT)yEnd=Math.max(yEnd,ye)}});
+        if(s.elseLab){o+=text(cxd+14,ye+3,[s.elseLab],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}if(!OT)yEnd=Math.max(yEnd,ye)}});
     o+=`<path d="M${n.bx},${yEnd} L${n.bx},${cy0}" class="fl"/>`;if(n.next)o+=`<path d="M${n.bx},${cy0} L${n.next.x},${cy0}" class="fl" marker-end="url(#o1)"/>`;
     if(s.lab)o+=text(n.dx+DW/2,n.rowY-6,[s.lab],{fs:10,fw:700,fill:"var(--muted)"});
     h+=o});
@@ -1308,15 +1308,15 @@ function noBranch(n){const q=n.dec,nx=q.nx,cx=n.x+DW/2,by=n.y+DW,rowY=n.y-(H/2-D
   const T=nx.out?nodes[`${n.f.id}|${n.P.id}|out`]:nodes[`${n.f.id}|${n.P.id}|${nx.step}`];if(!T)return text(cx,n.y+DW+11,wrap("No: "+q.no,26,1),{fs:8.5,fill:"#7b3597"});
   const yb=rb+40+(n.ln||0)*12,ex=nx.out?T.x+T.w/2:T.x+T.w-16-(n.ln||0)*16,ty=T.y+T.h;
   o+=`<path d="M${cx},${by} L${cx},${yb} L${ex},${yb} L${ex},${ty}" class="fl" marker-end="url(#o1)"/>`+text(cx+5,by+13,[q.swap?"Yes":"No"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"});
-  const nl=q.nl||nx.nl;if(nl){const lw=nl.length*5.4+8;o+=`<rect x="${cx+10}" y="${yb-7}" width="${lw}" height="13" rx="3" fill="var(--card)" fill-opacity=".92"/>`+text(cx+14,yb+3,[nl],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}
+  const nl=q.nl||nx.nl;if(nl){o+=text(cx+14,yb+3,[nl],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}
   return o}
 function fixBranch(n){const q=n.dec,F=nodes[`${n.f.id}|${n.P.id}|${q.fix.n}`];if(!F)return "";const W=F.w,cx=n.x+DW/2,by=n.y+DW,rowY=n.y-(H/2-DW/2),ym=rowY+H+18,ex=F.x+W+16,rx=F.x-16,cy=rowY+H/2;let o="";
   o+=`<path d="M${cx},${by} L${cx},${ym} L${ex},${ym} L${ex},${F.y+H/2} L${F.x+W},${F.y+H/2}" class="fl" marker-end="url(#o1)"/>`+text(cx+5,by+12,["No"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"});
   const S1=nodes[`${n.f.id}|${n.P.id}|1`];
   if(n.P.id==="SOC-01.1"){const S2=nodes[`${n.f.id}|${n.P.id}|1`];if(S2){const k=["1a","1b","1c"].indexOf(q.fix.n),yy=F.y+H+22+k*9,tx=S2.x+30+k*14,fx=F.x+W/2;o+=`<path d="M${fx},${F.y+H} L${fx},${yy} L${tx},${yy} L${tx},${S2.y+H}" class="fl" marker-end="url(#o1)"/>`}}else if(S1&&false){const k=["1a","1b","1c"].indexOf(q.fix.n),by=F.y+H+18+k*10,sx=S1.x+30+k*12,fx=F.x+W/2;o+=`<path d="M${fx},${F.y+H} L${fx},${by} L${sx},${by} L${sx},${S1.y+H}" class="fl" stroke-dasharray="5 3" marker-end="url(#o1)"/>`;
-  if(k===0)o+=`<rect x="${sx+8}" y="${by-7}" width="${"Retry from step 1".length*5+6}" height="13" rx="3" fill="var(--card)" fill-opacity=".92"/>`+text(sx+11,by+3,["Retry from step 1"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}
+  if(k===0)o+=text(sx+11,by+3,["Retry from step 1"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}
   else if(!q.noRetry){o+=`<path d="M${F.x},${F.y+H/2} L${rx},${F.y+H/2} L${rx},${cy} L${n.x},${cy}" class="fl" stroke-dasharray="5 3" marker-end="url(#o1)"/>`;
-  const ly=(F.y+H/2+cy)/2;o+=`<rect x="${rx-34}" y="${ly-7}" width="31" height="13" rx="3" fill="var(--card)" fill-opacity=".92"/>`+text(rx-4,ly+3,["Retry"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"end"});
+  const ly=(F.y+H/2+cy)/2;o+=text(rx-4,ly+3,["Retry"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"end"});
   }
   if(n.P.id==="SOC-05.1"){const O=nodes[`${n.f.id}|${n.P.id}|out`],S3=nodes[`${n.f.id}|${n.P.id}|3`],fx=F.x+W/2;if(O){const tx=O.x+O.w/2,jy=F.y+H+30;o+=`<path d="M${fx+12},${F.y+H} L${fx+12},${jy} L${tx},${jy} L${tx},${O.y+O.h}" class="fl" marker-end="url(#o1)"/>`}if(S3){const tx=S3.x+W-10,jy=F.y+H+16;o+=`<path d="M${fx-12},${F.y+H} L${fx-12},${jy} L${tx},${jy} L${tx},${S3.y+H}" class="fl" marker-end="url(#o1)"/>`}}else if(q.fix.join){const sq=n.P._seq||[],J=q.fix.join==="out"?nodes[`${n.f.id}|${n.P.id}|out`]:nodes[sq[sq.indexOf(n.id)+2]];if(J){const jx=F.x+W/2,jy=F.y+H+34,tx=J.x+J.w/2;if(J.kind==="dec"){const cyy=J.y+J.h/2,mx=J.x-14;o+=`<path d="M${jx},${F.y+H} L${jx},${jy} L${mx},${jy} L${mx},${cyy} L${J.x},${cyy}" class="fl" marker-end="url(#o1)"/>`}else o+=`<path d="M${jx},${F.y+H} L${jx},${jy} L${tx},${jy} L${tx},${J.y+J.h}" class="fl" marker-end="url(#o1)"/>`}}
   return o}
@@ -1330,7 +1330,7 @@ function draw(){
     if(f.pp&&f.pp.length)h+=`<g><title>Pain points: ${esc2(f.pp.join(" | "))}</title><circle cx="${PAD+wdt-22}" cy="${b.top+20}" r="9" fill="#fff"/><text x="${PAD+wdt-22}" y="${b.top+24.5}" font-size="12" font-weight="700" fill="var(--pain)" text-anchor="middle">!</text></g>`;
     if(f.ctl&&f.ctl.length)h+=`<g><title>Controls: ${esc2(f.ctl.join(" | "))}</title><circle cx="${PAD+wdt-48}" cy="${b.top+20}" r="9" fill="#fff"/><text x="${PAD+wdt-48}" y="${b.top+24.5}" font-size="11" font-weight="700" fill="${b.c}" text-anchor="middle">C</text></g>`;
   });
-  h+=strips;(d.frames||[]).forEach(f=>f.procs.forEach(P=>{if(P.back){const A=nodes[`${f.id}|${P.id}|${P.back.from}`],B=nodes[`${f.id}|${P.id}|${P.back.to}`];if(A&&B){const yy=A.y+A.h+16,ax=A.x+A.w/2,bx=B.x+B.w/2+(P.back.dx||0);h+=`<path d="M${ax},${A.y+A.h} L${ax},${yy} L${bx},${yy} L${bx},${B.y+B.h}" class="fl" marker-end="url(#o1)"/>`}}}));
+  h+=strips;(d.frames||[]).forEach(f=>f.procs.forEach(P=>{if(P.back){const A=nodes[`${f.id}|${P.id}|${P.back.from}`],B=nodes[`${f.id}|${P.id}|${P.back.to}`];if(A&&B){const yy=A.y+A.h+16,ax=A.x+A.w/2,bx=B.x+B.w/2+(P.back.dx||0);h+=`<path data-return-from="${A.id}" data-return-to="${B.id}" d="M${ax},${A.y+A.h} L${ax},${yy} L${bx},${yy} L${bx},${B.y+B.h}" class="fl" marker-end="url(#o1)"/>`}}}));
   // chain between processes and key processes (internal O2C flow)
   (d.chain||[]).forEach((e,i)=>{const A=nodes[e.a],B=nodes[e.b];if(!A||!B)return;const lane=PAD+CH+(i%(d.lanes||4))*(d.lanes?8:11);const col=d.accent;
     const ax=A.x+A.w/2,ay=A.y+A.h,yg=e.below&&A.f&&A.f._box?A.f._box.bot+7+(i%3)*6:A.y+A.h+(e.dy!=null?e.dy:(A.kind==="out"?30:34));
@@ -1356,7 +1356,7 @@ function draw(){
       const nxD=s.branches[bi+1]?nodes[`${f.id}|${P.id}|${s.branches[bi+1].step.n}|d`]:null;
       if(nxD)o+=`<path d="M${cxd},${D.y+DW} L${cxd},${nxD.y}" class="fl" marker-end="url(#o1)"/>`+text(cxd+5,D.y+DW+13,["No"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"});
       else{const ye=S.y+H+30;const OT=s.elseOut?nodes[`${f.id}|${P.id}|out`]:null;o+=(OT?`<path d="M${cxd},${D.y+DW} L${cxd},${ye} L${OT.x+OT.w/2},${ye} L${OT.x+OT.w/2},${OT.y+OT.h}" class="fl" marker-end="url(#o1)"/>`:`<path d="M${cxd},${D.y+DW} L${cxd},${ye} L${n.bx},${ye}" class="fl"/>`)+text(cxd+5,D.y+DW+13,["No"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"});
-        if(s.elseLab){const lw=s.elseLab.length*5.4+8;o+=`<rect x="${cxd+10}" y="${ye-7}" width="${lw}" height="13" rx="3" fill="var(--card)" fill-opacity=".92"/>`+text(cxd+14,ye+3,[s.elseLab],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}if(!OT)yEnd=Math.max(yEnd,ye)}});
+        if(s.elseLab){o+=text(cxd+14,ye+3,[s.elseLab],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}if(!OT)yEnd=Math.max(yEnd,ye)}});
     o+=`<path d="M${n.bx},${yEnd} L${n.bx},${cy0}" class="fl"/>`;if(n.next)o+=`<path d="M${n.bx},${cy0} L${n.next.x},${cy0}" class="fl" marker-end="url(#o1)"/>`;
     if(s.lab)o+=text(n.dx+DW/2,n.rowY-6,[s.lab],{fs:10,fw:700,fill:"var(--muted)"});
     h+=o});
@@ -1506,15 +1506,15 @@ function noBranch(n){const q=n.dec,nx=q.nx,cx=n.x+DW/2,by=n.y+DW,rowY=n.y-(H/2-D
   const T=nx.out?nodes[`${n.f.id}|${n.P.id}|out`]:nodes[`${n.f.id}|${n.P.id}|${nx.step}`];if(!T)return text(cx,n.y+DW+11,wrap("No: "+q.no,26,1),{fs:8.5,fill:"#7b3597"});
   const yb=rb+40+(n.ln||0)*12,ex=nx.out?T.x+T.w/2:T.x+T.w-16,ty=T.y+T.h;
   o+=`<path d="M${cx},${by} L${cx},${yb} L${ex},${yb} L${ex},${ty}" class="fl" marker-end="url(#o1)"/>`+text(cx+5,by+13,[q.swap?"Yes":"No"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"});
-  const nl=q.nl||nx.nl;if(nl){const lw=nl.length*5.4+8;o+=`<rect x="${cx+10}" y="${yb-7}" width="${lw}" height="13" rx="3" fill="var(--card)" fill-opacity=".92"/>`+text(cx+14,yb+3,[nl],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}
+  const nl=q.nl||nx.nl;if(nl){o+=text(cx+14,yb+3,[nl],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}
   return o}
 function fixBranch(n){const q=n.dec,F=nodes[`${n.f.id}|${n.P.id}|${q.fix.n}`];if(!F)return "";const W=F.w,cx=n.x+DW/2,by=n.y+DW,rowY=n.y-(H/2-DW/2),ym=rowY+H+18,ex=F.x+W+16,rx=F.x-16,cy=rowY+H/2;let o="";
   o+=`<path d="M${cx},${by} L${cx},${ym} L${ex},${ym} L${ex},${F.y+H/2} L${F.x+W},${F.y+H/2}" class="fl" marker-end="url(#o1)"/>`+text(cx+5,by+12,["No"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"});
   const S1=nodes[`${n.f.id}|${n.P.id}|1`];
   if(n.P.id==="SOC-01.1"){const S2=nodes[`${n.f.id}|${n.P.id}|1`];if(S2){const k=["1a","1b","1c"].indexOf(q.fix.n),yy=F.y+H+22+k*9,tx=S2.x+30+k*14,fx=F.x+W/2;o+=`<path d="M${fx},${F.y+H} L${fx},${yy} L${tx},${yy} L${tx},${S2.y+H}" class="fl" marker-end="url(#o1)"/>`}}else if(S1&&false){const k=["1a","1b","1c"].indexOf(q.fix.n),by=F.y+H+18+k*10,sx=S1.x+30+k*12,fx=F.x+W/2;o+=`<path d="M${fx},${F.y+H} L${fx},${by} L${sx},${by} L${sx},${S1.y+H}" class="fl" stroke-dasharray="5 3" marker-end="url(#o1)"/>`;
-  if(k===0)o+=`<rect x="${sx+8}" y="${by-7}" width="${"Retry from step 1".length*5+6}" height="13" rx="3" fill="var(--card)" fill-opacity=".92"/>`+text(sx+11,by+3,["Retry from step 1"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}
+  if(k===0)o+=text(sx+11,by+3,["Retry from step 1"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}
   else if(!q.noRetry){o+=`<path d="M${F.x},${F.y+H/2} L${rx},${F.y+H/2} L${rx},${cy} L${n.x},${cy}" class="fl" stroke-dasharray="5 3" marker-end="url(#o1)"/>`;
-  const ly=(F.y+H/2+cy)/2;o+=`<rect x="${rx-34}" y="${ly-7}" width="31" height="13" rx="3" fill="var(--card)" fill-opacity=".92"/>`+text(rx-4,ly+3,["Retry"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"end"});
+  const ly=(F.y+H/2+cy)/2;o+=text(rx-4,ly+3,["Retry"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"end"});
   }
   if(n.P.id==="SOC-05.1"){const O=nodes[`${n.f.id}|${n.P.id}|out`],S3=nodes[`${n.f.id}|${n.P.id}|3`],fx=F.x+W/2;if(O){const tx=O.x+O.w/2,jy=F.y+H+30;o+=`<path d="M${fx+12},${F.y+H} L${fx+12},${jy} L${tx},${jy} L${tx},${O.y+O.h}" class="fl" marker-end="url(#o1)"/>`}if(S3){const tx=S3.x+W-10,jy=F.y+H+16;o+=`<path d="M${fx-12},${F.y+H} L${fx-12},${jy} L${tx},${jy} L${tx},${S3.y+H}" class="fl" marker-end="url(#o1)"/>`}}else if(q.fix.join){const sq=n.P._seq||[],J=q.fix.join==="out"?nodes[`${n.f.id}|${n.P.id}|out`]:nodes[sq[sq.indexOf(n.id)+2]];if(J){const jx=F.x+W/2,jy=F.y+H+34,tx=J.x+J.w/2;if(J.kind==="dec"){const cyy=J.y+J.h/2,mx=J.x-14;o+=`<path d="M${jx},${F.y+H} L${jx},${jy} L${mx},${jy} L${mx},${cyy} L${J.x},${cyy}" class="fl" marker-end="url(#o1)"/>`}else o+=`<path d="M${jx},${F.y+H} L${jx},${jy} L${tx},${jy} L${tx},${J.y+J.h}" class="fl" marker-end="url(#o1)"/>`}}
   return o}
@@ -1528,7 +1528,7 @@ function draw(){
     if(f.pp&&f.pp.length)h+=`<g><title>Pain points: ${esc2(f.pp.join(" | "))}</title><circle cx="${PAD+wdt-22}" cy="${b.top+20}" r="9" fill="#fff"/><text x="${PAD+wdt-22}" y="${b.top+24.5}" font-size="12" font-weight="700" fill="var(--pain)" text-anchor="middle">!</text></g>`;
     if(f.ctl&&f.ctl.length)h+=`<g><title>Controls: ${esc2(f.ctl.join(" | "))}</title><circle cx="${PAD+wdt-48}" cy="${b.top+20}" r="9" fill="#fff"/><text x="${PAD+wdt-48}" y="${b.top+24.5}" font-size="11" font-weight="700" fill="${b.c}" text-anchor="middle">C</text></g>`;
   });
-  h+=strips;let BT="";(d.frames||[]).forEach(f=>f.procs.forEach(P=>{if(P.back){const A=nodes[`${f.id}|${P.id}|${P.back.from}`],B=nodes[`${f.id}|${P.id}|${P.back.to}`];if(A&&B){const yy=A.y+A.h+16,ax=A.x+A.w/2,bx=B.x+B.w/2+(P.back.dx||0);h+=`<path d="M${ax},${A.y+A.h} L${ax},${yy} L${bx},${yy} L${bx},${B.y+B.h}" class="fl"/>`;BT+=`<path d="M${bx},${B.y+B.h+19} L${bx},${B.y+B.h}" class="fl" marker-end="url(#o1)"/>`}}}));
+  h+=strips;(d.frames||[]).forEach(f=>f.procs.forEach(P=>{if(P.back){const A=nodes[`${f.id}|${P.id}|${P.back.from}`],B=nodes[`${f.id}|${P.id}|${P.back.to}`];if(A&&B){const yy=A.y+A.h+16,ax=A.x+A.w/2,bx=B.x+B.w/2+(P.back.dx||0);h+=`<path data-return-from="${A.id}" data-return-to="${B.id}" d="M${ax},${A.y+A.h} L${ax},${yy} L${bx},${yy} L${bx},${B.y+B.h}" class="fl" marker-end="url(#o1)"/>`}}}));
   // chain between processes and key processes (internal O2C flow)
   (d.chain||[]).forEach((e,i)=>{const A=nodes[e.a],B=nodes[e.b];if(!A||!B)return;const lane=PAD+CH+(i%(d.lanes||4))*(d.lanes?8:11);const col=d.accent;
     const ax=A.x+A.w/2,ay=A.y+A.h,yg=e.below&&A.f&&A.f._box?A.f._box.bot+7+(i%3)*6:A.y+A.h+(e.dy!=null?e.dy:(A.kind==="out"?30:34));
@@ -1554,7 +1554,7 @@ function draw(){
       const nxD=s.branches[bi+1]?nodes[`${f.id}|${P.id}|${s.branches[bi+1].step.n}|d`]:null;
       if(nxD)o+=`<path d="M${cxd},${D.y+DW} L${cxd},${nxD.y}" class="fl" marker-end="url(#o1)"/>`+text(cxd+5,D.y+DW+13,["No"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"});
       else{const ye=S.y+H+30;const OT=s.elseOut?nodes[`${f.id}|${P.id}|out`]:null;o+=(OT?`<path d="M${cxd},${D.y+DW} L${cxd},${ye} L${OT.x+OT.w/2},${ye} L${OT.x+OT.w/2},${OT.y+OT.h}" class="fl" marker-end="url(#o1)"/>`:`<path d="M${cxd},${D.y+DW} L${cxd},${ye} L${n.bx},${ye}" class="fl"/>`)+text(cxd+5,D.y+DW+13,["No"],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"});
-        if(s.elseLab){const lw=s.elseLab.length*5.4+8;o+=`<rect x="${cxd+10}" y="${ye-7}" width="${lw}" height="13" rx="3" fill="var(--card)" fill-opacity=".92"/>`+text(cxd+14,ye+3,[s.elseLab],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}if(!OT)yEnd=Math.max(yEnd,ye)}});
+        if(s.elseLab){o+=text(cxd+14,ye+3,[s.elseLab],{fs:8.5,fw:600,fill:"#5b2a7a",a:"start"})}if(!OT)yEnd=Math.max(yEnd,ye)}});
     o+=`<path d="M${n.bx},${yEnd} L${n.bx},${cy0}" class="fl"/>`;if(n.next)o+=`<path d="M${n.bx},${cy0} L${n.next.x},${cy0}" class="fl" marker-end="url(#o1)"/>`;
     if(s.lab)o+=text(n.dx+DW/2,n.rowY-6,[s.lab],{fs:10,fw:700,fill:"var(--muted)"});
     h+=o});
@@ -1583,7 +1583,7 @@ function draw(){
       ${s.feas?`<rect x="${n.x+(s.feasdx||0)+W/2-Math.max(W,s.feas.length*4.7+14)/2}" y="${n.y+H+(outl.length?27:3)}" width="${Math.max(W,s.feas.length*4.7+14)}" height="14" rx="4" fill="${/review/i.test(s.feas)?"#b45309":/future/i.test(s.feas)?"#5f6b7a":/applicable|relevant/i.test(s.feas)?"#667085":/not/i.test(s.feas)?"var(--pain)":/progress/i.test(s.feas)?"var(--hyb)":"var(--ok)"}"/><text x="${n.x+(s.feasdx||0)+W/2}" y="${n.y+H+(outl.length?37:13)}" font-size="8.3" font-weight="700" fill="#fff" text-anchor="middle">${esc2(s.feas)}</text>${s.feasn?`<text x="${n.x+(s.feasdx||0)+W/2+Math.max(W,s.feas.length*4.7+14)/2+5}" y="${n.y+H+(outl.length?37:13)}" font-size="9.5" font-weight="600" fill="var(--navy)" text-anchor="start">${esc2(s.feasn)}</text>`:""}`:""}
     </g>`;
   });
-  const svg=document.querySelector(E.svg);svg.setAttribute("viewBox",`0 0 ${svgW} ${svgH}`);svg.setAttribute("data-f",filter);svg.innerHTML=h+BT;
+  const svg=document.querySelector(E.svg);svg.setAttribute("viewBox",`0 0 ${svgW} ${svgH}`);svg.setAttribute("data-f",filter);svg.innerHTML=h;
   svg.querySelectorAll(".nd,.opn").forEach(g=>{const f=()=>detail(g.dataset.id);g.onclick=f;g.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();f()}}});
 }
 function detail(id){const n=nodes[id];if(!n)return;sel=id;
