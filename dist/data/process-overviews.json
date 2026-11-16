@@ -193,7 +193,7 @@
       },
       "tobe": {
         "title": "FP&A Commercial Process Map · AI suggested",
-        "description": "The same nine stages and steps as the As-Is map, including CAPEX planning after NMPC. Each step keeps its documented flow and its As-Is activity colour; where Claude sees a practical automation, digitalisation or AI change it is marked AI on the step (click it for the recommendation, tools and basis), AI Opportunity nodes hang off the processes and stages, and the TPI register items are shown as [SOLUTION] nodes on the steps they touch - FAST+ items on Stage 9, P&L reporting items on Stages 6 and 7. Feasibility on a Claude suggestion is the workbook status of the register item on the same step.",
+        "description": "The same nine stages and steps as the As-Is map, including CAPEX planning after NMPC. Each step keeps its documented flow and its As-Is activity colour; where AI sees a practical automation, digitalisation or AI change it is marked AI on the step (click it for the recommendation, tools and basis), AI Opportunity nodes hang off the processes and stages, and the TPI register items are shown as [SOLUTION] nodes on the steps they touch - FAST+ items on Stage 9, P&L reporting items on Stages 6 and 7. Feasibility on an AI suggestion is the workbook status of the register item on the same step.",
         "meta": [
           {
             "label": "Owner",
@@ -201,7 +201,7 @@
           },
           {
             "label": "Tools assumed",
-            "value": "Excel on SharePoint, SAP, PMR / CMR, AZ FORCE, Cost Tool, Power BI semantic model, Power Apps, Power Automate, Python, FAST+, OneGRC, Copilot Studio"
+            "value": "Excel on SharePoint, SAP, PMR / CMR, AZ FORCE, Cost Tool, Power BI semantic model, Power Apps, Power Automate, Python, FAST+, OneGRC, AI"
           }
         ],
         "cards": [
@@ -2357,7 +2357,7 @@
           },
           {
             "label": "Tools assumed",
-            "value": "SAP standard (background jobs, CJ8G / AFAB, AS01-AS06 uploads, ABUMN), CAS, CoStar scheduled reports and ETL, BlackLine auto-certification and import templates, Python, Power Apps, Power Automate, Power BI, Copilot Studio"
+            "value": "SAP standard (background jobs, CJ8G / AFAB, AS01-AS06 uploads, ABUMN), CAS, CoStar scheduled reports and ETL, BlackLine auto-certification and import templates, Python, Power Apps, Power Automate, Power BI, AI"
           }
         ],
         "cards": [
@@ -3276,7 +3276,7 @@
           },
           {
             "label": "Tools assumed",
-            "value": "Kofax (to be replaced by the global tool), Coupa, SAP, Celonis, Xelix, BlackLine, Python, Power Automate, Power BI, Copilot / agent builder, Copilot Studio"
+            "value": "Kofax (to be replaced by the global tool), Coupa, SAP, Celonis, Xelix, BlackLine, Python, Power Automate, Power BI, AI"
           }
         ],
         "cards": [
@@ -4720,7 +4720,7 @@
           },
           {
             "label": "Tools assumed",
-            "value": "ASIA SAP, Coupa, Intela, CROWN, TRT (LongView), ERH, BlackLine, Tax GL Analyzer (Group IT), Python, Power Automate, Power Apps, Power BI, Copilot / agent builder, SharePoint"
+            "value": "ASIA SAP, Coupa, Intela, CROWN, TRT (LongView), ERH, BlackLine, Tax GL Analyzer (Group IT), Python, Power Automate, Power Apps, Power BI, AI, SharePoint"
           }
         ],
         "cards": [
@@ -6012,7 +6012,7 @@
           },
           {
             "label": "Tools assumed",
-            "value": "BlackLine journal workflow and comments, SAP (P13), KPMG Clara / KCC, Wdesk / Workiva, Power Apps, Power Automate, Power BI, Python, Copilot Studio"
+            "value": "BlackLine journal workflow and comments, SAP (P13), KPMG Clara / KCC, Wdesk / Workiva, Power Apps, Power Automate, Power BI, Python, AI"
           }
         ],
         "cards": [

@@ -1,5 +1,5 @@
-import {processSummary} from './process-summary.js?v=20261116-validated';
-import {escapeHTML as esc} from './real-data.js?v=20261116-validated';
+import {processSummary} from './process-summary.js?v=20261116-ai-wording';
+import {escapeHTML as esc} from './real-data.js?v=20261116-ai-wording';
 import {titleCase} from './title-case.js';
 
 function processRow(process, index) {

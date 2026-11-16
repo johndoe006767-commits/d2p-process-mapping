@@ -1,4 +1,4 @@
-import {openMap} from './real-experience.js?v=20261116-process-audit';
+import {openMap} from './real-experience.js?v=20261116-ai-wording';
 import * as T from 'three';
 
 // Labels use the actual soma objects from the supplied organ-specific network.

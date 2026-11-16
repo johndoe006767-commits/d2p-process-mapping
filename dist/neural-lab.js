@@ -392,7 +392,7 @@ function aiDetails(s,n){
  const review=data.review?.[`${n.P.id}|${s.n}`]||data.review?.[s.t]||{};
  return block('AI suggestion',paragraph(s.rec||s.sug||review.sug||(!s.ch||s.ch==='same'?'No change proposed for this step.':'')))+
  block('Tools',paragraph(s.tools||review.tools))+block('Proposal basis',paragraph(s.opp))+block('Feasibility',paragraph(s.feas||s.holdfeas||review.feas))+
- block(s.feasl||'Review comments',paragraph(s.feasc||review.comment))+block('Validation note',paragraph(s.feasx))+block('Scope',paragraph(s.scope||review.scope))+block('Copilot / Microsoft AI option',detailFields(s.cop))+
+ block(s.feasl||'Review comments',paragraph(s.feasc||review.comment))+block('Validation note',paragraph(s.feasx))+block('Scope',paragraph(s.scope||review.scope))+block('AI option',detailFields(s.cop))+
  block('Proposed pain-point resolutions',list((s.pp||[]).map(p=>valueText(data.fixes?.[p])).filter(Boolean)))+block('Source review',detailFields(review));
 }
 
