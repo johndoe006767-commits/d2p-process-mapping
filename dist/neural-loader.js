@@ -1,14 +1,14 @@
 import {getScenario,setScenario,scenarioControl,bindScenarioControl,scenarioLabel} from './process-scenario.js';
-import {REAL} from './real-data.js?v=20261116-validated';
-import {mountNeuralLab} from './neural-lab.js?v=20261116-process-audit';
+import {REAL} from './real-data.js?v=20261116-ai-wording';
+import {mountNeuralLab} from './neural-lab.js?v=20261116-ai-wording';
 import {titleCase,normalizeHeadings} from './title-case.js';
 import {towerDisplayTitle} from './tower-names.js';
-import {processDashboard} from './process-dashboard.js?v=20261116-validated';
+import {processDashboard} from './process-dashboard.js?v=20261116-ai-wording';
 const root=document.querySelector('#process-workspace');let api=null,current=null,request=0,shellPromise,pending=null,returnHandler;let scenarioRefresh=0;const sources=new Map();
 const shell=()=>shellPromise??=fetch('./neural/shell.html?v=20261113-unified-nav').then(r=>{if(!r.ok)throw Error('The Process Workspace Could Not Load.');return r.text();}).catch(e=>{shellPromise=null;throw e;});
 function source(key) {
   if (!sources.has(key)) {
-    const request = fetch(`./neural/${key}.json?v=20261116-process-audit`).then(async response => {
+    const request = fetch(`./neural/${key}.json?v=20261116-ai-wording`).then(async response => {
       if (!response.ok) throw Error('The Process Records Could Not Load.');
       return response.json();
     }).catch(error => {
@@ -22,7 +22,7 @@ function source(key) {
 function flatten(steps){return steps.flatMap(s=>s.split?s.branches.flatMap(b=>flatten(b.steps)):s.fork?s.branches.flatMap(b=>flatten([b.step])):s.gate?(s.fix?[s.fix]:[]):[s]);}
 let overviewsPromise;
 function processOverviews(){
- return overviewsPromise??=fetch('./data/process-overviews.json?v=20261116-process-audit').then(async response=>{
+ return overviewsPromise??=fetch('./data/process-overviews.json?v=20261116-ai-wording').then(async response=>{
   if(!response.ok)throw Error('The process summaries could not load.');
   const data=await response.json();
   return data;

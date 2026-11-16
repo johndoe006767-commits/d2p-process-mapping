@@ -5,7 +5,7 @@ function applyTowerNames(towers) {
   return towers;
 }
 
-const response = await fetch('./data/real-processes.json?v=20261116-validated');
+const response = await fetch('./data/real-processes.json?v=20261116-ai-wording');
 if (!response.ok) throw new Error('The source process data could not be loaded.');
 export const REAL = applyTowerNames(await response.json());
 const kpiResponse = await fetch('./data/kpi-summary.json?v=20261116-validated');
