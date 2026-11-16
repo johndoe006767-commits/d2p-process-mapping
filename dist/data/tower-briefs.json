@@ -1,15 +1,13 @@
 {
   "source": {
-    "file": "All_Towers_P2P_Tax_O2C.html",
-    "format": "HTML",
+    "file": "All_Towers_Validated_Nov16.html",
     "section": "src-TPI",
     "dependenciesFile": "8_Tower_TPI_Interdependencies_Template.xlsx",
     "dependenciesSheet": "Tower Input",
     "dependenciesRange": "B5:B12",
-    "towerOverrides": {
-      "O2C": "All_Process_Towers_November 11.html",
-      "TAX": "All_Process_Towers_November 11.html"
-    }
+    "projectsRange": "C5:F12",
+    "projectsFile": "8_Tower_TPI_Interdependencies_Template.xlsx",
+    "projectsSheet": "Tower Input"
   },
   "towers": {
     "brain": {
@@ -47,31 +45,39 @@
             "name": "Fast+: Financial control approval flow",
             "description": "",
             "sourceText": "Fast+: Financial control approval flow",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-TPI",
-            "sourceItem": 1
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!C8",
+            "sourceItem": 1,
+            "sourceCell": "C8",
+            "workbookText": "Fast+: Financial control approval flow"
           },
           {
             "name": "Preclosing PnL data transformation",
             "description": "",
             "sourceText": "Preclosing PnL data transformation",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-TPI",
-            "sourceItem": 2
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!C8",
+            "sourceItem": 2,
+            "sourceCell": "C8",
+            "workbookText": "Preclosing PnL data transformation"
           }
         ],
         "2027": [
           {
-            "name": "Pre closing: First level variance screening using AI agent and AI draft commentary with transaction evidence",
-            "description": "",
+            "name": "Pre closing:",
+            "description": " First level variance screening using AI agent and AI draft commentary with transaction evidence",
             "sourceText": "Pre closing: First level variance screening using AI agent and AI draft commentary with transaction evidence",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-TPI",
-            "sourceItem": 1
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!E8",
+            "sourceItem": 1,
+            "sourceCell": "E8",
+            "workbookText": "Pre closing: First level variance screening using AI agent and AI draft commentary with transaction evidence"
           },
           {
-            "name": "SCC and Royalty check after system open: using python to do the reconciliation and using AI to flag the variances",
-            "description": "",
+            "name": "SCC and Royalty check after system open:",
+            "description": " using python to do the reconciliation and using AI to flag the variances",
             "sourceText": "SCC and Royalty check after system open: using python to do the reconciliation and using AI to flag the variances",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-TPI",
-            "sourceItem": 2
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!E8",
+            "sourceItem": 2,
+            "sourceCell": "E8",
+            "workbookText": "SCC and Royalty check after system open: using python to do the reconciliation and using AI to flag the variances"
           }
         ]
       },
@@ -128,73 +134,114 @@
             "name": "Site Costs Dashboard support pre-closing & closing analysis",
             "description": "",
             "sourceText": "Site Costs Dashboard support pre-closing & closing analysis",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-TPI",
-            "sourceItem": 1
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!C9",
+            "sourceItem": 1,
+            "sourceCell": "C9",
+            "workbookText": "Site Costs Dashboard support pre-closing & closing analysis"
           },
           {
             "name": "FTE Dashboard support pre-closing & closing analysis",
             "description": "",
             "sourceText": "FTE Dashboard support pre-closing & closing analysis",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-TPI",
-            "sourceItem": 2
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!C9",
+            "sourceItem": 2,
+            "sourceCell": "C9",
+            "workbookText": "FTE Dashboard support pre-closing & closing analysis"
           },
           {
             "name": "Ops Volume & COGM Dashboard support intra-month checks and closing",
             "description": "",
             "sourceText": "Ops Volume & COGM Dashboard support intra-month checks and closing",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-TPI",
-            "sourceItem": 3
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!C9",
+            "sourceItem": 3,
+            "sourceCell": "C9",
+            "workbookText": "Ops Volume & COGM Dashboard support intra-month checks and closing"
           },
           {
             "name": "Global Logistics pre-month closing",
             "description": "",
             "sourceText": "Global Logistics pre-month closing",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-TPI",
-            "sourceItem": 4
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!C9",
+            "sourceItem": 4,
+            "sourceCell": "C9",
+            "workbookText": "Global Logistics pre-month closing"
           },
           {
             "name": "Agent Rhy for actual pack consolidation",
             "description": "",
             "sourceText": "Agent Rhy for actual pack consolidation",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-TPI",
-            "sourceItem": 5
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!C9",
+            "sourceItem": 5,
+            "sourceCell": "C9",
+            "workbookText": "Agent Rhy for actual pack consolidation"
           },
           {
             "name": "Agent Charlie for planning pack consolidation",
             "description": "",
             "sourceText": "Agent Charlie for planning pack consolidation",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-TPI",
-            "sourceItem": 6
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!C9",
+            "sourceItem": 6,
+            "sourceCell": "C9",
+            "workbookText": "Agent Charlie for planning pack consolidation"
           }
         ],
         "2027": [
           {
             "name": "Capex dashboard",
-            "description": "",
-            "sourceText": "Capex dashboard",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-TPI",
-            "sourceItem": 1
+            "description": " (own ideas)",
+            "sourceText": "Capex dashboard (own ideas)",
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!E9",
+            "sourceItem": 1,
+            "sourceCell": "E9",
+            "workbookText": "Capex dashboard (own ideas)",
+            "origin": "Tower ideas"
           },
           {
             "name": "Planning & assumptions gathering tool",
-            "description": "",
-            "sourceText": "Planning & assumptions gathering tool",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-TPI",
-            "sourceItem": 2
+            "description": " (own ideas)",
+            "sourceText": "Planning & assumptions gathering tool (own ideas)",
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!E9",
+            "sourceItem": 2,
+            "sourceCell": "E9",
+            "workbookText": "Planning & assumptions gathering tool (own ideas)",
+            "origin": "Tower ideas"
           },
           {
             "name": "AI for draft analysis and commentaries",
-            "description": "",
-            "sourceText": "AI for draft analysis and commentaries",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-TPI",
-            "sourceItem": 3
+            "description": " (AI suggest)",
+            "sourceText": "AI for draft analysis and commentaries (AI suggest)",
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!E9",
+            "sourceItem": 3,
+            "sourceCell": "E9",
+            "workbookText": "AI for draft analysis and commentaries (AI suggest)",
+            "origin": "AI suggestions"
+          },
+          {
+            "name": "Coupa accrual lines enriched PO text",
+            "description": " (AI suggest - might be R2R initiatives)",
+            "sourceText": "Coupa accrual lines enriched PO text (AI suggest - might be R2R initiatives)",
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!E9",
+            "sourceItem": 4,
+            "sourceCell": "E9",
+            "workbookText": "Coupa accrual lines enriched PO text (AI suggest - might be R2R initiatives)",
+            "origin": "AI suggestions"
+          },
+          {
+            "name": "PPV, ROX and Yield analysis by material and brand produced by python script",
+            "description": " (AI suggest)",
+            "sourceText": "PPV, ROX and Yield analysis by material and brand produced by python script (AI suggest)",
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!E9",
+            "sourceItem": 5,
+            "sourceCell": "E9",
+            "workbookText": "PPV, ROX and Yield analysis by material and brand produced by python script (AI suggest)",
+            "origin": "AI suggestions"
           }
         ]
       },
       "notes": {},
       "sourceCounts": {
         "2026": 6,
-        "2027": 3
+        "2027": 5
       }
     },
     "liver": {
@@ -226,15 +273,19 @@
             "name": "Global FA Dashboard",
             "description": "",
             "sourceText": "Global FA Dashboard",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-TPI",
-            "sourceItem": 1
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!C11",
+            "sourceItem": 1,
+            "sourceCell": "C11",
+            "workbookText": "Global FA Dashboard"
           },
           {
             "name": "FA MEC Movement Dashboard",
             "description": "",
             "sourceText": "FA MEC Movement Dashboard",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-TPI",
-            "sourceItem": 2
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!C11",
+            "sourceItem": 2,
+            "sourceCell": "C11",
+            "workbookText": "FA MEC Movement Dashboard"
           }
         ],
         "2027": [
@@ -242,8 +293,10 @@
             "name": "Lease ETL preparation automation",
             "description": "",
             "sourceText": "Lease ETL preparation automation",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-TPI",
-            "sourceItem": 1
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!E11",
+            "sourceItem": 1,
+            "sourceCell": "E11",
+            "workbookText": "Lease ETL preparation automation"
           }
         ]
       },
@@ -276,15 +329,19 @@
             "name": "Non PO Accrual (In Progress)",
             "description": "",
             "sourceText": "Non PO Accrual (In Progress)",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-TPI",
-            "sourceItem": 1
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!C6",
+            "sourceItem": 1,
+            "sourceCell": "C6",
+            "workbookText": "Non PO Accrual (In Progress)"
           },
           {
             "name": "Global BSR Standardisation & Centralisation (In Progress)",
             "description": "",
             "sourceText": "Global BSR Standardisation & Centralisation (In Progress)",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-TPI",
-            "sourceItem": 2
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!C6",
+            "sourceItem": 2,
+            "sourceCell": "C6",
+            "workbookText": "Global BSR Standardisation & Centralisation (In Progress)"
           }
         ],
         "2027": [
@@ -292,15 +349,19 @@
             "name": "Automate Coupa interfaced cut-off",
             "description": "",
             "sourceText": "Automate Coupa interfaced cut-off",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-TPI",
-            "sourceItem": 1
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!E6",
+            "sourceItem": 1,
+            "sourceCell": "E6",
+            "workbookText": "Automate Coupa interfaced cut-off"
           },
           {
             "name": "China: contribution accrual and pre-payment offsetting",
             "description": "",
             "sourceText": "China: contribution accrual and pre-payment offsetting",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-TPI",
-            "sourceItem": 2
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!E6",
+            "sourceItem": 2,
+            "sourceCell": "E6",
+            "workbookText": "China: contribution accrual and pre-payment offsetting"
           }
         ]
       },
@@ -339,41 +400,55 @@
             "name": "Customer advance payments clearing",
             "description": "",
             "sourceText": "Customer advance payments clearing",
-            "source": "All_Process_Towers_November 11.html#src-TPI",
-            "sourceItem": 1
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!C7",
+            "sourceItem": 1,
+            "sourceCell": "C7",
+            "workbookText": "Customer advance payments clearing"
           },
           {
             "name": "Alexion SO automation, returns/ rebates automation",
             "description": "",
             "sourceText": "Alexion SO automation, returns/ rebates automation",
-            "source": "All_Process_Towers_November 11.html#src-TPI",
-            "sourceItem": 2
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!C7",
+            "sourceItem": 2,
+            "sourceCell": "C7",
+            "workbookText": "Alexion SO automation, returns/ rebates automation"
           },
           {
             "name": "Automate bank clearing for foreign vendor payments, including automatic FX gain/loss postings",
             "description": "",
             "sourceText": "Automate bank clearing for foreign vendor payments, including automatic FX gain/loss postings",
-            "source": "All_Process_Towers_November 11.html#src-TPI",
-            "sourceItem": 3
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!C7",
+            "sourceItem": 3,
+            "sourceCell": "C7",
+            "workbookText": "Automate bank clearing for foreign vendor payments, including automatic FX gain/loss postings"
           },
           {
             "name": "China intracompany funding via Crown request",
             "description": "",
             "sourceText": "China intracompany funding via Crown request",
-            "source": "All_Process_Towers_November 11.html#src-TPI",
-            "sourceItem": 4
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!C7",
+            "sourceItem": 4,
+            "sourceCell": "C7",
+            "workbookText": "China intracompany funding via Crown request"
           },
           {
             "name": "System change to exclude Banker's acceptance from the CNXX credit exposure",
             "description": "",
             "sourceText": "System change to exclude Banker's acceptance from the CNXX credit exposure",
-            "source": "User-specified O2C 2026 priorities"
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!C7",
+            "sourceItem": 5,
+            "sourceCell": "C7",
+            "workbookText": "System change to exclude Banker's acceptance from the CNXX credit exposure"
           },
           {
             "name": "Python script to auto-send pre-due reminders for Alexion Australia",
             "description": "",
             "sourceText": "Python script to auto-send pre-due reminders for Alexion Australia",
-            "source": "User-specified O2C 2026 priorities"
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!C7",
+            "sourceItem": 6,
+            "sourceCell": "C7",
+            "workbookText": "Python script to auto-send pre-due reminders for Alexion Australia"
           }
         ],
         "2027": [
@@ -381,28 +456,34 @@
             "name": "Pass the approved Crown request data (beneficiary, bank, currency, amount, value date) straight into the FIS Payment Hub to remove re-keying, with a duplicate-transfer check",
             "description": "",
             "sourceText": "Pass the approved Crown request data (beneficiary, bank, currency, amount, value date) straight into the FIS Payment Hub to remove re-keying, with a duplicate-transfer check",
-            "source": "All_Process_Towers_November 11.html#src-TPI",
-            "sourceItem": 1
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!E7",
+            "sourceItem": 1,
+            "sourceCell": "E7",
+            "workbookText": "Pass the approved Crown request data (beneficiary, bank, currency, amount, value date) straight into the FIS Payment Hub to remove re-keying, with a duplicate-transfer check"
           },
           {
-            "name": "Pre-creation VAT master-data validation(Before an order or credit note is created, check the VAT classification against SAP master data and flag mismatches to local market, stopping incorrect VAT at invoice.)",
-            "description": "",
+            "name": "Pre-creation VAT master-data validation",
+            "description": "(Before an order or credit note is created, check the VAT classification against SAP master data and flag mismatches to local market, stopping incorrect VAT at invoice.)",
             "sourceText": "Pre-creation VAT master-data validation(Before an order or credit note is created, check the VAT classification against SAP master data and flag mismatches to local market, stopping incorrect VAT at invoice.)",
-            "source": "All_Process_Towers_November 11.html#src-TPI",
-            "sourceItem": 2
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!E7",
+            "sourceItem": 2,
+            "sourceCell": "E7",
+            "workbookText": "Pre-creation VAT master-data validation(Before an order or credit note is created, check the VAT classification against SAP master data and flag mismatches to local market, stopping incorrect VAT at invoice.)"
           },
           {
-            "name": "Order block release-on-approval workflow with evidence trail (One workflow for the three block reasons: the blocked order generates the approval request with the exposure summary, routes it to the GDOA 2002 / Credit Risk Policy / GDOA 2000 approver, stores the evidence, and triggers the SAP release by script.)",
-            "description": "",
+            "name": "Order block release-on-approval workflow with evidence trail",
+            "description": " (One workflow for the three block reasons: the blocked order generates the approval request with the exposure summary, routes it to the GDOA 2002 / Credit Risk Policy / GDOA 2000 approver, stores the evidence, and triggers the SAP release by script.)",
             "sourceText": "Order block release-on-approval workflow with evidence trail (One workflow for the three block reasons: the blocked order generates the approval request with the exposure summary, routes it to the GDOA 2002 / Credit Risk Policy / GDOA 2000 approver, stores the evidence, and triggers the SAP release by script.)",
-            "source": "All_Process_Towers_November 11.html#src-TPI",
-            "sourceItem": 3
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!E7",
+            "sourceItem": 3,
+            "sourceCell": "E7",
+            "workbookText": "Order block release-on-approval workflow with evidence trail (One workflow for the three block reasons: the blocked order generates the approval request with the exposure summary, routes it to the GDOA 2002 / Credit Risk Policy / GDOA 2000 approver, stores the evidence, and triggers the SAP release by script.)"
           }
         ]
       },
       "notes": {},
       "sourceCounts": {
-        "2026": 4,
+        "2026": 6,
         "2027": 3
       }
     },
@@ -413,67 +494,79 @@
         {
           "tower": "P2P",
           "description": "Invoice processing for tax codes determination",
-          "sourceText": "P2P: Invoice processing for tax codes determination ",
+          "sourceText": "P2P: Invoice processing for tax codes determination",
           "sourceCell": "B10"
         },
         {
           "tower": "R2R",
           "description": "Balance sheet reconciliations for tax accounts",
-          "sourceText": "R2R: Balance sheet reconciliations for tax accounts ",
+          "sourceText": "R2R: Balance sheet reconciliations for tax accounts",
           "sourceCell": "B10"
         },
         {
           "tower": "C2C",
           "description": "Tax payments initiation",
-          "sourceText": "C2C: Tax payments initiation ",
+          "sourceText": "C2C: Tax payments initiation",
           "sourceCell": "B10"
         }
       ],
       "projects": {
         "2026": [
           {
-            "name": "Tax GL Analyzer for 1TSC",
+            "name": "GL Analyzer",
             "description": "",
-            "sourceText": "Tax GL Analyzer for 1TSC",
-            "source": "All_Process_Towers_November 11.html#src-TPI",
-            "sourceItem": 1
+            "sourceText": "GL Analyzer",
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!C10",
+            "sourceItem": 1,
+            "sourceCell": "C10",
+            "workbookText": "GL Analyzer"
           },
           {
-            "name": "Tax Reporting Automated Journal for SAP Pushdown",
+            "name": "Tax Reporting Automated Journal",
             "description": "",
-            "sourceText": "Tax Reporting Automated Journal for SAP Pushdown",
-            "source": "All_Process_Towers_November 11.html#src-TPI",
-            "sourceItem": 2
+            "sourceText": "Tax Reporting Automated Journal",
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!C10",
+            "sourceItem": 2,
+            "sourceCell": "C10",
+            "workbookText": "Tax Reporting Automated Journal"
           },
           {
-            "name": "Automated GL extraction for Non GTC markets",
+            "name": "Automation of Tax Impact Reporting",
             "description": "",
-            "sourceText": "Automated GL extraction for Non GTC markets",
-            "source": "All_Process_Towers_November 11.html#src-TPI",
-            "sourceItem": 3
+            "sourceText": "Automation of Tax Impact Reporting",
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!C10",
+            "sourceItem": 3,
+            "sourceCell": "C10",
+            "workbookText": "Automation of Tax Impact Reporting"
           }
         ],
         "2027": [
           {
-            "name": "Direct Tax Automation (POC) completed for Group Tax consideration, continue to scale across other markets, regions to assist CIT Review.",
-            "description": "",
+            "name": "Direct Tax Automation (POC)",
+            "description": " completed for Group Tax consideration, continue to scale across other markets, regions to assist CIT Review.",
             "sourceText": "Direct Tax Automation (POC) completed for Group Tax consideration, continue to scale across other markets, regions to assist CIT Review.",
-            "source": "All_Process_Towers_November 11.html#src-TPI",
-            "sourceItem": 1
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!E10",
+            "sourceItem": 1,
+            "sourceCell": "E10",
+            "workbookText": "Direct Tax Automation (POC) completed for Group Tax consideration, continue to scale across other markets, regions to assist CIT Review."
           },
           {
-            "name": "Indirect Tax Automation (POC) in progress for Group Tax consideration, continue to scale across other business requirements in VAT, WHT, Customs Duty. Key design: from regulatory change to controlled SAP implementation.",
-            "description": "",
-            "sourceText": "Indirect Tax Automation (POC) in progress for Group Tax consideration, continue to scale across other business requirements in VAT, WHT, Customs Duty. Key design: from regulatory change to controlled SAP implementation.",
-            "source": "All_Process_Towers_November 11.html#src-TPI",
-            "sourceItem": 2
+            "name": "Indirect Tax Automation (POC)",
+            "description": " in progress for Group Tax consideration, continue to scale across other business requirements in WHT, Customs Duty. Key design: from regulatory change to controlled SAP implementation.",
+            "sourceText": "Indirect Tax Automation (POC) in progress for Group Tax consideration, continue to scale across other business requirements in WHT, Customs Duty. Key design: from regulatory change to controlled SAP implementation.",
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!E10",
+            "sourceItem": 2,
+            "sourceCell": "E10",
+            "workbookText": "Indirect Tax Automation (POC) in progress for Group Tax consideration, continue to scale across other business requirements in WHT, Customs Duty. Key design: from regulatory change to controlled SAP implementation."
           }
         ]
       },
-      "notes": {},
+      "notes": {
+        "2027": "The workbook lists 2 named projects and records a total of 4."
+      },
       "sourceCounts": {
         "2026": 3,
-        "2027": 2
+        "2027": 4
       }
     },
     "lungs": {
@@ -505,22 +598,37 @@
             "name": "Coupa P2P Accrual Dashboard",
             "description": "",
             "sourceText": "Coupa P2P Accrual Dashboard",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-TPI",
-            "sourceItem": 1
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!C5",
+            "sourceItem": 1,
+            "sourceCell": "C5",
+            "workbookText": "Coupa P2P Accrual Dashboard"
           },
           {
             "name": "BSR Automation Globalisation",
             "description": "",
             "sourceText": "BSR Automation Globalisation",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-TPI",
-            "sourceItem": 2
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!C5",
+            "sourceItem": 2,
+            "sourceCell": "C5",
+            "workbookText": "BSR Automation Globalisation"
           },
           {
             "name": "AP 3rd party close analysis and governance",
             "description": "",
             "sourceText": "AP 3rd party close analysis and governance",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-TPI",
-            "sourceItem": 3
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!C5",
+            "sourceItem": 3,
+            "sourceCell": "C5",
+            "workbookText": "AP 3rd party close analysis and governance"
+          },
+          {
+            "name": "Manual SAP Extraction in preparation of BSR Working file",
+            "description": " - Repetitive & time consuming BSR Automation",
+            "sourceText": "Manual SAP Extraction in preparation of BSR Working file - Repetitive & time consuming BSR Automation",
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!C5",
+            "sourceItem": 4,
+            "sourceCell": "C5",
+            "workbookText": "Manual SAP Extraction in preparation of BSR Working file - Repetitive & time consuming BSR Automation"
           }
         ],
         "2027": [
@@ -528,30 +636,36 @@
             "name": "Automate the market-specific MM module closes",
             "description": "",
             "sourceText": "Automate the market-specific MM module closes",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-TPI",
-            "sourceItem": 1
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!E5",
+            "sourceItem": 1,
+            "sourceCell": "E5",
+            "workbookText": "Automate the market-specific MM module closes"
           },
           {
             "name": "Automate BSR template upload into BlackLine",
             "description": "",
             "sourceText": "Automate BSR template upload into BlackLine",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-TPI",
-            "sourceItem": 2
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!E5",
+            "sourceItem": 2,
+            "sourceCell": "E5",
+            "workbookText": "Automate BSR template upload into BlackLine"
           },
           {
             "name": "Simplify and automate ERH MOT preparation",
             "description": "",
             "sourceText": "Simplify and automate ERH MOT preparation",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-TPI",
-            "sourceItem": 3
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!E5",
+            "sourceItem": 3,
+            "sourceCell": "E5",
+            "workbookText": "Simplify and automate ERH MOT preparation"
           }
         ]
       },
       "notes": {
-        "2027": "(These 3 suggestions are aligned with GPO/GPDD focus as well)"
+        "2027": "These 3 suggestions are aligned with GPO/GPDD focus as well"
       },
       "sourceCounts": {
-        "2026": 3,
+        "2026": 4,
         "2027": 3
       }
     },
@@ -562,7 +676,7 @@
         {
           "tower": "FP&A",
           "description": "Cost information for manual journal requests",
-          "sourceText": "FP&A: Cost information for manual journal requests ",
+          "sourceText": "FP&A: Cost information for manual journal requests",
           "sourceCell": "B12"
         },
         {
@@ -584,31 +698,40 @@
             "name": "Manual Journal Month end close transformation",
             "description": "",
             "sourceText": "Manual Journal Month end close transformation",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-TPI",
-            "sourceItem": 1
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!C12",
+            "sourceItem": 1,
+            "sourceCell": "C12",
+            "workbookText": "Manual Journal Month end close transformation"
           },
           {
             "name": "Statutory audit end to end audit",
             "description": "",
             "sourceText": "Statutory audit end to end audit",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-TPI",
-            "sourceItem": 2
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!C12",
+            "sourceItem": 2,
+            "sourceCell": "C12",
+            "workbookText": "Statutory audit end to end audit"
           }
         ],
         "2027": [
           {
-            "name": "Replace the email request with standard journal request form via AI agent + Power Automate (MJV-06)",
+            "name": "Replace the email request with standard journal request form via Power Platform (MJV-06)",
             "description": "",
-            "sourceText": "Replace the email request with standard journal request form via AI agent + Power Automate (MJV-06)",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-TPI",
-            "sourceItem": 1
+            "sourceText": "Replace the email request with standard journal request form via Power Platform (MJV-06)",
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!E12",
+            "sourceItem": 1,
+            "sourceCell": "E12",
+            "workbookText": "Replace the email request with standard journal request form via Power Platform (MJV-06)"
           },
           {
             "name": "Pre-submission AI checks which includes GSOP compliance, enigma rules - enhancements for Subzero (MJV-07)",
             "description": "",
             "sourceText": "Pre-submission AI checks which includes GSOP compliance, enigma rules - enhancements for Subzero (MJV-07)",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-TPI",
-            "sourceItem": 2
+            "source": "8_Tower_TPI_Interdependencies_Template.xlsx#Tower Input!E12",
+            "sourceItem": 2,
+            "sourceCell": "E12",
+            "workbookText": "Pre-submission AI checks which includes GSOP compliance, enigma rules - enhancements from Subzero (MJV-07)",
+            "wordingException": "Approved wording: enhancements for Subzero."
           }
         ]
       },

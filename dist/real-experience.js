@@ -1,8 +1,8 @@
 import {cancelPageNavigation} from './page-navigation.js';
-import {REAL,KPI,escapeHTML as esc} from './real-data.js?v=20261112-source-parity';
-import {CARD_BRIEFS} from './tower-briefs.js?v=20261112-source-parity';
-import {comparisonMarkup} from './health.js?v=20261112-source-parity';
-import {prepareNeural,clearNeural} from './neural-loader.js?v=20261113-unified-nav';
+import {REAL,KPI,escapeHTML as esc} from './real-data.js?v=20261116-validated';
+import {CARD_BRIEFS} from './tower-briefs.js?v=20261116-process-audit';
+import {comparisonMarkup} from './health.js?v=20261116-mix-legend';
+import {prepareNeural,clearNeural} from './neural-loader.js?v=20261116-process-audit';
 import {titleCase,normalizeHeadings} from './title-case.js';
 const $=s=>document.querySelector(s);
 let currentId=null,ticket=0,mapOpener=null,organPosition={top:0,left:0};
@@ -54,6 +54,22 @@ export async function openMap(id,stage=null,mode='detail',keyboard=false){
 export function initExperience(){document.addEventListener('keydown',()=>document.body.classList.add('keyboard-input'));document.addEventListener('pointerdown',()=>document.body.classList.remove('keyboard-input'));addEventListener('pagehide',()=>{clearNeural();});normalizeHeadings(document);const observer=new MutationObserver(records=>{for(const r of records){for(const n of r.addedNodes){if(n.nodeType===1){normalizeHeadings(n.parentElement||n);}}}});observer.observe(document.body,{childList:true,subtree:true});window.FinanceLab={openMap,REAL};}
 
 const projectYears=new Map();
+function projectList(projects) {
+ const groups = new Map();
+ for (const project of projects) {
+  const origin = project.origin || '';
+  if (!groups.has(origin)) groups.set(origin, []);
+  groups.get(origin).push(project);
+ }
+ return [...groups].map(([origin, entries]) => {
+  const list = entries.map(project => `<li><strong>${esc(project.name)}</strong>${
+   project.description ? `<p>${esc(project.description)}</p>` : ''
+  }</li>`).join('');
+  return origin
+   ? `<section class="hud-project-group"><h5>${esc(origin)}</h5><ul class="hud-project-list">${list}</ul></section>`
+   : `<ul class="hud-project-list">${list}</ul>`;
+ }).join('');
+}
 function renderKpiContext(id){
  $('.hud-scroll').scrollTop=0;
  const brief=CARD_BRIEFS[id],populated=brief.status==='populated';
@@ -76,7 +92,7 @@ function renderKpiContext(id){
    if(active&&focus)tab.focus({preventScroll:true});
   });
   const panel=$('#hud-year-panel');panel.setAttribute('aria-labelledby','hud-year-'+year);
-  panel.innerHTML=populated?`${brief.projects[year].length?`<ul class="hud-project-list">${brief.projects[year].map(project=>`<li><strong>${esc(project.name)}</strong>${project.description&&project.description!==project.name?`<p>${esc(project.description)}</p>`:''}</li>`).join('')}</ul>`:`<div class="hud-project-empty"><strong>No ${year} ${year==='2027'?'AI-suggested ':''}TPI projects supplied</strong><p>The source records 0 projects for this tower.</p></div>`}${brief.notes[year]?`<p class="hud-project-note">${esc(brief.notes[year])}</p>`:''}`:'<div class="hud-project-empty"><strong>Awaiting tower data</strong><p>Project names and descriptions will appear here.</p></div>';
+  panel.innerHTML=populated?`${brief.projects[year].length?projectList(brief.projects[year]):`<div class="hud-project-empty"><strong>No ${year} ${year==='2027'?'AI-suggested ':''}TPI projects supplied</strong><p>The source records 0 projects for this tower.</p></div>`}${brief.notes[year]?`<p class="hud-project-note">${esc(brief.notes[year])}</p>`:''}`:'<div class="hud-project-empty"><strong>Awaiting tower data</strong><p>Project names and descriptions will appear here.</p></div>';
   window.dispatchEvent(new Event('tower-card-layout'));
  };
  tabs.forEach(tab=>tab.onclick=()=>selectYear(tab.dataset.projectYear));

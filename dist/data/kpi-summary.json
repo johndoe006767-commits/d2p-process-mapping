@@ -7,9 +7,9 @@
       "total": 102
     },
     "toBe": {
-      "auto": 47,
-      "semi": 22,
-      "manual": 33,
+      "auto": 31,
+      "semi": 45,
+      "manual": 26,
       "total": 102
     },
     "dependencies": [
@@ -24,7 +24,7 @@
             "direction": "in",
             "party": "FP&A Ops (Product Costing)",
             "detail": "SCC rate per SKU (via FET)",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-FPAC"
+            "source": "All_Towers_Validated_Nov16.html#src-FPAC"
           }
         ],
         "rank": 1
@@ -99,7 +99,7 @@
         "months": []
       }
     ],
-    "source": "All_Towers_P2P_Tax_O2C.html#src-FPAC"
+    "source": "All_Towers_Validated_Nov16.html#src-FPAC"
   },
   "pancreas": {
     "asIs": {
@@ -109,8 +109,8 @@
       "total": 61
     },
     "toBe": {
-      "auto": 12,
-      "semi": 36,
+      "auto": 17,
+      "semi": 31,
       "manual": 13,
       "total": 61
     },
@@ -126,7 +126,7 @@
             "direction": "in",
             "party": "CAPEX",
             "detail": "Depreciation forecast",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-FPAO"
+            "source": "All_Towers_Validated_Nov16.html#src-FPAO"
           },
           {
             "flowId": "FPAO-05",
@@ -134,7 +134,7 @@
             "direction": "in",
             "party": "CAPEX",
             "detail": "Depreciation and amortisation run",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-FPAO"
+            "source": "All_Towers_Validated_Nov16.html#src-FPAO"
           }
         ],
         "rank": 1
@@ -150,7 +150,7 @@
             "direction": "in",
             "party": "FP&A Comm",
             "detail": "NEW · Sales volume forecast used for the SCC calculation",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-FPAO"
+            "source": "All_Towers_Validated_Nov16.html#src-FPAO"
           }
         ],
         "rank": 2
@@ -166,7 +166,7 @@
             "direction": "in",
             "party": "P2P",
             "detail": "Coupa PO / non-PO and T&E cut-off",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-FPAO"
+            "source": "All_Towers_Validated_Nov16.html#src-FPAO"
           }
         ],
         "rank": 3
@@ -182,7 +182,7 @@
             "direction": "in",
             "party": "R2R",
             "detail": "Sub-module close (FA, AP, AR); accruals; lease; ICT",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-FPAO"
+            "source": "All_Towers_Validated_Nov16.html#src-FPAO"
           }
         ],
         "rank": 4
@@ -262,19 +262,19 @@
         "months": []
       }
     ],
-    "source": "All_Towers_P2P_Tax_O2C.html#src-FPAO"
+    "source": "All_Towers_Validated_Nov16.html#src-FPAO"
   },
   "liver": {
     "asIs": {
-      "auto": 4,
+      "auto": 5,
       "semi": 11,
-      "manual": 60,
+      "manual": 59,
       "total": 75
     },
     "toBe": {
-      "auto": 4,
-      "semi": 25,
-      "manual": 46,
+      "auto": 6,
+      "semi": 24,
+      "manual": 45,
       "total": 75
     },
     "dependencies": [
@@ -289,7 +289,7 @@
             "direction": "in",
             "party": "P2P-02 Invoice Management",
             "detail": "POs, goods receipts and invoices against WBSE",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-CAPEX"
+            "source": "All_Towers_Validated_Nov16.html#src-CAPEX"
           },
           {
             "flowId": "CAPEX-02",
@@ -297,7 +297,7 @@
             "direction": "in",
             "party": "P2P-01 Perform Goods & Services Receipt",
             "detail": "Goods receipts against project WBSE",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-CAPEX"
+            "source": "All_Towers_Validated_Nov16.html#src-CAPEX"
           }
         ],
         "rank": 1
@@ -348,7 +348,7 @@
         "months": []
       }
     ],
-    "source": "All_Towers_P2P_Tax_O2C.html#src-CAPEX"
+    "source": "All_Towers_Validated_Nov16.html#src-CAPEX"
   },
   "stomach": {
     "asIs": {
@@ -359,8 +359,8 @@
     },
     "toBe": {
       "auto": 25,
-      "semi": 18,
-      "manual": 41,
+      "semi": 19,
+      "manual": 40,
       "total": 84
     },
     "dependencies": [
@@ -375,7 +375,7 @@
             "direction": "in",
             "party": "O2C-03 Cash & Banking",
             "detail": "Payment confirmation / ACK file",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-P2P"
+            "source": "All_Towers_Validated_Nov16.html#src-P2P"
           },
           {
             "flowId": "P2P-03",
@@ -383,7 +383,7 @@
             "direction": "in",
             "party": "O2C-03 Cash & Banking",
             "detail": "Payment failure notification",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-P2P"
+            "source": "All_Towers_Validated_Nov16.html#src-P2P"
           },
           {
             "flowId": "P2P-03",
@@ -391,7 +391,7 @@
             "direction": "in",
             "party": "O2C-03 Cash & Banking",
             "detail": "Payment confirmation and proof",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-P2P"
+            "source": "All_Towers_Validated_Nov16.html#src-P2P"
           },
           {
             "flowId": "P2P-03",
@@ -399,7 +399,7 @@
             "direction": "in",
             "party": "O2C-03 Cash & Banking",
             "detail": "Rejected payment notification",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-P2P"
+            "source": "All_Towers_Validated_Nov16.html#src-P2P"
           },
           {
             "flowId": "P2P-03",
@@ -407,7 +407,7 @@
             "direction": "in",
             "party": "O2C-03 Cash & Banking",
             "detail": "Incoming funds notification",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-P2P"
+            "source": "All_Towers_Validated_Nov16.html#src-P2P"
           },
           {
             "flowId": "P2P-05",
@@ -415,7 +415,7 @@
             "direction": "in",
             "party": "O2C-03 Cash & Banking",
             "detail": "Debit posting",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-P2P"
+            "source": "All_Towers_Validated_Nov16.html#src-P2P"
           }
         ],
         "rank": 1
@@ -431,7 +431,7 @@
             "direction": "in",
             "party": "R2R-01 SAP Close",
             "detail": "Close calendar",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-P2P"
+            "source": "All_Towers_Validated_Nov16.html#src-P2P"
           },
           {
             "flowId": "P2P-04",
@@ -439,7 +439,7 @@
             "direction": "in",
             "party": "R2R",
             "detail": "⚠ LT#2 · Coupa accrual and offset prepayment adjustment (China)",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-P2P"
+            "source": "All_Towers_Validated_Nov16.html#src-P2P"
           }
         ],
         "rank": 2
@@ -455,7 +455,7 @@
             "direction": "in",
             "party": "CAPEX",
             "detail": "NEW · Approved project and WBSE set up - PO raised only after CAPEX approval",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-P2P"
+            "source": "All_Towers_Validated_Nov16.html#src-P2P"
           }
         ],
         "rank": 3
@@ -471,7 +471,7 @@
             "direction": "in",
             "party": "Tax",
             "detail": "⚠ LT#10 · Confirmed WHT treatment",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-P2P"
+            "source": "All_Towers_Validated_Nov16.html#src-P2P"
           }
         ],
         "rank": 4
@@ -487,7 +487,7 @@
             "direction": "in",
             "party": "Controlling",
             "detail": "BlackLine reconciliation calendar",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-P2P"
+            "source": "All_Towers_Validated_Nov16.html#src-P2P"
           }
         ],
         "rank": 5
@@ -575,20 +575,20 @@
         "months": []
       }
     ],
-    "source": "All_Towers_P2P_Tax_O2C.html#src-P2P"
+    "source": "All_Towers_Validated_Nov16.html#src-P2P"
   },
   "intestines": {
     "asIs": {
       "auto": 10,
       "semi": 15,
-      "manual": 12,
-      "total": 37
+      "manual": 13,
+      "total": 38
     },
     "toBe": {
-      "auto": 13,
-      "semi": 13,
-      "manual": 11,
-      "total": 37
+      "auto": 12,
+      "semi": 17,
+      "manual": 9,
+      "total": 38
     },
     "dependencies": [
       {
@@ -602,15 +602,15 @@
             "direction": "in",
             "party": "P2P",
             "detail": "AP-due invoice check",
-            "source": "All_Process_Towers_November 11.html#src-O2C"
+            "source": "All_Towers_Validated_Nov16.html#src-O2C"
           },
           {
             "flowId": "SOC-06.1",
-            "flow": "Flow A - Payment process: automated / semi-automated payment run",
+            "flow": "Flow A - Payment process",
             "direction": "in",
             "party": "P2P",
-            "detail": "3rd party / intercompany vendor invoices",
-            "source": "All_Process_Towers_November 11.html#src-O2C"
+            "detail": "automated / semi-automated payment run: 3rd party / intercompany vendor invoices",
+            "source": "All_Towers_Validated_Nov16.html#src-O2C"
           }
         ],
         "rank": 1
@@ -622,11 +622,11 @@
         "evidence": [
           {
             "flowId": "SOC-06.1",
-            "flow": "Flow A - Payment process: automated / semi-automated payment run",
+            "flow": "Flow A - Payment process",
             "direction": "in",
             "party": "Tax",
-            "detail": "Tax payments",
-            "source": "All_Process_Towers_November 11.html#src-O2C"
+            "detail": "automated / semi-automated payment run: Tax payments",
+            "source": "All_Towers_Validated_Nov16.html#src-O2C"
           }
         ],
         "rank": 2
@@ -642,7 +642,7 @@
             "direction": "in",
             "party": "Controlling",
             "detail": "Updates the price in SAP",
-            "source": "All_Process_Towers_November 11.html#src-O2C"
+            "source": "All_Towers_Validated_Nov16.html#src-O2C"
           }
         ],
         "rank": 3
@@ -728,7 +728,7 @@
         "months": []
       }
     ],
-    "source": "All_Process_Towers_November 11.html#src-O2C"
+    "source": "All_Towers_Validated_Nov16.html#src-O2C"
   },
   "spleen": {
     "asIs": {
@@ -738,8 +738,8 @@
       "total": 77
     },
     "toBe": {
-      "auto": 6,
-      "semi": 33,
+      "auto": 10,
+      "semi": 29,
       "manual": 38,
       "total": 77
     },
@@ -755,7 +755,7 @@
             "direction": "in",
             "party": "R2R-01 SAP Close",
             "detail": "SAP Close",
-            "source": "All_Process_Towers_November 11.html#src-TAX"
+            "source": "All_Towers_Validated_Nov16.html#src-TAX"
           },
           {
             "flowId": "TAX-03.4",
@@ -763,7 +763,7 @@
             "direction": "in",
             "party": "R2R-01 SAP Close",
             "detail": "SAP Close",
-            "source": "All_Process_Towers_November 11.html#src-TAX"
+            "source": "All_Towers_Validated_Nov16.html#src-TAX"
           },
           {
             "flowId": "TAX-01.5",
@@ -771,7 +771,7 @@
             "direction": "in",
             "party": "R2R-01 SAP Close",
             "detail": "SAP Close",
-            "source": "All_Process_Towers_November 11.html#src-TAX"
+            "source": "All_Towers_Validated_Nov16.html#src-TAX"
           }
         ],
         "rank": 1
@@ -787,7 +787,7 @@
             "direction": "in",
             "party": "CAPEX-05 Depreciation",
             "detail": "Depreciation & Amortisation",
-            "source": "All_Process_Towers_November 11.html#src-TAX"
+            "source": "All_Towers_Validated_Nov16.html#src-TAX"
           }
         ],
         "rank": 2
@@ -803,7 +803,7 @@
             "direction": "in",
             "party": "Controlling",
             "detail": "sum netting report",
-            "source": "All_Process_Towers_November 11.html#src-TAX"
+            "source": "All_Towers_Validated_Nov16.html#src-TAX"
           }
         ],
         "rank": 3
@@ -848,20 +848,20 @@
         "months": []
       }
     ],
-    "source": "All_Process_Towers_November 11.html#src-TAX"
+    "source": "All_Towers_Validated_Nov16.html#src-TAX"
   },
   "lungs": {
     "asIs": {
-      "auto": 1,
+      "auto": 2,
       "semi": 11,
       "manual": 27,
-      "total": 39
+      "total": 40
     },
     "toBe": {
-      "auto": 4,
-      "semi": 14,
+      "auto": 6,
+      "semi": 13,
       "manual": 21,
-      "total": 39
+      "total": 40
     },
     "dependencies": [
       {
@@ -875,7 +875,7 @@
             "direction": "in",
             "party": "O2C",
             "detail": "C2C billing release and trade AR",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-R2R"
+            "source": "All_Towers_Validated_Nov16.html#src-R2R"
           },
           {
             "flowId": "R2R-01.2",
@@ -883,7 +883,7 @@
             "direction": "in",
             "party": "O2C",
             "detail": "Sales, billing and AR",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-R2R"
+            "source": "All_Towers_Validated_Nov16.html#src-R2R"
           },
           {
             "flowId": "R2R-02.1",
@@ -891,7 +891,7 @@
             "direction": "in",
             "party": "O2C",
             "detail": "",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-R2R"
+            "source": "All_Towers_Validated_Nov16.html#src-R2R"
           },
           {
             "flowId": "R2R-03.1",
@@ -899,7 +899,7 @@
             "direction": "in",
             "party": "O2C",
             "detail": "AR and C2C support",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-R2R"
+            "source": "All_Towers_Validated_Nov16.html#src-R2R"
           }
         ],
         "rank": 1
@@ -915,7 +915,7 @@
             "direction": "in",
             "party": "CAPEX",
             "detail": "Settlement, depreciation and lease journals",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-R2R"
+            "source": "All_Towers_Validated_Nov16.html#src-R2R"
           },
           {
             "flowId": "R2R-02.1",
@@ -923,7 +923,7 @@
             "direction": "in",
             "party": "CAPEX",
             "detail": "FA and lease ERH files",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-R2R"
+            "source": "All_Towers_Validated_Nov16.html#src-R2R"
           },
           {
             "flowId": "R2R-03.1",
@@ -931,7 +931,7 @@
             "direction": "in",
             "party": "CAPEX",
             "detail": "FA and lease recs",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-R2R"
+            "source": "All_Towers_Validated_Nov16.html#src-R2R"
           }
         ],
         "rank": 2
@@ -947,7 +947,7 @@
             "direction": "in",
             "party": "P2P",
             "detail": "Coupa cut-off, AP invoices and accruals",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-R2R"
+            "source": "All_Towers_Validated_Nov16.html#src-R2R"
           },
           {
             "flowId": "R2R-03.1",
@@ -955,7 +955,7 @@
             "direction": "in",
             "party": "P2P",
             "detail": "AP support",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-R2R"
+            "source": "All_Towers_Validated_Nov16.html#src-R2R"
           }
         ],
         "rank": 3
@@ -971,7 +971,7 @@
             "direction": "in",
             "party": "Controlling",
             "detail": "Manual journals (MJV)",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-R2R"
+            "source": "All_Towers_Validated_Nov16.html#src-R2R"
           },
           {
             "flowId": "R2R-02.1",
@@ -979,7 +979,7 @@
             "direction": "in",
             "party": "Controlling",
             "detail": "Non-SAP units' data",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-R2R"
+            "source": "All_Towers_Validated_Nov16.html#src-R2R"
           }
         ],
         "rank": 4
@@ -995,7 +995,7 @@
             "direction": "in",
             "party": "FP&A Comm",
             "detail": "Close inputs",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-R2R"
+            "source": "All_Towers_Validated_Nov16.html#src-R2R"
           }
         ],
         "rank": 5
@@ -1011,7 +1011,7 @@
             "direction": "in",
             "party": "FP&A Ops",
             "detail": "⚠ LT#3 · Close inputs and accruals",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-R2R"
+            "source": "All_Towers_Validated_Nov16.html#src-R2R"
           }
         ],
         "rank": 6
@@ -1027,7 +1027,7 @@
             "direction": "in",
             "party": "Tax",
             "detail": "Tax postings before close",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-R2R"
+            "source": "All_Towers_Validated_Nov16.html#src-R2R"
           }
         ],
         "rank": 7
@@ -1096,7 +1096,7 @@
         "months": []
       }
     ],
-    "source": "All_Towers_P2P_Tax_O2C.html#src-R2R"
+    "source": "All_Towers_Validated_Nov16.html#src-R2R"
   },
   "kidneys": {
     "asIs": {
@@ -1106,9 +1106,9 @@
       "total": 14
     },
     "toBe": {
-      "auto": 0,
-      "semi": 8,
-      "manual": 6,
+      "auto": 2,
+      "semi": 11,
+      "manual": 1,
       "total": 14
     },
     "dependencies": [
@@ -1123,7 +1123,7 @@
             "direction": "in",
             "party": "P2P-04",
             "detail": "Coupa accruals (preventable journals)",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-CTRL"
+            "source": "All_Towers_Validated_Nov16.html#src-CTRL"
           }
         ],
         "rank": 1
@@ -1138,8 +1138,8 @@
             "flow": "Statutory audit end-to-end",
             "direction": "in",
             "party": "Tax",
-            "detail": "⚠ LT#7 · Planning input",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-CTRL"
+            "detail": "Planning input",
+            "source": "All_Towers_Validated_Nov16.html#src-CTRL"
           }
         ],
         "rank": 2
@@ -1155,7 +1155,7 @@
             "direction": "in",
             "party": "R2R",
             "detail": "Financial statements and trial balance",
-            "source": "All_Towers_P2P_Tax_O2C.html#src-CTRL"
+            "source": "All_Towers_Validated_Nov16.html#src-CTRL"
           }
         ],
         "rank": 3
@@ -1220,6 +1220,6 @@
         "months": []
       }
     ],
-    "source": "All_Towers_P2P_Tax_O2C.html#src-CTRL"
+    "source": "All_Towers_Validated_Nov16.html#src-CTRL"
   }
 }

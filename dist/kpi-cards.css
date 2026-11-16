@@ -243,7 +243,7 @@
 }
 
 /* Original card composition, extended with workbook descriptions and year selection. */
-#tower-telemetry-hud .hud-mix-heading{display:flex;align-items:center;justify-content:flex-start;gap:20px}
+#tower-telemetry-hud .hud-mix-heading{display:flex;align-items:center;justify-content:flex-start;gap:8px}
 #tower-telemetry-hud .hud-mix-heading h4{flex:none}
 .hud-mix-legend{display:flex;align-items:center;justify-content:flex-start;gap:calc(7px / var(--hud-scale,1));padding-inline:calc(7px / var(--hud-scale,1));color:var(--kpi-muted);font-size:11px;line-height:1.4}
 .hud-mix-legend>span{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
@@ -287,7 +287,6 @@
 #section-1 .label.card .hb-pending>span+span{margin-top:5px;color:#ecdeef}
 body[data-detail=true] #experience{min-height:var(--tower-detail-height,100dvh)}
 @media(max-width:767px){
- #tower-telemetry-hud .hud-mix-heading{gap:12px}
  #tower-telemetry-hud .hud-mix-heading h4{font-size:12px}
  .hud-mix-legend{gap:8px;font-size:10px}
  .hud-mix-legend>span{gap:4px}
@@ -330,3 +329,16 @@ body[data-detail=true] #experience{min-height:var(--tower-detail-height,100dvh)}
 #section-1 .label.card .kpi-divider{padding:0}
 @media(min-width:2500px) and (min-height:1200px){#section-1 .label.card .hb-manual{font-size:17px}}
 @media(max-width:767px){#section-1 .label.card .hb-manual{font-size:10px;gap:4px;flex-wrap:wrap}}
+
+.hud-project-group { margin-block: 1em .5em; }
+#tower-telemetry-hud .hud-project-group h5 {
+  margin: 0 0 .25em;
+  color: #e6b7d9;
+  font-size: max(12px, var(--floor, 0px));
+  font-weight: 600;
+  line-height: 1.4;
+}
+.hud-project-group + .hud-project-group {
+  padding-block-start: 1em;
+  border-block-start: 1px solid var(--kpi-rule);
+}

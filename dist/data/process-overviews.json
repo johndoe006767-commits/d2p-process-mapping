@@ -1,14 +1,6 @@
 {
-  "source": "All_Towers_P2P_Tax_O2C.html",
-  "sha256": "b2bfd26a629bd08879075b6c5f159a514f668c23b9eef871d0159f1ea6d6068b",
-  "retainedSource": {
-    "source": "All_Process_Towers_November 11.html",
-    "sha256": "8b9d2b881bf3d2021718c9711010712194399b8816bd21659dd9d5ab031e54f6",
-    "towers": [
-      "O2C",
-      "TAX"
-    ]
-  },
+  "source": "All_Towers_Validated_Nov16.html",
+  "sha256": "5d7b3b5313b980f58b79a85fc020f3e4b93ee650a2f5fb4db384f3ec210e1ae1",
   "towers": {
     "FPAC": {
       "asis": {
@@ -201,7 +193,7 @@
       },
       "tobe": {
         "title": "FP&A Commercial Process Map · AI suggested",
-        "description": "The same nine stages and steps as the As-Is map, including CAPEX planning after NMPC. Each step keeps its documented flow and its As-Is activity colour; where Claude sees a practical automation, digitalisation or AI change it is marked AI on the step (click it for the recommendation, tools and basis), AI Opportunity nodes hang off the processes and stages, and the TPI register items are shown as [SOLUTION] nodes on the steps they touch - FAST+ items on Stage 9, P&L reporting items on Stages 6 and 7. Feasibility on a Claude suggestion is the workbook status of the register item on the same step; otherwise it stays Under review.",
+        "description": "The same nine stages and steps as the As-Is map, including CAPEX planning after NMPC. Each step keeps its documented flow and its As-Is activity colour; where Claude sees a practical automation, digitalisation or AI change it is marked AI on the step (click it for the recommendation, tools and basis), AI Opportunity nodes hang off the processes and stages, and the TPI register items are shown as [SOLUTION] nodes on the steps they touch - FAST+ items on Stage 9, P&L reporting items on Stages 6 and 7. Feasibility on a Claude suggestion is the workbook status of the register item on the same step.",
         "meta": [
           {
             "label": "Owner",
@@ -225,12 +217,12 @@
           },
           {
             "label": "Steps with higher automation after AI",
-            "value": "46",
-            "note": "of 102 steps · 59 carry an AI recommendation · potential mix if adopted: -35 manual, +6 semi, +29 automated",
+            "value": "55",
+            "note": "of 102 steps · 59 carry an AI recommendation · potential mix if adopted: -42 manual, +29 semi, +13 automated",
             "mix": {
-              "man": 33,
-              "hyb": 22,
-              "auto": 47
+              "man": 26,
+              "hyb": 45,
+              "auto": 31
             }
           },
           {
@@ -263,9 +255,9 @@
               "auto": 0
             },
             "after": {
-              "man": 4,
-              "hyb": 2,
-              "auto": 3
+              "man": 3,
+              "hyb": 6,
+              "auto": 0
             }
           },
           "FPAC-02.01": {
@@ -278,9 +270,9 @@
               "auto": 1
             },
             "after": {
-              "man": 4,
-              "hyb": 2,
-              "auto": 3
+              "man": 3,
+              "hyb": 4,
+              "auto": 2
             }
           },
           "FPAC-02.03": {
@@ -294,8 +286,8 @@
             },
             "after": {
               "man": 4,
-              "hyb": 0,
-              "auto": 1
+              "hyb": 1,
+              "auto": 0
             }
           },
           "FPAC-02.02": {
@@ -308,9 +300,9 @@
               "auto": 0
             },
             "after": {
-              "man": 1,
-              "hyb": 3,
-              "auto": 4
+              "man": 0,
+              "hyb": 6,
+              "auto": 2
             }
           },
           "FPAC-03.01": {
@@ -324,8 +316,8 @@
             },
             "after": {
               "man": 3,
-              "hyb": 4,
-              "auto": 2
+              "hyb": 5,
+              "auto": 1
             }
           },
           "FPAC-04.01": {
@@ -338,8 +330,8 @@
               "auto": 7
             },
             "after": {
-              "man": 4,
-              "hyb": 1,
+              "man": 3,
+              "hyb": 2,
               "auto": 10
             }
           },
@@ -353,8 +345,8 @@
               "auto": 0
             },
             "after": {
-              "man": 3,
-              "hyb": 1,
+              "man": 2,
+              "hyb": 2,
               "auto": 0
             }
           },
@@ -368,9 +360,9 @@
               "auto": 0
             },
             "after": {
-              "man": 2,
-              "hyb": 3,
-              "auto": 2
+              "man": 1,
+              "hyb": 5,
+              "auto": 1
             }
           },
           "FPAC-07.01": {
@@ -384,8 +376,8 @@
             },
             "after": {
               "man": 5,
-              "hyb": 3,
-              "auto": 6
+              "hyb": 7,
+              "auto": 2
             }
           },
           "FPAC-07.02": {
@@ -399,8 +391,8 @@
             },
             "after": {
               "man": 2,
-              "hyb": 0,
-              "auto": 4
+              "hyb": 1,
+              "auto": 3
             }
           },
           "FPAC-08.01": {
@@ -414,8 +406,8 @@
             },
             "after": {
               "man": 0,
-              "hyb": 2,
-              "auto": 2
+              "hyb": 3,
+              "auto": 1
             }
           },
           "FPAC-09.01": {
@@ -428,9 +420,9 @@
               "auto": 8
             },
             "after": {
-              "man": 1,
-              "hyb": 1,
-              "auto": 10
+              "man": 0,
+              "hyb": 3,
+              "auto": 9
             }
           }
         }
@@ -446,8 +438,8 @@
             "window": "Planning cycles (RBU2 March-April, MTP July-August, Phased Budget); at",
             "flows": [
               {
-                "name": "Revenue Planning",
                 "id": "FPAC-01.01",
+                "name": "Revenue Planning",
                 "reference": "FPAC-01.01"
               }
             ]
@@ -461,18 +453,18 @@
             "window": "Planning cycles; 4+ revision cycles; CFO sign-off (MPC); CAPEX 1-2 days per cycle (RBU2, MTP, PB)",
             "flows": [
               {
-                "name": "MPC Planning (Manpower Cost Planning)",
                 "id": "FPAC-02.01",
+                "name": "MPC Planning (Manpower Cost Planning)",
                 "reference": "FPAC-02.01"
               },
               {
-                "name": "NMPC Planning (Non-Manpower Cost Planning)",
                 "id": "FPAC-02.02",
+                "name": "NMPC Planning (Non-Manpower Cost Planning)",
                 "reference": "FPAC-02.02"
               },
               {
-                "name": "CAPEX Planning",
                 "id": "FPAC-02.03",
+                "name": "CAPEX Planning",
                 "reference": "FPAC-02.03"
               }
             ]
@@ -486,8 +478,8 @@
             "window": "~1 week sales and ~1 week cost inputs (often parallel); 4-5 consolidat",
             "flows": [
               {
-                "name": "P&L Planning",
                 "id": "FPAC-03.01",
+                "name": "P&L Planning",
                 "reference": "FPAC-03.01"
               }
             ]
@@ -501,8 +493,8 @@
             "window": "Per planning cycle; 4+ iterations; 30 min - 1 hr PMR-CMR bridge lag pe",
             "flows": [
               {
-                "name": "Planning System Submission",
                 "id": "FPAC-04.01",
+                "name": "Planning System Submission",
                 "reference": "FPAC-04.01"
               }
             ]
@@ -516,8 +508,8 @@
             "window": "RBU2 (March, completing April); MTP (July, completing August); no deck",
             "flows": [
               {
-                "name": "Planning Review Preparation (Planning Deck Preparation)",
                 "id": "FPAC-05.01",
+                "name": "Planning Review Preparation (Planning Deck Preparation)",
                 "reference": "FPAC-05.01"
               }
             ]
@@ -531,8 +523,8 @@
             "window": "WD-4 to WD-1 / WD+1 (~4-5 working days); 4+ revision cycles; CFO sign-",
             "flows": [
               {
-                "name": "Pre-close Analysis",
                 "id": "FPAC-06.01",
+                "name": "Pre-close Analysis",
                 "reference": "FPAC-06.01"
               }
             ]
@@ -546,13 +538,13 @@
             "window": "Revenue: WD-1 to WD+2 (~1 working day); Cost: WD+2 to WD+5 (~1 working",
             "flows": [
               {
-                "name": "Revenue Reporting",
                 "id": "FPAC-07.01",
+                "name": "Revenue Reporting",
                 "reference": "FPAC-07.01"
               },
               {
-                "name": "Cost Reporting",
                 "id": "FPAC-07.02",
+                "name": "Cost Reporting",
                 "reference": "FPAC-07.02"
               }
             ]
@@ -566,8 +558,8 @@
             "window": "WD1 to WD7 (~7 working days), triggered by the Group / International M",
             "flows": [
               {
-                "name": "Mid-Month Forecast (MMF)",
                 "id": "FPAC-08.01",
+                "name": "Mid-Month Forecast (MMF)",
                 "reference": "FPAC-08.01"
               }
             ]
@@ -581,18 +573,16 @@
             "window": "WD1 to WD7 EOD (~7 days); monthly; 14 APAC markets; typically one iter",
             "flows": [
               {
-                "name": "FCF Control on Revenue and P&L (FAST+)",
                 "id": "FPAC-09.01",
+                "name": "FCF Control on Revenue and P&L (FAST+)",
                 "reference": "FPAC-09.01"
               }
             ]
           }
         ],
         "comparison": {
-          "rule": "Before = As-Is · After = proposed AI / automation changes. Implemented remains visible at its As-Is activity level and does not count as uplift. Not feasible and Not relevant are excluded from the After view.",
           "rows": [
             {
-              "id": "FPAC-01",
               "name": "Stage 1: Revenue Planning by SKU and Brand",
               "steps": 9,
               "before": {
@@ -601,14 +591,13 @@
                 "auto": 0
               },
               "after": {
-                "man": 4,
-                "hyb": 2,
-                "auto": 3
+                "man": 3,
+                "hyb": 6,
+                "auto": 0
               },
-              "uplift": 4
+              "uplift": 5
             },
             {
-              "id": "FPAC-02",
               "name": "Stage 2: Manpower (MPC), Non-Manpower (NMPC) & CAPEX Planning",
               "steps": 22,
               "before": {
@@ -617,14 +606,13 @@
                 "auto": 1
               },
               "after": {
-                "man": 9,
-                "hyb": 5,
-                "auto": 8
+                "man": 7,
+                "hyb": 11,
+                "auto": 4
               },
-              "uplift": 11
+              "uplift": 14
             },
             {
-              "id": "FPAC-03",
               "name": "Stage 3: P&L Planning & Total Company Consolidation",
               "steps": 9,
               "before": {
@@ -634,13 +622,12 @@
               },
               "after": {
                 "man": 3,
-                "hyb": 4,
-                "auto": 2
+                "hyb": 5,
+                "auto": 1
               },
               "uplift": 4
             },
             {
-              "id": "FPAC-04",
               "name": "Stage 4: Planning System Submission & PMR-CMR Validation",
               "steps": 15,
               "before": {
@@ -649,14 +636,13 @@
                 "auto": 7
               },
               "after": {
-                "man": 4,
-                "hyb": 1,
+                "man": 3,
+                "hyb": 2,
                 "auto": 10
               },
-              "uplift": 3
+              "uplift": 4
             },
             {
-              "id": "FPAC-05",
               "name": "Stage 5: Planning Deck Preparation & Leadership Review",
               "steps": 4,
               "before": {
@@ -665,14 +651,13 @@
                 "auto": 0
               },
               "after": {
-                "man": 3,
-                "hyb": 1,
+                "man": 2,
+                "hyb": 2,
                 "auto": 0
               },
-              "uplift": 1
+              "uplift": 2
             },
             {
-              "id": "FPAC-06",
               "name": "Stage 6: Pre-Close Analysis",
               "steps": 7,
               "before": {
@@ -681,14 +666,13 @@
                 "auto": 0
               },
               "after": {
-                "man": 2,
-                "hyb": 3,
-                "auto": 2
+                "man": 1,
+                "hyb": 5,
+                "auto": 1
               },
-              "uplift": 5
+              "uplift": 6
             },
             {
-              "id": "FPAC-07",
               "name": "Stage 7: Monthly Revenue & Cost Reporting",
               "steps": 20,
               "before": {
@@ -698,13 +682,12 @@
               },
               "after": {
                 "man": 7,
-                "hyb": 3,
-                "auto": 10
+                "hyb": 8,
+                "auto": 5
               },
               "uplift": 12
             },
             {
-              "id": "FPAC-08",
               "name": "Stage 8: Mid-Month / Rolling Forecast",
               "steps": 4,
               "before": {
@@ -714,13 +697,12 @@
               },
               "after": {
                 "man": 0,
-                "hyb": 2,
-                "auto": 2
+                "hyb": 3,
+                "auto": 1
               },
               "uplift": 4
             },
             {
-              "id": "FPAC-09",
               "name": "Stage 9: FCF Control Attestation via FAST+",
               "steps": 12,
               "before": {
@@ -729,11 +711,11 @@
                 "auto": 8
               },
               "after": {
-                "man": 1,
-                "hyb": 1,
-                "auto": 10
+                "man": 0,
+                "hyb": 3,
+                "auto": 9
               },
-              "uplift": 2
+              "uplift": 4
             }
           ],
           "total": {
@@ -745,13 +727,12 @@
               "auto": 18
             },
             "after": {
-              "man": 33,
-              "hyb": 22,
-              "auto": 47
+              "man": 26,
+              "hyb": 45,
+              "auto": 31
             },
-            "uplift": 46
-          },
-          "note": "Manual 68 → 33 (-35) · Semi-automated 16 → 22 (+6) · Automated 18 → 47 (+29). M = manual, S = semi-automated, A = automated. Steps uplifted = steps whose activity level would change if the suggestion is adopted."
+            "uplift": 55
+          }
         }
       },
       "activityTypes": {
@@ -765,15 +746,15 @@
         },
         "FPAC-01|FPAC-01.01|3": {
           "before": "man",
-          "after": "auto"
+          "after": "hyb"
         },
         "FPAC-01|FPAC-01.01|4": {
           "before": "man",
-          "after": "auto"
+          "after": "hyb"
         },
         "FPAC-01|FPAC-01.01|5": {
           "before": "man",
-          "after": "auto"
+          "after": "hyb"
         },
         "FPAC-01|FPAC-01.01|6": {
           "before": "man",
@@ -785,7 +766,7 @@
         },
         "FPAC-01|FPAC-01.01|8": {
           "before": "man",
-          "after": "man"
+          "after": "hyb"
         },
         "FPAC-01|FPAC-01.01|9": {
           "before": "hyb",
@@ -793,7 +774,7 @@
         },
         "FPAC-02|FPAC-02.01|1": {
           "before": "man",
-          "after": "auto"
+          "after": "hyb"
         },
         "FPAC-02|FPAC-02.01|2": {
           "before": "man",
@@ -805,11 +786,11 @@
         },
         "FPAC-02|FPAC-02.01|4": {
           "before": "man",
-          "after": "auto"
+          "after": "hyb"
         },
         "FPAC-02|FPAC-02.01|5": {
           "before": "hyb",
-          "after": "hyb"
+          "after": "auto"
         },
         "FPAC-02|FPAC-02.01|6": {
           "before": "man",
@@ -825,7 +806,7 @@
         },
         "FPAC-02|FPAC-02.01|9": {
           "before": "man",
-          "after": "man"
+          "after": "hyb"
         },
         "FPAC-02|FPAC-02.02|1": {
           "before": "man",
@@ -833,7 +814,7 @@
         },
         "FPAC-02|FPAC-02.02|2": {
           "before": "man",
-          "after": "auto"
+          "after": "hyb"
         },
         "FPAC-02|FPAC-02.02|3": {
           "before": "man",
@@ -849,7 +830,7 @@
         },
         "FPAC-02|FPAC-02.02|6": {
           "before": "man",
-          "after": "auto"
+          "after": "hyb"
         },
         "FPAC-02|FPAC-02.02|7": {
           "before": "hyb",
@@ -857,7 +838,7 @@
         },
         "FPAC-02|FPAC-02.02|8": {
           "before": "man",
-          "after": "man"
+          "after": "hyb"
         },
         "FPAC-02|FPAC-02.03|1": {
           "before": "man",
@@ -877,7 +858,7 @@
         },
         "FPAC-02|FPAC-02.03|5": {
           "before": "man",
-          "after": "auto"
+          "after": "hyb"
         },
         "FPAC-03|FPAC-03.01|1": {
           "before": "man",
@@ -909,7 +890,7 @@
         },
         "FPAC-03|FPAC-03.01|8": {
           "before": "man",
-          "after": "auto"
+          "after": "hyb"
         },
         "FPAC-03|FPAC-03.01|9": {
           "before": "man",
@@ -973,7 +954,7 @@
         },
         "FPAC-04|FPAC-04.01|15": {
           "before": "man",
-          "after": "man"
+          "after": "hyb"
         },
         "FPAC-05|FPAC-05.01|1": {
           "before": "man",
@@ -989,7 +970,7 @@
         },
         "FPAC-05|FPAC-05.01|4": {
           "before": "man",
-          "after": "man"
+          "after": "hyb"
         },
         "FPAC-06|FPAC-06.01|1": {
           "before": "hyb",
@@ -1005,7 +986,7 @@
         },
         "FPAC-06|FPAC-06.01|4": {
           "before": "man",
-          "after": "man"
+          "after": "hyb"
         },
         "FPAC-06|FPAC-06.01|5": {
           "before": "man",
@@ -1017,7 +998,7 @@
         },
         "FPAC-06|FPAC-06.01|7": {
           "before": "man",
-          "after": "auto"
+          "after": "hyb"
         },
         "FPAC-07|FPAC-07.01|1": {
           "before": "man",
@@ -1029,7 +1010,7 @@
         },
         "FPAC-07|FPAC-07.01|3": {
           "before": "man",
-          "after": "auto"
+          "after": "hyb"
         },
         "FPAC-07|FPAC-07.01|4": {
           "before": "hyb",
@@ -1045,11 +1026,11 @@
         },
         "FPAC-07|FPAC-07.01|7": {
           "before": "man",
-          "after": "auto"
+          "after": "hyb"
         },
         "FPAC-07|FPAC-07.01|8": {
           "before": "man",
-          "after": "auto"
+          "after": "hyb"
         },
         "FPAC-07|FPAC-07.01|9": {
           "before": "man",
@@ -1069,7 +1050,7 @@
         },
         "FPAC-07|FPAC-07.01|13": {
           "before": "man",
-          "after": "auto"
+          "after": "hyb"
         },
         "FPAC-07|FPAC-07.01|14": {
           "before": "man",
@@ -1093,7 +1074,7 @@
         },
         "FPAC-07|FPAC-07.02|5": {
           "before": "man",
-          "after": "auto"
+          "after": "hyb"
         },
         "FPAC-07|FPAC-07.02|6": {
           "before": "man",
@@ -1109,7 +1090,7 @@
         },
         "FPAC-08|FPAC-08.01|3": {
           "before": "man",
-          "after": "auto"
+          "after": "hyb"
         },
         "FPAC-08|FPAC-08.01|4": {
           "before": "man",
@@ -1117,7 +1098,7 @@
         },
         "FPAC-09|FPAC-09.01|1": {
           "before": "hyb",
-          "after": "hyb"
+          "after": "auto"
         },
         "FPAC-09|FPAC-09.01|2": {
           "before": "auto",
@@ -1145,7 +1126,7 @@
         },
         "FPAC-09|FPAC-09.01|8": {
           "before": "man",
-          "after": "man"
+          "after": "hyb"
         },
         "FPAC-09|FPAC-09.01|9": {
           "before": "auto",
@@ -1157,11 +1138,11 @@
         },
         "FPAC-09|FPAC-09.01|11": {
           "before": "man",
-          "after": "auto"
+          "after": "hyb"
         },
         "FPAC-09|FPAC-09.01|12": {
           "before": "man",
-          "after": "auto"
+          "after": "hyb"
         }
       }
     },
@@ -1389,19 +1370,19 @@
       },
       "tobe": {
         "title": "FP&A Ops Process Map · AI suggested",
-        "description": "The same eight key processes and 61 steps as the As-Is map. Each step keeps its documented flow and its As-Is activity colour; where Claude sees a practical automation, digitalisation or AI change it is marked AI on the step (click it for the recommendation, tools and basis), AI Opportunity nodes hang off the processes and key processes, and the TPI register items are shown as [SOLUTION] nodes on the steps they touch - Agent Rhy items on Performance Reporting and Variance Analysis, Site Cost & FTE Dashboard items on Month-End Actualization, Variance Analysis and Commentary. Each Claude suggestion carries the LT opportunity scoring of 26 Oct 2026 (Can be explored, Potential future opportunity; Implemented shown at the As-Is step with an Implemented tag; Not feasible items removed from the map), with a tag where the opportunity sits outside the KL scope; suggestions not covered by the review stay Under review.",
+        "description": "From the planning target and the published production volume to the signed-off Group planning submission, and from the month-end close to the regional MI Pack and the leadership insights: volume & COGM, logistics, workforce & OPEX, CAPEX, product costing and inventory planning, productivity bridges and site packs, reviews and sign-off, month-end actualization, variance analysis and performance reporting. The two LT feedback decks (Planning and Actual) are applied: Cost & Resource Planning merged into Operational Planning, Commentary Generation consolidated into Performance Reporting, boxes removed, combined and renamed and pain points revised as marked.",
         "meta": [
           {
             "label": "Owner",
-            "value": "FP&A Ops (GFS KL) with Embedded Finance, Global Ops, GSC&S, PC CoE, CAPEX, GLF, HR, Site CFOs / RFDs and the Global Reporting Team"
+            "value": "FP&A Ops (GFS KL) with Embedded Finance (EF), Global Ops, GSC&S, PC CoE, CAPEX, Global Logistics Finance, HR, Site CFOs / RFDs and the Global Reporting Team"
           },
           {
-            "label": "Basis",
-            "value": "FP&A Ops As-Is map with the LT feedback applied (Oct 2026, incl. the 26 Oct review) · FP&A Ops TPI register (56 items: Agent Rhy 32, Site Cost & FTE Dashboard 24)"
+            "label": "Cadence",
+            "value": "Every planning cycle (e.g. RBU, Phased Budget); monthly close WD1–WD+5 with the MI Pack and regional consolidation"
           },
           {
-            "label": "Tools assumed",
-            "value": "Hyperion, AZForce, SAP / SOAR / FDH / ASO, Power BI (Site Cost & FTE dashboard, COGM, CAPEX), Power Apps, Power Automate, Python, SharePoint lists, Copilot Studio agents (Rhy, Charlie, Riff)"
+            "label": "Core systems",
+            "value": "Hyperion (Planning Hub / OPS Cube / OPSPR), AZForce, Capex Tool / CAPROW, CAS, GSC&S BP Portal, BPP, FDH, SAP, SOAR / BW, OBIEE / ASO, Power BI, Lean P&L, AI Agent Rhy"
           }
         ],
         "cards": [
@@ -1417,12 +1398,12 @@
           },
           {
             "label": "Steps with higher automation after AI",
-            "value": "27",
-            "note": "of 61 steps · 37 carry an AI recommendation · potential mix if adopted: -21 manual, +12 semi, +9 automated",
+            "value": "32",
+            "note": "of 61 steps · 37 carry an AI recommendation · potential mix if adopted: -21 manual, +7 semi, +14 automated",
             "mix": {
               "man": 13,
-              "hyb": 36,
-              "auto": 12
+              "hyb": 31,
+              "auto": 17
             }
           },
           {
@@ -1433,13 +1414,13 @@
           },
           {
             "label": "AI opportunity nodes",
-            "value": "18",
-            "note": "12 on processes · 6 at key-process level · 3 automation, 2 digitalisation, 4 process improvement, 7 AI, 2 cross-tower",
+            "value": "14",
+            "note": "11 on processes · 3 at key-process level · 3 automation, 2 digitalisation, 3 process improvement, 5 AI, 1 cross-tower",
             "mix": null
           },
           {
             "label": "TPI / CI initiatives linked",
-            "value": "56 · 9",
+            "value": "56 · 11",
             "note": "32 Agent Rhy · APAC MI Pack consolidation (RHY) · 24 APAC Site Cost & FTE Dashboard (FPA)",
             "mix": null
           }
@@ -1516,8 +1497,8 @@
             },
             "after": {
               "man": 1,
-              "hyb": 3,
-              "auto": 0
+              "hyb": 2,
+              "auto": 1
             }
           },
           "G07": {
@@ -1561,8 +1542,8 @@
             },
             "after": {
               "man": 0,
-              "hyb": 3,
-              "auto": 1
+              "hyb": 2,
+              "auto": 2
             }
           },
           "G09": {
@@ -1576,8 +1557,8 @@
             },
             "after": {
               "man": 1,
-              "hyb": 3,
-              "auto": 1
+              "hyb": 2,
+              "auto": 2
             }
           },
           "G10": {
@@ -1606,8 +1587,8 @@
             },
             "after": {
               "man": 2,
-              "hyb": 1,
-              "auto": 2
+              "hyb": 3,
+              "auto": 0
             }
           },
           "G12": {
@@ -1621,8 +1602,8 @@
             },
             "after": {
               "man": 1,
-              "hyb": 3,
-              "auto": 2
+              "hyb": 2,
+              "auto": 3
             }
           },
           "G13": {
@@ -1636,8 +1617,8 @@
             },
             "after": {
               "man": 0,
-              "hyb": 2,
-              "auto": 1
+              "hyb": 1,
+              "auto": 2
             }
           },
           "G14": {
@@ -1651,8 +1632,8 @@
             },
             "after": {
               "man": 0,
-              "hyb": 3,
-              "auto": 0
+              "hyb": 2,
+              "auto": 1
             }
           },
           "G16": {
@@ -1677,14 +1658,14 @@
           {
             "id": "FPAO-01",
             "name": "Demand & Operational Inputs",
-            "controls": "Targets are the binding ceiling for all submissions",
+            "controls": "controls Targets are the binding ceiling for all submissions",
             "description": "Planning targets are released by Global Ops to the APAC region and the production volume target, reflecting demand from the External Sales Forecast, is published by GSC&S - the two feeds every planning stream consumes.",
             "owner": "FP&A Ops (with Global Ops and GSC&S)",
             "window": "Each planning cycle",
             "flows": [
               {
-                "name": "Planning Inputs & Cycle Kick-off",
                 "id": "G01",
+                "name": "Planning Inputs & Cycle Kick-off",
                 "reference": "G01"
               }
             ]
@@ -1692,39 +1673,39 @@
           {
             "id": "FPAO-02",
             "name": "Operational Planning",
-            "controls": "EF sign-off of COGM, FMC changes in OPS Cube restricted to GFS SMEs and tracked, Total Project Cost must align to CAS approved amount, Site sign-off of expenses, CFO sign-off of FMC, Provision / MV changes after the soft-lock date need Inventory Finance Director approval",
+            "controls": "controls EF sign-off of COGM, FMC changes in OPS Cube restricted to GFS SMEs and tracked, Total Project Cost must align to CAS approved amount, Site sign-off of expenses, CFO sign-off of FMC, Provision / MV changes after the soft-lock date need Inventory Finance Director approval",
             "description": "Volume and COGM modelling, logistics and warehouse costs, workforce and OPEX, CAPEX, product costing and inventory are planned in parallel streams that converge on the site P&L. Cost & Resource Planning activities were merged into Operational Planning at the LT review.",
             "owner": "FP&A Ops (with EF, GSC&S, PC CoE, CAPEX, Global Logistics Finance)",
             "window": "Each planning cycle",
             "flows": [
               {
-                "name": "Operations Planning – Volume & Cost of Goods Manufactured modelling",
                 "id": "G02",
+                "name": "Operations Planning – Volume & Cost of Goods Manufactured modelling",
                 "reference": "G02"
               },
               {
-                "name": "Global Logistic & Warehouse",
                 "id": "G03",
+                "name": "Global Logistic & Warehouse",
                 "reference": "G03"
               },
               {
-                "name": "Workforce & OPEX Planning",
                 "id": "G04",
+                "name": "Workforce & OPEX Planning",
                 "reference": "G04"
               },
               {
-                "name": "CAPEX Planning",
                 "id": "G05",
+                "name": "CAPEX Planning",
                 "reference": "G05"
               },
               {
-                "name": "Inventory Planning",
                 "id": "G07",
+                "name": "Inventory Planning",
                 "reference": "G07"
               },
               {
-                "name": "Product Costing (FMC & SCC)",
                 "id": "G06",
+                "name": "Product Costing (FMC & SCC)",
                 "reference": "G06"
               }
             ]
@@ -1732,19 +1713,19 @@
           {
             "id": "FPAO-03",
             "name": "P&L Modelling & Forecasting",
-            "controls": "P&L-to-FMC reconciliation mandatory, CPU costs and volumes reconcile to the site submission, Steerco approval for input changes after submission dates",
+            "controls": "controls P&L-to-FMC reconciliation mandatory, CPU costs and volumes reconcile to the site submission, Steerco approval for input changes after submission dates",
             "description": "Productivity bridges, the P&L-to-FMC reconciliation and the cost-per-unit analysis explain the submission; the site P&L is finalised in Hyperion with the Lean P&L, actualized from MEC and packaged with bridges and CAPEX slides into the review packs under the cycle governance.",
             "owner": "FP&A Ops (with EF, Global Ops)",
             "window": "Each planning cycle",
             "flows": [
               {
-                "name": "Productivity Planning & Cost per Unit",
                 "id": "G08",
+                "name": "Productivity Planning & Cost per Unit",
                 "reference": "G08"
               },
               {
-                "name": "Site P&L and Review Packs",
                 "id": "G09",
+                "name": "Site P&L and Review Packs",
                 "reference": "G09"
               }
             ]
@@ -1752,14 +1733,14 @@
           {
             "id": "FPAO-04",
             "name": "Planning Review and Sign-Off",
-            "controls": "Email approval by OPS Performance Director (P&L) / Inventory Finance Director (MVs, provisions) after soft lock, OPS Cube close",
+            "controls": "controls Email approval by OPS Performance Director (P&L) / Inventory Finance Director (MVs, provisions) after soft lock, OPS Cube close",
             "description": "Site reviews with RFDs challenge the forecast and productivity, post-review adjustments are reloaded, the Planning Hub is soft-locked under change control, regional packs and productivity bridges are reviewed and the OPS Cube is closed for the Group submission, which becomes the planning comparator for month-end reporting.",
             "owner": "EF / Site CFO/RFD / FP&A Ops / Global Ops",
             "window": "Each planning cycle",
             "flows": [
               {
-                "name": "Planning Review and Sign-Off (Site → Region → Group)",
                 "id": "G10",
+                "name": "Planning Review and Sign-Off (Site → Region → Group)",
                 "reference": "G10"
               }
             ]
@@ -1767,14 +1748,14 @@
           {
             "id": "FPAO-05",
             "name": "Month-End Actualization",
-            "controls": "Pre-close data integrity checks (SOP task 1A / 1B), Manual journal preparation, approval and posting follow MU / GFS rules, SAP sign-off; balance sheet review; controls attestation",
+            "controls": "controls Pre-close data integrity checks (SOP task 1A / 1B), Manual journal preparation, approval and posting follow MU / GFS rules, SAP sign-off; balance sheet review; controls attestation",
             "description": "Pre-month-end checks, month-end journal posting and process order settlement, the preliminary P&L preparation and the final SAP → SOAR → FDH → ASO reconciliation deliver the actual P&L, validated with EF and the site CFO for SAP sign-off (WD2) and FDH close (WD4).",
             "owner": "FP&A Ops (with EF, R2R, CAPEX, P2P)",
             "window": "Intra-month to WD+4 (monthly)",
             "flows": [
               {
-                "name": "Month-End Close: Pre-close, Journals & SAP Close",
                 "id": "G11",
+                "name": "Month-End Close: Pre-close, Journals & SAP Close",
                 "reference": "G11"
               }
             ]
@@ -1782,14 +1763,14 @@
           {
             "id": "FPAO-06",
             "name": "Variance Analysis",
-            "controls": "Input to SOX and FCF controls",
+            "controls": "controls Input to SOX and FCF controls",
             "description": "GFS analysts analyse actuals against the planning comparator line by line - volume and COGM at standard, PPV / ROX / yield, manpower and non-manpower, CAPEX and depreciation, inventory write-offs and provisions - and conclude the Ops P&L variance that feeds the commentaries and the SOX / FCF controls.",
             "owner": "FP&A Ops",
             "window": "WD+2 – WD+4 (monthly)",
             "flows": [
               {
-                "name": "Variance Analysis vs Budget / RBU",
                 "id": "G12",
+                "name": "Variance Analysis vs Budget / RBU",
                 "reference": "G12"
               }
             ]
@@ -1797,19 +1778,19 @@
           {
             "id": "FPAO-07",
             "name": "Performance Reporting",
-            "controls": "P&L control Core FSC009-001 (site MI Pack as evidence), Pre-read and sign-off evidence for Core FSC009-001",
+            "controls": "controls P&L control Core FSC009-001 (site MI Pack as evidence), Pre-read and sign-off evidence for Core FSC009-001",
             "description": "Analysts conclude root causes and write the commentaries into the site MI Pack (Commentary Preparation, consolidated into Performance Reporting at the LT review); the pack is reviewed with EF, signed off by the site CFO / Head of Finance and consolidated to regional level by AI Agent Rhy for the Global OPS Performance Pack.",
             "owner": "FP&A Ops / EF / Site CFO/RFD",
             "window": "WD+2 – WD+5 (monthly)",
             "flows": [
               {
-                "name": "Commentary Preparation",
                 "id": "G13",
+                "name": "Commentary Preparation",
                 "reference": "G13"
               },
               {
-                "name": "MI Pack Review & Sign-Off (Site and Regional)",
                 "id": "G14",
+                "name": "MI Pack Review & Sign-Off (Site and Regional)",
                 "reference": "G14"
               }
             ]
@@ -1823,18 +1804,16 @@
             "window": "WD+5 onwards",
             "flows": [
               {
-                "name": "Leadership Insights & Decision Support",
                 "id": "G16",
+                "name": "Leadership Insights & Decision Support",
                 "reference": "G16"
               }
             ]
           }
         ],
         "comparison": {
-          "rule": "Before = As-Is as finalised with the LT · After = potential future mix if the proposed AI opportunities are adopted (not an approved or committed future state; feasibility follows the LT opportunity scoring of 26 Oct 2026; suggestions it did not cover stay Under review).",
           "rows": [
             {
-              "id": "FPAO-01",
               "name": "Demand & Operational Inputs",
               "steps": 2,
               "before": {
@@ -1850,7 +1829,6 @@
               "uplift": 0
             },
             {
-              "id": "FPAO-02",
               "name": "Operational Planning",
               "steps": 26,
               "before": {
@@ -1860,13 +1838,12 @@
               },
               "after": {
                 "man": 5,
-                "hyb": 16,
-                "auto": 5
+                "hyb": 15,
+                "auto": 6
               },
-              "uplift": 16
+              "uplift": 17
             },
             {
-              "id": "FPAO-03",
               "name": "P&L Modelling & Forecasting",
               "steps": 9,
               "before": {
@@ -1876,13 +1853,12 @@
               },
               "after": {
                 "man": 1,
-                "hyb": 6,
-                "auto": 2
+                "hyb": 3,
+                "auto": 5
               },
-              "uplift": 1
+              "uplift": 4
             },
             {
-              "id": "FPAO-04",
               "name": "Planning Review and Sign-Off",
               "steps": 5,
               "before": {
@@ -1898,7 +1874,6 @@
               "uplift": 1
             },
             {
-              "id": "FPAO-05",
               "name": "Month-End Actualization",
               "steps": 5,
               "before": {
@@ -1914,7 +1889,6 @@
               "uplift": 3
             },
             {
-              "id": "FPAO-06",
               "name": "Variance Analysis",
               "steps": 6,
               "before": {
@@ -1924,13 +1898,12 @@
               },
               "after": {
                 "man": 1,
-                "hyb": 3,
-                "auto": 2
+                "hyb": 2,
+                "auto": 3
               },
-              "uplift": 2
+              "uplift": 3
             },
             {
-              "id": "FPAO-07",
               "name": "Performance Reporting",
               "steps": 6,
               "before": {
@@ -1946,7 +1919,6 @@
               "uplift": 3
             },
             {
-              "id": "FPAO-08",
               "name": "Leadership Insights & Decision Support",
               "steps": 2,
               "before": {
@@ -1972,12 +1944,11 @@
             },
             "after": {
               "man": 13,
-              "hyb": 36,
-              "auto": 12
+              "hyb": 31,
+              "auto": 17
             },
-            "uplift": 27
-          },
-          "note": "Manual 34 → 13 (-21) · Semi-automated 24 → 36 (+12) · Automated 3 → 12 (+9). M = manual, S = semi-automated, A = automated. Steps uplifted = steps whose activity level would change if the suggestion is adopted."
+            "uplift": 32
+          }
         }
       },
       "activityTypes": {
@@ -2051,7 +2022,7 @@
         },
         "FPAO-02|G05|2": {
           "before": "hyb",
-          "after": "hyb"
+          "after": "auto"
         },
         "FPAO-02|G05|3": {
           "before": "man",
@@ -2095,15 +2066,15 @@
         },
         "FPAO-03|G08|1": {
           "before": "hyb",
-          "after": "hyb"
+          "after": "auto"
         },
         "FPAO-03|G08|2": {
           "before": "hyb",
-          "after": "hyb"
+          "after": "auto"
         },
         "FPAO-03|G08|3": {
           "before": "man",
-          "after": "auto"
+          "after": "hyb"
         },
         "FPAO-03|G08|4": {
           "before": "hyb",
@@ -2119,7 +2090,7 @@
         },
         "FPAO-03|G09|3": {
           "before": "hyb",
-          "after": "hyb"
+          "after": "auto"
         },
         "FPAO-03|G09|4": {
           "before": "man",
@@ -2151,7 +2122,7 @@
         },
         "FPAO-05|G11|1": {
           "before": "man",
-          "after": "auto"
+          "after": "hyb"
         },
         "FPAO-05|G11|2": {
           "before": "man",
@@ -2163,7 +2134,7 @@
         },
         "FPAO-05|G11|4": {
           "before": "man",
-          "after": "auto"
+          "after": "hyb"
         },
         "FPAO-05|G11|5": {
           "before": "man",
@@ -2191,7 +2162,7 @@
         },
         "FPAO-06|G12|6": {
           "before": "hyb",
-          "after": "hyb"
+          "after": "auto"
         },
         "FPAO-07|G13|1": {
           "before": "man",
@@ -2203,7 +2174,7 @@
         },
         "FPAO-07|G13|3": {
           "before": "hyb",
-          "after": "hyb"
+          "after": "auto"
         },
         "FPAO-07|G14|1": {
           "before": "man",
@@ -2215,7 +2186,7 @@
         },
         "FPAO-07|G14|3": {
           "before": "hyb",
-          "after": "hyb"
+          "after": "auto"
         },
         "FPAO-08|G16|1": {
           "before": "man",
@@ -2251,9 +2222,9 @@
             "value": "75",
             "note": "",
             "mix": {
-              "man": 60,
+              "man": 59,
               "hyb": 11,
-              "auto": 4
+              "auto": 5
             }
           },
           {
@@ -2320,9 +2291,9 @@
             "owner": "CAPEX / Local Finance / IT",
             "systems": "1 flow · CAPEX-05",
             "before": {
-              "man": 3,
+              "man": 2,
               "hyb": 2,
-              "auto": 0
+              "auto": 1
             },
             "after": null
           },
@@ -2350,7 +2321,7 @@
           },
           "CAPEX-08": {
             "description": "Lease cycle from WD-8; journals WD-1",
-            "owner": "Local Finance / CAPEX (Lease) / IT / Licensed CoStar user",
+            "owner": "Local Finance / CAPEX (Lease) / IT / Licensed CoStar u…",
             "systems": "6 flows · CAPEX-08",
             "before": {
               "man": 23,
@@ -2374,7 +2345,7 @@
       },
       "tobe": {
         "title": "CAPEX Process Map · AI suggested",
-        "description": "The same eight key processes and 21 flows as the As-Is map (Intangible Assets and the CN group vs local balance file removed per the CAPEX feedback, Oct 2026). Each step keeps its documented flow; where Claude sees a practical automation, digitalisation or AI change it is marked AI on the step (click it for the recommendation, tools and basis), AI Opportunity nodes hang off the processes and key processes, and the four links the register proposes but has not confirmed are shown as AI-suggested dependencies. Every blue element is a hypothesis: feasibility stays Under Review until the TPI Opportunity Register or the LT records one.",
+        "description": "How capital projects are approved, spent, capitalised and depreciated, how fixed assets and leases are maintained, and what CAPEX hands to R2R and Tax: from the Business proposal and Capital Approval Board / DOA approval in CAS, the WBSE and budget in SAP, project spend settled to AUC and capitalised, fixed asset additions, the monthly depreciation run, impairments, retirements and the physical verification, lease records in CoStar posting to SAP through BlackLine, and the FA and lease ERH files and balance sheet reconciliations at month end.",
         "meta": [
           {
             "label": "Owner",
@@ -2395,19 +2366,19 @@
             "value": "75",
             "note": "",
             "mix": {
-              "man": 60,
+              "man": 59,
               "hyb": 11,
-              "auto": 4
+              "auto": 5
             }
           },
           {
             "label": "Steps with higher automation after AI",
-            "value": "28",
-            "note": "of 75 steps · 41 carry an AI recommendation · -28 manual, +28 semi, +0 automated",
+            "value": "15",
+            "note": "of 75 steps · 41 carry an AI recommendation · -14 manual, +13 semi, +1 automated",
             "mix": {
-              "man": 32,
-              "hyb": 39,
-              "auto": 4
+              "man": 45,
+              "hyb": 24,
+              "auto": 6
             }
           },
           {
@@ -2480,14 +2451,14 @@
             "owner": "CAPEX / Local Finance / IT",
             "systems": "1 flow · CAPEX-05",
             "before": {
-              "man": 3,
+              "man": 2,
               "hyb": 2,
-              "auto": 0
+              "auto": 1
             },
             "after": {
-              "man": 3,
+              "man": 2,
               "hyb": 2,
-              "auto": 0
+              "auto": 1
             }
           },
           "CAPEX-06": {
@@ -2522,7 +2493,7 @@
           },
           "CAPEX-08": {
             "description": "Lease cycle from WD-8; journals WD-1",
-            "owner": "Local Finance / CAPEX (Lease) / IT / Licensed CoStar user",
+            "owner": "Local Finance / CAPEX (Lease) / IT / Licensed CoStar u…",
             "systems": "6 flows · CAPEX-08",
             "before": {
               "man": 23,
@@ -2546,8 +2517,8 @@
             },
             "after": {
               "man": 1,
-              "hyb": 4,
-              "auto": 0
+              "hyb": 3,
+              "auto": 1
             }
           }
         }
@@ -2557,19 +2528,19 @@
           {
             "id": "CAPEX-01",
             "name": "Capital Project Approval & Set-up",
-            "controls": "CPX002A",
+            "controls": "controls CPX002A",
             "description": "Business drafts proposals and business cases, the Capital Approval Board (above threshold) and DOA in CAS approve, Local Finance defines the asset structure and DMT creates the project account code (WBSE) and budget in SAP.",
             "owner": "Business / Capital Approval Board / Local Finance / DMT",
             "window": "Annual budget cycle; ad hoc",
             "flows": [
               {
-                "name": "Review and Approve Capital Projects",
                 "id": "CAPEX-01.1",
+                "name": "Review and Approve Capital Projects",
                 "reference": "8.4.1.3"
               },
               {
-                "name": "Create Project Account Codes",
                 "id": "CAPEX-01.2",
+                "name": "Create Project Account Codes",
                 "reference": "8.4.2.1"
               }
             ]
@@ -2577,19 +2548,19 @@
           {
             "id": "CAPEX-02",
             "name": "Project Spend, Settlement & Capitalisation",
-            "controls": "CPX004, CPX003, CPX005B, CPX005BC",
+            "controls": "controls CPX004, CPX003, CPX005B, CPX005BC",
             "description": "Business books spend to the WBSE, Local Finance reviews it, CAPEX settles WBSE to AUC monthly and produces month-end reports",
             "owner": "Business / Local Finance / CAPEX / DMT",
             "window": "Monthly settlement; project close ad hoc",
             "flows": [
               {
-                "name": "Record Project Related Transactions",
                 "id": "CAPEX-02.1",
+                "name": "Record Project Related Transactions",
                 "reference": "8.4.2.2"
               },
               {
-                "name": "Close and Capitalise Projects",
                 "id": "CAPEX-02.2",
+                "name": "Close and Capitalise Projects",
                 "reference": "8.4.2.4"
               }
             ]
@@ -2597,19 +2568,19 @@
           {
             "id": "CAPEX-03",
             "name": "Fixed Asset Additions",
-            "controls": "CPX001, CPX002, CPX005BC",
+            "controls": "controls CPX001, CPX002, CPX005BC",
             "description": "Business requests a new asset (commercial: via DMT with approval review)",
             "owner": "Business / Local Finance / DMT / CAPEX",
             "window": "Ad hoc; quarterly unposted asset review",
             "flows": [
               {
-                "name": "Process and Record Fixed Asset Additions - Commercial",
                 "id": "CAPEX-03.1",
+                "name": "Process and Record Fixed Asset Additions - Commercial",
                 "reference": "8.3.3.11"
               },
               {
-                "name": "Process and Record Fixed Asset Additions - Non-Commercial",
                 "id": "CAPEX-03.2",
+                "name": "Process and Record Fixed Asset Additions - Non-Commercial",
                 "reference": "8.3.3.3"
               }
             ]
@@ -2617,14 +2588,14 @@
           {
             "id": "CAPEX-05",
             "name": "Depreciation & Amortisation",
-            "controls": "CPX011",
+            "controls": "controls CPX011",
             "description": "Mid-month and month-end depreciation test runs, error and variance investigation with Local Finance and IT, then the production depreciation run and reconciliation of the asset register to the P&L.",
             "owner": "CAPEX / Local Finance / IT",
             "window": "Mid-month test run; production run per",
             "flows": [
               {
-                "name": "Calculate and Record Depreciation Expense",
                 "id": "CAPEX-05.1",
+                "name": "Calculate and Record Depreciation Expense",
                 "reference": "8.3.3.6"
               }
             ]
@@ -2632,19 +2603,19 @@
           {
             "id": "CAPEX-06",
             "name": "Impairments, Retirements & Transfers",
-            "controls": "CPX013, CPX010, CPX008",
+            "controls": "controls CPX013, CPX010, CPX008",
             "description": "Review assets for impairment and post it (unplanned depreciation, useful-life change or one-time FI journal), and process asset transfers, retirements, scrapping and sales with DOA approval.",
             "owner": "Business / Local Finance / CAPEX / DMT / CFO",
             "window": "Annual impairment review; ad hoc",
             "flows": [
               {
-                "name": "Process and Record Fixed Asset Impairments",
                 "id": "CAPEX-06.1",
+                "name": "Process and Record Fixed Asset Impairments",
                 "reference": "8.3.3.4"
               },
               {
-                "name": "Process and Record Fixed Asset Retirements",
                 "id": "CAPEX-06.2",
+                "name": "Process and Record Fixed Asset Retirements",
                 "reference": "8.3.3.10"
               }
             ]
@@ -2652,14 +2623,14 @@
           {
             "id": "CAPEX-07",
             "name": "Physical Asset Verification",
-            "controls": "CPX010",
+            "controls": "controls CPX010",
             "description": "CAPEX sends asset lists to points of contact, Business verifies assets physically and investigates missing items, CAPEX consolidates confirmations and DMT updates master data",
             "owner": "CAPEX / Business / DMT",
             "window": "At least annually (per Fixed Asset",
             "flows": [
               {
-                "name": "Track Fixed Assets including Physical Inventory",
                 "id": "CAPEX-07.1",
+                "name": "Track Fixed Assets including Physical Inventory",
                 "reference": "8.3.3.8"
               }
             ]
@@ -2673,33 +2644,33 @@
             "window": "Lease cycle from WD-8; journals WD-1",
             "flows": [
               {
-                "name": "Execute mass lease accounting additions or modifications",
                 "id": "CAPEX-08.1",
+                "name": "Execute mass lease accounting additions or modifications",
                 "reference": "8.3.3.15"
               },
               {
-                "name": "Update lease accounting master data",
                 "id": "CAPEX-08.2",
+                "name": "Update lease accounting master data",
                 "reference": "8.3.3.16"
               },
               {
-                "name": "Approve and review a lease accounting record",
                 "id": "CAPEX-08.3",
+                "name": "Approve and review a lease accounting record",
                 "reference": "8.3.3.13"
               },
               {
-                "name": "Process lease accounting entries",
                 "id": "CAPEX-08.4",
+                "name": "Process lease accounting entries",
                 "reference": "8.3.3.17"
               },
               {
-                "name": "Prepare lease accounting entries - BlackLine",
                 "id": "CAPEX-08.5",
+                "name": "Prepare lease accounting entries - BlackLine",
                 "reference": "8.3.3.18"
               },
               {
-                "name": "Execute lease accounting reporting",
                 "id": "CAPEX-08.6",
+                "name": "Execute lease accounting reporting",
                 "reference": "8.3.3.14"
               }
             ]
@@ -2713,38 +2684,36 @@
             "window": "WD-2 (CN file); by WD+4 (ERH MOT)",
             "flows": [
               {
-                "name": "Prepare FA ERH MOT file",
                 "id": "CAPEX-09.1",
+                "name": "Prepare FA ERH MOT file",
                 "reference": "No SOP"
               },
               {
-                "name": "Prepare lease ERH MOT file",
                 "id": "CAPEX-09.2",
+                "name": "Prepare lease ERH MOT file",
                 "reference": "No SOP"
               },
               {
-                "name": "Prepare FA and lease BS reconciliations",
                 "id": "CAPEX-09.4",
+                "name": "Prepare FA and lease BS reconciliations",
                 "reference": "No SOP"
               },
               {
-                "name": "Prepare and review month-end project and FA reports",
                 "id": "CAPEX-09.5",
+                "name": "Prepare and review month-end project and FA reports",
                 "reference": "No SOP"
               },
               {
-                "name": "Respond to ad hoc FA and lease queries",
                 "id": "CAPEX-09.6",
+                "name": "Respond to ad hoc FA and lease queries",
                 "reference": "No SOP"
               }
             ]
           }
         ],
         "comparison": {
-          "rule": "Before = As-Is. After applies the proposed Enhanced level for Can be explored, Potential future opportunity and Under review. Implemented, Not feasible and Not relevant remain at the As-Is level and do not count as uplift. Under review remains unapproved.",
           "rows": [
             {
-              "id": "CAPEX-01",
               "name": "Capital Project Approval & Set-up",
               "steps": 10,
               "before": {
@@ -2760,7 +2729,6 @@
               "uplift": 1
             },
             {
-              "id": "CAPEX-02",
               "name": "Project Spend, Settlement & Capitalisation",
               "steps": 9,
               "before": {
@@ -2776,7 +2744,6 @@
               "uplift": 4
             },
             {
-              "id": "CAPEX-03",
               "name": "Fixed Asset Additions",
               "steps": 6,
               "before": {
@@ -2792,23 +2759,21 @@
               "uplift": 3
             },
             {
-              "id": "CAPEX-05",
               "name": "Depreciation & Amortisation",
               "steps": 5,
               "before": {
-                "man": 3,
+                "man": 2,
                 "hyb": 2,
-                "auto": 0
+                "auto": 1
               },
               "after": {
-                "man": 3,
+                "man": 2,
                 "hyb": 2,
-                "auto": 0
+                "auto": 1
               },
               "uplift": 0
             },
             {
-              "id": "CAPEX-06",
               "name": "Impairments, Retirements & Transfers",
               "steps": 10,
               "before": {
@@ -2824,7 +2789,6 @@
               "uplift": 2
             },
             {
-              "id": "CAPEX-07",
               "name": "Physical Asset Verification",
               "steps": 5,
               "before": {
@@ -2840,7 +2804,6 @@
               "uplift": 0
             },
             {
-              "id": "CAPEX-08",
               "name": "Lease Accounting (IFRS 16)",
               "steps": 25,
               "before": {
@@ -2856,7 +2819,6 @@
               "uplift": 3
             },
             {
-              "id": "CAPEX-09",
               "name": "FA & Lease Month-End Reporting",
               "steps": 5,
               "before": {
@@ -2866,28 +2828,27 @@
               },
               "after": {
                 "man": 1,
-                "hyb": 4,
-                "auto": 0
+                "hyb": 3,
+                "auto": 1
               },
-              "uplift": 1
+              "uplift": 2
             }
           ],
           "total": {
             "name": "Total",
             "steps": 75,
             "before": {
-              "man": 60,
+              "man": 59,
               "hyb": 11,
-              "auto": 4
+              "auto": 5
             },
             "after": {
-              "man": 46,
-              "hyb": 25,
-              "auto": 4
+              "man": 45,
+              "hyb": 24,
+              "auto": 6
             },
-            "uplift": 14
-          },
-          "note": "Manual 60 → 46 (-14) · Semi-automated 11 → 25 (+14) · Automated 4 → 4 (0). M = manual, S = semi-automated, A = automated."
+            "uplift": 15
+          }
         }
       },
       "activityTypes": {
@@ -2992,8 +2953,8 @@
           "after": "man"
         },
         "CAPEX-05|CAPEX-05.1|1": {
-          "before": "man",
-          "after": "man"
+          "before": "auto",
+          "after": "auto"
         },
         "CAPEX-05|CAPEX-05.1|2": {
           "before": "hyb",
@@ -3173,7 +3134,7 @@
         },
         "CAPEX-09|CAPEX-09.1|1": {
           "before": "hyb",
-          "after": "hyb"
+          "after": "auto"
         },
         "CAPEX-09|CAPEX-09.2|1": {
           "before": "hyb",
@@ -3294,7 +3255,7 @@
           },
           "P2P-05": {
             "description": "As needed · Manual · Coupa, SAP, bank",
-            "owner": "P2P Accounts Payable with Tax, the Business and Cash & Banking",
+            "owner": "P2P Accounts Payable with Tax, the Business and Cash &…",
             "systems": "4 flows · P2P-05",
             "before": {
               "man": 16,
@@ -3332,10 +3293,10 @@
           {
             "label": "Steps with higher automation after AI",
             "value": "17",
-            "note": "of 84 steps · 29 carry an AI recommendation · -14 manual, +7 semi, +7 automated",
+            "note": "of 84 steps · 29 carry an AI recommendation · -15 manual, +8 semi, +7 automated",
             "mix": {
-              "man": 41,
-              "hyb": 18,
+              "man": 40,
+              "hyb": 19,
               "auto": 25
             }
           },
@@ -3400,8 +3361,8 @@
             },
             "after": {
               "man": 12,
-              "hyb": 2,
-              "auto": 9
+              "hyb": 3,
+              "auto": 8
             }
           },
           "P2P-04": {
@@ -3415,22 +3376,22 @@
             },
             "after": {
               "man": 8,
-              "hyb": 4,
-              "auto": 5
+              "hyb": 7,
+              "auto": 2
             }
           },
           "P2P-05": {
             "description": "As needed · Manual · Coupa, SAP, bank",
-            "owner": "P2P Accounts Payable with Tax, the Business and Cash & Banking",
+            "owner": "P2P Accounts Payable with Tax, the Business and Cash &…",
             "systems": "4 flows · P2P-05",
             "before": {
-              "man": 17,
-              "hyb": 3,
+              "man": 16,
+              "hyb": 4,
               "auto": 3
             },
             "after": {
-              "man": 12,
-              "hyb": 7,
+              "man": 11,
+              "hyb": 8,
               "auto": 4
             }
           }
@@ -3447,8 +3408,8 @@
             "window": "On delivery · Manual · SAP (MIGO) / Coupa",
             "flows": [
               {
-                "name": "Goods / service receipt",
                 "id": "P2P-01.1",
+                "name": "Goods / service receipt",
                 "reference": "P2P-01.1"
               }
             ]
@@ -3462,18 +3423,18 @@
             "window": "Daily · Mixed · Kofax, Coupa, SAP",
             "flows": [
               {
-                "name": "Flow 1 - Invoice received and captured (Kofax / AP invoice mailbox / iPay / Coupa)",
                 "id": "P2P-02.1",
+                "name": "Flow 1 - Invoice received and captured (Kofax / AP invoice mailbox / iPay / Coupa)",
                 "reference": "P2P-02.1"
               },
               {
-                "name": "Flow 2 - PO + GR + invoice match in Coupa",
                 "id": "P2P-02.2",
+                "name": "Flow 2 - PO + GR + invoice match in Coupa",
                 "reference": "P2P-02.2"
               },
               {
-                "name": "Flow 3 - Approval and SAP posting",
                 "id": "P2P-02.3",
+                "name": "Flow 3 - Approval and SAP posting",
                 "reference": "P2P-02.3"
               }
             ]
@@ -3487,33 +3448,33 @@
             "window": "Per payment run · Automated run, manual exceptions · SAP (F110), bank",
             "flows": [
               {
-                "name": "Flow 1 - Standard payment run (normal flow)",
                 "id": "P2P-03.1",
+                "name": "Flow 1 - Standard payment run (normal flow)",
                 "reference": "P2P-03.1"
               },
               {
-                "name": "Flow 2 - Exception: manual and emergency payments",
                 "id": "P2P-03.2",
+                "name": "Flow 2 - Exception: manual and emergency payments",
                 "reference": "P2P-03.2"
               },
               {
-                "name": "Flow 3 - Exception: rejected payments (before and after funds release)",
                 "id": "P2P-03.3",
+                "name": "Flow 3 - Exception: rejected payments (before and after funds release)",
                 "reference": "P2P-03.3"
               },
               {
-                "name": "Flow 4 - Exception: early payment requests and payment date changes",
                 "id": "P2P-03.4",
+                "name": "Flow 4 - Exception: early payment requests and payment date changes",
                 "reference": "P2P-03.4"
               },
               {
-                "name": "Flow 5 - Exception: incoming funds",
                 "id": "P2P-03.5",
+                "name": "Flow 5 - Exception: incoming funds",
                 "reference": "P2P-03.5"
               },
               {
-                "name": "Flow 6 - Control: duplicate payment monitoring (Xelix)",
                 "id": "P2P-03.6",
+                "name": "Flow 6 - Control: duplicate payment monitoring (Xelix)",
                 "reference": "P2P-03.6"
               }
             ]
@@ -3527,18 +3488,18 @@
             "window": "Month end · Manual / semi-automated · SAP, Coupa, Celonis, Excel, Python, BlackLine, OneGRC",
             "flows": [
               {
-                "name": "Flow 1 - STP cut-off and non-PO accrual (APAC WD-3; China WD-6)",
                 "id": "P2P-04.1",
+                "name": "Flow 1 - STP cut-off and non-PO accrual (APAC WD-3; China WD-6)",
                 "reference": "P2P-04.1"
               },
               {
-                "name": "Flow 2 - SOX / FCF self-assessment and reporting",
                 "id": "P2P-04.2",
+                "name": "Flow 2 - SOX / FCF self-assessment and reporting",
                 "reference": "P2P-04.2"
               },
               {
-                "name": "Flow 3 - AP balance sheet reconciliation (BSR)",
                 "id": "P2P-04.3",
+                "name": "Flow 3 - AP balance sheet reconciliation (BSR)",
                 "reference": "P2P-04.3"
               }
             ]
@@ -3552,33 +3513,31 @@
             "window": "As needed · Manual · Coupa, SAP, bank",
             "flows": [
               {
-                "name": "Variant 1 - Withholding tax (WHT) validation before posting",
                 "id": "P2P-05.1",
+                "name": "Variant 1 - Withholding tax (WHT) validation before posting",
                 "reference": "P2P-05.1"
               },
               {
-                "name": "Variant 2 - Down payments and non-invoice payments",
                 "id": "P2P-05.2",
+                "name": "Variant 2 - Down payments and non-invoice payments",
                 "reference": "P2P-05.2"
               },
               {
-                "name": "Variant 2b - Down payments: China (iPay)",
                 "id": "P2P-05.2b",
+                "name": "Variant 2b - Down payments: China (iPay)",
                 "reference": "P2P-05.2b"
               },
               {
-                "name": "Variant 3 - Direct debits",
                 "id": "P2P-05.3",
+                "name": "Variant 3 - Direct debits",
                 "reference": "P2P-05.3"
               }
             ]
           }
         ],
         "comparison": {
-          "rule": "Before = As-Is. After applies the proposed Enhanced level only for Can be explored and Potential future opportunity. Implemented, Not feasible, Not relevant and Under review / Under assessment remain at As-Is and do not count as uplift.",
           "rows": [
             {
-              "id": "P2P-01",
               "name": "Goods & services receipt",
               "steps": 4,
               "before": {
@@ -3594,7 +3553,6 @@
               "uplift": 1
             },
             {
-              "id": "P2P-02",
               "name": "Invoice management",
               "steps": 17,
               "before": {
@@ -3610,7 +3568,6 @@
               "uplift": 1
             },
             {
-              "id": "P2P-03",
               "name": "Payment",
               "steps": 23,
               "before": {
@@ -3626,7 +3583,6 @@
               "uplift": 3
             },
             {
-              "id": "P2P-04",
               "name": "Month-end close",
               "steps": 17,
               "before": {
@@ -3642,17 +3598,16 @@
               "uplift": 7
             },
             {
-              "id": "P2P-05",
               "name": "Specialist variants (branch from the core invoice journey)",
               "steps": 23,
               "before": {
-                "man": 17,
-                "hyb": 3,
+                "man": 16,
+                "hyb": 4,
                 "auto": 3
               },
               "after": {
-                "man": 12,
-                "hyb": 7,
+                "man": 11,
+                "hyb": 8,
                 "auto": 4
               },
               "uplift": 5
@@ -3662,18 +3617,17 @@
             "name": "Total",
             "steps": 84,
             "before": {
-              "man": 56,
-              "hyb": 10,
+              "man": 55,
+              "hyb": 11,
               "auto": 18
             },
             "after": {
-              "man": 41,
-              "hyb": 18,
+              "man": 40,
+              "hyb": 19,
               "auto": 25
             },
             "uplift": 17
-          },
-          "note": "Manual 56 → 41 (-15) · Semi-automated 10 → 18 (+8) · Automated 18 → 25 (+7). M = manual, S = semi-automated, A = automated."
+          }
         }
       },
       "activityTypes": {
@@ -3827,7 +3781,7 @@
         },
         "P2P-03|P2P-03.4|2": {
           "before": "man",
-          "after": "auto"
+          "after": "hyb"
         },
         "P2P-03|P2P-03.4|3": {
           "before": "auto",
@@ -3895,7 +3849,7 @@
         },
         "P2P-04|P2P-04.3|1": {
           "before": "man",
-          "after": "auto"
+          "after": "hyb"
         },
         "P2P-04|P2P-04.3|2": {
           "before": "hyb",
@@ -3915,11 +3869,11 @@
         },
         "P2P-04|P2P-04.3|5": {
           "before": "man",
-          "after": "auto"
+          "after": "hyb"
         },
         "P2P-04|P2P-04.3|6": {
           "before": "man",
-          "after": "auto"
+          "after": "hyb"
         },
         "P2P-05|P2P-05.1|1": {
           "before": "man",
@@ -3959,7 +3913,7 @@
         },
         "P2P-05|P2P-05.2|2": {
           "before": "hyb",
-          "after": "man"
+          "after": "hyb"
         },
         "P2P-05|P2P-05.2|2a": {
           "before": "man",
@@ -3967,7 +3921,7 @@
         },
         "P2P-05|P2P-05.2|3": {
           "before": "man",
-          "after": "auto"
+          "after": "hyb"
         },
         "P2P-05|P2P-05.2|4": {
           "before": "auto",
@@ -4007,11 +3961,1362 @@
         },
         "P2P-05|P2P-05.3|3": {
           "before": "hyb",
-          "after": "hyb"
+          "after": "auto"
         },
         "P2P-05|P2P-05.3|4": {
           "before": "man",
           "after": "hyb"
+        }
+      }
+    },
+    "O2C": {
+      "asis": {
+        "title": "Order to Cash As-Is Process Map",
+        "description": "Convert distributor EDI sales, customer purchase orders, returns and rebates into valid SAP sales orders or credit notes, then release blocked orders, bill them and collect payment; apply the cash received to customer accounts in High Radius, run outgoing payments and post the bank statements through to the bank reconciliation in BlackLine, handed to R2R Reporting for month-end close.",
+        "meta": [
+          {
+            "label": "Owner",
+            "value": "O2C Sales Order, Order Release, Credit Risk, Billing, Collection, Cash Application and Cash & Banking teams"
+          },
+          {
+            "label": "Cadence",
+            "value": "Daily; monthly SOA and reminders"
+          },
+          {
+            "label": "Core systems",
+            "value": "SAP; High Radius Collection Cloud and Cash Application; Crown; FIS Payment Hub; bank portals; BlackLine; local e-invoicing portals"
+          }
+        ],
+        "cards": [
+          {
+            "label": "Process steps mapped",
+            "value": "38",
+            "note": "",
+            "mix": {
+              "man": 13,
+              "hyb": 15,
+              "auto": 10
+            }
+          },
+          {
+            "label": "Key processes · processes",
+            "value": "6 · 10",
+            "note": "as documented with the O2C teams (register Oct 2026)",
+            "mix": null
+          },
+          {
+            "label": "Decision points",
+            "value": "17",
+            "note": "approval, validation and completeness checks in the E2E",
+            "mix": null
+          },
+          {
+            "label": "Handoffs documented",
+            "value": "30",
+            "note": "to and from other towers and parties",
+            "mix": null
+          },
+          {
+            "label": "Pain points documented",
+            "value": "19",
+            "note": "step-level, from the O2C walkthrough and register (Oct 2026)",
+            "mix": null
+          }
+        ],
+        "nodes": {
+          "SOC-01": {
+            "description": "SAP processes the distributor EDI file; customer POs, returns and rebates are entered in SAP and credit-checked.",
+            "owner": "O2C",
+            "systems": "SAP",
+            "before": {
+              "man": 2,
+              "hyb": 3,
+              "auto": 2
+            },
+            "after": null
+          },
+          "SOC-02": {
+            "description": "Orders held by the credit check are reviewed and approved for release.",
+            "owner": "O2C",
+            "systems": "SAP; High Radius",
+            "before": {
+              "man": 3,
+              "hyb": 1,
+              "auto": 1
+            },
+            "after": null
+          },
+          "SOC-03": {
+            "description": "Delivery posts the PGI, billing is released and invoices, credit notes and e-invoices are sent.",
+            "owner": "O2C",
+            "systems": "SAP; local e-invoicing portals",
+            "before": {
+              "man": 0,
+              "hyb": 3,
+              "auto": 2
+            },
+            "after": null
+          },
+          "SOC-04": {
+            "description": "SOA, reminders and payment chasing with escalation; disputes and deductions are resolved.",
+            "owner": "O2C",
+            "systems": "High Radius Collection Cloud; SAP",
+            "before": {
+              "man": 2,
+              "hyb": 4,
+              "auto": 0
+            },
+            "after": null
+          },
+          "SOC-05": {
+            "description": "Bank statements are matched to invoices in High Radius and the output file is posted to SAP.",
+            "owner": "O2C",
+            "systems": "High Radius Cash Application; SAP",
+            "before": {
+              "man": 1,
+              "hyb": 0,
+              "auto": 3
+            },
+            "after": null
+          },
+          "SOC-06": {
+            "description": "Outgoing payments, bank statement posting, open-item clearing and bank reconciliation.",
+            "owner": "O2C",
+            "systems": "SAP; Crown; FIS Payment Hub; BlackLine",
+            "before": {
+              "man": 5,
+              "hyb": 4,
+              "auto": 2
+            },
+            "after": null
+          }
+        }
+      },
+      "tobe": {
+        "title": "Order to Cash Process Map · AI suggested",
+        "description": "Convert distributor EDI sales, customer purchase orders, returns and rebates into valid SAP sales orders or credit notes, then release blocked orders, bill them and collect payment; apply the cash received to customer accounts in High Radius, run outgoing payments and post the bank statements through to the bank reconciliation in BlackLine, handed to R2R Reporting for month-end close.",
+        "meta": [
+          {
+            "label": "Owner",
+            "value": "O2C Sales Order, Order Release, Credit Risk, Billing, Collection, Cash Application and Cash & Banking teams"
+          },
+          {
+            "label": "Cadence",
+            "value": "Daily; monthly SOA and reminders"
+          },
+          {
+            "label": "Core systems",
+            "value": "SAP; High Radius Collection Cloud and Cash Application; Crown; FIS Payment Hub; bank portals; BlackLine; local e-invoicing portals"
+          }
+        ],
+        "cards": [
+          {
+            "label": "Process steps (as documented)",
+            "value": "38",
+            "note": "",
+            "mix": {
+              "man": 13,
+              "hyb": 15,
+              "auto": 10
+            }
+          },
+          {
+            "label": "Steps with higher automation after AI",
+            "value": "6",
+            "note": "of 38 steps · 17 carry an AI recommendation · -4 manual, +2 semi, +2 automated",
+            "mix": {
+              "man": 9,
+              "hyb": 17,
+              "auto": 12
+            }
+          },
+          {
+            "label": "Pain points documented",
+            "value": "19",
+            "note": "18 with an AI suggested fix",
+            "mix": null
+          },
+          {
+            "label": "AI opportunity nodes",
+            "value": "2",
+            "note": "2 on flows · 0 at phase level",
+            "mix": null
+          },
+          {
+            "label": "TPI / CI initiatives linked",
+            "value": "6 · 24",
+            "note": "register CI column · TPI register Jun–Aug 2026",
+            "mix": null
+          }
+        ],
+        "nodes": {
+          "SOC-01": {
+            "description": "SAP processes the distributor EDI file; customer POs, returns and rebates are entered in SAP and credit-checked.",
+            "owner": "O2C",
+            "systems": "SAP",
+            "before": {
+              "man": 2,
+              "hyb": 3,
+              "auto": 2
+            },
+            "after": {
+              "man": 2,
+              "hyb": 3,
+              "auto": 2
+            }
+          },
+          "SOC-02": {
+            "description": "Orders held by the credit check are reviewed and approved for release.",
+            "owner": "O2C",
+            "systems": "SAP; High Radius",
+            "before": {
+              "man": 3,
+              "hyb": 1,
+              "auto": 1
+            },
+            "after": {
+              "man": 0,
+              "hyb": 3,
+              "auto": 2
+            }
+          },
+          "SOC-03": {
+            "description": "Delivery posts the PGI, billing is released and invoices, credit notes and e-invoices are sent.",
+            "owner": "O2C",
+            "systems": "SAP; local e-invoicing portals",
+            "before": {
+              "man": 0,
+              "hyb": 3,
+              "auto": 2
+            },
+            "after": {
+              "man": 0,
+              "hyb": 3,
+              "auto": 2
+            }
+          },
+          "SOC-04": {
+            "description": "SOA, reminders and payment chasing with escalation; disputes and deductions are resolved.",
+            "owner": "O2C",
+            "systems": "High Radius Collection Cloud; SAP",
+            "before": {
+              "man": 2,
+              "hyb": 4,
+              "auto": 0
+            },
+            "after": {
+              "man": 2,
+              "hyb": 4,
+              "auto": 0
+            }
+          },
+          "SOC-05": {
+            "description": "Bank statements are matched to invoices in High Radius and the output file is posted to SAP.",
+            "owner": "O2C",
+            "systems": "High Radius Cash Application; SAP",
+            "before": {
+              "man": 1,
+              "hyb": 0,
+              "auto": 3
+            },
+            "after": {
+              "man": 1,
+              "hyb": 0,
+              "auto": 3
+            }
+          },
+          "SOC-06": {
+            "description": "Outgoing payments, bank statement posting, open-item clearing and bank reconciliation.",
+            "owner": "O2C",
+            "systems": "SAP; Crown; FIS Payment Hub; BlackLine",
+            "before": {
+              "man": 5,
+              "hyb": 4,
+              "auto": 2
+            },
+            "after": {
+              "man": 4,
+              "hyb": 4,
+              "auto": 3
+            }
+          }
+        }
+      },
+      "dashboard": {
+        "processes": [
+          {
+            "id": "SOC-01",
+            "name": "Sales order creation",
+            "controls": "",
+            "description": "SAP processes the daily distributor EDI file; the Sales Order team fixes missing end-customer accounts, prices and stock. Customer POs, returns and rebates are entered manually after approval, then pass the system credit check.",
+            "owner": "O2C Sales Order team",
+            "window": "Daily · Semi-automated · SAP",
+            "flows": [
+              {
+                "id": "SOC-01.1",
+                "name": "Flow 1 - EDI orders (automatic)",
+                "reference": "SOC-01.1"
+              },
+              {
+                "id": "SOC-01.2",
+                "name": "Flow 2 - Customer PO, returns and rebates (manual)",
+                "reference": "SOC-01.2"
+              }
+            ]
+          },
+          {
+            "id": "SOC-02",
+            "name": "Order block release",
+            "controls": "",
+            "description": "Manual orders that fail the SAP credit check are blocked. The block reason is identified and Credit Risk or Collection approves the release.",
+            "owner": "O2C Order Release, Credit Risk and Collection teams",
+            "window": "Daily · Semi-automated · SAP, High Radius",
+            "flows": [
+              {
+                "id": "SOC-02.1",
+                "name": "Order block release (manual orders)",
+                "reference": "SOC-02.1"
+              }
+            ]
+          },
+          {
+            "id": "SOC-03",
+            "name": "Billing",
+            "controls": "",
+            "description": "Delivery to the customer triggers the PGI posting. Billing is released, invoices and credit notes are generated and sent, with local tax invoices and e-invoicing where mandated.",
+            "owner": "O2C Billing team",
+            "window": "Daily · Semi-automated · SAP, local e-invoicing portals",
+            "flows": [
+              {
+                "id": "SOC-03.1",
+                "name": "Billing (invoices, credit notes, e-invoicing)",
+                "reference": "SOC-03.1"
+              }
+            ]
+          },
+          {
+            "id": "SOC-04",
+            "name": "Collections & disputes management",
+            "controls": "",
+            "description": "Monthly SOA, pre-due reminders and payment chasing with escalation. Disputes and deductions are recorded, investigated and resolved by credit note or invoice correction.",
+            "owner": "O2C Collection team",
+            "window": "Daily; monthly SOA and reminders · Semi-automated · High Radius, SAP",
+            "flows": [
+              {
+                "id": "SOC-04.1",
+                "name": "Collection - payment follow-up and escalation",
+                "reference": "SOC-04.1"
+              },
+              {
+                "id": "SOC-04.2",
+                "name": "Disputes and deductions management",
+                "reference": "SOC-04.2"
+              }
+            ]
+          },
+          {
+            "id": "SOC-05",
+            "name": "Payment allocation / cash application",
+            "controls": "",
+            "description": "Daily bank statements feed High Radius, which auto-matches payments to invoices and posts the output file to SAP. Unmatched payments are checked and cleared manually.",
+            "owner": "O2C Cash Application team",
+            "window": "Daily · Semi-automated · High Radius Cash Application, SAP",
+            "flows": [
+              {
+                "id": "SOC-05.1",
+                "name": "Payment allocation - matched payments",
+                "reference": "SOC-05.1"
+              }
+            ]
+          },
+          {
+            "id": "SOC-06",
+            "name": "Cash & Banking",
+            "controls": "",
+            "description": "Outgoing payments run through the SAP payment run or the manual route in Crown. Bank statements are posted, open items cleared and the bank reconciled in BlackLine.",
+            "owner": "O2C Cash & Banking team",
+            "window": "Daily · Semi-automated · SAP, Crown, FIS Payment Hub, bank portals, BlackLine",
+            "flows": [
+              {
+                "id": "SOC-06.1",
+                "name": "Flow A - Payment process: automated / semi-automated payment run",
+                "reference": "SOC-06.1"
+              },
+              {
+                "id": "SOC-06.2",
+                "name": "Flow A - Payment process: manual payment route",
+                "reference": "SOC-06.2"
+              },
+              {
+                "id": "SOC-06.3",
+                "name": "Flow B - Bank statement process",
+                "reference": "SOC-06.3"
+              }
+            ]
+          }
+        ],
+        "comparison": {
+          "rows": [
+            {
+              "name": "Sales order creation",
+              "steps": 7,
+              "before": {
+                "man": 2,
+                "hyb": 3,
+                "auto": 2
+              },
+              "after": {
+                "man": 2,
+                "hyb": 3,
+                "auto": 2
+              },
+              "uplift": 0
+            },
+            {
+              "name": "Order block release",
+              "steps": 5,
+              "before": {
+                "man": 3,
+                "hyb": 1,
+                "auto": 1
+              },
+              "after": {
+                "man": 0,
+                "hyb": 3,
+                "auto": 2
+              },
+              "uplift": 4
+            },
+            {
+              "name": "Billing",
+              "steps": 5,
+              "before": {
+                "man": 0,
+                "hyb": 3,
+                "auto": 2
+              },
+              "after": {
+                "man": 0,
+                "hyb": 3,
+                "auto": 2
+              },
+              "uplift": 0
+            },
+            {
+              "name": "Collections & disputes management",
+              "steps": 6,
+              "before": {
+                "man": 2,
+                "hyb": 4,
+                "auto": 0
+              },
+              "after": {
+                "man": 2,
+                "hyb": 4,
+                "auto": 0
+              },
+              "uplift": 0
+            },
+            {
+              "name": "Payment allocation / cash application",
+              "steps": 4,
+              "before": {
+                "man": 1,
+                "hyb": 0,
+                "auto": 3
+              },
+              "after": {
+                "man": 1,
+                "hyb": 0,
+                "auto": 3
+              },
+              "uplift": 0
+            },
+            {
+              "name": "Cash & Banking",
+              "steps": 11,
+              "before": {
+                "man": 5,
+                "hyb": 4,
+                "auto": 2
+              },
+              "after": {
+                "man": 4,
+                "hyb": 4,
+                "auto": 3
+              },
+              "uplift": 2
+            }
+          ],
+          "total": {
+            "name": "Total",
+            "steps": 38,
+            "before": {
+              "man": 13,
+              "hyb": 15,
+              "auto": 10
+            },
+            "after": {
+              "man": 9,
+              "hyb": 17,
+              "auto": 12
+            },
+            "uplift": 6
+          }
+        }
+      },
+      "activityTypes": {
+        "SOC-01|SOC-01.1|1": {
+          "before": "auto",
+          "after": "auto"
+        },
+        "SOC-01|SOC-01.1|1a": {
+          "before": "hyb",
+          "after": "hyb"
+        },
+        "SOC-01|SOC-01.1|1b": {
+          "before": "man",
+          "after": "man"
+        },
+        "SOC-01|SOC-01.1|1c": {
+          "before": "hyb",
+          "after": "hyb"
+        },
+        "SOC-01|SOC-01.1|2": {
+          "before": "auto",
+          "after": "auto"
+        },
+        "SOC-01|SOC-01.2|1": {
+          "before": "man",
+          "after": "man"
+        },
+        "SOC-01|SOC-01.2|2": {
+          "before": "hyb",
+          "after": "hyb"
+        },
+        "SOC-02|SOC-02.1|1": {
+          "before": "auto",
+          "after": "auto"
+        },
+        "SOC-02|SOC-02.1|1a": {
+          "before": "man",
+          "after": "hyb"
+        },
+        "SOC-02|SOC-02.1|1b": {
+          "before": "man",
+          "after": "hyb"
+        },
+        "SOC-02|SOC-02.1|1c": {
+          "before": "man",
+          "after": "hyb"
+        },
+        "SOC-02|SOC-02.1|2": {
+          "before": "hyb",
+          "after": "auto"
+        },
+        "SOC-03|SOC-03.1|1": {
+          "before": "hyb",
+          "after": "hyb"
+        },
+        "SOC-03|SOC-03.1|2": {
+          "before": "hyb",
+          "after": "hyb"
+        },
+        "SOC-03|SOC-03.1|3": {
+          "before": "auto",
+          "after": "auto"
+        },
+        "SOC-03|SOC-03.1|4": {
+          "before": "hyb",
+          "after": "hyb"
+        },
+        "SOC-03|SOC-03.1|5": {
+          "before": "auto",
+          "after": "auto"
+        },
+        "SOC-04|SOC-04.1|1": {
+          "before": "hyb",
+          "after": "hyb"
+        },
+        "SOC-04|SOC-04.1|2": {
+          "before": "hyb",
+          "after": "hyb"
+        },
+        "SOC-04|SOC-04.1|3": {
+          "before": "man",
+          "after": "man"
+        },
+        "SOC-04|SOC-04.2|1": {
+          "before": "hyb",
+          "after": "hyb"
+        },
+        "SOC-04|SOC-04.2|2": {
+          "before": "man",
+          "after": "man"
+        },
+        "SOC-04|SOC-04.2|3": {
+          "before": "hyb",
+          "after": "hyb"
+        },
+        "SOC-05|SOC-05.1|1": {
+          "before": "auto",
+          "after": "auto"
+        },
+        "SOC-05|SOC-05.1|2": {
+          "before": "auto",
+          "after": "auto"
+        },
+        "SOC-05|SOC-05.1|4": {
+          "before": "man",
+          "after": "man"
+        },
+        "SOC-05|SOC-05.1|3": {
+          "before": "auto",
+          "after": "auto"
+        },
+        "SOC-06|SOC-06.1|1": {
+          "before": "auto",
+          "after": "auto"
+        },
+        "SOC-06|SOC-06.1|2": {
+          "before": "hyb",
+          "after": "hyb"
+        },
+        "SOC-06|SOC-06.1|3": {
+          "before": "man",
+          "after": "man"
+        },
+        "SOC-06|SOC-06.2|1": {
+          "before": "man",
+          "after": "man"
+        },
+        "SOC-06|SOC-06.2|2": {
+          "before": "man",
+          "after": "hyb"
+        },
+        "SOC-06|SOC-06.2|3": {
+          "before": "man",
+          "after": "man"
+        },
+        "SOC-06|SOC-06.3|1": {
+          "before": "hyb",
+          "after": "hyb"
+        },
+        "SOC-06|SOC-06.3|3": {
+          "before": "hyb",
+          "after": "hyb"
+        },
+        "SOC-06|SOC-06.3|2": {
+          "before": "auto",
+          "after": "auto"
+        },
+        "SOC-06|SOC-06.3|4": {
+          "before": "man",
+          "after": "man"
+        },
+        "SOC-06|SOC-06.3|5": {
+          "before": "hyb",
+          "after": "auto"
+        }
+      }
+    },
+    "TAX": {
+      "asis": {
+        "title": "Tax As-Is Process Map",
+        "description": "End-to-end compliance covering CIT, VAT and WHT, from source transactions and financial close through tax determination, review, approval, filing and payment.",
+        "meta": [
+          {
+            "label": "Owner",
+            "value": "Tax Delivery Team (TDT) with Deloitte (OSP), Financial Controller / CFC, CFO, P2P, O2C (Cash & Banking), R2R, Controlling, CAPEX and DMT"
+          },
+          {
+            "label": "Cadence",
+            "value": "WHT monthly (21st) and annual (31 Oct); CIT annual (PAYG monthly, balance 31 May); VAT monthly (20th)"
+          },
+          {
+            "label": "Core systems",
+            "value": "ASIA SAP; Coupa / Kofax OCR; Intela; CROWN; FPT e-invoice portal; e-tax portal; TRT (LongView); ERH; BlackLine; Excel"
+          }
+        ],
+        "cards": [
+          {
+            "label": "Process steps mapped",
+            "value": "77",
+            "note": "",
+            "mix": {
+              "man": 56,
+              "hyb": 15,
+              "auto": 6
+            }
+          },
+          {
+            "label": "Key processes · flows",
+            "value": "3 · 20",
+            "note": "as documented in the Tax SOPs and current-state maps (Sep–Oct 2026)",
+            "mix": null
+          },
+          {
+            "label": "Decision points",
+            "value": "9",
+            "note": "approval, validation and completeness checks in the flows",
+            "mix": null
+          },
+          {
+            "label": "Handoffs documented",
+            "value": "16",
+            "note": "to and from other towers and parties",
+            "mix": null
+          },
+          {
+            "label": "Pain points documented",
+            "value": "9",
+            "note": "reviewed with the LT · more to be shared",
+            "mix": null
+          }
+        ],
+        "nodes": {
+          "TAX-02": {
+            "description": "Tax year January–December · PAYG instalments by the 20th, balancing payment by 31 May · Intela, ASIA SAP, CROWN, LongView",
+            "owner": "Tax (TDT) with Deloitte (OSP), Controlling, Financial Controller and the CFO",
+            "systems": "7 flows · TAX-02",
+            "before": {
+              "man": 21,
+              "hyb": 3,
+              "auto": 1
+            },
+            "after": null
+          },
+          "TAX-03": {
+            "description": "Monthly · return and payment due 20th of the following month · ASIA SAP, Coupa, FPT e-invoice, Intela, CROWN",
+            "owner": "P2P, O2C, R2R, Tax (TDT) with Deloitte Vietnam (OSP), CFC and CFO",
+            "systems": "7 flows · TAX-03",
+            "before": {
+              "man": 16,
+              "hyb": 9,
+              "auto": 2
+            },
+            "after": null
+          },
+          "TAX-01": {
+            "description": "Monthly remittance by the 21st, extract at WD+2 · Annual return July–June by 31 October · ASIA SAP, Coupa, CROWN",
+            "owner": "P2P, Tax (TDT), O2C (Cash & Banking), Financial Controller and CFO",
+            "systems": "6 flows · TAX-01",
+            "before": {
+              "man": 19,
+              "hyb": 3,
+              "auto": 3
+            },
+            "after": null
+          }
+        }
+      },
+      "tobe": {
+        "title": "Tax Process Map · AI suggested",
+        "description": "End-to-end compliance covering CIT, VAT and WHT, from source transactions and financial close through tax determination, review, approval, filing and payment.",
+        "meta": [
+          {
+            "label": "Owner",
+            "value": "Tax Delivery Team (TDT) with Deloitte (OSP), Financial Controller / CFC, CFO, P2P, O2C, R2R, Controlling, CAPEX, DMT, Group IT and Global Digital"
+          },
+          {
+            "label": "Tools assumed",
+            "value": "ASIA SAP, Coupa, Intela, CROWN, TRT (LongView), ERH, BlackLine, Tax GL Analyzer (Group IT), Python, Power Automate, Power Apps, Power BI, Copilot / agent builder, SharePoint"
+          }
+        ],
+        "cards": [
+          {
+            "label": "Process steps (as documented)",
+            "value": "77",
+            "note": "",
+            "mix": {
+              "man": 56,
+              "hyb": 15,
+              "auto": 6
+            }
+          },
+          {
+            "label": "Steps with higher automation after AI",
+            "value": "22",
+            "note": "of 77 steps · 23 carry an AI recommendation · -18 manual, +14 semi, +4 automated",
+            "mix": {
+              "man": 38,
+              "hyb": 29,
+              "auto": 10
+            }
+          },
+          {
+            "label": "Pain points documented",
+            "value": "9",
+            "note": "4 with an AI suggested fix · draft, to be validated",
+            "mix": null
+          },
+          {
+            "label": "AI opportunity nodes",
+            "value": "12",
+            "note": "9 on flows · 3 at key-process level",
+            "mix": null
+          },
+          {
+            "label": "TPI register items",
+            "value": "2",
+            "note": "shown on the map · 2027 TPIs only",
+            "mix": null
+          }
+        ],
+        "nodes": {
+          "TAX-02": {
+            "description": "Tax year January–December · PAYG instalments by the 20th, balancing payment by 31 May · Intela, ASIA SAP, CROWN, LongView",
+            "owner": "Tax (TDT) with Deloitte (OSP), Controlling, Financial Controller and the CFO",
+            "systems": "7 flows · TAX-02",
+            "before": {
+              "man": 21,
+              "hyb": 3,
+              "auto": 1
+            },
+            "after": {
+              "man": 14,
+              "hyb": 9,
+              "auto": 2
+            }
+          },
+          "TAX-03": {
+            "description": "Monthly · return and payment due 20th of the following month · ASIA SAP, Coupa, FPT e-invoice, Intela, CROWN",
+            "owner": "P2P, O2C, R2R, Tax (TDT) with Deloitte Vietnam (OSP), CFC and CFO",
+            "systems": "7 flows · TAX-03",
+            "before": {
+              "man": 16,
+              "hyb": 9,
+              "auto": 2
+            },
+            "after": {
+              "man": 11,
+              "hyb": 11,
+              "auto": 5
+            }
+          },
+          "TAX-01": {
+            "description": "Monthly remittance by the 21st, extract at WD+2 · Annual return July–June by 31 October · ASIA SAP, Coupa, CROWN",
+            "owner": "P2P, Tax (TDT), O2C (Cash & Banking), Financial Controller and CFO",
+            "systems": "6 flows · TAX-01",
+            "before": {
+              "man": 19,
+              "hyb": 3,
+              "auto": 3
+            },
+            "after": {
+              "man": 13,
+              "hyb": 9,
+              "auto": 3
+            }
+          }
+        }
+      },
+      "dashboard": {
+        "processes": [
+          {
+            "id": "TAX-02",
+            "name": "Corporate Income Tax",
+            "controls": "",
+            "description": "Starts with Business transactions through the year | Produces RTP in LongView; reconciled tax balances",
+            "owner": "Tax (TDT) with Deloitte (OSP), Controlling, Financial Controller and the CFO",
+            "window": "Tax year January–December · PAYG instalments by the 20th, balancing payment by 31 May · Intela, ASIA SAP, CROWN, LongView",
+            "flows": [
+              {
+                "id": "TAX-02.1",
+                "name": "Phase 1 - Business inputs",
+                "reference": "TAX-02.1"
+              },
+              {
+                "id": "TAX-02.2",
+                "name": "Phase 2 - Financial close",
+                "reference": "TAX-02.2"
+              },
+              {
+                "id": "TAX-02.3",
+                "name": "Phase 3 - Tax Data Gathering & Analysis",
+                "reference": "TAX-02.3"
+              },
+              {
+                "id": "TAX-02.4",
+                "name": "Phase 4 - Computation and review",
+                "reference": "TAX-02.4"
+              },
+              {
+                "id": "TAX-02.5",
+                "name": "Phase 5 - Disclosures, presentation and filing",
+                "reference": "TAX-02.5"
+              },
+              {
+                "id": "TAX-02.6",
+                "name": "Phase 6 - Tax payment",
+                "reference": "TAX-02.6"
+              },
+              {
+                "id": "TAX-02.7",
+                "name": "Phase 7 - Post-filing and reporting",
+                "reference": "TAX-02.7"
+              }
+            ]
+          },
+          {
+            "id": "TAX-03",
+            "name": "VAT",
+            "controls": "",
+            "description": "Starts with Tax codes, VAT registration and customer / vendor tax classification maintained | Produces Payment confirmation; adjustment entries; VAT balances reconciled",
+            "owner": "P2P, O2C, R2R, Tax (TDT) with Deloitte Vietnam (OSP), CFC and CFO",
+            "window": "Monthly · return and payment due 20th of the following month · ASIA SAP, Coupa, FPT e-invoice, Intela, CROWN",
+            "flows": [
+              {
+                "id": "TAX-03.1",
+                "name": "Phase 1 - Tax master data and origination",
+                "reference": "TAX-03.1"
+              },
+              {
+                "id": "TAX-03.2",
+                "name": "Phase 2 - Transaction processing and VAT posting",
+                "reference": "TAX-03.2"
+              },
+              {
+                "id": "TAX-03.3",
+                "name": "Phase 3 - VAT accounting and close",
+                "reference": "TAX-03.3"
+              },
+              {
+                "id": "TAX-03.4",
+                "name": "Phase 4 - VAT Data Gathering & Analysis",
+                "reference": "TAX-03.4"
+              },
+              {
+                "id": "TAX-03.5",
+                "name": "Phase 5 - Return preparation and review",
+                "reference": "TAX-03.5"
+              },
+              {
+                "id": "TAX-03.6",
+                "name": "Phase 6 - Approval and filing",
+                "reference": "TAX-03.6"
+              },
+              {
+                "id": "TAX-03.7",
+                "name": "Phase 7 - Payment and post-filing",
+                "reference": "TAX-03.7"
+              }
+            ]
+          },
+          {
+            "id": "TAX-01",
+            "name": "Withholding Tax",
+            "controls": "",
+            "description": "Starts with Supplier onboarding: ABN, tax residency, treaty or exemption documents | Produces Signed annual WHT form lodged with the ATO by 31 October",
+            "owner": "P2P, Tax (TDT), O2C (Cash & Banking), Financial Controller and CFO",
+            "window": "Monthly remittance by the 21st, extract at WD+2 · Annual return July–June by 31 October · ASIA SAP, Coupa, CROWN",
+            "flows": [
+              {
+                "id": "TAX-01.1",
+                "name": "Phase 1 - Supplier onboarding and purchasing",
+                "reference": "TAX-01.1"
+              },
+              {
+                "id": "TAX-01.2",
+                "name": "Phase 2 - Invoice receipt and verification",
+                "reference": "TAX-01.2"
+              },
+              {
+                "id": "TAX-01.3",
+                "name": "Phase 3 - WHT review and posting",
+                "reference": "TAX-01.3"
+              },
+              {
+                "id": "TAX-01.4",
+                "name": "Phase 4 - Supplier payment and close",
+                "reference": "TAX-01.4"
+              },
+              {
+                "id": "TAX-01.5",
+                "name": "Phase 5 - Monthly WHT remittance",
+                "reference": "TAX-01.5"
+              },
+              {
+                "id": "TAX-01.6",
+                "name": "Phase 6 - Annual WHT filing",
+                "reference": "TAX-01.6"
+              }
+            ]
+          }
+        ],
+        "comparison": {
+          "rows": [
+            {
+              "name": "Corporate Income Tax",
+              "steps": 25,
+              "before": {
+                "man": 21,
+                "hyb": 3,
+                "auto": 1
+              },
+              "after": {
+                "man": 14,
+                "hyb": 9,
+                "auto": 2
+              },
+              "uplift": 8
+            },
+            {
+              "name": "VAT",
+              "steps": 27,
+              "before": {
+                "man": 16,
+                "hyb": 9,
+                "auto": 2
+              },
+              "after": {
+                "man": 11,
+                "hyb": 11,
+                "auto": 5
+              },
+              "uplift": 8
+            },
+            {
+              "name": "Withholding Tax",
+              "steps": 25,
+              "before": {
+                "man": 19,
+                "hyb": 3,
+                "auto": 3
+              },
+              "after": {
+                "man": 13,
+                "hyb": 9,
+                "auto": 3
+              },
+              "uplift": 6
+            }
+          ],
+          "total": {
+            "name": "Total",
+            "steps": 77,
+            "before": {
+              "man": 56,
+              "hyb": 15,
+              "auto": 6
+            },
+            "after": {
+              "man": 38,
+              "hyb": 29,
+              "auto": 10
+            },
+            "uplift": 22
+          }
+        }
+      },
+      "activityTypes": {
+        "TAX-02|TAX-02.1|1": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-02|TAX-02.1|2": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-02|TAX-02.1|3": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-02|TAX-02.1|4": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-02|TAX-02.2|1": {
+          "before": "hyb",
+          "after": "hyb"
+        },
+        "TAX-02|TAX-02.2|2": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-02|TAX-02.2|3": {
+          "before": "auto",
+          "after": "auto"
+        },
+        "TAX-02|TAX-02.3|1": {
+          "before": "hyb",
+          "after": "auto"
+        },
+        "TAX-02|TAX-02.3|2": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-02|TAX-02.3|3": {
+          "before": "hyb",
+          "after": "hyb"
+        },
+        "TAX-02|TAX-02.3|4": {
+          "before": "man",
+          "after": "hyb"
+        },
+        "TAX-02|TAX-02.3|5": {
+          "before": "man",
+          "after": "hyb"
+        },
+        "TAX-02|TAX-02.4|1": {
+          "before": "man",
+          "after": "hyb"
+        },
+        "TAX-02|TAX-02.4|2": {
+          "before": "man",
+          "after": "hyb"
+        },
+        "TAX-02|TAX-02.4|3": {
+          "before": "man",
+          "after": "hyb"
+        },
+        "TAX-02|TAX-02.5|1": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-02|TAX-02.5|2": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-02|TAX-02.5|3": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-02|TAX-02.5|4": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-02|TAX-02.6|1": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-02|TAX-02.6|2": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-02|TAX-02.7|1": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-02|TAX-02.7|2": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-02|TAX-02.7|3": {
+          "before": "man",
+          "after": "hyb"
+        },
+        "TAX-02|TAX-02.7|4": {
+          "before": "man",
+          "after": "hyb"
+        },
+        "TAX-03|TAX-03.1|1": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-03|TAX-03.1|2": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-03|TAX-03.1|3": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-03|TAX-03.1|4": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-03|TAX-03.1|5": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-03|TAX-03.2|1": {
+          "before": "hyb",
+          "after": "hyb"
+        },
+        "TAX-03|TAX-03.2|2": {
+          "before": "hyb",
+          "after": "auto"
+        },
+        "TAX-03|TAX-03.2|3": {
+          "before": "hyb",
+          "after": "hyb"
+        },
+        "TAX-03|TAX-03.2|4": {
+          "before": "hyb",
+          "after": "hyb"
+        },
+        "TAX-03|TAX-03.2|5": {
+          "before": "hyb",
+          "after": "hyb"
+        },
+        "TAX-03|TAX-03.2|6": {
+          "before": "auto",
+          "after": "auto"
+        },
+        "TAX-03|TAX-03.3|1": {
+          "before": "auto",
+          "after": "auto"
+        },
+        "TAX-03|TAX-03.3|2": {
+          "before": "hyb",
+          "after": "hyb"
+        },
+        "TAX-03|TAX-03.4|1": {
+          "before": "hyb",
+          "after": "hyb"
+        },
+        "TAX-03|TAX-03.4|2": {
+          "before": "hyb",
+          "after": "auto"
+        },
+        "TAX-03|TAX-03.4|3": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-03|TAX-03.4|4": {
+          "before": "hyb",
+          "after": "auto"
+        },
+        "TAX-03|TAX-03.5|1": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-03|TAX-03.5|2": {
+          "before": "man",
+          "after": "hyb"
+        },
+        "TAX-03|TAX-03.5|3": {
+          "before": "man",
+          "after": "hyb"
+        },
+        "TAX-03|TAX-03.6|1": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-03|TAX-03.6|2": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-03|TAX-03.7|1": {
+          "before": "man",
+          "after": "hyb"
+        },
+        "TAX-03|TAX-03.7|2": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-03|TAX-03.7|3": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-03|TAX-03.7|4": {
+          "before": "man",
+          "after": "hyb"
+        },
+        "TAX-03|TAX-03.7|5": {
+          "before": "man",
+          "after": "hyb"
+        },
+        "TAX-01|TAX-01.1|1": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-01|TAX-01.1|2": {
+          "before": "man",
+          "after": "hyb"
+        },
+        "TAX-01|TAX-01.1|3": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-01|TAX-01.2|1": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-01|TAX-01.2|2": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-01|TAX-01.2|3": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-01|TAX-01.2|4": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-01|TAX-01.2|5": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-01|TAX-01.3|1": {
+          "before": "man",
+          "after": "hyb"
+        },
+        "TAX-01|TAX-01.3|2": {
+          "before": "auto",
+          "after": "auto"
+        },
+        "TAX-01|TAX-01.4|1": {
+          "before": "auto",
+          "after": "auto"
+        },
+        "TAX-01|TAX-01.4|2": {
+          "before": "auto",
+          "after": "auto"
+        },
+        "TAX-01|TAX-01.4|3": {
+          "before": "hyb",
+          "after": "hyb"
+        },
+        "TAX-01|TAX-01.5|1": {
+          "before": "hyb",
+          "after": "hyb"
+        },
+        "TAX-01|TAX-01.5|2": {
+          "before": "man",
+          "after": "hyb"
+        },
+        "TAX-01|TAX-01.5|3": {
+          "before": "man",
+          "after": "hyb"
+        },
+        "TAX-01|TAX-01.5|4": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-01|TAX-01.5|5": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-01|TAX-01.6|1": {
+          "before": "hyb",
+          "after": "hyb"
+        },
+        "TAX-01|TAX-01.6|2": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-01|TAX-01.6|3": {
+          "before": "man",
+          "after": "hyb"
+        },
+        "TAX-01|TAX-01.6|4": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-01|TAX-01.6|5": {
+          "before": "man",
+          "after": "man"
+        },
+        "TAX-01|TAX-01.6|6": {
+          "before": "man",
+          "after": "hyb"
+        },
+        "TAX-01|TAX-01.6|7": {
+          "before": "man",
+          "after": "man"
         }
       }
     },
@@ -4036,12 +5341,12 @@
         "cards": [
           {
             "label": "Process steps mapped",
-            "value": "39",
+            "value": "40",
             "note": "",
             "mix": {
               "man": 27,
               "hyb": 11,
-              "auto": 1
+              "auto": 2
             }
           },
           {
@@ -4064,7 +5369,7 @@
           },
           {
             "label": "Pain points documented",
-            "value": "9",
+            "value": "8",
             "note": "from the R2R feedback workbook (Pain Points sheet)",
             "mix": null
           }
@@ -4099,7 +5404,7 @@
             "before": {
               "man": 6,
               "hyb": 1,
-              "auto": 0
+              "auto": 1
             },
             "after": null
           },
@@ -4129,54 +5434,58 @@
       },
       "tobe": {
         "title": "R2R Process Map · AI suggested",
-        "description": "The same five key processes as the As-Is map. Each step keeps its documented flow and As-Is colour; where Claude sees a practical change within the tools AZ uses (Python, Power Automate, Power BI, Copilot / agent builder) it is marked AI on the step and typed as AI in process improvement or AI in digitalization (click it for the recommendation, tools and basis). Copilot / Agent tags show where a Microsoft 365 Copilot or Agent Builder option could help. AI Opportunity nodes hang off the flows, and the TPI register items are shown as [SOLUTION] nodes on the steps they touch. Everything in blue is a hypothesis to validate with the R2R team and the LT.",
+        "description": "Intercompany transactions close first and R2R monitors the towers' month-end tasks and closes SAP by WD+2; legal entity and intercompany data are loaded into ERH, reconciled to SAP, locked and promoted to GFR by WD+4, from where they roll up into Group Consolidation & Reporting; balance sheet accounts are reconciled in BlackLine by risk rating, certified and approved, then reviewed by Controlling, FP&A Ops and FP&A Comm; the balance sheet integrity packs are signed off by the CFO. Updated for the LT review of 13 Oct 2026 (Min Lee) and the R2R feedback workbook.",
         "meta": [
           {
             "label": "Owner",
-            "value": "R2R with C2C, GFR, IT, Controlling / Embedded Finance, FP&A Ops, FP&A Comm, GPS, the CFO, Global R2R and Digital Delivery"
+            "value": "R2R (SAP close, ERH reporting, BSR preparation) with C2C, GFR, IT, Controlling / Embedded Finance (close review, BSR review, BSI pack), FP&A Ops and FP&A Comm (BSR review), GPS (non-SOX BSI dashboard) and the CFO"
           },
           {
-            "label": "Tools assumed",
-            "value": "SAP, ERH, BlackLine, Power BI, Python, Power Automate, Power Query / Dataflow, Copilot / agent builder, Copilot Studio"
+            "label": "Cadence",
+            "value": "Intercompany close from WD-4; SAP closed by WD+2 5pm; intercompany module locked WD+3; units promoted to GFR by WD+4; BSR WD+4 to WD+17; BSR review WD+16 / WD+18; BSI pack by WD+20"
+          },
+          {
+            "label": "Core systems",
+            "value": "SAP (job-run, OB52, F.01); Nintex; Quantum; MicroStrategy; ERH (SOAR, FDH, FDMEE, Smart View, ICT); Speedy Bot; BlackLine; Power BI; GCC dashboard; Email; Box"
           }
         ],
         "cards": [
           {
             "label": "Process steps (as documented)",
-            "value": "39",
+            "value": "40",
             "note": "",
             "mix": {
               "man": 27,
               "hyb": 11,
-              "auto": 1
+              "auto": 2
             }
           },
           {
             "label": "Steps with higher automation after AI",
-            "value": "8",
-            "note": "of 39 steps · 14 carry an AI recommendation · -9 manual, +6 semi, +3 automated",
+            "value": "9",
+            "note": "of 40 steps · 14 carry an AI recommendation · -9 manual, +5 semi, +4 automated",
             "mix": {
               "man": 18,
-              "hyb": 17,
-              "auto": 4
+              "hyb": 16,
+              "auto": 6
             }
           },
           {
             "label": "Pain points documented",
-            "value": "9",
-            "note": "9 with an AI suggested fix",
+            "value": "8",
+            "note": "8 with an AI suggested fix",
             "mix": null
           },
           {
             "label": "AI opportunity nodes",
-            "value": "7",
-            "note": "5 on flows · 2 at key-process level",
+            "value": "5",
+            "note": "4 on flows · 1 at key-process level",
             "mix": null
           },
           {
             "label": "TPI register items",
             "value": "45",
-            "note": "9 shown on the map · Coupa Accrual Reports and Payroll Interface registers (Jul-Aug 2026)",
+            "note": "0 shown on the map · Coupa Accrual Reports and Payroll Interface registers (Jul-Aug 2026)",
             "mix": null
           }
         ],
@@ -4192,8 +5501,8 @@
             },
             "after": {
               "man": 2,
-              "hyb": 7,
-              "auto": 1
+              "hyb": 6,
+              "auto": 2
             }
           },
           "R2R-02": {
@@ -4218,11 +5527,11 @@
             "before": {
               "man": 6,
               "hyb": 1,
-              "auto": 0
+              "auto": 1
             },
             "after": {
               "man": 4,
-              "hyb": 2,
+              "hyb": 3,
               "auto": 1
             }
           },
@@ -4269,13 +5578,13 @@
             "window": "WD-9 to WD+2 · intercompany close from WD-4, SAP closed by WD+2 5pm",
             "flows": [
               {
-                "name": "Flow 1 - Intercompany Month-End Close (8.3.2.51)",
                 "id": "R2R-01.1",
+                "name": "Flow 1 - Intercompany Month-End Close (8.3.2.51)",
                 "reference": "R2R-01.1"
               },
               {
-                "name": "Flow 2 - Complete Month-End ERP Close (8.3.2.8)",
                 "id": "R2R-01.2",
+                "name": "Flow 2 - Complete Month-End ERP Close (8.3.2.8)",
                 "reference": "R2R-01.2"
               }
             ]
@@ -4289,13 +5598,13 @@
             "window": "WD+2 to WD+4 · intercompany module locked by WD+3, units promoted to GFR by WD+4",
             "flows": [
               {
-                "name": "Flow 1 - Prepare Legal Entity Financial Statements (8.3.4.1)",
                 "id": "R2R-02.1",
+                "name": "Flow 1 - Prepare Legal Entity Financial Statements (8.3.4.1)",
                 "reference": "R2R-02.1"
               },
               {
-                "name": "Flow 2 - Intercompany ERH Reporting (8.3.2.52)",
                 "id": "R2R-02.2",
+                "name": "Flow 2 - Intercompany ERH Reporting (8.3.2.52)",
                 "reference": "R2R-02.2"
               }
             ]
@@ -4309,13 +5618,13 @@
             "window": "WD+4 to WD+17 · balances load daily to BlackLine (last load WD+9)",
             "flows": [
               {
-                "name": "Flow 1 - Reconcile GL and Sub-Ledger Accounts (8.3.2.30 and 8.3.2.31)",
                 "id": "R2R-03.1",
+                "name": "Flow 1 - Reconcile GL and Sub-Ledger Accounts (8.3.2.30 and 8.3.2.31)",
                 "reference": "R2R-03.1"
               },
               {
-                "name": "Flow 2 - Resolve Reconciliation Actions (8.3.2.33)",
                 "id": "R2R-03.2",
+                "name": "Flow 2 - Resolve Reconciliation Actions (8.3.2.33)",
                 "reference": "R2R-03.2"
               }
             ]
@@ -4329,8 +5638,8 @@
             "window": "WD+16 SOX, WD+18 non-SOX",
             "flows": [
               {
-                "name": "Flow 1 - Perform Management Review (8.3.2.34)",
                 "id": "R2R-04.1",
+                "name": "Flow 1 - Perform Management Review (8.3.2.34)",
                 "reference": "R2R-04.1"
               }
             ]
@@ -4344,23 +5653,21 @@
             "window": "WD+17 to WD+20",
             "flows": [
               {
-                "name": "Flow 1 - BSI Review, Non-SOX (Power BI) (8.3.2.35.1)",
                 "id": "R2R-05.1",
+                "name": "Flow 1 - BSI Review, Non-SOX (Power BI) (8.3.2.35.1)",
                 "reference": "R2R-05.1"
               },
               {
-                "name": "Flow 2 - BSI Review, SOX Non-Hubs (8.3.2.35.3)",
                 "id": "R2R-05.2",
+                "name": "Flow 2 - BSI Review, SOX Non-Hubs (8.3.2.35.3)",
                 "reference": "R2R-05.2"
               }
             ]
           }
         ],
         "comparison": {
-          "rule": "Before = As-Is. After applies the proposed Enhanced level for Can be explored, Potential future opportunity and Under review. Implemented, Not feasible and Not relevant remain at As-Is and do not count as uplift. Under review remains unapproved.",
           "rows": [
             {
-              "id": "R2R-01",
               "name": "SAP Close",
               "steps": 10,
               "before": {
@@ -4370,13 +5677,12 @@
               },
               "after": {
                 "man": 2,
-                "hyb": 7,
-                "auto": 1
+                "hyb": 6,
+                "auto": 2
               },
-              "uplift": 1
+              "uplift": 2
             },
             {
-              "id": "R2R-02",
               "name": "ERH Reporting",
               "steps": 9,
               "before": {
@@ -4392,23 +5698,21 @@
               "uplift": 3
             },
             {
-              "id": "R2R-03",
               "name": "BSR Preparation and Approval",
-              "steps": 7,
+              "steps": 8,
               "before": {
                 "man": 6,
                 "hyb": 1,
-                "auto": 0
+                "auto": 1
               },
               "after": {
                 "man": 4,
                 "hyb": 2,
-                "auto": 1
+                "auto": 2
               },
               "uplift": 2
             },
             {
-              "id": "R2R-04",
               "name": "BSR Review (Management Review)",
               "steps": 4,
               "before": {
@@ -4424,7 +5728,6 @@
               "uplift": 1
             },
             {
-              "id": "R2R-05",
               "name": "Balance Sheet Integrity Pack",
               "steps": 9,
               "before": {
@@ -4442,20 +5745,19 @@
           ],
           "total": {
             "name": "Total",
-            "steps": 39,
+            "steps": 40,
             "before": {
               "man": 27,
               "hyb": 11,
-              "auto": 1
+              "auto": 2
             },
             "after": {
               "man": 21,
-              "hyb": 14,
-              "auto": 4
+              "hyb": 13,
+              "auto": 6
             },
-            "uplift": 8
-          },
-          "note": "Manual 27 → 21 (-6) · Semi-automated 11 → 14 (+3) · Automated 1 → 4 (+3). M = manual, S = semi-automated, A = automated."
+            "uplift": 9
+          }
         }
       },
       "activityTypes": {
@@ -4477,7 +5779,7 @@
         },
         "R2R-01|R2R-01.1|5": {
           "before": "hyb",
-          "after": "hyb"
+          "after": "auto"
         },
         "R2R-01|R2R-01.2|1": {
           "before": "hyb",
@@ -4536,20 +5838,24 @@
           "after": "man"
         },
         "R2R-03|R2R-03.1|1": {
-          "before": "hyb",
-          "after": "hyb"
+          "before": "auto",
+          "after": "auto"
         },
         "R2R-03|R2R-03.1|2": {
-          "before": "man",
-          "after": "man"
+          "before": "hyb",
+          "after": "hyb"
         },
         "R2R-03|R2R-03.1|3": {
           "before": "man",
           "after": "man"
         },
+        "R2R-03|R2R-03.1|4": {
+          "before": "man",
+          "after": "man"
+        },
         "R2R-03|R2R-03.2|1": {
           "before": "man",
-          "after": "auto"
+          "after": "hyb"
         },
         "R2R-03|R2R-03.2|2": {
           "before": "man",
@@ -4698,7 +6004,7 @@
       },
       "tobe": {
         "title": "Controlling Process Map · AI suggested",
-        "description": "The same two key processes as the As-Is map. Each step keeps its documented flow; where Claude sees a practical automation, digitalisation or AI change it is marked AI on the step (click it for the recommendation, tools, basis and the register items it rests on), AI Opportunity nodes hang off the flows, and the register items that already have a status in the workbook are shown as [SOLUTION] nodes on the steps they touch. The feasibility shown on a Claude suggestion is the workbook status of the register item it builds on; where the suggestion is Claude's own it stays Under Review.",
+        "description": "Two questions for the visitor: how does GFS Controlling make sure every judgmental manual journal posted in the month-end close is needed, GSOP-compliant, approved and reviewed in the management P&L, and how does it get the statutory audit from planning to filed accounts across all the process towers each year? The answer is the journey below - the Business requests, Embedded Finance approves the cost, the GFS Controller checks the GSOP and posts in BlackLine, the GFS Manager approves and GFS FP&A reviews the P&L; the audit runs from planning and walkthroughs through PBC evidence, fieldwork, financial statement review and P13 adjustments to statutory filing. Pain points and TPI 2026 initiatives are shown where Controlling recorded them.",
         "meta": [
           {
             "label": "Owner",
@@ -4722,12 +6028,12 @@
           },
           {
             "label": "Steps with higher automation after AI",
-            "value": "6",
-            "note": "of 14 steps · 14 carry an AI recommendation · -6 manual, +6 semi, +0 automated",
+            "value": "13",
+            "note": "of 14 steps · 14 carry an AI recommendation · -11 manual, +9 semi, +2 automated",
             "mix": {
-              "man": 6,
-              "hyb": 8,
-              "auto": 0
+              "man": 1,
+              "hyb": 11,
+              "auto": 2
             }
           },
           {
@@ -4760,9 +6066,9 @@
               "auto": 0
             },
             "after": {
-              "man": 0,
-              "hyb": 7,
-              "auto": 0
+              "man": 1,
+              "hyb": 5,
+              "auto": 1
             }
           },
           "CTRL-02": {
@@ -4775,9 +6081,9 @@
               "auto": 0
             },
             "after": {
-              "man": 6,
-              "hyb": 1,
-              "auto": 0
+              "man": 0,
+              "hyb": 6,
+              "auto": 1
             }
           }
         }
@@ -4793,8 +6099,8 @@
             "window": "Month-end close · Manual · BlackLine, SAP, Email",
             "flows": [
               {
-                "name": "Manual Journal Request (MJV)",
                 "id": "CTRL-01.01",
+                "name": "Manual Journal Request (MJV)",
                 "reference": "CTRL-01.01"
               }
             ]
@@ -4808,18 +6114,16 @@
             "window": "Annual · Manual · KPMG Clara / KCC, Wdesk / Workiva, Email, SAP (P13)",
             "flows": [
               {
-                "name": "Statutory audit end-to-end (seven sub-processes)",
                 "id": "CTRL-02.01",
+                "name": "Statutory audit end-to-end (seven sub-processes)",
                 "reference": "CTRL-02.01"
               }
             ]
           }
         ],
         "comparison": {
-          "rule": "Before = As-Is. After applies the proposed Enhanced level for Can be explored, Potential future opportunity and Under review. Implemented, Not feasible and Not relevant remain at As-Is and do not count as uplift. Under review remains unapproved.",
           "rows": [
             {
-              "id": "CTRL-01",
               "name": "Manual Journal Preparation (MJV)",
               "steps": 7,
               "before": {
@@ -4828,14 +6132,13 @@
                 "auto": 0
               },
               "after": {
-                "man": 0,
-                "hyb": 7,
-                "auto": 0
+                "man": 1,
+                "hyb": 5,
+                "auto": 1
               },
               "uplift": 6
             },
             {
-              "id": "CTRL-02",
               "name": "Statutory Reporting & Audit",
               "steps": 7,
               "before": {
@@ -4844,11 +6147,11 @@
                 "auto": 0
               },
               "after": {
-                "man": 6,
-                "hyb": 1,
-                "auto": 0
+                "man": 0,
+                "hyb": 6,
+                "auto": 1
               },
-              "uplift": 0
+              "uplift": 7
             }
           ],
           "total": {
@@ -4860,13 +6163,12 @@
               "auto": 0
             },
             "after": {
-              "man": 6,
-              "hyb": 8,
-              "auto": 0
+              "man": 1,
+              "hyb": 11,
+              "auto": 2
             },
-            "uplift": 6
-          },
-          "note": "Manual 12 → 6 (-6) · Semi-automated 2 → 8 (+6) · Automated 0 → 0 (0). M = manual, S = semi-automated, A = automated."
+            "uplift": 13
+          }
         }
       },
       "activityTypes": {
@@ -4888,11 +6190,11 @@
         },
         "CTRL-01|CTRL-01.01|4": {
           "before": "hyb",
-          "after": "hyb"
+          "after": "auto"
         },
         "CTRL-01|CTRL-01.01|5": {
           "before": "man",
-          "after": "hyb"
+          "after": "man"
         },
         "CTRL-01|CTRL-01.01|6": {
           "before": "man",
@@ -4900,1387 +6202,31 @@
         },
         "CTRL-02|CTRL-02.01|1": {
           "before": "man",
-          "after": "man"
+          "after": "hyb"
         },
         "CTRL-02|CTRL-02.01|2": {
           "before": "man",
-          "after": "man"
+          "after": "hyb"
         },
         "CTRL-02|CTRL-02.01|3": {
           "before": "man",
-          "after": "man"
+          "after": "hyb"
         },
         "CTRL-02|CTRL-02.01|4": {
           "before": "man",
-          "after": "man"
+          "after": "hyb"
         },
         "CTRL-02|CTRL-02.01|5": {
           "before": "hyb",
-          "after": "hyb"
+          "after": "auto"
         },
         "CTRL-02|CTRL-02.01|6": {
           "before": "man",
-          "after": "man"
+          "after": "hyb"
         },
         "CTRL-02|CTRL-02.01|7": {
           "before": "man",
-          "after": "man"
-        }
-      }
-    },
-    "TAX": {
-      "asis": {
-        "title": "Tax As-Is Process Map",
-        "description": "End-to-end compliance covering CIT, VAT and WHT, from source transactions and financial close through tax determination, review, approval, filing and payment.",
-        "meta": [
-          {
-            "label": "Owner",
-            "value": "Tax Delivery Team (TDT) with Deloitte (OSP), Financial Controller / CFC, CFO, P2P, O2C (Cash & Banking), R2R, Controlling, CAPEX and DMT"
-          },
-          {
-            "label": "Cadence",
-            "value": "WHT monthly (21st) and annual (31 Oct); CIT annual (PAYG monthly, balance 31 May); VAT monthly (20th)"
-          },
-          {
-            "label": "Core systems",
-            "value": "ASIA SAP; Coupa / Kofax OCR; Intela; CROWN; FPT e-invoice portal; e-tax portal; TRT (LongView); ERH; BlackLine; Excel"
-          }
-        ],
-        "cards": [
-          {
-            "label": "Process steps mapped",
-            "value": "77",
-            "note": "",
-            "mix": {
-              "man": 56,
-              "hyb": 15,
-              "auto": 6
-            }
-          },
-          {
-            "label": "Key processes · flows",
-            "value": "3 · 20",
-            "note": "as documented in the Tax SOPs and current-state maps (Sep–Oct 2026)",
-            "mix": null
-          },
-          {
-            "label": "Decision points",
-            "value": "9",
-            "note": "approval, validation and completeness checks in the flows",
-            "mix": null
-          },
-          {
-            "label": "Handoffs documented",
-            "value": "16",
-            "note": "to and from other towers and parties",
-            "mix": null
-          },
-          {
-            "label": "Pain points documented",
-            "value": "9",
-            "note": "reviewed with the LT · more to be shared",
-            "mix": null
-          }
-        ],
-        "nodes": {
-          "TAX-02": {
-            "description": "Tax year January–December · PAYG instalments by the 20th, balancing payment by 31 May · Intela, ASIA SAP, CROWN, LongView",
-            "owner": "Tax (TDT) with Deloitte (OSP), Controlling, Financial Controller and the CFO",
-            "systems": "7 flows · TAX-02",
-            "before": {
-              "man": 21,
-              "hyb": 3,
-              "auto": 1
-            },
-            "after": null
-          },
-          "TAX-03": {
-            "description": "Monthly · return and payment due 20th of the following month · ASIA SAP, Coupa, FPT e-invoice, Intela, CROWN",
-            "owner": "P2P, O2C, R2R, Tax (TDT) with Deloitte Vietnam (OSP), CFC and CFO",
-            "systems": "7 flows · TAX-03",
-            "before": {
-              "man": 16,
-              "hyb": 9,
-              "auto": 2
-            },
-            "after": null
-          },
-          "TAX-01": {
-            "description": "Monthly remittance by the 21st, extract at WD+2 · Annual return July–June by 31 October · ASIA SAP, Coupa, CROWN",
-            "owner": "P2P, Tax (TDT), O2C (Cash & Banking), Financial Controller and CFO",
-            "systems": "6 flows · TAX-01",
-            "before": {
-              "man": 19,
-              "hyb": 3,
-              "auto": 3
-            },
-            "after": null
-          }
-        }
-      },
-      "tobe": {
-        "title": "Tax Process Map · AI suggested",
-        "description": "End-to-end compliance covering CIT, VAT and WHT, from source transactions and financial close through tax determination, review, approval, filing and payment.",
-        "meta": [
-          {
-            "label": "Owner",
-            "value": "Tax Delivery Team (TDT) with Deloitte (OSP), Financial Controller / CFC, CFO, P2P, O2C, R2R, Controlling, CAPEX, DMT, Group IT and Global Digital"
-          },
-          {
-            "label": "Tools assumed",
-            "value": "ASIA SAP, Coupa, Intela, CROWN, TRT (LongView), ERH, BlackLine, Tax GL Analyzer (Group IT), Python, Power Automate, Power Apps, Power BI, Copilot / agent builder, SharePoint"
-          }
-        ],
-        "cards": [
-          {
-            "label": "Process steps (as documented)",
-            "value": "77",
-            "note": "",
-            "mix": {
-              "man": 56,
-              "hyb": 15,
-              "auto": 6
-            }
-          },
-          {
-            "label": "Steps with higher automation after AI",
-            "value": "18",
-            "note": "of 77 steps · 23 carry an AI recommendation · -18 manual, +18 semi, +0 automated",
-            "mix": {
-              "man": 38,
-              "hyb": 33,
-              "auto": 6
-            }
-          },
-          {
-            "label": "Pain points documented",
-            "value": "9",
-            "note": "4 with an AI suggested fix · draft, to be validated",
-            "mix": null
-          },
-          {
-            "label": "AI opportunity nodes",
-            "value": "12",
-            "note": "9 on flows · 3 at key-process level",
-            "mix": null
-          },
-          {
-            "label": "TPI register items",
-            "value": "2",
-            "note": "shown on the map · 2027 TPIs only",
-            "mix": null
-          }
-        ],
-        "nodes": {
-          "TAX-02": {
-            "description": "Tax year January–December · PAYG instalments by the 20th, balancing payment by 31 May · Intela, ASIA SAP, CROWN, LongView",
-            "owner": "Tax (TDT) with Deloitte (OSP), Controlling, Financial Controller and the CFO",
-            "systems": "7 flows · TAX-02",
-            "before": {
-              "man": 21,
-              "hyb": 3,
-              "auto": 1
-            },
-            "after": {
-              "man": 14,
-              "hyb": 10,
-              "auto": 1
-            }
-          },
-          "TAX-03": {
-            "description": "Monthly · return and payment due 20th of the following month · ASIA SAP, Coupa, FPT e-invoice, Intela, CROWN",
-            "owner": "P2P, O2C, R2R, Tax (TDT) with Deloitte Vietnam (OSP), CFC and CFO",
-            "systems": "7 flows · TAX-03",
-            "before": {
-              "man": 16,
-              "hyb": 9,
-              "auto": 2
-            },
-            "after": {
-              "man": 11,
-              "hyb": 14,
-              "auto": 2
-            }
-          },
-          "TAX-01": {
-            "description": "Monthly remittance by the 21st, extract at WD+2 · Annual return July–June by 31 October · ASIA SAP, Coupa, CROWN",
-            "owner": "P2P, Tax (TDT), O2C (Cash & Banking), Financial Controller and CFO",
-            "systems": "6 flows · TAX-01",
-            "before": {
-              "man": 19,
-              "hyb": 3,
-              "auto": 3
-            },
-            "after": {
-              "man": 13,
-              "hyb": 9,
-              "auto": 3
-            }
-          }
-        }
-      },
-      "dashboard": {
-        "processes": [
-          {
-            "id": "TAX-02",
-            "name": "Corporate Income Tax",
-            "controls": "",
-            "description": "Starts with Business transactions through the year | Produces RTP in LongView; reconciled tax balances",
-            "owner": "Tax (TDT) with Deloitte (OSP), Controlling, Financial Controller and the CFO",
-            "window": "Tax year January–December · PAYG instalments by the 20th, balancing payment by 31 May · Intela, ASIA SAP, CROWN, LongView",
-            "flows": [
-              {
-                "name": "Phase 1 - Business inputs",
-                "id": "TAX-02.1",
-                "reference": "TAX-02.1"
-              },
-              {
-                "name": "Phase 2 - Financial close",
-                "id": "TAX-02.2",
-                "reference": "TAX-02.2"
-              },
-              {
-                "name": "Phase 3 - Tax Data Gathering & Analysis",
-                "id": "TAX-02.3",
-                "reference": "TAX-02.3"
-              },
-              {
-                "name": "Phase 4 - Computation and review",
-                "id": "TAX-02.4",
-                "reference": "TAX-02.4"
-              },
-              {
-                "name": "Phase 5 - Disclosures, presentation and filing",
-                "id": "TAX-02.5",
-                "reference": "TAX-02.5"
-              },
-              {
-                "name": "Phase 6 - Tax payment",
-                "id": "TAX-02.6",
-                "reference": "TAX-02.6"
-              },
-              {
-                "name": "Phase 7 - Post-filing and reporting",
-                "id": "TAX-02.7",
-                "reference": "TAX-02.7"
-              }
-            ]
-          },
-          {
-            "id": "TAX-03",
-            "name": "VAT",
-            "controls": "",
-            "description": "Starts with Tax codes, VAT registration and customer / vendor tax classification maintained | Produces Payment confirmation; adjustment entries; VAT balances reconciled",
-            "owner": "P2P, O2C, R2R, Tax (TDT) with Deloitte Vietnam (OSP), CFC and CFO",
-            "window": "Monthly · return and payment due 20th of the following month · ASIA SAP, Coupa, FPT e-invoice, Intela, CROWN",
-            "flows": [
-              {
-                "name": "Phase 1 - Tax master data and origination",
-                "id": "TAX-03.1",
-                "reference": "TAX-03.1"
-              },
-              {
-                "name": "Phase 2 - Transaction processing and VAT posting",
-                "id": "TAX-03.2",
-                "reference": "TAX-03.2"
-              },
-              {
-                "name": "Phase 3 - VAT accounting and close",
-                "id": "TAX-03.3",
-                "reference": "TAX-03.3"
-              },
-              {
-                "name": "Phase 4 - VAT Data Gathering & Analysis",
-                "id": "TAX-03.4",
-                "reference": "TAX-03.4"
-              },
-              {
-                "name": "Phase 5 - Return preparation and review",
-                "id": "TAX-03.5",
-                "reference": "TAX-03.5"
-              },
-              {
-                "name": "Phase 6 - Approval and filing",
-                "id": "TAX-03.6",
-                "reference": "TAX-03.6"
-              },
-              {
-                "name": "Phase 7 - Payment and post-filing",
-                "id": "TAX-03.7",
-                "reference": "TAX-03.7"
-              }
-            ]
-          },
-          {
-            "id": "TAX-01",
-            "name": "Withholding Tax",
-            "controls": "",
-            "description": "Starts with Supplier onboarding: ABN, tax residency, treaty or exemption documents | Produces Signed annual WHT form lodged with the ATO by 31 October",
-            "owner": "P2P, Tax (TDT), O2C (Cash & Banking), Financial Controller and CFO",
-            "window": "Monthly remittance by the 21st, extract at WD+2 · Annual return July–June by 31 October · ASIA SAP, Coupa, CROWN",
-            "flows": [
-              {
-                "name": "Phase 1 - Supplier onboarding and purchasing",
-                "id": "TAX-01.1",
-                "reference": "TAX-01.1"
-              },
-              {
-                "name": "Phase 2 - Invoice receipt and verification",
-                "id": "TAX-01.2",
-                "reference": "TAX-01.2"
-              },
-              {
-                "name": "Phase 3 - WHT review and posting",
-                "id": "TAX-01.3",
-                "reference": "TAX-01.3"
-              },
-              {
-                "name": "Phase 4 - Supplier payment and close",
-                "id": "TAX-01.4",
-                "reference": "TAX-01.4"
-              },
-              {
-                "name": "Phase 5 - Monthly WHT remittance",
-                "id": "TAX-01.5",
-                "reference": "TAX-01.5"
-              },
-              {
-                "name": "Phase 6 - Annual WHT filing",
-                "id": "TAX-01.6",
-                "reference": "TAX-01.6"
-              }
-            ]
-          }
-        ],
-        "comparison": {
-          "rule": "Before = As-Is. After applies the proposed Enhanced level for Can be explored, Potential future opportunity and Under review. Implemented, Not feasible and Not relevant remain at As-Is and do not count as uplift. Under review remains unapproved.",
-          "rows": [
-            {
-              "id": "TAX-02",
-              "name": "Corporate Income Tax",
-              "steps": 25,
-              "before": {
-                "man": 21,
-                "hyb": 3,
-                "auto": 1
-              },
-              "after": {
-                "man": 14,
-                "hyb": 10,
-                "auto": 1
-              },
-              "uplift": 7
-            },
-            {
-              "id": "TAX-03",
-              "name": "VAT",
-              "steps": 27,
-              "before": {
-                "man": 16,
-                "hyb": 9,
-                "auto": 2
-              },
-              "after": {
-                "man": 11,
-                "hyb": 14,
-                "auto": 2
-              },
-              "uplift": 5
-            },
-            {
-              "id": "TAX-01",
-              "name": "Withholding Tax",
-              "steps": 25,
-              "before": {
-                "man": 19,
-                "hyb": 3,
-                "auto": 3
-              },
-              "after": {
-                "man": 13,
-                "hyb": 9,
-                "auto": 3
-              },
-              "uplift": 6
-            }
-          ],
-          "total": {
-            "name": "Total",
-            "steps": 77,
-            "before": {
-              "man": 56,
-              "hyb": 15,
-              "auto": 6
-            },
-            "after": {
-              "man": 38,
-              "hyb": 33,
-              "auto": 6
-            },
-            "uplift": 18
-          },
-          "note": "Manual 56 → 38 (-18) · Semi-automated 15 → 33 (+18) · Automated 6 → 6 (0). M = manual, S = semi-automated, A = automated."
-        }
-      },
-      "activityTypes": {
-        "TAX-02|TAX-02.1|1": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-02|TAX-02.1|2": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-02|TAX-02.1|3": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-02|TAX-02.1|4": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-02|TAX-02.2|1": {
-          "before": "hyb",
           "after": "hyb"
-        },
-        "TAX-02|TAX-02.2|2": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-02|TAX-02.2|3": {
-          "before": "auto",
-          "after": "auto"
-        },
-        "TAX-02|TAX-02.3|1": {
-          "before": "hyb",
-          "after": "hyb"
-        },
-        "TAX-02|TAX-02.3|2": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-02|TAX-02.3|3": {
-          "before": "hyb",
-          "after": "hyb"
-        },
-        "TAX-02|TAX-02.3|4": {
-          "before": "man",
-          "after": "hyb"
-        },
-        "TAX-02|TAX-02.3|5": {
-          "before": "man",
-          "after": "hyb"
-        },
-        "TAX-02|TAX-02.4|1": {
-          "before": "man",
-          "after": "hyb"
-        },
-        "TAX-02|TAX-02.4|2": {
-          "before": "man",
-          "after": "hyb"
-        },
-        "TAX-02|TAX-02.4|3": {
-          "before": "man",
-          "after": "hyb"
-        },
-        "TAX-02|TAX-02.5|1": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-02|TAX-02.5|2": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-02|TAX-02.5|3": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-02|TAX-02.5|4": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-02|TAX-02.6|1": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-02|TAX-02.6|2": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-02|TAX-02.7|1": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-02|TAX-02.7|2": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-02|TAX-02.7|3": {
-          "before": "man",
-          "after": "hyb"
-        },
-        "TAX-02|TAX-02.7|4": {
-          "before": "man",
-          "after": "hyb"
-        },
-        "TAX-03|TAX-03.1|1": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-03|TAX-03.1|2": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-03|TAX-03.1|3": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-03|TAX-03.1|4": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-03|TAX-03.1|5": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-03|TAX-03.2|1": {
-          "before": "hyb",
-          "after": "hyb"
-        },
-        "TAX-03|TAX-03.2|2": {
-          "before": "hyb",
-          "after": "hyb"
-        },
-        "TAX-03|TAX-03.2|3": {
-          "before": "hyb",
-          "after": "hyb"
-        },
-        "TAX-03|TAX-03.2|4": {
-          "before": "hyb",
-          "after": "hyb"
-        },
-        "TAX-03|TAX-03.2|5": {
-          "before": "hyb",
-          "after": "hyb"
-        },
-        "TAX-03|TAX-03.2|6": {
-          "before": "auto",
-          "after": "auto"
-        },
-        "TAX-03|TAX-03.3|1": {
-          "before": "auto",
-          "after": "auto"
-        },
-        "TAX-03|TAX-03.3|2": {
-          "before": "hyb",
-          "after": "hyb"
-        },
-        "TAX-03|TAX-03.4|1": {
-          "before": "hyb",
-          "after": "hyb"
-        },
-        "TAX-03|TAX-03.4|2": {
-          "before": "hyb",
-          "after": "hyb"
-        },
-        "TAX-03|TAX-03.4|3": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-03|TAX-03.4|4": {
-          "before": "hyb",
-          "after": "hyb"
-        },
-        "TAX-03|TAX-03.5|1": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-03|TAX-03.5|2": {
-          "before": "man",
-          "after": "hyb"
-        },
-        "TAX-03|TAX-03.5|3": {
-          "before": "man",
-          "after": "hyb"
-        },
-        "TAX-03|TAX-03.6|1": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-03|TAX-03.6|2": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-03|TAX-03.7|1": {
-          "before": "man",
-          "after": "hyb"
-        },
-        "TAX-03|TAX-03.7|2": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-03|TAX-03.7|3": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-03|TAX-03.7|4": {
-          "before": "man",
-          "after": "hyb"
-        },
-        "TAX-03|TAX-03.7|5": {
-          "before": "man",
-          "after": "hyb"
-        },
-        "TAX-01|TAX-01.1|1": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-01|TAX-01.1|2": {
-          "before": "man",
-          "after": "hyb"
-        },
-        "TAX-01|TAX-01.1|3": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-01|TAX-01.2|1": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-01|TAX-01.2|2": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-01|TAX-01.2|3": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-01|TAX-01.2|4": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-01|TAX-01.2|5": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-01|TAX-01.3|1": {
-          "before": "man",
-          "after": "hyb"
-        },
-        "TAX-01|TAX-01.3|2": {
-          "before": "auto",
-          "after": "auto"
-        },
-        "TAX-01|TAX-01.4|1": {
-          "before": "auto",
-          "after": "auto"
-        },
-        "TAX-01|TAX-01.4|2": {
-          "before": "auto",
-          "after": "auto"
-        },
-        "TAX-01|TAX-01.4|3": {
-          "before": "hyb",
-          "after": "hyb"
-        },
-        "TAX-01|TAX-01.5|1": {
-          "before": "hyb",
-          "after": "hyb"
-        },
-        "TAX-01|TAX-01.5|2": {
-          "before": "man",
-          "after": "hyb"
-        },
-        "TAX-01|TAX-01.5|3": {
-          "before": "man",
-          "after": "hyb"
-        },
-        "TAX-01|TAX-01.5|4": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-01|TAX-01.5|5": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-01|TAX-01.6|1": {
-          "before": "hyb",
-          "after": "hyb"
-        },
-        "TAX-01|TAX-01.6|2": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-01|TAX-01.6|3": {
-          "before": "man",
-          "after": "hyb"
-        },
-        "TAX-01|TAX-01.6|4": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-01|TAX-01.6|5": {
-          "before": "man",
-          "after": "man"
-        },
-        "TAX-01|TAX-01.6|6": {
-          "before": "man",
-          "after": "hyb"
-        },
-        "TAX-01|TAX-01.6|7": {
-          "before": "man",
-          "after": "man"
-        }
-      }
-    },
-    "O2C": {
-      "asis": {
-        "title": "Order to Cash As-Is Process Map",
-        "description": "Convert distributor EDI sales, customer purchase orders, returns and rebates into valid SAP sales orders or credit notes, then release blocked orders, bill them and collect payment; apply the cash received to customer accounts in High Radius, run outgoing payments and post the bank statements through to the bank reconciliation in BlackLine, handed to R2R Reporting for month-end close.",
-        "meta": [
-          {
-            "label": "Owner",
-            "value": "O2C Sales Order, Order Release, Credit Risk, Billing, Collection, Cash Application and Cash & Banking teams"
-          },
-          {
-            "label": "Cadence",
-            "value": "Daily; monthly SOA and reminders"
-          },
-          {
-            "label": "Core systems",
-            "value": "SAP; High Radius Collection Cloud and Cash Application; Crown; FIS Payment Hub; bank portals; BlackLine; local e-invoicing portals"
-          }
-        ],
-        "cards": [
-          {
-            "label": "Process steps mapped",
-            "value": "37",
-            "note": "",
-            "mix": {
-              "man": 12,
-              "hyb": 15,
-              "auto": 10
-            }
-          },
-          {
-            "label": "Key processes · processes",
-            "value": "6 · 10",
-            "note": "as documented with the O2C teams (register Oct 2026)",
-            "mix": null
-          },
-          {
-            "label": "Decision points",
-            "value": "17",
-            "note": "approval, validation and completeness checks in the E2E",
-            "mix": null
-          },
-          {
-            "label": "Handoffs documented",
-            "value": "30",
-            "note": "to and from other towers and parties",
-            "mix": null
-          },
-          {
-            "label": "Pain points documented",
-            "value": "19",
-            "note": "step-level, from the O2C walkthrough and register (Oct 2026)",
-            "mix": null
-          }
-        ],
-        "nodes": {
-          "SOC-01": {
-            "description": "SAP processes the distributor EDI file; customer POs, returns and rebates are entered in SAP and credit-checked.",
-            "owner": "O2C",
-            "systems": "SAP",
-            "before": {
-              "man": 2,
-              "hyb": 3,
-              "auto": 2
-            },
-            "after": null
-          },
-          "SOC-02": {
-            "description": "Orders held by the credit check are reviewed and approved for release.",
-            "owner": "O2C",
-            "systems": "SAP; High Radius",
-            "before": {
-              "man": 3,
-              "hyb": 1,
-              "auto": 1
-            },
-            "after": null
-          },
-          "SOC-03": {
-            "description": "Delivery posts the PGI, billing is released and invoices, credit notes and e-invoices are sent.",
-            "owner": "O2C",
-            "systems": "SAP; local e-invoicing portals",
-            "before": {
-              "man": 0,
-              "hyb": 3,
-              "auto": 2
-            },
-            "after": null
-          },
-          "SOC-04": {
-            "description": "SOA, reminders and payment chasing with escalation; disputes and deductions are resolved.",
-            "owner": "O2C",
-            "systems": "High Radius Collection Cloud; SAP",
-            "before": {
-              "man": 2,
-              "hyb": 4,
-              "auto": 0
-            },
-            "after": null
-          },
-          "SOC-05": {
-            "description": "Bank statements are matched to invoices in High Radius and the output file is posted to SAP.",
-            "owner": "O2C",
-            "systems": "High Radius Cash Application; SAP",
-            "before": {
-              "man": 1,
-              "hyb": 0,
-              "auto": 3
-            },
-            "after": null
-          },
-          "SOC-06": {
-            "description": "Outgoing payments, bank statement posting, open-item clearing and bank reconciliation.",
-            "owner": "O2C",
-            "systems": "SAP; Crown; FIS Payment Hub; BlackLine",
-            "before": {
-              "man": 4,
-              "hyb": 4,
-              "auto": 2
-            },
-            "after": null
-          }
-        }
-      },
-      "tobe": {
-        "title": "Order to Cash Process Map · AI suggested",
-        "description": "Convert distributor EDI sales, customer purchase orders, returns and rebates into valid SAP sales orders or credit notes, then release blocked orders, bill them and collect payment; apply the cash received to customer accounts in High Radius, run outgoing payments and post the bank statements through to the bank reconciliation in BlackLine, handed to R2R Reporting for month-end close.",
-        "meta": [
-          {
-            "label": "Owner",
-            "value": "O2C Sales Order, Order Release, Credit Risk, Billing, Collection, Cash Application and Cash & Banking teams"
-          },
-          {
-            "label": "Systems",
-            "value": "SAP, High Radius, Crown / ServiceNow, FIS Payment Hub, BlackLine API, Python, Power Automate, Power BI, AI document extraction"
-          }
-        ],
-        "cards": [
-          {
-            "label": "Process steps (as documented)",
-            "value": "37",
-            "note": "",
-            "mix": {
-              "man": 12,
-              "hyb": 15,
-              "auto": 10
-            }
-          },
-          {
-            "label": "Steps with higher automation after AI",
-            "value": "4",
-            "note": "of 37 steps · 19 carry an AI recommendation · -1 manual, -2 semi, +3 automated",
-            "mix": {
-              "man": 11,
-              "hyb": 13,
-              "auto": 13
-            }
-          },
-          {
-            "label": "Pain points documented",
-            "value": "19",
-            "note": "19 with an AI suggested fix",
-            "mix": null
-          },
-          {
-            "label": "AI opportunity nodes",
-            "value": "7",
-            "note": "4 on flows · 3 at phase level",
-            "mix": null
-          },
-          {
-            "label": "TPI / CI initiatives linked",
-            "value": "6 · 24",
-            "note": "register CI column · TPI register Jun–Aug 2026",
-            "mix": null
-          }
-        ],
-        "nodes": {
-          "SOC-01": {
-            "description": "SAP processes the distributor EDI file; customer POs, returns and rebates are entered in SAP and credit-checked.",
-            "owner": "O2C",
-            "systems": "SAP",
-            "before": {
-              "man": 2,
-              "hyb": 3,
-              "auto": 2
-            },
-            "after": {
-              "man": 2,
-              "hyb": 3,
-              "auto": 2
-            }
-          },
-          "SOC-02": {
-            "description": "Orders held by the credit check are reviewed and approved for release.",
-            "owner": "O2C",
-            "systems": "SAP; High Radius",
-            "before": {
-              "man": 3,
-              "hyb": 1,
-              "auto": 1
-            },
-            "after": {
-              "man": 3,
-              "hyb": 0,
-              "auto": 2
-            }
-          },
-          "SOC-03": {
-            "description": "Delivery posts the PGI, billing is released and invoices, credit notes and e-invoices are sent.",
-            "owner": "O2C",
-            "systems": "SAP; local e-invoicing portals",
-            "before": {
-              "man": 0,
-              "hyb": 3,
-              "auto": 2
-            },
-            "after": {
-              "man": 0,
-              "hyb": 3,
-              "auto": 2
-            }
-          },
-          "SOC-04": {
-            "description": "SOA, reminders and payment chasing with escalation; disputes and deductions are resolved.",
-            "owner": "O2C",
-            "systems": "High Radius Collection Cloud; SAP",
-            "before": {
-              "man": 2,
-              "hyb": 4,
-              "auto": 0
-            },
-            "after": {
-              "man": 2,
-              "hyb": 4,
-              "auto": 0
-            }
-          },
-          "SOC-05": {
-            "description": "Bank statements are matched to invoices in High Radius and the output file is posted to SAP.",
-            "owner": "O2C",
-            "systems": "High Radius Cash Application; SAP",
-            "before": {
-              "man": 1,
-              "hyb": 0,
-              "auto": 3
-            },
-            "after": {
-              "man": 1,
-              "hyb": 0,
-              "auto": 3
-            }
-          },
-          "SOC-06": {
-            "description": "Outgoing payments, bank statement posting, open-item clearing and bank reconciliation.",
-            "owner": "O2C",
-            "systems": "SAP; Crown; FIS Payment Hub; BlackLine",
-            "before": {
-              "man": 4,
-              "hyb": 4,
-              "auto": 2
-            },
-            "after": {
-              "man": 3,
-              "hyb": 3,
-              "auto": 4
-            }
-          }
-        }
-      },
-      "dashboard": {
-        "processes": [
-          {
-            "id": "SOC-01",
-            "name": "Sales order creation",
-            "controls": "",
-            "description": "SAP processes the daily distributor EDI file; the Sales Order team fixes missing end-customer accounts, prices and stock. Customer POs, returns and rebates are entered manually after approval, then pass the system credit check.",
-            "owner": "O2C Sales Order team",
-            "window": "Daily · Semi-automated · SAP",
-            "flows": [
-              {
-                "name": "Flow 1 - EDI orders (automatic)",
-                "id": "SOC-01.1",
-                "reference": "SOC-01.1"
-              },
-              {
-                "name": "Flow 2 - Customer PO, returns and rebates (manual)",
-                "id": "SOC-01.2",
-                "reference": "SOC-01.2"
-              }
-            ]
-          },
-          {
-            "id": "SOC-02",
-            "name": "Order block release",
-            "controls": "",
-            "description": "Manual orders that fail the SAP credit check are blocked. The block reason is identified and Credit Risk or Collection approves the release.",
-            "owner": "O2C Order Release, Credit Risk and Collection teams",
-            "window": "Daily · Semi-automated · SAP, High Radius",
-            "flows": [
-              {
-                "name": "Order block release (manual orders)",
-                "id": "SOC-02.1",
-                "reference": "SOC-02.1"
-              }
-            ]
-          },
-          {
-            "id": "SOC-03",
-            "name": "Billing",
-            "controls": "",
-            "description": "Delivery to the customer triggers the PGI posting. Billing is released, invoices and credit notes are generated and sent, with local tax invoices and e-invoicing where mandated.",
-            "owner": "O2C Billing team",
-            "window": "Daily · Semi-automated · SAP, local e-invoicing portals",
-            "flows": [
-              {
-                "name": "Billing (invoices, credit notes, e-invoicing)",
-                "id": "SOC-03.1",
-                "reference": "SOC-03.1"
-              }
-            ]
-          },
-          {
-            "id": "SOC-04",
-            "name": "Collections & disputes management",
-            "controls": "",
-            "description": "Monthly SOA, pre-due reminders and payment chasing with escalation. Disputes and deductions are recorded, investigated and resolved by credit note or invoice correction.",
-            "owner": "O2C Collection team",
-            "window": "Daily; monthly SOA and reminders · Semi-automated · High Radius, SAP",
-            "flows": [
-              {
-                "name": "Collection - payment follow-up and escalation",
-                "id": "SOC-04.1",
-                "reference": "SOC-04.1"
-              },
-              {
-                "name": "Disputes and deductions management",
-                "id": "SOC-04.2",
-                "reference": "SOC-04.2"
-              }
-            ]
-          },
-          {
-            "id": "SOC-05",
-            "name": "Payment allocation / cash application",
-            "controls": "",
-            "description": "Daily bank statements feed High Radius, which auto-matches payments to invoices and posts the output file to SAP. Unmatched payments are checked and cleared manually.",
-            "owner": "O2C Cash Application team",
-            "window": "Daily · Semi-automated · High Radius Cash Application, SAP",
-            "flows": [
-              {
-                "name": "Payment allocation - matched payments",
-                "id": "SOC-05.1",
-                "reference": "SOC-05.1"
-              }
-            ]
-          },
-          {
-            "id": "SOC-06",
-            "name": "Cash & Banking",
-            "controls": "",
-            "description": "Outgoing payments run through the SAP payment run or the manual route in Crown. Bank statements are posted, open items cleared and the bank reconciled in BlackLine.",
-            "owner": "O2C Cash & Banking team",
-            "window": "Daily · Semi-automated · SAP, Crown, FIS Payment Hub, bank portals, BlackLine",
-            "flows": [
-              {
-                "name": "Flow A - Payment process: automated / semi-automated payment run",
-                "id": "SOC-06.1",
-                "reference": "SOC-06.1"
-              },
-              {
-                "name": "Flow A - Payment process: manual payment route",
-                "id": "SOC-06.2",
-                "reference": "SOC-06.2"
-              },
-              {
-                "name": "Flow B - Bank statement process",
-                "id": "SOC-06.3",
-                "reference": "SOC-06.3"
-              }
-            ]
-          }
-        ],
-        "comparison": {
-          "rule": "Before = As-Is. After applies the proposed Enhanced level only for Can be explored and Potential future opportunity. Implemented, Not feasible, Not relevant and Under review remain at As-Is and do not count as uplift.",
-          "rows": [
-            {
-              "id": "SOC-01",
-              "name": "Sales order creation",
-              "steps": 7,
-              "before": {
-                "man": 2,
-                "hyb": 3,
-                "auto": 2
-              },
-              "after": {
-                "man": 2,
-                "hyb": 3,
-                "auto": 2
-              },
-              "uplift": 0
-            },
-            {
-              "id": "SOC-02",
-              "name": "Order block release",
-              "steps": 5,
-              "before": {
-                "man": 3,
-                "hyb": 1,
-                "auto": 1
-              },
-              "after": {
-                "man": 3,
-                "hyb": 0,
-                "auto": 2
-              },
-              "uplift": 1
-            },
-            {
-              "id": "SOC-03",
-              "name": "Billing",
-              "steps": 5,
-              "before": {
-                "man": 0,
-                "hyb": 3,
-                "auto": 2
-              },
-              "after": {
-                "man": 0,
-                "hyb": 3,
-                "auto": 2
-              },
-              "uplift": 0
-            },
-            {
-              "id": "SOC-04",
-              "name": "Collections & disputes management",
-              "steps": 6,
-              "before": {
-                "man": 2,
-                "hyb": 4,
-                "auto": 0
-              },
-              "after": {
-                "man": 2,
-                "hyb": 4,
-                "auto": 0
-              },
-              "uplift": 0
-            },
-            {
-              "id": "SOC-05",
-              "name": "Payment allocation / cash application",
-              "steps": 4,
-              "before": {
-                "man": 1,
-                "hyb": 0,
-                "auto": 3
-              },
-              "after": {
-                "man": 1,
-                "hyb": 0,
-                "auto": 3
-              },
-              "uplift": 0
-            },
-            {
-              "id": "SOC-06",
-              "name": "Cash & Banking",
-              "steps": 10,
-              "before": {
-                "man": 4,
-                "hyb": 4,
-                "auto": 2
-              },
-              "after": {
-                "man": 3,
-                "hyb": 3,
-                "auto": 4
-              },
-              "uplift": 3
-            }
-          ],
-          "total": {
-            "name": "Total",
-            "steps": 37,
-            "before": {
-              "man": 12,
-              "hyb": 15,
-              "auto": 10
-            },
-            "after": {
-              "man": 11,
-              "hyb": 13,
-              "auto": 13
-            },
-            "uplift": 4
-          },
-          "note": "Manual 12 → 11 (-1) · Semi-automated 15 → 13 (-2) · Automated 10 → 13 (+3). M = manual, S = semi-automated, A = automated."
-        }
-      },
-      "activityTypes": {
-        "SOC-01|SOC-01.1|1": {
-          "before": "auto",
-          "after": "auto"
-        },
-        "SOC-01|SOC-01.1|1a": {
-          "before": "hyb",
-          "after": "hyb"
-        },
-        "SOC-01|SOC-01.1|1b": {
-          "before": "man",
-          "after": "man"
-        },
-        "SOC-01|SOC-01.1|1c": {
-          "before": "hyb",
-          "after": "hyb"
-        },
-        "SOC-01|SOC-01.1|2": {
-          "before": "auto",
-          "after": "auto"
-        },
-        "SOC-01|SOC-01.2|1": {
-          "before": "man",
-          "after": "man"
-        },
-        "SOC-01|SOC-01.2|2": {
-          "before": "hyb",
-          "after": "hyb"
-        },
-        "SOC-02|SOC-02.1|1": {
-          "before": "auto",
-          "after": "auto"
-        },
-        "SOC-02|SOC-02.1|1a": {
-          "before": "man",
-          "after": "man"
-        },
-        "SOC-02|SOC-02.1|1b": {
-          "before": "man",
-          "after": "man"
-        },
-        "SOC-02|SOC-02.1|1c": {
-          "before": "man",
-          "after": "man"
-        },
-        "SOC-02|SOC-02.1|2": {
-          "before": "hyb",
-          "after": "auto"
-        },
-        "SOC-03|SOC-03.1|1": {
-          "before": "hyb",
-          "after": "hyb"
-        },
-        "SOC-03|SOC-03.1|2": {
-          "before": "hyb",
-          "after": "hyb"
-        },
-        "SOC-03|SOC-03.1|3": {
-          "before": "auto",
-          "after": "auto"
-        },
-        "SOC-03|SOC-03.1|4": {
-          "before": "hyb",
-          "after": "hyb"
-        },
-        "SOC-03|SOC-03.1|5": {
-          "before": "auto",
-          "after": "auto"
-        },
-        "SOC-04|SOC-04.1|1": {
-          "before": "hyb",
-          "after": "hyb"
-        },
-        "SOC-04|SOC-04.1|2": {
-          "before": "hyb",
-          "after": "hyb"
-        },
-        "SOC-04|SOC-04.1|3": {
-          "before": "man",
-          "after": "man"
-        },
-        "SOC-04|SOC-04.2|1": {
-          "before": "hyb",
-          "after": "hyb"
-        },
-        "SOC-04|SOC-04.2|2": {
-          "before": "man",
-          "after": "man"
-        },
-        "SOC-04|SOC-04.2|3": {
-          "before": "hyb",
-          "after": "hyb"
-        },
-        "SOC-05|SOC-05.1|1": {
-          "before": "auto",
-          "after": "auto"
-        },
-        "SOC-05|SOC-05.1|2": {
-          "before": "auto",
-          "after": "auto"
-        },
-        "SOC-05|SOC-05.1|4": {
-          "before": "man",
-          "after": "man"
-        },
-        "SOC-05|SOC-05.1|3": {
-          "before": "auto",
-          "after": "auto"
-        },
-        "SOC-06|SOC-06.1|1": {
-          "before": "auto",
-          "after": "auto"
-        },
-        "SOC-06|SOC-06.1|2": {
-          "before": "hyb",
-          "after": "auto"
-        },
-        "SOC-06|SOC-06.1|3": {
-          "before": "man",
-          "after": "man"
-        },
-        "SOC-06|SOC-06.2|1": {
-          "before": "man",
-          "after": "man"
-        },
-        "SOC-06|SOC-06.2|2": {
-          "before": "man",
-          "after": "hyb"
-        },
-        "SOC-06|SOC-06.3|1": {
-          "before": "hyb",
-          "after": "hyb"
-        },
-        "SOC-06|SOC-06.3|3": {
-          "before": "hyb",
-          "after": "hyb"
-        },
-        "SOC-06|SOC-06.3|2": {
-          "before": "auto",
-          "after": "auto"
-        },
-        "SOC-06|SOC-06.3|4": {
-          "before": "man",
-          "after": "man"
-        },
-        "SOC-06|SOC-06.3|5": {
-          "before": "hyb",
-          "after": "auto"
         }
       }
     }
