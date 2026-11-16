@@ -1,5 +1,5 @@
 // Process metrics and workbook context shared with the selected tower card.
-import {REAL} from './real-data.js?v=20261112-source-parity';
+import {REAL} from './real-data.js?v=20261116-validated';
 import {organs} from './organs.js';
 
 const ACCENT = Object.fromEntries(organs.map(o => [o.id, o.color]));

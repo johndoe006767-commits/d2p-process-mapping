@@ -1,5 +1,5 @@
-import {processSummary} from './process-summary.js';
-import {escapeHTML as esc} from './real-data.js?v=20261112-source-parity';
+import {processSummary} from './process-summary.js?v=20261116-validated';
+import {escapeHTML as esc} from './real-data.js?v=20261116-validated';
 import {titleCase} from './title-case.js';
 
 function processRow(process, index) {
@@ -36,11 +36,8 @@ function comparisonRow({name, steps, before, after, uplift}) {
   </tr>`;
 }
 
-export function processDashboard({processes, comparison}, overview) {
-  return `<section id="dashboard" aria-label="Process summary" tabindex="-1" hidden>
-    ${processSummary(overview)}
-    <div class="dashboard-tables">
-      <section aria-labelledby="dashboard-processes-title">
+export function processDashboard({processes, comparison}, overview, scenario) {
+  const processTable = `<section aria-labelledby="dashboard-processes-title">
         <h2 id="dashboard-processes-title" tabindex="-1">Key Processes · What Each One Does</h2>
         <div class="dashboard-table-wrap" role="region" aria-labelledby="dashboard-processes-title" tabindex="0">
           <table class="dashboard-processes" aria-labelledby="dashboard-processes-title">
@@ -52,11 +49,11 @@ export function processDashboard({processes, comparison}, overview) {
             <tbody>${processes.map(processRow).join('')}</tbody>
           </table>
         </div>
-      </section>
-      <section aria-labelledby="dashboard-comparison-title">
+      </section>`;
+  const comparisonTable = `<section aria-labelledby="dashboard-comparison-title">
         <div class="dashboard-comparison-heading">
           <h2 id="dashboard-comparison-title">Before vs After Automation / AI</h2>
-          <span class="dashboard-uplift">${esc(comparison.total.uplift)} ${comparison.total.uplift === 1 ? 'Step' : 'Steps'} Uplifted</span>
+          <span class="dashboard-uplift">${esc(comparison.total.uplift)} of ${esc(comparison.total.steps)} steps uplifted</span>
         </div>
         <div class="dashboard-table-wrap" role="region" aria-labelledby="dashboard-comparison-title" tabindex="0">
           <table class="dashboard-comparison" aria-labelledby="dashboard-comparison-title">
@@ -69,7 +66,10 @@ export function processDashboard({processes, comparison}, overview) {
             <tfoot>${comparisonRow(comparison.total)}</tfoot>
           </table>
         </div>
-      </section>
-    </div>
+      </section>`;
+  const tables = scenario === 'tobe' ? [comparisonTable, processTable] : [processTable, comparisonTable];
+  return `<section id="dashboard" aria-label="Process summary" tabindex="-1" hidden>
+    ${processSummary(overview)}
+    <div class="dashboard-tables">${tables.join('')}</div>
   </section>`;
 }

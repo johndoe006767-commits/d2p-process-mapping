@@ -1,8 +1,8 @@
 import {scrollPageTo,cancelPageNavigation} from './page-navigation.js';
 import {fitLines,measureText,fitSvgLabels} from './svg-text.js?v=astral-3';
-import {mountAstralBackground} from './astral-background.js?v=galaxy-2';
+import {mountAstralBackground} from './astral-background.js?v=galaxy-3';
 import {titleCase} from './title-case.js';
-import {makeSourceOverview} from './neural-overview.js?v=20261112-source-parity';
+import {makeSourceOverview} from './neural-overview.js?v=20261116-process-audit';
 
 const ltPrefix = /^\s*(?:⚠\uFE0F?\s*)?LT\s*#\s*\d+[a-z]*\b\s*(?:[·:–—-]\s*)?/i;
 const aiPrefix = /^\s*AI(?:[ -]suggested)?\s*[:·–—-]/i;
@@ -31,8 +31,8 @@ const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 const names=frames.map(f=>titleCase(f.name.replace(/^Stage \d+:\s*/,'')));
 const typeNames={man:'Manual',hyb:'Semi',auto:'Automated'};
 const typeColors={man:'var(--man)',hyb:'var(--hyb)',auto:'var(--auto)'};
-// The source can retain an earlier or rejected proposal in its raw type fields.
-// Normalize this render's cloned steps once, before filters, headings and cards read them.
+const opportunityTones=new Map([['can be explored','explore'],['potential future opportunity','future'],['potential for future opportunity','future']]);
+const nextType={man:'hyb',hyb:'auto',auto:'auto'};
 for (const frame of frames) {
  frame.up = visibleHandoffs(frame.up);
  frame.down = visibleHandoffs(frame.down);
@@ -44,9 +44,9 @@ for (const frame of frames) {
     if (step[side]) step[side] = step[side].flatMap(([p,w]) => cleanDependency(p,w));
    }
    const pair = payload.activityTypes[[frame.id, process.id, step.n].join('|')];
-   step.asIsType = isAI && payload.stageInitiatives ? (step.was || pair.before) : pair.before;
-   step.effectiveType = pair.after;
-   step.ty = isAI ? pair.after : pair.before;
+   step.ty = pair.before;
+   step.qualified = annotations(step,sourceReview(step,process.id,frame.id)).length > 0;
+   step.overviewType = step.qualified ? nextType[step.ty] : step.ty;
   }
  }
 }
@@ -83,7 +83,6 @@ function annotations(record,review={}){
  const tone=opportunityTones.get(label.toLowerCase());
  return tone?[{kind:'feasibility',label,tone}]:[];
 }
-const opportunityTones=new Map([['can be explored','explore'],['potential future opportunity','future']]);
 function nodeAnnotations(n){
  const record=n.s||n.opp;
  return record?annotations(record,sourceReview(record,n.P?.id,n.f.id,!!n.opp)):[];
@@ -290,14 +289,13 @@ function skin(){
  for(const n of Object.values(nodes)){
   let group=svg.querySelector(`[data-id="${CSS.escape(n.id)}"]`);
   if(n.s&&!n.kind&&group){const s=n.s,top=activityTop(n);group.replaceChildren(el('title',{},s.t));group.append(el('rect',{class:'b',x:n.x,y:top,width:n.w,height:activityHeight,rx:8}));
-   // Source renderers may classify by the previous type. Use the selected scenario.
+   // Both detailed views use the documented activity type.
    group.classList.remove('ty-man','ty-hyb','ty-auto');
    group.classList.add('ty-'+s.ty);
    group.append(txt(n.x+12,top+26,String(s.n).padStart(2,'0'),8.2,'var(--accent)',400));
-   const badges=payload.activityBadges ? payload.activityBadges[n.id] || [] : (isAI&&s.ch&&s.ch!=='same'?['AI']:[]);
-   if(badges.length){
-    const badge=txt(n.x+29+measureText(String(s.n).padStart(2,'0'),8.2),top+26,badges.join(' · '),8.2,'var(--prop)',600);
-    if(payload.activityBadges)badge.setAttribute('class','activity-badges');
+   if(s.qualified && (payload.activityBadges ? payload.activityBadges[n.id]?.length : s.ch && s.ch!=='same')){
+    const badge=txt(n.x+29+measureText(String(s.n).padStart(2,'0'),8.2),top+26,'AI',8.2,'var(--prop)',600);
+    badge.setAttribute('class','activity-badges');
     group.append(badge);
    }
    const label=txt(n.x+n.w-12,top+26,typeNames[s.ty],8.2,'var(--muted)',400);label.setAttribute('text-anchor','end');group.append(label);group.append(el('circle',{cx:n.x+n.w-18-measureText(typeNames[s.ty],8.2),cy:top+23,r:2.1,fill:typeColors[s.ty]}));
@@ -393,16 +391,15 @@ const detailFields=value=>value&&typeof value!=='object'?paragraph(value):value&
 function aiDetails(s,n){
  const review=data.review?.[`${n.P.id}|${s.n}`]||data.review?.[s.t]||{};
  return block('AI suggestion',paragraph(s.rec||s.sug||review.sug||(!s.ch||s.ch==='same'?'No change proposed for this step.':'')))+
- block('Activity type if adopted',paragraph(typeNames[s.effectiveType]))+block('As Is activity type',paragraph(typeNames[s.asIsType]))+
  block('Tools',paragraph(s.tools||review.tools))+block('Proposal basis',paragraph(s.opp))+block('Feasibility',paragraph(s.feas||s.holdfeas||review.feas))+
- block(s.feasl||'Review comments',paragraph(s.feasc||review.comment))+block('Scope',paragraph(s.scope))+block('Copilot / Microsoft AI option',detailFields(s.cop))+
+ block(s.feasl||'Review comments',paragraph(s.feasc||review.comment))+block('Validation note',paragraph(s.feasx))+block('Scope',paragraph(s.scope||review.scope))+block('Copilot / Microsoft AI option',detailFields(s.cop))+
  block('Proposed pain-point resolutions',list((s.pp||[]).map(p=>valueText(data.fixes?.[p])).filter(Boolean)))+block('Source review',detailFields(review));
 }
 
 function record(n){
- if(n.opp){const o=n.opp,review=data.review?.[`${n.P?.id||n.f.id}|opp`]||data.review?.[o.t];return `<h2 id="card-title">${esc(o.t)}</h2><p class="card-description">${esc(o.d)}</p>${block('Opportunity type',paragraph(o.ty))}${block('Reference',paragraph(o.rid))}${block('Feasibility',paragraph(o.feas||review?.feas))}${block('Review comments',paragraph(o.feasc||review?.comment))}${block('Source review',detailFields(review))}`;}
+ if(n.opp){const o=n.opp,review=data.review?.[`${n.P?.id||n.f.id}|opp`]||data.review?.[o.t];return `<h2 id="card-title">${esc(o.t)}</h2><p class="card-description">${esc(o.d)}</p>${block('Opportunity type',paragraph(o.ty))}${block('Reference',paragraph(o.rid))}${block('Feasibility',paragraph(o.feas||review?.feas))}${block('Validation note',paragraph(o.feasx))}${block('Scope',paragraph(o.scope||review?.scope))}${block('Review comments',paragraph(o.feasc||review?.comment))}${block('Source review',detailFields(review))}`;}
  if(n.s&&!n.kind){const s=n.s;return `<h2 id="card-title">${esc(s.t)}</h2><p class="card-description">${esc(s.d)}</p><dl class="record-meta"><div><dt>Owner</dt><dd>${esc(s.o||n.P.owner)}</dd></div><div><dt>Activity type</dt><dd style="color:${typeColors[s.ty]}">${typeNames[s.ty]}</dd></div><div><dt>Systems</dt><dd>${esc(s.sys)}</dd></div><div><dt>Process</dt><dd>${esc(n.P.name)}</dd></div></dl>${isAI?aiDetails(s,n):''}${block('Inputs',handoffs(s.in))}${block('Outputs',handoffs(s.out))}${s.dec?block('Decision',paragraph(s.dec.q)+`<p><strong>Yes</strong> · ${esc(s.dec.yes)}<br><strong>No</strong> · ${esc(s.dec.no)}</p>`):''}${block('Documented pain points',list(s.pp),'pain')}${block('Control',paragraph(s.ctl))}${block('Existing CI / TPI',paragraph(s.ci))}${block('Review notes',paragraph(s.note))}${block('Source feedback',paragraph(s.fb))}<p class="source-note">${esc(s.src||`${t.name} · ${viewLabel} Source`)}</p>`;}
- if(n.kind==='dec'){const d=n.dec;return `<h2 id="card-title">${esc(d.q)}</h2>${paragraph(d.d)}${block('If yes',paragraph(d.yes))}${block('If no',paragraph(d.no))}${block('Checked by',paragraph(d.o||n.P.owner))}${block('Example',paragraph(d.ex))}${block('Systems',paragraph(d.sys))}${block('Documented pain points',list(d.pp),'pain')}<p class="source-note">${esc(d.src||n.step?.src||`Decision Recorded in the ${t.name} ${viewLabel} Process Map.`)}</p>`;}
+ if(n.kind==='dec'){const d=n.dec;return `<h2 id="card-title">${esc(d.q)}</h2>${paragraph(d.d)}${block('Validation note',paragraph(d.feasx||n.step?.feasx))}${block('If yes',paragraph(d.yes))}${block('If no',paragraph(d.no))}${block('Checked by',paragraph(d.o||n.P.owner))}${block('Example',paragraph(d.ex))}${block('Systems',paragraph(d.sys))}${block('Documented pain points',list(d.pp),'pain')}<p class="source-note">${esc(d.src||n.step?.src||`Decision Recorded in the ${t.name} ${viewLabel} Process Map.`)}</p>`;}
  if(n.kind==='in'||n.kind==='out'){return `<h2 id="card-title">${esc(n.kind==='in'?n.lab:'Process output')}</h2><p class="card-description">${esc(n.kind==='in'?n.txt:n.doc)}</p>${block('Process',paragraph(n.P.name))}${block('Owner',paragraph(n.P.owner))}${block(n.kind==='in'?'Upstream dependencies':'Downstream handoffs',dependencyList(n.kind==='in'?n.f.up:n.f.down))}${block('Notes',paragraph(n.P.outnote))}`;}
  if(n.c){const c=n.c;const refs=(c.steps||[]).map(ref=>nodes[`${n.f.id}|${ref}`]).filter(Boolean);return `<h2 id="card-title">${n.kind==='ch'?'Documented pain point':'Process improvement'}</h2><p class="card-description">${esc(c.full||c.t)}</p>${block('Affected activities',list(refs.map(x=>`${x.s?.n||''}. ${x.s?.t||x.P?.name||''}`)))}${block('Reference',paragraph(c.ref))}${block('Status',paragraph(c.st))}<p class="source-note">${esc(c.src||`${t.name} · ${viewLabel} Source`)}</p>`;}
  return '<h2 id="card-title">Source record</h2>';
@@ -440,7 +437,7 @@ function jump(index,instant=false){activeStage=index;if(mode!=='detail')setMode(
 function markStage(i){activeStage=i;$$('#stages button').forEach((b,j)=>b.setAttribute('aria-current',i===j?'step':'false'));$('#stage-select').value=String(i);if($('#current-stage'))$('#current-stage').textContent=`Viewing stage ${i+1} of ${frames.length} · ${names[i]}`;updateFilterStatus();}
 function updateFilterStatus(){
  const group=mode==='overview'?activities():activities().filter(n=>n.f===frames[activeStage]);
- const count=group.filter(n=>filter==='all'||filter==='pp'&&n.s.pp?.length||n.s.ty===filter).length;
+ const count=group.filter(n=>filter==='all'||filter==='pp'&&n.s.pp?.length||(mode==='overview'?n.s.overviewType:n.s.ty)===filter).length;
  if($('#filter-status'))$('#filter-status').textContent=filter==='all'?`${group.length} activities${mode==='overview'?` across ${Object.keys(flow.records).length} ${['FPAC','FPAO'].includes(t.sourceKey)?'processes':'stages'}`:' in this stage'}`:`${count} of ${group.length} activities in focus${count===0?' · flow retained':''}`;
  if(mode==='overview')if($('#current-stage'))$('#current-stage').textContent=`High-Level Flow · ${t.name}`;
 }
@@ -511,11 +508,8 @@ function showProcessCard(r,target){
  const mixText=mix=>`${mix.man} manual · ${mix.hyb} semi · ${mix.auto} automated`;
  const meta=(label,value)=>`<div><dt>${esc(label)}</dt><dd>${esc(value)}</dd></div>`;
  let mixes=meta('As Is activity mix',mixText(r));
- if(isAI){
-  const steps=activities().filter(n=>n.f===r.f&&(!r.P||n.P===r.P));
-  const before={man:0,hyb:0,auto:0};
-  for(const {s} of steps)before[s.asIsType]++;
-  mixes=meta('As Is activity mix',mixText(before))+meta('AI Suggested activity mix',mixText(r));
+ if(isAI && mode==='overview'){
+  mixes=meta('As Is activity mix',mixText(r.before))+meta('AI Suggested activity mix',mixText(r));
  }
  $('#card-content').innerHTML=`<h2 id="card-title">${esc(r.t)}</h2>
   ${summary?.description?`<p class="card-description">${esc(summary.description)}</p>`:''}

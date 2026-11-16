@@ -19,7 +19,16 @@ export const organs = [
 
 export async function loadOrganGeometry(config) {
   const loader = new STLLoader();
-  const geometry = await Promise.all(config.files.map(id => loader.loadAsync(`./assets/organs/FMA${id}.stl`)));
+  const geometry = await Promise.all(config.files.map(async id => {
+    const response = await fetch(`./assets/organs/FMA${id}.stl.gz`);
+    if (!response.ok) throw new Error(`Could not load organ mesh FMA${id} (${response.status})`);
+    const bytes = await response.arrayBuffer();
+    const signature = new Uint8Array(bytes, 0, 2);
+    // Some static hosts decompress gzip assets before fetch returns them.
+    if (signature[0] !== 0x1f || signature[1] !== 0x8b) return loader.parse(bytes);
+    const decoded = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
+    return loader.parse(await new Response(decoded).arrayBuffer());
+  }));
   const root = new THREE.Group();
   const content = new THREE.Group();
   root.add(content);

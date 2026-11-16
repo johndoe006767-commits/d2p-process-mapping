@@ -20,20 +20,36 @@ function paragraphs(box) {
   return [...box.querySelectorAll(':scope > p')].map(p => p.textContent.trim());
 }
 
-function showSourceHeading(svg, doc, towerKey) {
+function activityMix(nodes, enhanced) {
+  const before = {man: 0, hyb: 0, auto: 0};
+  const after = enhanced ? {...before} : null;
+  let tagged = 0;
+  for (const {s} of nodes) {
+    before[s.ty]++;
+    if (after) after[s.overviewType]++;
+    if (s.qualified) tagged++;
+  }
+  return {before, after, tagged};
+}
+
+function showSourceHeading(svg, doc, towerKey, activities) {
   const heading = svg.closest('#overview').querySelector('.overview-heading');
   const bar = doc.querySelector('.hlbar');
   const title = bar ? [...bar.childNodes].filter(n => n.nodeType === Node.TEXT_NODE).map(n => n.textContent).join('').trim() : doc.querySelector('.hd h2').textContent;
   heading.querySelector('h1').textContent = titleCase(towerDisplayTitle(towerKey, title));
   const caption = doc.querySelector('.hlbar small,.hd p').textContent.trim();
   heading.querySelector('.overview-intro').textContent = caption.replace(/click a (process|phase) to (?:jump to the map|open it on the map)/i, 'select a $1 to open its information card');
-  const summary = doc.querySelector('.hlsum');
-  if (summary) {
+  if (doc.querySelector('.hlsum')) {
+    const {before, after, tagged} = activityMix(activities, true);
     const note = document.createElement('div');
     note.className = 'flow-scenario-summary';
-    for (const child of summary.children) {
-      const item = document.createElement(child.matches('b') ? 'strong' : 'span');
-      item.textContent = child.textContent.trim().replace('On the detailed map each step keeps its As-Is colour; the AI tag', 'The AI tag');
+    const labels = {man: 'Manual', hyb: 'Semi-automated', auto: 'Automated'};
+    const lines = ['Projected activity mix', `${activities.length} activities · ${tagged} with a qualifying opportunity`,
+      ...TYPES.map(type => `${labels[type]} ${before[type]} → ${after[type]}`),
+      'The projection moves tagged manual activities to semi-automated and tagged semi-automated activities to automated.'];
+    for (const [index, line] of lines.entries()) {
+      const item = document.createElement(index === 0 ? 'strong' : 'span');
+      item.textContent = line;
       note.append(item);
     }
     heading.after(note);
@@ -113,9 +129,14 @@ function drawCard(group, x, y, h, card) {
 
 export function makeSourceOverview(svg, payload, activityNodes, onSelect, towerKey) {
   const doc = new DOMParser().parseFromString(payload.high, 'text/html');
-  showSourceHeading(svg, doc, towerKey);
+  showSourceHeading(svg, doc, towerKey, activityNodes);
   const sourceSvg = doc.querySelector('svg');
   const frames = payload.data.frames, records = {}, positions = {};
+  const summaries = {};
+  for (const [id, source] of Object.entries(payload.overviewNodes)) {
+    const members = activityNodes.filter(n => (sourceSvg ? n.P.id : n.f.id) === id);
+    summaries[id] = {...source, ...activityMix(members, payload.scenario === 'tobe')};
+  }
   let width, height, minY = 0;
 
   function wire(group, frame, process, title, index, description) {
@@ -123,9 +144,9 @@ export function makeSourceOverview(svg, payload, activityNodes, onSelect, towerK
     const activities = activityNodes.filter(n => n.f === frame && (!process || n.P === process)).map(n => n.s);
     const pain = [...new Set(activities.flatMap(a => a.pp || [])
       .concat(frame.stagePain || frame.pp || [], (frame.ch || []).map(c => c.full || c.t)))];
-    const counts = Object.fromEntries(TYPES.map(type => [type, activities.filter(a => a.ty === type).length]));
+    const {before, after} = summaries[id];
     const record = {id, t: title, f: frame, P: process, index, st: frames.indexOf(frame) + 1,
-      count: activities.length, ...counts, pain,
+      count: activities.length, before, ...(after || before), pain,
       inp: frame.up.map(x => x.p + ': ' + x.w), out: frame.down.map(x => x.p + ': ' + x.w)};
     records[id] = record;
     group.classList.add('flow-node');
@@ -157,9 +178,9 @@ export function makeSourceOverview(svg, payload, activityNodes, onSelect, towerK
       const rect = group.querySelector('rect');
       const x = +rect.getAttribute('x'), y = +rect.getAttribute('y'), h = +rect.getAttribute('height');
       const title = titleCase(group.querySelector('text[font-size^="15"],text[font-size="16"]')?.textContent || process.name);
-      const data = payload.overviewNodes[id];
+      const data = summaries[id];
       const display = {...data, index: group.querySelector('text[font-size="12"]').textContent,
-        statistic: group.querySelector('text[font-size="11.8"]').textContent,
+        statistic: group.querySelector('text[font-size="11.8"]').textContent.replace(/\d+ AI$/, data.tagged + ' AI'),
         mixLabels: [...group.querySelectorAll('text[font-size="10.8"]:not([text-anchor="end"])')].map(t => t.textContent)};
       const card = measureCard(title, display, +rect.getAttribute('width'), group.querySelector('text[font-size="9"]').textContent);
       return {group, frame, process, data, x, y, h, card, index: i + 1};
@@ -194,7 +215,7 @@ export function makeSourceOverview(svg, payload, activityNodes, onSelect, towerK
         const output = anchor.getAttribute('fill') === '#e6f4ec';
         anchor.setAttribute('fill', output ? '#26332f' : 'var(--base)');
         anchor.setAttribute('fill-opacity', '1');
-        anchor.setAttribute('stroke', output ? '#6c9c8d' : '#a9809f');
+        anchor.setAttribute('stroke', '#a183ac');
         anchor.setAttribute('stroke-width', '.8');
         anchor.setAttribute('rx', '4');
       }
@@ -237,7 +258,7 @@ export function makeSourceOverview(svg, payload, activityNodes, onSelect, towerK
       const title = box.querySelector('h4').textContent;
       const index = Number(box.querySelector('.bd')?.textContent);
       const frame = frames[index - 1];
-      const data = {...(frame ? payload.overviewNodes[frame.id] : {}), paragraphs: paragraphs(box),
+      const data = {...(frame ? summaries[frame.id] : {}), paragraphs: paragraphs(box),
         mixLabels: [...box.querySelectorAll('.hlmx')].map(row => row.querySelector('em')?.textContent)};
       const card = measureCard(titleCase(title), data, W, frame ? 'Stage ' + index : '');
       return {cell, frame, index, title, data, card, col: +cell.style.gridColumn, row: +cell.style.gridRow};

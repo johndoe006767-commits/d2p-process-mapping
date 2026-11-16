@@ -20,7 +20,13 @@
 #process-workspace #navigation{background:#302238;backdrop-filter:none;box-shadow:none}
 #process-workspace .astral-background{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;contain:strict}
 #process-workspace .astral-background canvas{display:block;width:100%;height:100%}
-#process-workspace .astral-background::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.22)}
+#process-workspace .astral-background::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.48)}
+#process-workspace .static-galaxy canvas{visibility:hidden}
+#process-workspace .static-galaxy::before{
+ content:"";position:absolute;inset:var(--header-height,0px) 0 0;
+ background:#1c1524 url('assets/map-galaxy.jpg') center / min(94vw,calc((100dvh - var(--header-height,0px)) * 1.65)) auto no-repeat;
+ background-blend-mode:screen;opacity:.72;
+}
 #process-workspace[data-mode] > .lab-main,#process-workspace footer{position:relative;z-index:1}
 #process-workspace #process-map,#process-workspace #overview{background-image:none;background-color:transparent}
 #process-workspace .map-intro,#process-workspace .overview-heading{background:#1c1524}

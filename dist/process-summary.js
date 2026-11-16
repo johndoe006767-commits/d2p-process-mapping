@@ -1,4 +1,4 @@
-import {escapeHTML} from './real-data.js?v=20261112-source-parity';
+import {escapeHTML} from './real-data.js?v=20261116-validated';
 import {titleCase} from './title-case.js';
 
 const valueTones = new Map([

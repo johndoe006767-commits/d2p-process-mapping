@@ -1,10 +1,10 @@
-import {REAL} from './real-data.js?v=20261112-source-parity';
+import {REAL} from './real-data.js?v=20261116-validated';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 
-import { organs, loadOrganGeometry, organModelFor } from './organs.js?v=20261105-activity-organs';
+import { organs, loadOrganGeometry, organModelFor } from './organs.js?v=20261116-packed-models';
 import { createNeuronNetwork } from './neurons.js';
 export const replacementModels = new Map();
 const vertexShader = `

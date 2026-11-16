@@ -1,5 +1,5 @@
 // Card content is supplied separately from the detailed process-map registers.
-const response = await fetch('./data/tower-briefs.json?v=20261112-source-parity');
+const response = await fetch('./data/tower-briefs.json?v=20261116-process-audit');
 if (!response.ok) throw new Error('The tower card data could not be loaded.');
 const workbook = await response.json();
 export const CARD_BRIEFS = workbook.towers;
