@@ -1,4 +1,4 @@
-import {REAL} from './real-data.js?v=20261116-ai-wording';
+import {REAL} from './real-data.js?v=20261117-tower-maps';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';

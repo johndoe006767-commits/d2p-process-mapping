@@ -1,8 +1,8 @@
 import {cancelPageNavigation} from './page-navigation.js';
-import {REAL,KPI,escapeHTML as esc} from './real-data.js?v=20261116-ai-wording';
+import {REAL,KPI,escapeHTML as esc} from './real-data.js?v=20261117-tower-maps';
 import {CARD_BRIEFS} from './tower-briefs.js?v=20261116-process-audit';
-import {comparisonMarkup} from './health.js?v=20261116-ai-wording';
-import {prepareNeural,clearNeural} from './neural-loader.js?v=20261116-ai-wording';
+import {comparisonMarkup} from './health.js?v=20261117-tower-maps';
+import {prepareNeural,clearNeural} from './neural-loader.js?v=20261117-tower-maps';
 import {titleCase,normalizeHeadings} from './title-case.js';
 const $=s=>document.querySelector(s);
 let currentId=null,ticket=0,mapOpener=null,organPosition={top:0,left:0};

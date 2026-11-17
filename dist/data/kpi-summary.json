@@ -759,7 +759,7 @@
           },
           {
             "flowId": "TAX-03.4",
-            "flow": "4 · VAT Data Gathering & Analysis",
+            "flow": "4 · Value Added Tax Data Gathering & Analysis",
             "direction": "in",
             "party": "R2R-01 SAP Close",
             "detail": "SAP Close",
@@ -799,7 +799,7 @@
         "evidence": [
           {
             "flowId": "TAX-03.4",
-            "flow": "4 · VAT Data Gathering & Analysis",
+            "flow": "4 · Value Added Tax Data Gathering & Analysis",
             "direction": "in",
             "party": "Controlling",
             "detail": "sum netting report",

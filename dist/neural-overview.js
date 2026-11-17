@@ -260,13 +260,18 @@ export function makeSourceOverview(svg, payload, activityNodes, onSelect, towerK
       const frame = frames[index - 1];
       const data = {...(frame ? summaries[frame.id] : {}), paragraphs: paragraphs(box),
         mixLabels: [...box.querySelectorAll('.hlmx')].map(row => row.querySelector('em')?.textContent)};
-      const card = measureCard(titleCase(title), data, W, frame ? 'Stage ' + index : '');
-      return {cell, frame, index, title, data, card, col: +cell.style.gridColumn, row: +cell.style.gridRow};
+      const span = Number(box.style.gridColumn.match(/^span (\d+)/)?.[1] || 1);
+      const cardWidth = W * span + gapX * (span - 1);
+      const card = measureCard(titleCase(title), data, cardWidth, frame ? 'Stage ' + index : '');
+      return {cell, frame, index, title, data, card, span, col: +cell.style.gridColumn, row: +cell.style.gridRow};
     });
-    const cols = Math.max(...cells.map(c => c.col));
+    const cols = Math.max(...cells.map(c => c.col + c.span - 1));
     const rows = Math.max(...cells.map(c => c.row));
-    const occupied = new Set(cells.map(c => c.row + ',' + c.col));
+    const occupied = new Set(cells.flatMap(c => Array.from({length: c.span}, (_, i) => c.row + ',' + (c.col + i))));
     const heights = Array.from({length: rows}, (_, i) => Math.max(...cells.filter(c => c.row === i + 1).map(c => c.card.height)));
+    const rowTop = row => top + heights.slice(0, row - 1).reduce((offset, h) => offset + h + gapY, 0);
+    const columnLeft = col => margin + (col - 1) * (W + gapX);
+    const branchOrigin = cells.find(({cell}) => cell.querySelector('.bstub'));
     width = cols * W + (cols - 1) * gapX + margin * 2;
     height = heights.reduce((sum, h) => sum + h, 0) + (rows - 1) * gapY + top + margin;
     const defs = el('defs');
@@ -274,18 +279,31 @@ export function makeSourceOverview(svg, payload, activityNodes, onSelect, towerK
     arrow.append(el('path', {d: 'M0 0 L10 5 L0 10 Z', fill: '#c6adce'}));
     defs.append(arrow);
     svg.append(defs);
-    for (const {cell, frame, index, title, data, card, row, col} of cells) {
+    for (const {cell, frame, index, title, data, card, span, row, col} of cells) {
       const h = heights[row - 1];
-      const x = margin + (col - 1) * (W + gapX);
-      const y = top + heights.slice(0, row - 1).reduce((offset, above) => offset + above + gapY, 0);
+      const x = columnLeft(col);
+      const y = rowTop(row);
       let d = '';
-      if (cell.classList.contains('r') && occupied.has(row + ',' + (col + 1))) d = 'M' + (x + W) + ',' + (y + h / 2) + 'h' + gapX;
+      if (cell.classList.contains('r') && occupied.has(row + ',' + (col + span))) d = 'M' + (x + card.width) + ',' + (y + h / 2) + 'h' + gapX;
       if (cell.classList.contains('l') && occupied.has(row + ',' + (col - 1))) d = 'M' + x + ',' + (y + h / 2) + 'h-' + gapX;
       if (cell.classList.contains('d') && occupied.has((row + 1) + ',' + col)) d = 'M' + (x + W / 2) + ',' + (y + h) + 'v' + gapY;
       if (d) svg.append(el('path', {d, class: 'overview-edge main', 'marker-end': 'url(#source-high-arrow)'}), el('path', {d, class: 'flow-signal'}));
+      const branchLabel = cell.querySelector('.bl')?.textContent;
+      if (branchLabel && branchOrigin) {
+        const startX = columnLeft(branchOrigin.col) + branchOrigin.card.width / 2;
+        const startY = rowTop(branchOrigin.row) + heights[branchOrigin.row - 1];
+        const endX = x + card.width / 2;
+        const laneY = (startY + y) / 2;
+        const branch = el('path', {
+          d: `M${startX},${startY} V${laneY} H${endX} V${y}`,
+          class: 'overview-edge branch', 'stroke-dasharray': '6 4', 'marker-end': 'url(#source-high-arrow)'
+        });
+        svg.append(branch, text((startX + endX) / 2, laneY - 6, branchLabel, {class: 'flow-meta', 'text-anchor': 'middle'}));
+      }
       const group = el('g');
       group.append(el('title', {}, title + ' · ' + data.paragraphs.join(' ')));
       drawCard(group, x, y, h, card);
+      if (branchLabel) group.querySelector('.flow-node-body').setAttribute('stroke-dasharray', '6 4');
       if (frame) wire(group, frame, null, titleCase(title), index, data.description);
       svg.append(group);
     }

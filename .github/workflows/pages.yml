@@ -25,6 +25,15 @@ jobs:
       - name: Check out the repository
         uses: actions/checkout@v7
 
+      - name: Verify generic AI wording
+        run: |
+          if git grep -ilE 'claude|co[ -]?pilot' -- 'dist/*.js' 'dist/*.html' 'dist/*.json'; then
+            echo 'Use AI in the site files listed above.'
+            exit 1
+          else
+            test "$?" -eq 1
+          fi
+
       - name: Configure Pages
         uses: actions/configure-pages@v6
 

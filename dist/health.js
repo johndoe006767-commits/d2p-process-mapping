@@ -1,5 +1,5 @@
 // Process metrics and workbook context shared with the selected tower card.
-import {REAL} from './real-data.js?v=20261116-ai-wording';
+import {REAL} from './real-data.js?v=20261117-tower-maps';
 import {organs} from './organs.js';
 
 const ACCENT = Object.fromEntries(organs.map(o => [o.id, o.color]));

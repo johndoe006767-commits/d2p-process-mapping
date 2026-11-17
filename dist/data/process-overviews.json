@@ -1,6 +1,6 @@
 {
   "source": "All_Towers_Validated_Nov16.html",
-  "sha256": "5d7b3b5313b980f58b79a85fc020f3e4b93ee650a2f5fb4db384f3ec210e1ae1",
+  "sha256": "f1a4b6e1f00100851b6c1fff3e4df157f212af209bbcef8f2b408e6294739d4d",
   "towers": {
     "FPAC": {
       "asis": {
@@ -4815,7 +4815,7 @@
         "processes": [
           {
             "id": "TAX-02",
-            "name": "Corporate Income Tax",
+            "name": "Corporate Income Tax & Group Tax Reporting",
             "controls": "",
             "description": "Starts with Business transactions through the year | Produces RTP in LongView; reconciled tax balances",
             "owner": "Tax (TDT) with Deloitte (OSP), Controlling, Financial Controller and the CFO",
@@ -4860,7 +4860,7 @@
           },
           {
             "id": "TAX-03",
-            "name": "VAT",
+            "name": "Value Added Tax",
             "controls": "",
             "description": "Starts with Tax codes, VAT registration and customer / vendor tax classification maintained | Produces Payment confirmation; adjustment entries; VAT balances reconciled",
             "owner": "P2P, O2C, R2R, Tax (TDT) with Deloitte Vietnam (OSP), CFC and CFO",
@@ -4873,17 +4873,17 @@
               },
               {
                 "id": "TAX-03.2",
-                "name": "Phase 2 - Transaction processing and VAT posting",
+                "name": "Phase 2 - Transaction processing and Value Added Tax posting",
                 "reference": "TAX-03.2"
               },
               {
                 "id": "TAX-03.3",
-                "name": "Phase 3 - VAT accounting and close",
+                "name": "Phase 3 - Value Added Tax accounting and close",
                 "reference": "TAX-03.3"
               },
               {
                 "id": "TAX-03.4",
-                "name": "Phase 4 - VAT Data Gathering & Analysis",
+                "name": "Phase 4 - Value Added Tax Data Gathering & Analysis",
                 "reference": "TAX-03.4"
               },
               {
@@ -4947,7 +4947,7 @@
         "comparison": {
           "rows": [
             {
-              "name": "Corporate Income Tax",
+              "name": "Corporate Income Tax & Group Tax Reporting",
               "steps": 25,
               "before": {
                 "man": 21,
@@ -4962,7 +4962,7 @@
               "uplift": 8
             },
             {
-              "name": "VAT",
+              "name": "Value Added Tax",
               "steps": 27,
               "before": {
                 "man": 16,

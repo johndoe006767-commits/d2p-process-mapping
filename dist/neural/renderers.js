@@ -1043,7 +1043,9 @@ function layout(d){
   {const raw=d.frames.flatMap(f=>f.procs.map(p=>({p,f})));const procs=[];raw.forEach(it=>{const k=it.p.phase||it.p.name;const L=procs[procs.length-1];if(L&&L.k===k&&L.f===it.f){L.ids.push(it.p.id)}else procs.push({k,f:it.f,p:it.p,ids:[it.p.id]})});const cw=procs.length<=3?230:150,ch=40;let cx=x0;
    h+=text(x0,y+12,["Process phases"],{fs:10.5,fw:700,fill:"var(--muted)",a:"start"});y+=18;
    procs.forEach(({p,f},i)=>{const fi=d.frames.indexOf(f);const col=d.accent;const op=.55+.15*(fi%3);
-     h+=`<g><title>${esc2(f.name)} / ${esc2(p.phase||p.name)} (${esc2(procs[i].ids.join(", "))})</title><path d="M${cx},${y} L${cx+cw-14},${y} L${cx+cw},${y+ch/2} L${cx+cw-14},${y+ch} L${cx},${y+ch} L${cx+14},${y+ch/2}z" fill="${col}" fill-opacity="${op}"/>${text(cx+cw/2+4,y+ch/2+4,wrap(`${i+1}. ${p.phase||p.name}`,cw>200?32:20,1),{fs:10.5,fw:700,fill:"#fff"})}</g>`;cx+=cw+4});
+     const phaseLines = wrap(`${i+1}. ${p.phase||p.name}`, cw > 200 ? 32 : 20, 2);
+     const labelY = y + ch / 2 + 4 - (phaseLines.length - 1) * 6.3;
+     h+=`<g><title>${esc2(f.name)} / ${esc2(p.phase||p.name)} (${esc2(procs[i].ids.join(", "))})</title><path d="M${cx},${y} L${cx+cw-14},${y} L${cx+cw},${y+ch/2} L${cx+cw-14},${y+ch} L${cx},${y+ch} L${cx+14},${y+ch/2}z" fill="${col}" fill-opacity="${op}"/>${text(cx+cw/2+4,labelY,phaseLines,{fs:10.5,fw:700,fill:"#fff"})}</g>`;cx+=cw+4});
    maxX=Math.max(maxX,cx);y+=ch+22;}
   d.frames.forEach((f,fi)=>{
     const top=y;const c=d.accent;

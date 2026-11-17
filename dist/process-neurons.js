@@ -1,4 +1,4 @@
-import {openMap} from './real-experience.js?v=20261116-ai-wording';
+import {openMap} from './real-experience.js?v=20261117-tower-maps';
 import * as T from 'three';
 
 // Labels use the actual soma objects from the supplied organ-specific network.
