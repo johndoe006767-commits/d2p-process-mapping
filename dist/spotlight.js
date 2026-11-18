@@ -5,7 +5,7 @@ const $ = selector => document.querySelector(selector);
 const escape = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 const arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg>';
 const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-let galaxy, spotlights = [], filter = 'all', query = '';
+let galaxy, spotlights = [], filter = 'all';
 const embedded = window.parent !== window;
 let active = !embedded;
 let entranceTimer = 0;
@@ -26,7 +26,7 @@ function playCardEntrance() {
   cards.classList.add('cards-arriving');
   entranceTimer = setTimeout(stopCardEntrance,1050);
 }
-const dataControls = [...document.querySelectorAll('[data-filter],.opportunity-search input')];
+const dataControls = [...document.querySelectorAll('[data-filter]')];
 dataControls.forEach(control => control.disabled = true);
 function syncMotion() {
   const paused = reduced.matches || !active;
@@ -93,37 +93,29 @@ function renderNodes() {
   }));
 }
 function renderResults() {
-  const groups = spotlights.filter(s => filter === 'all' || String(s.id) === filter).map(s => ({...s, matches:s.opportunities.filter(o =>
-    [o.title,o.description,o.tower,o.stage,o.impact,s.category,...s.towers].join(' ').toLowerCase().includes(query)
-  )})).filter(s => s.matches.length);
-  const count = groups.reduce((sum,s)=>sum+s.matches.length,0);
-  $('#result-count').textContent = `${count} ${count === 1 ? 'opportunity' : 'opportunities'}${filter === 'all' ? ' across all spotlights' : ' in ' + spotlights.find(s => String(s.id) === filter).category}${query ? ' matching your search' : ''}`;
+  const groups = spotlights.filter(s => filter === 'all' || String(s.id) === filter);
   $('#opportunity-results').innerHTML = groups.map(s => `<section class="opportunity-group" aria-labelledby="group-${s.id}">
-    <header class="group-heading"><div><h3 id="group-${s.id}">${escape(titleCase(s.category))}</h3><p>Spotlight ${s.id} · ${s.matches.length} ${s.matches.length === 1 ? 'opportunity':'opportunities'}</p></div><div class="group-impact"><strong>${escape(s.impact)}</strong>${s.towers.map(escape).join(' · ')}</div></header>
+    <header class="group-heading"><div><h3 id="group-${s.id}">${escape(titleCase(s.category))}</h3><p>Spotlight ${s.id} · ${s.opportunities.length} ${s.opportunities.length === 1 ? 'opportunity':'opportunities'}</p></div><div class="group-impact"><strong>${escape(s.impact)}</strong>${s.towers.map(escape).join(' · ')}</div></header>
     <p class="group-workflow"><span>Workflow</span> ${s.steps.map(escape).join(' <span aria-hidden="true">→</span> ')}</p>
     <div class="opportunity-table-wrap" role="region" aria-label="${escape(s.category)} table" tabindex="0">
       <table class="opportunity-table">
         <caption class="sr-only">${escape(titleCase(s.category))} — Detailed Opportunities</caption>
         <colgroup><col class="col-number"><col class="col-opportunity"><col class="col-description"><col class="col-owner"><col class="col-impact"><col class="col-status"></colgroup>
         <thead><tr><th scope="col">No.</th><th scope="col">Opportunity</th><th scope="col">Description</th><th scope="col">Tower / Stage</th><th scope="col">Impact</th><th scope="col">Status</th></tr></thead>
-        <tbody>${s.matches.map(o=>`<tr class="opportunity-row"><td class="opportunity-number">${String(s.opportunities.indexOf(o)+1).padStart(2,'0')}</td><th scope="row">${escape(titleCase(o.title))}</th><td>${escape(o.description)}</td><td class="opportunity-owner"><strong>${escape(o.tower)}</strong><span>${escape(o.stage)}</span></td><td class="impact-label">${escape(o.impact)}</td><td><span class="status-label">${escape(o.status)}</span></td></tr>`).join('')}</tbody>
+        <tbody>${s.opportunities.map((o,index)=>`<tr class="opportunity-row"><td class="opportunity-number">${String(index+1).padStart(2,'0')}</td><th scope="row">${escape(titleCase(o.title))}</th><td>${escape(o.description)}</td><td class="opportunity-owner"><strong>${escape(o.tower)}</strong><span>${escape(o.stage)}</span></td><td class="impact-label">${escape(o.impact)}</td><td><span class="status-label">${escape(o.status)}</span></td></tr>`).join('')}</tbody>
       </table>
     </div>
   </section>`).join('');
-  $('.empty-results').hidden = count !== 0;
 }
-function chooseFilter(value, clearSearch = true) {
+function chooseFilter(value) {
   filter = value;
-  if (clearSearch) {query = ''; $('.opportunity-search input').value = '';}
   document.querySelectorAll('[data-filter]').forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.filter === filter)));
   renderResults();
 }
 document.querySelectorAll('[data-filter]').forEach(button => {
   button.setAttribute('aria-controls','opportunity-results');
-  button.addEventListener('click', () => chooseFilter(button.dataset.filter, false));
+  button.addEventListener('click', () => chooseFilter(button.dataset.filter));
 });
-$('.opportunity-search input').addEventListener('input', event => {query = event.target.value.trim().toLowerCase(); renderResults();});
-$('.reset-search').addEventListener('click',()=>{chooseFilter('all');$('.opportunity-search input').focus();});
 async function load() {
   try {
     const response = await fetch('./data/spotlight.json?v=20261118');
@@ -135,9 +127,8 @@ async function load() {
     syncMotion();
     playCardEntrance();
   } catch {
-    $('#spotlight-nodes').innerHTML = '<div class="loading-message" role="alert"><p>The spotlight opportunities could not load.</p><button class="reset-search" type="button">Try again</button></div>';
+    $('#spotlight-nodes').innerHTML = '<div class="loading-message" role="alert"><p>The spotlight opportunities could not load.</p><button class="retry-load" type="button">Try again</button></div>';
     $('#spotlight-nodes button').addEventListener('click',load,{once:true});
-    $('#result-count').textContent = 'Waiting for spotlight data.';
   }
 }
 load();
