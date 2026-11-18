@@ -42,7 +42,7 @@ server.on('error', error => {
   process.exitCode = 1;
 });
 server.listen(0, '127.0.0.1', () => {
-  const url = `http://127.0.0.1:${server.address().port}/`;
+  const url = `http://127.0.0.1:${server.address().port}/demand-to-profit.html`;
   console.log(`Open ${url} in your browser.\nKeep this window open while using the site. Press Ctrl+C to stop.`);
   if (process.platform === 'win32' && process.argv.includes('--open')) {
     const browser = spawn('explorer.exe', [url], { stdio: 'ignore' });

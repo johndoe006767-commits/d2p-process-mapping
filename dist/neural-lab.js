@@ -2,7 +2,7 @@ import {scrollPageTo,cancelPageNavigation} from './page-navigation.js';
 import {fitLines,measureText,fitSvgLabels} from './svg-text.js?v=astral-3';
 import {mountAstralBackground} from './astral-background.js?v=galaxy-3';
 import {titleCase} from './title-case.js';
-import {makeSourceOverview} from './neural-overview.js?v=20261117-tower-maps';
+import {makeSourceOverview} from './neural-overview.js?v=20261118-published';
 
 const ltPrefix = /^\s*(?:⚠\uFE0F?\s*)?LT\s*#\s*\d+[a-z]*\b\s*(?:[·:–—-]\s*)?/i;
 const aiPrefix = /^\s*AI(?:[ -]suggested)?\s*[:·–—-]/i;

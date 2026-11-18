@@ -1,4 +1,4 @@
-import {escapeHTML} from './real-data.js?v=20261117-tower-maps';
+import {escapeHTML} from './real-data.js?v=20261118-published';
 import {titleCase} from './title-case.js';
 
 const valueTones = new Map([

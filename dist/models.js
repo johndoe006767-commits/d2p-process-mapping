@@ -1,4 +1,4 @@
-import {REAL} from './real-data.js?v=20261117-tower-maps';
+import {REAL} from './real-data.js?v=20261118-published';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';

@@ -1,0 +1,8 @@
+/* One return control across the anatomy, process maps and embedded pages. */
+body :is(#detail #back,#process-workspace #map-controls #lab-return,#process-workspace #neural-return,#helpdesk .helpdesk-back,.spotlight-header .back-link,.resource-back){display:inline-flex;align-items:center;justify-content:center;gap:.65em;min-height:max(44px,calc(44px / var(--anatomy-scale,1)));padding:4px 6px;border:0;border-radius:10px;background:transparent;color:#f2e9f2;font-family:Inter,Arial,sans-serif;font-weight:600;line-height:1.3;white-space:nowrap;text-decoration:none;cursor:pointer;touch-action:manipulation;box-shadow:none}
+.site-back .back-icon{display:grid;place-items:center;box-sizing:border-box;flex:none;width:2em;height:2em;padding:0;border:0;border-radius:50%;background:#dcbfda;color:#39253f}
+.site-back .back-icon svg,#process-workspace .site-back .back-icon svg{display:block;width:1.1em;height:1.1em;fill:currentColor;stroke:none;transform:none;transition:transform 160ms ease}
+.site-back:focus-visible{outline:2px solid #efd9eb;outline-offset:4px}
+body #section-1 #detail #back.site-back{min-height:calc(44px / var(--anatomy-scale,1))}
+@media(hover:hover){.site-back:hover .back-icon{background:#f2dded}.site-back:hover .back-icon svg{transform:translateX(-2px)}}
+@media(prefers-reduced-motion:reduce){.site-back .back-icon svg{transition:none}.site-back:hover .back-icon svg{transform:none}}

@@ -39,7 +39,7 @@ export function createHelpdesk(host, {onOpen, onClose}) {
       <button type="button" class="helpdesk-preview-open">View YTD Summary <svg class="ico" aria-hidden="true"><use href="#i-ne"/></svg></button>
     </aside>
     <section id="helpdesk-detail" aria-labelledby="helpdesk-title" hidden>
-      <button type="button" class="helpdesk-back"><svg class="ico" aria-hidden="true"><use href="#i-left"/></svg>Back to Overview</button>
+      <button type="button" class="helpdesk-back site-back" aria-label="Back to overview"><span class="back-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 2 1 7l7 5V9h8a4 4 0 0 1 4 4v2a4 4 0 0 1-4 4H4v3h12a7 7 0 0 0 7-7v-2a7 7 0 0 0-7-7H8Z"/></svg></span><span>Back</span></button>
       <div class="helpdesk-hero" aria-hidden="true">
         <img class="helpdesk-hero-full" src="assets/helpdesk/nursa-full.webp" alt="" draggable="false">
         <img class="helpdesk-hero-portrait" src="assets/helpdesk/nursa-portrait.webp" alt="" draggable="false">

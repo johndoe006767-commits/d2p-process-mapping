@@ -1,7 +1,7 @@
 @echo off
 setlocal
 title E2E Mapping
-if not exist "%~dp0dist\index.html" (
+if not exist "%~dp0dist\demand-to-profit.html" (
   echo Extract the entire site ZIP, then double-click this launcher in the extracted folder.
   pause
   exit /b 1

@@ -1,5 +1,5 @@
-import {processSummary} from './process-summary.js?v=20261117-tower-maps';
-import {escapeHTML as esc} from './real-data.js?v=20261117-tower-maps';
+import {processSummary} from './process-summary.js?v=20261118-published';
+import {escapeHTML as esc} from './real-data.js?v=20261118-published';
 import {titleCase} from './title-case.js';
 
 function processRow(process, index) {

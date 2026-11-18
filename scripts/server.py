@@ -119,8 +119,8 @@ def serve(port):
 
 
 def start(port, no_browser):
-    if not (DIST / "index.html").is_file():
-        raise RuntimeError("dist/index.html is missing. Keep the launcher beside dist/.")
+    if not (DIST / "demand-to-profit.html").is_file():
+        raise RuntimeError("dist/demand-to-profit.html is missing. Keep the launcher beside dist/.")
     RUNTIME.mkdir(exist_ok=True)
     lock = RUNTIME / "starting"
     try:
@@ -130,7 +130,7 @@ def start(port, no_browser):
     try:
         state = read_state()
         if running(state):
-            url = "http://127.0.0.1:{}/".format(state["port"])
+            url = "http://127.0.0.1:{}/demand-to-profit.html".format(state["port"])
             print("Site is already running: " + url)
         else:
             with socket.socket() as probe:
@@ -166,7 +166,7 @@ def start(port, no_browser):
             else:
                 child.terminate()
                 raise RuntimeError("Server did not become ready. See " + str(LOG))
-            url = "http://127.0.0.1:{}/".format(port)
+            url = "http://127.0.0.1:{}/demand-to-profit.html".format(port)
             print("Site started: " + url)
         if not no_browser:
             webbrowser.open(url)
@@ -206,7 +206,7 @@ def main():
         stop()
     else:
         state = read_state()
-        print("Running at http://127.0.0.1:{}/".format(state["port"]) if running(state)
+        print("Running at http://127.0.0.1:{}/demand-to-profit.html".format(state["port"]) if running(state)
               else "This folder's site is not running.")
 
 

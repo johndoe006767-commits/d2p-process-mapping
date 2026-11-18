@@ -1,16 +1,16 @@
 import * as T from 'three';
 import {syncAnatomyLayout,elementDisplayScale} from './anatomy-layout.js?v=20261105-desktop-sizing';
-import {REAL,KPI} from './real-data.js?v=20261117-tower-maps';
+import {REAL,KPI} from './real-data.js?v=20261118-published';
 import {CARD_BRIEFS} from './tower-briefs.js?v=20261116-process-audit';
-import {bindTower,initExperience,hideMap,openMap} from './real-experience.js?v=20261117-tower-maps';
-import {createProcessNeurons,updateProcessNeurons} from './process-neurons.js?v=20261117-tower-maps';
+import {bindTower,initExperience,hideMap,openMap} from './real-experience.js?v=20261118-published';
+import {createProcessNeurons,updateProcessNeurons} from './process-neurons.js?v=20261118-published';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
-import {loadReplacement} from './models.js?v=20261117-tower-maps';
+import {loadReplacement} from './models.js?v=20261118-published';
 import {organModelFor} from './organs.js?v=20261116-packed-models';
 import {buildVesselNetwork} from './vessels.js';
 import {mountAstralOrgan,mountAstralSkeleton,mountAstralVessel,createAstralRenderer} from './astral-anatomy.js?v=20261107-semi-gold';
-import {cardMarkup,metricsSentence,accentFor,towerNameFor,towerAcronymFor,overviewNameFor} from './health.js?v=20261117-tower-maps';
-import {createHelpdesk} from './helpdesk.js?v=20261106-gfs-ytd';
+import {cardMarkup,metricsSentence,accentFor,towerNameFor,towerAcronymFor,overviewNameFor} from './health.js?v=20261118-published';
+import {createHelpdesk} from './helpdesk.js?v=20261118-published';
 const $=s=>document.querySelector(s);
 syncAnatomyLayout();
 const configs=[
@@ -200,7 +200,7 @@ function layoutOverviewLabels(){
     }
   }
 }
-function frame(now){if(document.hidden||!sceneInView||helpdesk.isOpen||document.body.classList.contains('modal-open')){last=now;animation=requestAnimationFrame(frame);return;}const dt=Math.min((now-last)/1000,.05);last=now;time+=dt;separation=reduced.matches?separationTarget:T.MathUtils.lerp(separation,separationTarget,1-Math.exp(-dt*12));if(Math.abs(separation-separationTarget)<.0001)separation=separationTarget;const beat=reduced.matches?1:1.12+Math.pow(Math.max(0,Math.sin(time*6)),8)*.035;heart.scale.setScalar(beat);syncHelpdesk();
+function frame(now){if(document.hidden||!sceneInView||helpdesk.isOpen||document.body.dataset.spotlight==='true'||document.body.classList.contains('modal-open')){last=now;animation=requestAnimationFrame(frame);return;}const dt=Math.min((now-last)/1000,.05);last=now;time+=dt;separation=reduced.matches?separationTarget:T.MathUtils.lerp(separation,separationTarget,1-Math.exp(-dt*12));if(Math.abs(separation-separationTarget)<.0001)separation=separationTarget;const beat=reduced.matches?1:1.12+Math.pow(Math.max(0,Math.sin(time*6)),8)*.035;heart.scale.setScalar(beat);syncHelpdesk();
 const bodyAlpha=selected?0:1;for(const mesh of bones.children){const target=(mesh===skull?T.MathUtils.lerp(.20,1,separation):1)*skeletonOpacity;mesh.material.opacity+=(target*bodyAlpha-mesh.material.opacity)*Math.min(1,dt*10);mesh.visible=mesh.material.opacity>.01;}heart.visible=!selected;
 for(const o of organs){const t=o.duration?Math.min(1,(now-o.start)/o.duration):1;const e=ease(t);if(!selected&&(!o.flight||t===1)){o.flight=false;o.root.position.copy(overviewTarget(o));o.root.scale.setScalar(overviewScale(o));}else{o.root.position.lerpVectors(o.from,o.to,e);o.root.scale.setScalar(T.MathUtils.lerp(o.fromScale,o.toScale,e));}if(t<1||selected!==o)o.root.quaternion.slerpQuaternions(o.fromQuat,o.toQuat,e);else if(o.rotationTarget){
  // Advance from the current angle so releasing a drag never restarts the turn.

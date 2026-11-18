@@ -1,14 +1,14 @@
 import {getScenario,setScenario,scenarioControl,bindScenarioControl,scenarioLabel} from './process-scenario.js';
-import {REAL} from './real-data.js?v=20261117-tower-maps';
-import {mountNeuralLab} from './neural-lab.js?v=20261117-tower-maps';
+import {REAL} from './real-data.js?v=20261118-published';
+import {mountNeuralLab} from './neural-lab.js?v=20261118-published';
 import {titleCase,normalizeHeadings} from './title-case.js';
 import {towerDisplayTitle} from './tower-names.js';
-import {processDashboard} from './process-dashboard.js?v=20261117-tower-maps';
+import {processDashboard} from './process-dashboard.js?v=20261118-published';
 const root=document.querySelector('#process-workspace');let api=null,current=null,request=0,shellPromise,pending=null,returnHandler;let scenarioRefresh=0;const sources=new Map();
-const shell=()=>shellPromise??=fetch('./neural/shell.html?v=20261113-unified-nav').then(r=>{if(!r.ok)throw Error('The Process Workspace Could Not Load.');return r.text();}).catch(e=>{shellPromise=null;throw e;});
+const shell=()=>shellPromise??=fetch('./neural/shell.html?v=20261118-published').then(r=>{if(!r.ok)throw Error('The Process Workspace Could Not Load.');return r.text();}).catch(e=>{shellPromise=null;throw e;});
 function source(key) {
   if (!sources.has(key)) {
-    const request = fetch(`./neural/${key}.json?v=20261117-tower-maps`).then(async response => {
+    const request = fetch(`./neural/${key}.json?v=20261118-published`).then(async response => {
       if (!response.ok) throw Error('The Process Records Could Not Load.');
       return response.json();
     }).catch(error => {
@@ -22,7 +22,7 @@ function source(key) {
 function flatten(steps){return steps.flatMap(s=>s.split?s.branches.flatMap(b=>flatten(b.steps)):s.fork?s.branches.flatMap(b=>flatten([b.step])):s.gate?(s.fix?[s.fix]:[]):[s]);}
 let overviewsPromise;
 function processOverviews(){
- return overviewsPromise??=fetch('./data/process-overviews.json?v=20261117-tower-maps').then(async response=>{
+ return overviewsPromise??=fetch('./data/process-overviews.json?v=20261118-published').then(async response=>{
   if(!response.ok)throw Error('The process summaries could not load.');
   const data=await response.json();
   return data;
@@ -38,7 +38,7 @@ export function prepareNeural(id,onReturn){
  return job.promise;
 }
 async function loadNeural(id,onReturn){
- const scenario=getScenario(id),selection=id+':'+scenario;if(current===selection&&api)return api;const ticket=++request,t=REAL[id];root.setAttribute('aria-label',`${t.name} Process Workspace`);root.removeAttribute('aria-labelledby');delete root.dataset.mode;root.innerHTML='<div class="neural-loading"><p role="status">Loading the Process Workspace…</p><button id="neural-return" type="button">Back to Organ</button></div>';root.querySelector('#neural-return').onclick=onReturn;
+ const scenario=getScenario(id),selection=id+':'+scenario;if(current===selection&&api)return api;const ticket=++request,t=REAL[id];root.setAttribute('aria-label',`${t.name} Process Workspace`);root.removeAttribute('aria-labelledby');delete root.dataset.mode;root.innerHTML='<div class="neural-loading"><p role="status">Loading the Process Workspace…</p><button id="neural-return" class="site-back" type="button" aria-label="Back to organ view"><span class="back-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 2 1 7l7 5V9h8a4 4 0 0 1 4 4v2a4 4 0 0 1-4 4H4v3h12a7 7 0 0 0 7-7v-2a7 7 0 0 0-7-7H8Z"/></svg></span><span>Back</span></button></div>';root.querySelector('#neural-return').onclick=onReturn;
  api?.destroy();api=null;current=null;
  try{const [html,original,overviews]=await Promise.all([shell(),source(t.sourceKey+(scenario==='tobe'?'-ai':'')),processOverviews(),document.fonts.ready]);if(ticket!==request)return null;const payload=structuredClone(original);preserveChallenges(payload.data);root.innerHTML=html.replaceAll('{{NAME}}',titleCase(t.name));root.style.setProperty('--stage-count',payload.data.frames.length);root.dataset.mode='detail';root.dataset.scenario=scenario;
  const towerOverview=overviews.towers[t.sourceKey];
@@ -54,7 +54,7 @@ async function loadNeural(id,onReturn){
  root.querySelector('.overview-heading>span').textContent=scenario==='tobe'?'AI Suggested · Potential mix if adopted':'Inputs → Processes → Outputs';
  root.querySelector('#map-svg').setAttribute('aria-label',`${t.name} Detailed Process Map`);root.querySelector('#overview-svg').setAttribute('aria-label',`${t.name} High-Level Flow`);
  payload.scenario=scenario;api=mountNeuralLab(root,payload,t,onReturn);if(!api)throw Error('The Process Map Could Not Be Rendered.');current=selection;returnHandler=onReturn;normalizeHeadings(root);return api;
- }catch(e){if(ticket!==request)return null;root.innerHTML='<div class="neural-loading" role="alert"><h2>Process Workspace Unavailable</h2><p>Retry to load this tower’s source records.</p><button id="neural-retry">Try Again</button><button id="neural-return" type="button">Back to Organ</button></div>';root.querySelector('#neural-retry').onclick=()=>prepareNeural(id,onReturn).then(next=>{if(next)root.querySelector('#lab-return')?.focus({preventScroll:true});}).catch(()=>root.querySelector('#neural-retry')?.focus({preventScroll:true}));root.querySelector('#neural-return').onclick=onReturn;throw e;}
+ }catch(e){if(ticket!==request)return null;root.innerHTML='<div class="neural-loading" role="alert"><h2>Process Workspace Unavailable</h2><p>Retry to load this tower’s source records.</p><button id="neural-retry">Try Again</button><button id="neural-return" class="site-back" type="button" aria-label="Back to organ view"><span class="back-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 2 1 7l7 5V9h8a4 4 0 0 1 4 4v2a4 4 0 0 1-4 4H4v3h12a7 7 0 0 0 7-7v-2a7 7 0 0 0-7-7H8Z"/></svg></span><span>Back</span></button></div>';root.querySelector('#neural-retry').onclick=()=>prepareNeural(id,onReturn).then(next=>{if(next)root.querySelector('#lab-return')?.focus({preventScroll:true});}).catch(()=>root.querySelector('#neural-retry')?.focus({preventScroll:true}));root.querySelector('#neural-return').onclick=onReturn;throw e;}
 }
 export function clearNeural(){request++;pending=null;api?.destroy();api=null;current=null;root.hidden=true;root.replaceChildren();}
 

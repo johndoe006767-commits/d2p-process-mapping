@@ -1,0 +1,350 @@
+{
+  "source": "D2P_Spotlight_Only.html",
+  "spotlights": [
+    {
+      "id": 1,
+      "category": "Approvals, controls & audit",
+      "title": "FAST+ · one approval and evidence rail",
+      "description": "Built for FP&A Commercial's FCF control attestation across 14 markets. The same rail can carry every tower's control sign-offs, with AI checking evidence and summarising the approval pack.",
+      "steps": [
+        "Evidence check",
+        "AI approval summary",
+        "Approval record",
+        "OneGRC evidence",
+        "Control status"
+      ],
+      "tags": [
+        "FP&A Comm",
+        "All towers"
+      ],
+      "impact": "Impacts all 8 towers",
+      "towers": [
+        "FP&A Commercial",
+        "FP&A Ops",
+        "CAPEX",
+        "P2P",
+        "O2C",
+        "Tax",
+        "R2R",
+        "Controlling"
+      ],
+      "opportunities": [
+        {
+          "id": "1-1",
+          "title": "Pre-submit evidence completeness check",
+          "description": "FAST+ checks required files, period, market and approver fields before the request enters the workflow and returns specific missing-item messages.",
+          "tower": "FP&A Commercial",
+          "stage": "Profit",
+          "impact": "All towers",
+          "status": "Can be explored"
+        },
+        {
+          "id": "1-2",
+          "title": "AI prediction of approval bottlenecks",
+          "description": "Historical cycle times and workflow patterns flag requests likely to miss the cut-off so delegation or follow-up can happen earlier.",
+          "tower": "FP&A Commercial",
+          "stage": "Profit",
+          "impact": "All towers",
+          "status": "Can be explored"
+        },
+        {
+          "id": "1-3",
+          "title": "AI approval summary",
+          "description": "AI summarises the approval pack, key evidence and exceptions so approvers can review the important points quickly.",
+          "tower": "FP&A Commercial",
+          "stage": "Profit",
+          "impact": "All towers",
+          "status": "Can be explored"
+        },
+        {
+          "id": "1-4",
+          "title": "Approval record capture",
+          "description": "A consistent approval record keeps the decision, approver and supporting evidence together for later traceability.",
+          "tower": "FP&A Commercial",
+          "stage": "Profit",
+          "impact": "All towers",
+          "status": "Can be explored"
+        },
+        {
+          "id": "1-5",
+          "title": "OneGRC evidence pack",
+          "description": "Approved evidence is organised into a reusable control pack for governance and audit support.",
+          "tower": "FP&A Commercial",
+          "stage": "Profit",
+          "impact": "All towers",
+          "status": "Can be explored"
+        },
+        {
+          "id": "1-6",
+          "title": "Control-status visibility",
+          "description": "A common status view shows which controls are complete, pending or require follow-up.",
+          "tower": "FP&A Commercial",
+          "stage": "Profit",
+          "impact": "All towers",
+          "status": "Can be explored"
+        },
+        {
+          "id": "1-7",
+          "title": "Control sign-off workflow",
+          "description": "Standard sign-off steps reduce different approval approaches across towers and markets.",
+          "tower": "FP&A Commercial",
+          "stage": "Profit",
+          "impact": "All towers",
+          "status": "Can be explored"
+        },
+        {
+          "id": "1-8",
+          "title": "Reusable approval rail",
+          "description": "The FAST+ pattern becomes a common approval and evidence rail that other towers can reuse rather than build separately.",
+          "tower": "FP&A Commercial",
+          "stage": "Profit",
+          "impact": "All towers",
+          "status": "Can be explored"
+        },
+        {
+          "id": "1-9",
+          "title": "Cross-tower control reuse",
+          "description": "The same evidence-check, summary and sign-off pattern can support control activities wherever equivalent approvals are required.",
+          "tower": "FP&A Commercial",
+          "stage": "Profit",
+          "impact": "All towers",
+          "status": "Can be explored"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "category": "Connected close",
+      "title": "One automation platform for reconciliations",
+      "description": "The BSR automation framework built for P2P (governed VM, script repository, run dashboard, BlackLine API) is reused for O2C bank reconciliations, R2R, Controlling and Tax instead of each tower building its own.",
+      "steps": [
+        "Scheduled SAP extract",
+        "Standard template",
+        "Auto reconciliation",
+        "Anomaly flags",
+        "BlackLine API upload"
+      ],
+      "tags": [
+        "P2P",
+        "O2C",
+        "R2R",
+        "Controlling",
+        "Tax"
+      ],
+      "impact": "Impacts 5 towers",
+      "towers": [
+        "P2P",
+        "O2C",
+        "R2R",
+        "Controlling",
+        "Tax"
+      ],
+      "opportunities": [
+        {
+          "id": "2-1",
+          "title": "P2P BSR automation framework",
+          "description": "The governed P2P reconciliation framework becomes the reusable base instead of each tower creating a separate automation stack.",
+          "tower": "P2P",
+          "stage": "Close",
+          "impact": "5 towers",
+          "status": "Can be explored"
+        },
+        {
+          "id": "2-2",
+          "title": "O2C bank reconciliation",
+          "description": "O2C reuses the common extraction, template and automated reconciliation pattern for bank reconciliation work.",
+          "tower": "O2C",
+          "stage": "Close",
+          "impact": "5 towers",
+          "status": "Can be explored"
+        },
+        {
+          "id": "2-3",
+          "title": "R2R reconciliation reuse",
+          "description": "R2R applies the shared framework to reconciliation activities during close.",
+          "tower": "R2R",
+          "stage": "Close",
+          "impact": "5 towers",
+          "status": "Can be explored"
+        },
+        {
+          "id": "2-4",
+          "title": "Controlling reconciliation reuse",
+          "description": "Controlling uses the same governed reconciliation components and run approach.",
+          "tower": "Controlling",
+          "stage": "Close",
+          "impact": "5 towers",
+          "status": "Can be explored"
+        },
+        {
+          "id": "2-5",
+          "title": "Tax reconciliation reuse",
+          "description": "Tax reuses the common reconciliation framework where tax balance checks require the same pattern.",
+          "tower": "Tax",
+          "stage": "Close",
+          "impact": "5 towers",
+          "status": "Can be explored"
+        },
+        {
+          "id": "2-6",
+          "title": "Scheduled SAP extraction",
+          "description": "Scheduled extraction removes repeated manual data pulls and provides a consistent input to reconciliation runs.",
+          "tower": "P2P",
+          "stage": "Close",
+          "impact": "5 towers",
+          "status": "Can be explored"
+        },
+        {
+          "id": "2-7",
+          "title": "Standard reconciliation template",
+          "description": "A common template standardises the structure of reconciliation inputs and outputs across participating towers.",
+          "tower": "P2P",
+          "stage": "Close",
+          "impact": "5 towers",
+          "status": "Can be explored"
+        },
+        {
+          "id": "2-8",
+          "title": "Automated anomaly flags",
+          "description": "Automated checks highlight unmatched or unusual items so teams can focus on exceptions.",
+          "tower": "R2R",
+          "stage": "Close",
+          "impact": "5 towers",
+          "status": "Can be explored"
+        },
+        {
+          "id": "2-9",
+          "title": "BlackLine API upload",
+          "description": "Completed reconciliation outputs are passed into BlackLine through the shared integration pattern.",
+          "tower": "R2R",
+          "stage": "Close",
+          "impact": "5 towers",
+          "status": "Can be explored"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "category": "Validate at source",
+      "title": "WHT and VAT decided at invoice capture",
+      "description": "An AI determination assistant classifies the payment nature and proposes the WHT code and VAT treatment when the invoice arrives in P2P, so Tax reviews exceptions instead of correcting postings at month end.",
+      "steps": [
+        "Vendor tax profile check",
+        "AI payment-nature classification",
+        "WHT / VAT code proposed",
+        "Exception to Tax",
+        "Clean posting"
+      ],
+      "tags": [
+        "P2P",
+        "Tax"
+      ],
+      "impact": "Impacts 2 towers",
+      "towers": [
+        "P2P",
+        "Tax"
+      ],
+      "opportunities": [
+        {
+          "id": "3-1",
+          "title": "Vendor tax-profile check",
+          "description": "The invoice is checked against the vendor tax profile before downstream posting decisions are made.",
+          "tower": "P2P",
+          "stage": "Invoice",
+          "impact": "P2P + Tax",
+          "status": "Can be explored"
+        },
+        {
+          "id": "3-2",
+          "title": "Payment-nature classification",
+          "description": "AI classifies the nature of the payment from invoice information to support the correct tax treatment.",
+          "tower": "P2P",
+          "stage": "Invoice",
+          "impact": "P2P + Tax",
+          "status": "Can be explored"
+        },
+        {
+          "id": "3-3",
+          "title": "WHT code proposal",
+          "description": "The assistant proposes the relevant withholding-tax code at invoice capture for review.",
+          "tower": "P2P",
+          "stage": "Invoice",
+          "impact": "P2P + Tax",
+          "status": "Can be explored"
+        },
+        {
+          "id": "3-4",
+          "title": "VAT treatment proposal",
+          "description": "VAT treatment is proposed while the invoice is being processed rather than corrected later.",
+          "tower": "P2P",
+          "stage": "Invoice",
+          "impact": "P2P + Tax",
+          "status": "Can be explored"
+        },
+        {
+          "id": "3-5",
+          "title": "Tax exception routing",
+          "description": "Cases that do not meet the standard rules are routed to Tax for review.",
+          "tower": "Tax",
+          "stage": "Invoice",
+          "impact": "P2P + Tax",
+          "status": "Can be explored"
+        },
+        {
+          "id": "3-6",
+          "title": "Clean P2P posting",
+          "description": "Validated tax treatment supports a cleaner downstream posting from P2P.",
+          "tower": "P2P",
+          "stage": "Invoice",
+          "impact": "P2P + Tax",
+          "status": "Can be explored"
+        },
+        {
+          "id": "3-7",
+          "title": "Invoice-capture validation",
+          "description": "Tax-related checks are brought forward to the point where invoice data first enters the process.",
+          "tower": "P2P",
+          "stage": "Invoice",
+          "impact": "P2P + Tax",
+          "status": "Can be explored"
+        },
+        {
+          "id": "3-8",
+          "title": "Tax-rule decision support",
+          "description": "The assistant applies the relevant decision logic to help users select the appropriate treatment.",
+          "tower": "Tax",
+          "stage": "Invoice",
+          "impact": "P2P + Tax",
+          "status": "Can be explored"
+        },
+        {
+          "id": "3-9",
+          "title": "Exception-only Tax review",
+          "description": "Tax focuses on exceptions rather than manually reviewing every routine transaction.",
+          "tower": "Tax",
+          "stage": "Invoice",
+          "impact": "P2P + Tax",
+          "status": "Can be explored"
+        },
+        {
+          "id": "3-10",
+          "title": "Reduce month-end corrections",
+          "description": "Earlier validation reduces the need to correct tax-related postings during month-end close.",
+          "tower": "Tax",
+          "stage": "Close",
+          "impact": "P2P + Tax",
+          "status": "Can be explored"
+        },
+        {
+          "id": "3-11",
+          "title": "P2P and Tax integration",
+          "description": "The opportunity connects invoice processing and tax review so the decision is made closer to source.",
+          "tower": "P2P",
+          "stage": "Invoice",
+          "impact": "P2P + Tax",
+          "status": "Can be explored"
+        }
+      ]
+    }
+  ]
+}

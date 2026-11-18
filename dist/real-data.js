@@ -5,10 +5,10 @@ function applyTowerNames(towers) {
   return towers;
 }
 
-const response = await fetch('./data/real-processes.json?v=20261117-tower-maps');
+const response = await fetch('./data/real-processes.json?v=20261118-published');
 if (!response.ok) throw new Error('The source process data could not be loaded.');
 export const REAL = applyTowerNames(await response.json());
-const kpiResponse = await fetch('./data/kpi-summary.json?v=20261117-tower-maps');
+const kpiResponse = await fetch('./data/kpi-summary.json?v=20261118-published');
 if (!kpiResponse.ok) throw new Error('The tower KPI summary could not be loaded.');
 export const KPI = await kpiResponse.json();
 export const TOWER_HEALTH = Object.fromEntries(Object.entries(REAL).map(([id,t])=>[id,{name:t.name,...t.counts,...KPI[id]}]));

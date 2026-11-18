@@ -21,7 +21,7 @@ h1,h2,h3,h4,h5,h6{font-family:Inter,Arial,sans-serif;letter-spacing:normal}
 
 /* Keep the supplied logo's original colours and transparent artwork intact. */
 #anatomy-brand{inset:0 auto auto 0;padding:10px;z-index:0}
-#anatomy-brand img{width:clamp(180px,7.3vw,280px);height:clamp(70px,2.85vw,110px);object-fit:cover;object-position:center;filter:none;opacity:1;transform:none;background:transparent}
+#anatomy-brand img{width:calc(clamp(180px,7.3vw,280px) + 10px);height:calc(clamp(70px,2.85vw,110px) + 10px);object-fit:cover;object-position:center;filter:none;opacity:1;transform:none;background:transparent}
 #experience{z-index:1}
 #tower-telemetry-hud{z-index:20}
 
@@ -29,9 +29,14 @@ h1,h2,h3,h4,h5,h6{font-family:Inter,Arial,sans-serif;letter-spacing:normal}
 @font-face{font-family:Lora;src:url('assets/fonts/lora-medium.ttf') format('truetype');font-style:normal;font-weight:500;font-display:swap}
 @font-face{font-family:Lora;src:url('assets/fonts/lora-medium-italic.ttf') format('truetype');font-style:italic;font-weight:500;font-display:swap}
 #overview-intro{position:absolute;z-index:0;top:clamp(16px,.8vw,32px);left:50%;transform:translateX(-50%);width:min(1040px,60vw);text-align:center;pointer-events:none;overflow:clip}
-#overview-intro h1{position:relative;display:block;width:max-content;max-width:100%;padding:.02em .32em;margin:0 auto;overflow:clip;color:var(--text);font-family:Lora,Georgia,serif;font-size:clamp(38px,1.6667vw,64px);font-weight:500;line-height:1.05;letter-spacing:-.025em;white-space:nowrap}
+#overview-intro h1{position:relative;display:block;width:max-content;max-width:100%;padding:.02em .32em;margin:0 auto;overflow:clip;color:var(--text);font-family:Lora,Georgia,serif;font-size:calc(clamp(38px,1.6667vw,64px) + 10px);font-weight:500;line-height:1.05;letter-spacing:-.025em;white-space:nowrap}
 #overview-intro h1 em{font-size:.8em;font-weight:500;color:#e5bad7;padding-inline:.05em;text-transform:lowercase}
 #overview-intro p{margin:0;color:var(--muted);font-family:Lora,Georgia,serif;font-size:clamp(14px,.46875vw,18px);font-weight:500;line-height:1.1;white-space:nowrap}
+@media(max-width:1023px){
+ #overview-intro{top:100px;width:calc(100% - 32px)}
+ #overview-intro h1{white-space:normal;text-wrap:balance}
+ #overview-intro p{white-space:normal;line-height:1.35}
+}
 #scene{position:relative;z-index:1}
 #labels,#detail{z-index:2}
 body[data-detail=true] #overview-intro,body[data-helpdesk=true] #overview-intro{display:none}
