@@ -18,7 +18,7 @@ document.body.append(menu);
 const toggle = menu.querySelector('#resource-toggle');
 const actions = menu.querySelector('#resource-actions');
 const resources = {
-  spotlight: {title:'Demand to Profit Spotlight',src:'./spotlight.html?embedded=1&v=20261118-published'},
+  spotlight: {title:'Demand to Profit Spotlight',src:'./spotlight.html?embedded=1&v=20261118-card-layout'},
   journey: {title:'Eight Doors and One Connected Journey',src:'./connected-journey.html'},
 };
 let current = null, previousScroll = 0, priorInert = [];

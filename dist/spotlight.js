@@ -78,12 +78,10 @@ $('.led-track').innerHTML = ledGroup + ledGroup;
 function renderNodes() {
   $('#spotlight-nodes').innerHTML = spotlights.map(s => `<article class="spotlight-node" aria-labelledby="node-${s.id}-title">
     <svg class="card-border" aria-hidden="true"><rect class="border-glow" x="1" y="1" rx="15" pathLength="100"/><rect class="border-trace" x="1" y="1" rx="15" pathLength="100"/></svg>
-    <h2 id="node-${s.id}-title">${escape(titleCase(s.category))}</h2>
-    <p class="node-metric"><strong>${s.opportunities.length}</strong><span>Opportunities</span></p>
-    <h3>${escape(titleCase(s.title))}</h3>
+    <p class="node-label">Spotlight ${s.id}</p>
+    <h2 id="node-${s.id}-title">${escape(titleCase(s.title))}</h2>
     <p class="node-description">${escape(s.description)}</p>
-    <p class="node-tags">${s.tags.map(escape).join(' · ')}</p>
-    <button type="button" class="node-open" data-spotlight="${s.id}" aria-label="View ${s.opportunities.length} opportunities: ${escape(s.category)}">View Opportunities ${arrow}</button>
+    <button type="button" class="node-open" data-spotlight="${s.id}" aria-controls="opportunity-results" aria-label="View ${s.opportunities.length} opportunities for Spotlight ${s.id}: ${escape(s.category)}"><span class="node-count"><strong>${s.opportunities.length}</strong> Opportunities</span>${arrow}</button>
   </article>`).join('');
   document.querySelectorAll('.spotlight-node').forEach(card=>motionVisibility.observe(card));
   document.querySelectorAll('[data-spotlight]').forEach(button => button.addEventListener('click', () => {
