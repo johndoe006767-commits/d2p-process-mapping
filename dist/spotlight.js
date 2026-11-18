@@ -81,6 +81,7 @@ function renderNodes() {
     <p class="node-label">Spotlight ${s.id}</p>
     <h2 id="node-${s.id}-title">${escape(titleCase(s.title))}</h2>
     <p class="node-description">${escape(s.description)}</p>
+    <p class="node-towers"><span>Related Towers</span>${s.towers.map(escape).join(' · ')}</p>
     <button type="button" class="node-open" data-spotlight="${s.id}" aria-controls="opportunity-results" aria-label="View ${s.opportunities.length} opportunities for Spotlight ${s.id}: ${escape(s.category)}"><span class="node-count"><strong>${s.opportunities.length}</strong> Opportunities</span>${arrow}</button>
   </article>`).join('');
   document.querySelectorAll('.spotlight-node').forEach(card=>motionVisibility.observe(card));
